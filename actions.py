@@ -8,8 +8,14 @@ M_RI = BP.PORT_A
 M_LE = BP.PORT_B
 M_CL = BP.PORT_C
 
-def  do_a_wheelie(speed):
-    BP.set_motor_power(M_LE + M_RI, speed)
+def do_a_wheelie(v, w):
+    # calculate the power for each motor
+    p_le = 0
+    p_ri = 0
+    # apply that power 
+    BP.set_motor_power(M_LE, p_le)
+    BP.set_motor_power(M_RI, p_ri)
+
 
 def grab_em(pos):
     BP.set_motor_position(M_CL, pos)
