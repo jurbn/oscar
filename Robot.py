@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 from __future__ import print_function # use python 3 syntax but make it compatible with python 2
-from __future__ import division       #                           ''
+from __future__ import division
 
-#import brickpi3 # import the BrickPi3 drivers
+import brickpi3 # import the BrickPi3 drivers
 import time     # import the time library for the sleep function
 import sys
 
@@ -21,16 +21,17 @@ class Robot:
 ######## UNCOMMENT and FILL UP all you think is necessary (following the suggested scheme) ########
 
         # Robot construction parameters
-        # DIAMETER??? I THINK....???????
-        #self.R = ??
-        #self.L = ??
-        #self. ...
+        self.radius = 0
+        self.length = 0
 
         ##################################################
         # Motors and sensors setup
 
         # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
         self.BP = brickpi3.BrickPi3()
+
+        self.left_motor = self.BP.PORT_A
+        self.right_motor = self.BP.PORT_B
 
         # Configure sensors, for example a touch sensor.
         #self.BP.set_sensor_type(self.BP.PORT_1, self.BP.SENSOR_TYPE.TOUCH)
@@ -59,25 +60,36 @@ class Robot:
 
 
 
-    def setSpeed(self, v,w):
-        """ To be filled """
+    def setSpeed(self, v, w):
+        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in dps) """
         print("setting speed to %.2f %.2f" % (v, w))
 
-        # compute the speed that should be set in each motor ...
+        dps_left = (v - (w * self.length) / 2) / self.radius
+        dps_right = (v + (w* self.length) / 2) / self.radius
 
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
-        speedDPS_left = 180
-        speedDPS_right = 180
-        #self.BP.set_motor_dps(self.BP.PORT_B, speedDPS_left)
-        #self.BP.set_motor_dps(self.BP.PORT_C, speedDPS_right)
+        self.BP.set_motor_dps(self.left_motor, dps_left)
+        self.BP.set_motor_dps(self.right_motor, dps_right)
 
 
     def readSpeed(self):
-        """ To be filled"""
-
-        return 0,0
+        """ Returns Oscar's linear and angular speed """
+        try:
+            speed_left = self.BP.get_motor_status(self.left_motor)[3] * self.radius    # get_motor_status returns an array, the 4th element is its dps
+            speed_right = self.BP.get_motor_status(self.right_motor)[3] * self.radius
+        except Exception:
+            print("There was an error while reading the speed of the motors")
+            return
+        
+        w = (speed_right - speed_left) / self.length
+        try:
+            r = (self.length / 2) * (speed_left + speed_right) / (speed_right - speed_left)
+            v = r * w
+        except Exception:
+            v = speed_left  # si salta algun error es pq R es infinita, en ese caso speed_right = speed_left --> v = speed_left = speed_right
+        return v, w
 
     def readOdometry(self):
         """ Returns current value of odometry estimation """
