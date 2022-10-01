@@ -6,6 +6,7 @@ from __future__ import division
 import brickpi3 # import the BrickPi3 drivers
 import time     # import the time library for the sleep function
 import sys
+import math
 
 # tambien se podria utilizar el paquete de threading
 from multiprocessing import Process, Value, Array, Lock
@@ -61,24 +62,24 @@ class Robot:
 
 
     def setSpeed(self, v, w):
-        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in dps) """
-        print("setting speed to %.2f %.2f" % (v, w))
+        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rps) """
+        print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
 
-        dps_left = (v - (w * self.length) / 2) / self.radius
-        dps_right = (v + (w* self.length) / 2) / self.radius
+        rps_left = (v - (w * self.length) / 2) / self.radius
+        rps_right = (v + (w* self.length) / 2) / self.radius
 
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
-        self.BP.set_motor_dps(self.left_motor, dps_left)
-        self.BP.set_motor_dps(self.right_motor, dps_right)
+        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to adapt it :/
+        self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
 
     def readSpeed(self):
-        """ Returns Oscar's linear and angular speed """
+        """ Returns Oscar's linear (m/s) and angular (rad/s) speed """
         try:
-            speed_left = self.BP.get_motor_status(self.left_motor)[3] * self.radius    # get_motor_status returns an array, the 4th element is its dps
-            speed_right = self.BP.get_motor_status(self.right_motor)[3] * self.radius
+            speed_left = math.radians(self.BP.get_motor_status(self.left_motor)[3]) * self.radius       # get_motor_status returns an array, the 4th element is its dps
+            speed_right = math.radians(self.BP.get_motor_status(self.right_motor)[3]) * self.radius     # get_motor_status works in dps, and we need it to be rps
         except Exception:
             print("There was an error while reading the speed of the motors")
             return
@@ -161,6 +162,31 @@ class Robot:
         #print("Stopping odometry ... X= %d" %(x_odo.value))
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
                 Y=  %.2f, th=  %.2f \n" %(x_odo.value, y_odo.value, th_odo.value))
+
+    def updateOdometry2(self):
+        """
+        The same as updateOdometry, but less scary (~º3º)~
+        """
+        while not self.finished.value:
+            tIni = time.clock()
+            v, w = self.readSpeed()     # v is in m/s and w in rad/s
+            # implementation of the *formulas*
+            if w == 0:
+                th = 0
+                s = v * self.P
+            else:
+                th = w * self.P
+                s = (v / w) * th
+            self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
+            self.x += s * math.cos((self.th + th/2))
+            self.y += s * math.sin((self.th + th/2))
+            self.th += th
+            self.lock_odometry.acquire()
+            tEnd = time.clock()
+            time.sleep(self.P - (tEnd-tIni))    # 2 mimir que es too late
+        print("Odometry was stopped... :(")
+            
+
 
 
     # Stop the odometry thread.
