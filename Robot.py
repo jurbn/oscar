@@ -183,7 +183,7 @@ class Robot:
             self.th += th
             self.lock_odometry.acquire()
             tEnd = time.clock()
-            time.sleep(self.P - (tEnd-tIni))    # 2 mimir que es too late
+            time.sleep(self.P - (tEnd-tIni))    # 2 mimir que es 2 late
         print("Odometry was stopped... :(")
             
 
