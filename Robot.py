@@ -163,7 +163,7 @@ class Robot:
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
                 Y=  %.2f, th=  %.2f \n" %(x_odo.value, y_odo.value, th_odo.value))
 
-    def updateOdometry2(self):
+    def updateOdometryButBetter(self):
         """
         The same as updateOdometry, but less scary (~º3º)~
         """
