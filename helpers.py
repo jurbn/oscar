@@ -33,32 +33,25 @@ def plot_robot(loc_eje, c, tamano):
     plt.plot(robot[0, :], robot[1, :], c)
 
 
-def pos_bot(vc, x_w_r, t):
+def pos_bot(vw, x_w_r, t):
     """
     Returns the position of the robot with vc=[v, w] during t seconds and starting on x_w_r.
     """
-    if vc[1] == 0:   # w=0
-        x_r_r2 = np.array([vc[0]*t, 0, 0])
+    if vw[1] == 0:   # w=0
+        x_r_r2 = np.array([vw[0]*t, 0, 0])
     else:
-        r = vc[0] / vc[1]
-        th = vc[1] * t
+        r = vw[0] / vw[1]
+        th = vw[1] * t
         al = (np.pi - th) / 2
         x_r_r2 = np.array([r*chord(th)*np.sin(al), r*chord(th)*np.cos(al), th])
     x_w_r2 = loc(np.matmul(hom(x_w_r), hom(x_r_r2)))   # nueva localizacion x_w_r
     return x_w_r2
-
-def get_r(pos, th):
-    """
-    Returns the radius of the theta turn a robot has to make to arrive a certain [x, y] position.
-    """
-    return np.linalg.norm(pos) / (2 * np.sin(th/2))
 
 def hom(x: np.array):
     """
     Returns the Transformation matrix based on the location vector
     """
     return np.matrix([[np.cos(x[2]), -np.sin(x[2]) , x[0]], [np.sin(x[2]), np.cos(x[2]), x[1]], [0, 0, 1]])
-
 
 def loc(T):
     """
