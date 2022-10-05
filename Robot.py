@@ -1,11 +1,13 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 from __future__ import print_function # use python 3 syntax but make it compatible with python 2
-from __future__ import division       #                           ''
+from __future__ import division
 
-#import brickpi3 # import the BrickPi3 drivers
+import brickpi3 # import the BrickPi3 drivers
 import time     # import the time library for the sleep function
 import sys
+import math
+import sage
 
 # tambien se podria utilizar el paquete de threading
 from multiprocessing import Process, Value, Array, Lock
@@ -17,20 +19,22 @@ class Robot:
 
         Initialize Motors and Sensors according to the set up in your robot
         """
-
 ######## UNCOMMENT and FILL UP all you think is necessary (following the suggested scheme) ########
 
         # Robot construction parameters
-        # DIAMETER??? I THINK....???????
-        #self.R = ??
-        #self.L = ??
-        #self. ...
-
+        self.radius = 0
+        self.length = 0
+        self.op_cl = 0 #value of the open claw (encoder)
+        self.cl_cl = 0 #value of the closed claw (encoder)
         ##################################################
         # Motors and sensors setup
 
         # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
         self.BP = brickpi3.BrickPi3()
+
+        self.left_motor = self.BP.PORT_A
+        self.right_motor = self.BP.PORT_B
+        self.claw_motor = self.BP.PORT_C
 
         # Configure sensors, for example a touch sensor.
         #self.BP.set_sensor_type(self.BP.PORT_1, self.BP.SENSOR_TYPE.TOUCH)
@@ -55,29 +59,46 @@ class Robot:
         #self.lock_odometry.release()
 
         # odometry update period
-        self.P = 1.0
+        self.period = 1.0
 
+    def setSpeed(self, v, w):
+        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
+        (Positive w values turn left, negative ones turn right) """
+        print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
 
-
-    def setSpeed(self, v,w):
-        """ To be filled """
-        print("setting speed to %.2f %.2f" % (v, w))
-
-        # compute the speed that should be set in each motor ...
+        rps_left = (v - (w * self.length) / 2) / self.radius 
+        rps_right = (v + (w* self.length) / 2) / self.radius
 
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
-        speedDPS_left = 180
-        speedDPS_right = 180
-        #self.BP.set_motor_dps(self.BP.PORT_B, speedDPS_left)
-        #self.BP.set_motor_dps(self.BP.PORT_C, speedDPS_right)
+        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
+        self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
+    def close_claw(self):
+        """Closes Oscar's claw and pulls it up"""
+        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
+
+    def open_claw(self):
+        """Pulls Oscar's claw down and opens it"""
+        self.BP.set_motor_position(self.claw_motor, self.op_cl)  
 
     def readSpeed(self):
-        """ To be filled"""
-
-        return 0,0
+        """ Returns Oscar's linear (m/s) and angular (rad/s) speed """
+        try:
+            speed_left = math.radians(self.BP.get_motor_status(self.left_motor)[3]) * self.radius       # get_motor_status returns an array, the 4th element is its dps
+            speed_right = math.radians(self.BP.get_motor_status(self.right_motor)[3]) * self.radius     # get_motor_status works in dps, and we need it to be rps
+        except Exception:
+            print("There was an error while reading the speed of the motors")
+            return
+        
+        w = (speed_right - speed_left) / self.length
+        try:
+            r = (self.length / 2) * (speed_left + speed_right) / (speed_right - speed_left)
+            v = r * w
+        except Exception:
+            v = speed_left  # si salta algun error es pq R es infinita, en ese caso speed_right = speed_left --> v = speed_left = speed_right
+        return v, w
 
     def readOdometry(self):
         """ Returns current value of odometry estimation """
@@ -86,9 +107,9 @@ class Robot:
     def startOdometry(self):
         """ This starts a new process/thread that will be updating the odometry periodically """
         self.finished.value = False
-        self.p = Process(target=self.updateOdometry, args=(self.x, self.y, self.th, self.finished))
-        self.p.start()
-        print("PID: ", self.p.pid)
+        self.process = Process(target=self.updateOdometry, args=(self.x, self.y, self.th, self.finished))
+        self.process.start()
+        print("PID: ", self.process.pid)
         # we don't really need to pass the shared params x, y, th, finished,
         # because they are part of the class, so visible within updateOdometry in any case,
         # but it's just to show an example of process receiving params
@@ -144,15 +165,47 @@ class Robot:
 
 
             tEnd = time.clock()
-            time.sleep(self.P - (tEnd-tIni))
+            time.sleep(self.period - (tEnd-tIni))
 
         #print("Stopping odometry ... X= %d" %(x_odo.value))
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
                 Y=  %.2f, th=  %.2f \n" %(x_odo.value, y_odo.value, th_odo.value))
 
+    def updateOdometryButBetter(self):
+        """
+        The same as updateOdometry, but less scary (~º3º)~          (OJO QUE AQUI ESTOY HACIENDO COSAS QUE POSBOT ME HACE EN SAGE)
+        """
+        while not self.finished.value:
+            tIni = time.clock()
+            v, w = self.readSpeed()     # v is in m/s and w in rad/s
+            # implementation of the *formulas*
+            if w == 0:
+                th = 0
+                s = v * self.period
+            else:
+                th = w * self.period
+                s = (v / w) * th
+            self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
+            self.x += s * math.cos((self.th + th/2))
+            self.y += s * math.sin((self.th + th/2))
+            self.th = sage.norm_pi(self.th + th)
+            self.lock_odometry.acquire()
+            tEnd = time.clock()
+            time.sleep(self.period - (tEnd-tIni))    # 2 mimir que es 2 late
+        print("Odometry was stopped... :(")
 
     # Stop the odometry thread.
     def stopOdometry(self):
         self.finished.value = True
         #self.BP.reset_all()
+
+    def setup(self):
+        """
+        Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
+        """
+        self.set_motor_limits(self.left_motor, 50, 60)
+        self.set_motor_limits(self.right_motor, 50, 60)
+        self.BP.set_motor_limits(self.claw_motor, 50, 60)
+        self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
+
 
