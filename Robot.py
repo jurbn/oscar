@@ -7,6 +7,7 @@ import brickpi3 # import the BrickPi3 drivers
 import time     # import the time library for the sleep function
 import sys
 import math
+import sage
 
 # tambien se podria utilizar el paquete de threading
 from multiprocessing import Process, Value, Array, Lock
@@ -59,9 +60,7 @@ class Robot:
         #self.lock_odometry.release()
 
         # odometry update period
-        self.P = 1.0
-
-
+        self.period = 1.0
 
     def setSpeed(self, v, w):
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rps) """
@@ -76,6 +75,13 @@ class Robot:
         self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to adapt it :/
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
+    def close_claw(self):
+        """Closes Oscar's claw and pulls it up"""
+        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
+
+    def open_claw(self):
+        """Pulls Oscar's claw down and opens it"""
+        self.BP.set_motor_position(self.claw_motor, self.op_cl)  
 
     def readSpeed(self):
         """ Returns Oscar's linear (m/s) and angular (rad/s) speed """
@@ -101,9 +107,9 @@ class Robot:
     def startOdometry(self):
         """ This starts a new process/thread that will be updating the odometry periodically """
         self.finished.value = False
-        self.p = Process(target=self.updateOdometry, args=(self.x, self.y, self.th, self.finished))
-        self.p.start()
-        print("PID: ", self.p.pid)
+        self.process = Process(target=self.updateOdometry, args=(self.x, self.y, self.th, self.finished))
+        self.process.start()
+        print("PID: ", self.process.pid)
         # we don't really need to pass the shared params x, y, th, finished,
         # because they are part of the class, so visible within updateOdometry in any case,
         # but it's just to show an example of process receiving params
@@ -159,7 +165,7 @@ class Robot:
 
 
             tEnd = time.clock()
-            time.sleep(self.P - (tEnd-tIni))
+            time.sleep(self.period - (tEnd-tIni))
 
         #print("Stopping odometry ... X= %d" %(x_odo.value))
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
@@ -167,7 +173,7 @@ class Robot:
 
     def updateOdometryButBetter(self):
         """
-        The same as updateOdometry, but less scary (~º3º)~
+        The same as updateOdometry, but less scary (~º3º)~          (OJO QUE AQUI ESTOY HACIENDO COSAS QUE POSBOT ME HACE EN SAGE)
         """
         while not self.finished.value:
             tIni = time.clock()
@@ -175,30 +181,28 @@ class Robot:
             # implementation of the *formulas*
             if w == 0:
                 th = 0
-                s = v * self.P
+                s = v * self.period
             else:
-                th = w * self.P
+                th = w * self.period
                 s = (v / w) * th
             self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
             self.x += s * math.cos((self.th + th/2))
             self.y += s * math.sin((self.th + th/2))
-            self.th += th
+            self.th = sage.norm_pi(self.th + th)
             self.lock_odometry.acquire()
             tEnd = time.clock()
-            time.sleep(self.P - (tEnd-tIni))    # 2 mimir que es 2 late
+            time.sleep(self.period - (tEnd-tIni))    # 2 mimir que es 2 late
         print("Odometry was stopped... :(")
-            
-
-    def close_claw(self):
-        """Closes Oscar's claw and pulls it up"""
-        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
-
-    def open_claw(self):
-        """Pulls Oscar's claw down and opens it"""
-        self.BP.set_motor_position(self.claw_motor, self.op_cl)  
 
     # Stop the odometry thread.
     def stopOdometry(self):
         self.finished.value = True
         #self.BP.reset_all()
+
+    def setup(self):
+        """
+        Sets Oscar ready to fight: detects the claw open position, checks the camera, etc (maybe a lil brake check would be okay too?)
+        """
+        self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
+
 
