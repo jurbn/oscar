@@ -190,9 +190,11 @@ class Robot:
             
 
     def close_claw(self):
+        """Closes Oscar's claw and pulls it up"""
         self.BP.set_motor_position(self.claw_motor, self.cl_cl)
 
     def open_claw(self):
+        """Pulls Oscar's claw down and opens it"""
         self.BP.set_motor_position(self.claw_motor, self.op_cl)  
 
     # Stop the odometry thread.
