@@ -2,7 +2,6 @@ from __future__ import print_function, division
 
 import time
 import brickpi3
-import read
 
 BP = brickpi3.BrickPi3()
 M_RI = BP.PORT_A

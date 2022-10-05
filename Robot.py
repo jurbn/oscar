@@ -24,7 +24,8 @@ class Robot:
         # Robot construction parameters
         self.radius = 0
         self.length = 0
-
+        self.op_cl = 0 #value of the open claw (encoder)
+        self.cl_cl = 0 #value of the closed claw (encoder)
         ##################################################
         # Motors and sensors setup
 
@@ -33,6 +34,7 @@ class Robot:
 
         self.left_motor = self.BP.PORT_A
         self.right_motor = self.BP.PORT_B
+        self.claw_motor = self.BP.PORT_C
 
         # Configure sensors, for example a touch sensor.
         #self.BP.set_sensor_type(self.BP.PORT_1, self.BP.SENSOR_TYPE.TOUCH)
@@ -187,7 +189,11 @@ class Robot:
         print("Odometry was stopped... :(")
             
 
+    def close_claw(self):
+        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
 
+    def open_claw(self):
+        self.BP.set_motor_position(self.claw_motor, self.op_cl)  
 
     # Stop the odometry thread.
     def stopOdometry(self):
