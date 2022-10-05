@@ -18,7 +18,6 @@ class Robot:
 
         Initialize Motors and Sensors according to the set up in your robot
         """
-
 ######## UNCOMMENT and FILL UP all you think is necessary (following the suggested scheme) ########
 
         # Robot construction parameters
@@ -64,16 +63,17 @@ class Robot:
 
 
     def setSpeed(self, v, w):
-        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rps) """
+        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
+        (Positive w values turn left, negative ones turn right) """
         print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
 
-        rps_left = (v - (w * self.length) / 2) / self.radius
+        rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w* self.length) / 2) / self.radius
 
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
-        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to adapt it :/
+        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
 
@@ -133,7 +133,7 @@ class Robot:
             # to "lock" a whole set of operations, we can use a "mutex"
             self.lock_odometry.acquire()
             #x_odo.value+=1
-            y_odo.value+=1
+            y_odo.value+=1hola
             th_odo.value+=1
             self.lock_odometry.release()
 
