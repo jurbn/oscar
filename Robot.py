@@ -139,7 +139,7 @@ class Robot:
             # to "lock" a whole set of operations, we can use a "mutex"
             self.lock_odometry.acquire()
             #x_odo.value+=1
-            y_odo.value+=1hola
+            y_odo.value+=1
             th_odo.value+=1
             self.lock_odometry.release()
 
@@ -201,8 +201,11 @@ class Robot:
 
     def setup(self):
         """
-        Sets Oscar ready to fight: detects the claw open position, checks the camera, etc (maybe a lil brake check would be okay too?)
+        Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
+        self.set_motor_limits(self.left_motor, 50, 60)
+        self.set_motor_limits(self.right_motor, 50, 60)
+        self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
 
 
