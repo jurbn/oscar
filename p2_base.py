@@ -14,34 +14,34 @@ def main(args):
 
         # Instantiate Odometry. Default value will be 0,0,0
         # robot = Robot(init_position=args.pos_ini)
-        robot = Robot()
+        oscar = Robot()
 
-        print("X value at the beginning from main X= %.2f" %(robot.x.value))
+        print("X value at the beginning from main X= %.2f" %(oscar.x.value))
 
         # 1. launch updateOdometry Process()
-        robot.startOdometry()
+        oscar.startOdometry()
 
         # 2. perform trajectory
 
 
         # DUMMY CODE! delete when you have your own
-        robot.setSpeed(1,1)
+        oscar.setSpeed(1,1)
         print("Start : %s" % time.ctime())
         time.sleep(3)
-        print("X value from main tmp %d" % robot.x.value)
+        print("X value from main tmp %d" % oscar.x.value)
         time.sleep(3)
         print("End : %s" % time.ctime())
 
-        robot.lock_odometry.acquire()
-        print("Odom values at main at the END: %.2f, %.2f, %.2f " % (robot.x.value, robot.y.value, robot.th.value))
-        robot.lock_odometry.release()
+        oscar.lock_odometry.acquire()
+        print("Odom values at main at the END: %.2f, %.2f, %.2f " % (oscar.x.value, oscar.y.value, oscar.th.value))
+        oscar.lock_odometry.release()
 
         # PART 1:
-        # robot.setSpeed()
+        # oscar.setSpeed()
         # until ...
 
         # PART 2:
-        # robot.setSpeed()
+        # oscar.setSpeed()
         # until ...
 
         # ...
@@ -51,13 +51,14 @@ def main(args):
         # 3. wrap up and close stuff ...
         # This currently unconfigure the sensors, disable the motors,
         # and restore the LED to the control of the BrickPi3 firmware.
-        robot.stopOdometry()
+        oscar.stopOdometry()
 
 
     except KeyboardInterrupt:
     # except the program gets interrupted by Ctrl+C on the keyboard.
     # THIS IS IMPORTANT if we want that motors STOP when we Ctrl+C ...
-        robot.stopOdometry()
+        oscar.stopOdometry()
+        oscar.stopRobot()
 
 if __name__ == "__main__":
 
