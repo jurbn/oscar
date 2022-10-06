@@ -22,8 +22,8 @@ class Robot:
 ######## UNCOMMENT and FILL UP all you think is necessary (following the suggested scheme) ########
 
         # Robot construction parameters
-        self.radius = 0
-        self.length = 0
+        self.radius = 0.028
+        self.length = 0.127
         self.op_cl = 0 #value of the open claw (encoder)
         self.cl_cl = 0 #value of the closed claw (encoder)
         ##################################################
@@ -67,8 +67,8 @@ class Robot:
         print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
 
         rps_left = (v - (w * self.length) / 2) / self.radius 
-        rps_right = (v + (w* self.length) / 2) / self.radius
-
+        rps_right = (v + (w * self.length) / 2) / self.radius
+        print(rps_left, rps_right)
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
@@ -115,7 +115,7 @@ class Robot:
         # but it's just to show an example of process receiving params
 
     # You may want to pass additional shared variables besides the odometry values and stop flag
-    def updateOdometry(self, x_odo, y_odo, th_odo, finished):
+    def updateOdometry2(self, x_odo, y_odo, th_odo, finished):
         """ To be filled ...  """
 
         while not finished.value:
@@ -171,7 +171,7 @@ class Robot:
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
                 Y=  %.2f, th=  %.2f \n" %(x_odo.value, y_odo.value, th_odo.value))
 
-    def updateOdometryButBetter(self):
+    def updateOdometry(self):
         """
         The same as updateOdometry, but less scary (~º3º)~          (OJO QUE AQUI ESTOY HACIENDO COSAS QUE POSBOT ME HACE EN SAGE)
         """
@@ -200,16 +200,16 @@ class Robot:
         #self.BP.reset_all()
 
     def stopRobot(self):
-        self.BP.set_motor_dps(self.left_motor & self.right_motor & self.claw_motor, 0)
-
+        self.BP.set_motor_power(self.left_motor + self.right_motor + self.claw_motor, 0)
+        print('Stopped the robot!')    
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
-        self.set_motor_limits(self.left_motor, 50, 60)
-        self.set_motor_limits(self.right_motor, 50, 60)
+        self.stopRobot()
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
+        self.cl_cl = self.op_cl - 225
 
 
