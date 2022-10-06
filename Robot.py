@@ -188,9 +188,9 @@ class Robot:
                 th = w * self.period
                 s = (v / w) * th
             self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
-            self.x += s * math.cos((self.th + th/2))
-            self.y += s * math.sin((self.th + th/2))
-            self.th = sage.norm_pi(self.th + th)
+            self.x.value += s * math.cos((self.th + th/2))
+            self.y.value += s * math.sin((self.th + th/2))
+            self.th.value = sage.norm_pi(self.th + th)
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.period - (tEnd-tIni))    # 2 mimir que es 2 late
@@ -200,6 +200,10 @@ class Robot:
     def stopOdometry(self):
         self.finished.value = True
         #self.BP.reset_all()
+
+    def stopRobot(self):
+        self.BP.set_motor_dps(self.left_motor & self.right_motor & self.claw_motor, 0)
+
 
     def setup(self):
         """
