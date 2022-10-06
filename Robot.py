@@ -51,6 +51,8 @@ class Robot:
         self.y = Value('d',0.0)
         self.th = Value('d',0.0)
         self.finished = Value('b',1) # boolean to show if odometry updates are finished
+        self.w_max = 100
+        self.v_max = 100
 
         # if we want to block several instructions to be run together, we may want to use an explicit Lock
         self.lock_odometry = Lock()
@@ -72,7 +74,7 @@ class Robot:
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
-        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
+        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left    ))  # BP works on degrees, so we have to transform it :/
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
     def close_claw(self):
