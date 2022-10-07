@@ -1,58 +1,86 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from __future__ import print_function # use python 3 syntax but make it compatible with python 2
+# use python 3 syntax but make it compatible with python 2
+from __future__ import print_function
 from __future__ import division
 from asyncio import wait_for
-import brickpi3 # import the BrickPi3 drivers
+import math
+import brickpi3  # import the BrickPi3 drivers
 import time     # import the time library for the sleep function
 import sys
-import math
 import sage
 import numpy as np
 
-def spinn (robot):
-    robot.setSpeed(0,100)
-    time.sleep(5)
-    robot.setSpeed(0,0)
 
-def runn (robot):
-    robot.setSpeed(100,0)
-    time.sleep(5)
-    robot.setSpeed(0,0)
+def spin(robot, w, t):
+    robot.setSpeed(0, w)
+    time.sleep(t)
+    robot.setSpeed(0, 0)
 
-def spin (robot):
-    robot.setSpeed(0,60)
-    time.sleep(5)
-    robot.setSpeed(0,0)
 
-def run (robot):
-    robot.setSpeed(60,0)
-    time.sleep(5)
-    robot.setSpeed(0,0)
+def run(robot, v, t):
+    robot.setSpeed(v, 0)
+    time.sleep(t)
+    robot.setSpeed(0, 0)
 
-def moveC (robot,pos,R,th, t=0):
-    #voy a hacer el control con la funcion del cálculo de la posición tras el movimiento y los datos de odometría.
-    if t==0:
-        w=robot.w_max*0.75
-        v=w*R
-        t=th*R/v
-        obj=sage.pos_bot([v,w],pos,t)
-        robot.setSpeed(v,w)
+
+def moveC(robot, pos, R, th, t=0):
+    # voy a hacer el control con la funcion del cálculo de la posición tras el movimiento y los datos de odometría.
+    if t == 0:
+        w = robot.w_max*0.75
+        v = w*R
+        t = th*R/v
+        obj = sage.pos_bot([v, w], pos, t)
+        robot.setSpeed(v, w)
     else:
-        w=th/t
-        v=w*R
-        obj=sage.pos_bot([v,w],pos,t)
-        robot.setSpeed(v,w)
-    while(robot.readOdometry!=obj):
-            time.sleep(0.1)
+        w = th/t
+        v = w*R
+        obj = sage.pos_bot([v, w], pos, t)
+        robot.setSpeed(v, w)
+    while (robot.readOdometry != obj):
+        time.sleep(0.1)
 
-def eight(robot, r, w):
-    v = w*r
+def eight(robot, r = 0.2, v = 0.2):
+    w = v / r
+    print('screw you up the a$$')
     robot.setSpeed(v, w)
-    print('a')
-    time.sleep(np.pi*2/w)
+    time.sleep(np.pi/w)
+    print('a complete circle yay')
     robot.setSpeed(v, -w)
-    print('e')
     time.sleep(np.pi*2/w)
+    print('oh no is this a loop????')
+    robot.setSpeed(v, w)
+    time.sleep(np.pi/w)
+    print('yay :D')
     robot.stopRobot()
+
+
+def putivuelta(robot, r1=0.2, r2=0.1, d=1, v=0.2):
+    """
+    Does a slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
+    """
+    w1 = v / r1
+    w2 = v / r2
+    th = (np.pi/2) - math.acos((r1-r2)/d)
+    th1 = (np.pi/2 + th)    # angle to turn on the first circle (twice: while leaving and when arriving)
+    th2 = 2*(np.pi/2 - th)    # angle to turn on the second circle (twice: while leaving and when arriving)
+    o = math.sqrt(math.pow(d)+math.pow(r1-r2))  # distance to be covered in between circles
+    print('goin for a walk')
+    robot.setSpeed(0, w1)
+    time.sleep(th1/w1)
+    print('straight as a d')
+    robot.setSpeed(v, 0)
+    time.sleep(o/v)
+    print('tokio drift')
+    robot.setSpeed(0, w2)
+    time.sleep(th2/w2)
+    print('shit i forgot my purse')
+    robot.setSpeed(v, 0)
+    time.sleep(o/v)
+    print('almost there...')
+    robot.setSpeed(0, w1)
+    time.sleep(th1/w1)
+    print('back home')
+    robot.stopRobot()
+
 

@@ -202,6 +202,9 @@ class Robot:
         #self.BP.reset_all()
 
     def stopRobot(self):
+        """
+        Stops the robot
+        """
         self.BP.set_motor_power(self.left_motor + self.right_motor + self.claw_motor, 0)
         print('Stopped the robot!')    
 
