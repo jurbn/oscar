@@ -159,19 +159,20 @@ class Robot:
         Stops the robot
         """
         self.setSpeed(0, 0)
-        #logging.info('Stopped the robot!')  
+        logging.info('Stopped the robot!')  
 
     def kill(self):
         self.stopRobot()
         self.stopOdometry()
-        #logging.warning('The robot has been annihilated')
+        logging.warning('The robot has been annihilated')
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
-        #logging.basicConfig(filename=self.log_file, encoding='utf-8', datefmt='%d/%m/%Y %H:%M:%S')
-        #logging.info('Started the robot!')
+        logging.basicConfig(filename=self.log_file, level=logging.DEBUG)
+        print('Log file is:' + self.log_file)
+        logging.info('Started the robot!')
         self.stopRobot()
         self.BP.reset_motor_encoder(self.left_motor + self.right_motor)
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
