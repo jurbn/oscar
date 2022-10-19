@@ -205,6 +205,10 @@ class Robot:
         logging.info("Odometry was stopped... :(")
 
     # Stop the odometry thread.
+    def toaPolla(self):
+        self.BP.set_motor_power(self.left_motor, 100)
+        self.BP.set_motor_power(self.right_motor, 100)
+
     def stopOdometry(self):
         self.finished.value = True
 
