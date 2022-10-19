@@ -22,8 +22,8 @@ class Robot:
 ######## UNCOMMENT and FILL UP all you think is necessary (following the suggested scheme) ########
 
         # Robot construction parameters
-        self.radius = 0.028
-        self.length = 0.127
+        self.radius = 0.0275
+        self.length = 0.145
         self.op_cl = 0 #value of the open claw (encoder)
         self.cl_cl = 0 #value of the closed claw (encoder)
         ##################################################
@@ -109,7 +109,7 @@ class Robot:
     def startOdometry(self):
         """ This starts a new process/thread that will be updating the odometry periodically """
         self.finished.value = False
-        self.process = Process(target=self.updateOdometry, args=(self.x, self.y, self.th, self.finished))
+        self.process = Process(target=self.updateOdometry, args=())
         self.process.start()
         print("PID: ", self.process.pid)
         # we don't really need to pass the shared params x, y, th, finished,
@@ -188,9 +188,9 @@ class Robot:
                 th = w * self.period
                 s = (v / w) * th
             self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
-            self.x.value += s * math.cos((self.th + th/2))
-            self.y.value += s * math.sin((self.th + th/2))
-            self.th.value = sage.norm_pi(self.th + th)
+            self.x.value += s * math.cos((self.th.value + th/2))
+            self.y.value += s * math.sin((self.th.value + th/2))
+            self.th.value = sage.norm_pi(self.th.value + th)
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.period - (tEnd-tIni))    # 2 mimir que es 2 late

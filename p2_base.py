@@ -20,7 +20,7 @@ def main(args):
         #time.sleep(5)
         #oscar.stopOdometry()
         #oscar.stopRobot()      
-        mv.eight(oscar, 0.2, 1)
+        mv.putivuelta(oscar, 0.2, 0.3, 0.6, 0.2)
 
     except KeyboardInterrupt:
     # except the program gets interrupted by Ctrl+C on the keyboard.
