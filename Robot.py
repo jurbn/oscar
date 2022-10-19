@@ -71,7 +71,6 @@ class Robot:
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
         (Positive w values turn left, negative ones turn right) """
         print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
-
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
         print('Right rad/s: {}. Left rad/s: {}'.format(rps_left, rps_right))
@@ -198,17 +197,17 @@ class Robot:
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
-            logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
-            with open(self.odometry_file, 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile, delimiter=' ')
-                writer.writerow([self.x.value, self.y.value, self.th.value])
-        logging.info("Odometry was stopped... :(")
+           # logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
+           # with open(self.odometry_file, 'w', newline='') as csvfile:
+           #     writer = csv.writer(csvfile, delimiter=' ')
+           #     writer.writerow([self.x.value, self.y.value, self.th.value])
+        #logging.info("Odometry was stopped... :(")
 
     # Stop the odometry thread.
     def toaPolla(self):
-        self.BP.set_motor_power(self.left_motor, 100)
-        self.BP.set_motor_power(self.right_motor, 100)
-
+        #self.BP.set_motor_power(self.left_motor, 90)
+        #self.BP.set_motor_power(self.right_motor, 90)
+        self.setSpeed(0.3, 0)
     def stopOdometry(self):
         self.finished.value = True
 
@@ -217,20 +216,21 @@ class Robot:
         Stops the robot
         """
         self.setSpeed(0, 0)
-        logging.info('Stopped the robot!')  
+        #logging.info('Stopped the robot!')  
 
     def kill(self):
         self.stopRobot()
         self.stopOdometry()
-        logging.warning('The robot has been annihilated')
+        #logging.warning('The robot has been annihilated')
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
-        logging.basicConfig(filename=self.log_file, encoding='utf-8', datefmt='%d/%m/%Y %H:%M:%S')
-        logging.info('Started the robot!')
+        #logging.basicConfig(filename=self.log_file, encoding='utf-8', datefmt='%d/%m/%Y %H:%M:%S')
+        #logging.info('Started the robot!')
         self.stopRobot()
+        self.BP.reset_motor_encoder(self.left_motor + self.right_motor)
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
         self.cl_cl = self.op_cl - 225

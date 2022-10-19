@@ -21,10 +21,14 @@ def main(args):
         #oscar.stopOdometry()
         #oscar.stopRobot()      
         #mv.putivuelta(oscar, 0.2, 0.3, 0.6, 0.2)
+        oscar.setSpeed(0.2, 0)
+        time.sleep(1)
         oscar.toaPolla()
         for i in range(50):
             print(oscar.readSpeed())
             time.sleep(0.1)
+        oscar.setSpeed(0.2, 0)
+        time.sleep(1)
         oscar.stopRobot()
 
     except KeyboardInterrupt:
