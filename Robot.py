@@ -3,13 +3,14 @@
 from __future__ import print_function # use python 3 syntax but make it compatible with python 2
 from __future__ import division
 
+import sage
 import brickpi3 # import the BrickPi3 drivers
+
 import time     # import the time library for the sleep function
 import sys
 import math
-import sage
-
-# tambien se podria utilizar el paquete de threading
+import csv
+import logging
 from multiprocessing import Process, Value, Array, Lock
 
 class Robot:
@@ -61,7 +62,10 @@ class Robot:
         #self.lock_odometry.release()
 
         # odometry update period
-        self.period = 1.0
+        self.odometry_period = 1.0
+
+        self.odometry_file = 'odometry/' + time.strftime('%Y%m%d%H%M%S') + '.csv'
+        self.log_file = 'log/' + time.strftime('%Y%m%d%H%M%S') + '.log'
 
     def setSpeed(self, v, w):
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
@@ -70,7 +74,7 @@ class Robot:
 
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
-        print(rps_left, rps_right)
+        print('Right rad/s: {}. Left rad/s: {}'.format(rps_left, rps_right))
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
@@ -167,7 +171,7 @@ class Robot:
 
 
             tEnd = time.clock()
-            time.sleep(self.period - (tEnd-tIni))
+            time.sleep(self.odometry_period - (tEnd-tIni))
 
         #print("Stopping odometry ... X= %d" %(x_odo.value))
         sys.stdout.write("Stopping odometry ... X=  %.2f, \
@@ -183,35 +187,45 @@ class Robot:
             # implementation of the *formulas*
             if w == 0:
                 th = 0
-                s = v * self.period
+                s = v * self.odometry_period
             else:
-                th = w * self.period
+                th = w * self.odometry_period
                 s = (v / w) * th
-            self.lock_odometry.acquire()    # the following operations will be performed at the same time (or somethin?)
+            self.lock_odometry.acquire()    # the following operations are non-atomic, so we lock them so the variables cannot be modified during its execution
             self.x.value += s * math.cos((self.th.value + th/2))
             self.y.value += s * math.sin((self.th.value + th/2))
             self.th.value = sage.norm_pi(self.th.value + th)
             self.lock_odometry.acquire()
             tEnd = time.clock()
-            time.sleep(self.period - (tEnd-tIni))    # 2 mimir que es 2 late
-        print("Odometry was stopped... :(")
+            time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
+            logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
+            with open(self.odometry_file, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=' ')
+                writer.writerow([self.x.value, self.y.value, self.th.value])
+        logging.info("Odometry was stopped... :(")
 
     # Stop the odometry thread.
     def stopOdometry(self):
         self.finished.value = True
-        #self.BP.reset_all()
 
     def stopRobot(self):
         """
         Stops the robot
         """
-        self.BP.set_motor_power(self.left_motor + self.right_motor + self.claw_motor, 0)
-        print('Stopped the robot!')    
+        self.setSpeed(0, 0)
+        logging.info('Stopped the robot!')  
+
+    def kill(self):
+        self.stopRobot()
+        self.stopOdometry()
+        logging.warning('The robot has been annihilated')
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
+        logging.basicConfig(filename=self.log_file, encoding='utf-8', datefmt='%d/%m/%Y %H:%M:%S')
+        logging.info('Started the robot!')
         self.stopRobot()
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
