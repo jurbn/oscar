@@ -119,63 +119,6 @@ class Robot:
         # because they are part of the class, so visible within updateOdometry in any case,
         # but it's just to show an example of process receiving params
 
-    # You may want to pass additional shared variables besides the odometry values and stop flag
-    def updateOdometry2(self, x_odo, y_odo, th_odo, finished):
-        """ To be filled ...  """
-
-        while not finished.value:
-            # current processor time in a floating point value, in seconds
-            tIni = time.clock()
-
-            # compute updates
-
-            ######## UPDATE FROM HERE with your code (following the suggested scheme) ########
-            sys.stdout.write("Dummy update of odometry ...., X=  %d, \
-                Y=  %d, th=  %d \n" %(x_odo.value, y_odo.value, th_odo.value) )
-            #print("Dummy update of odometry ...., X=  %.2f" %(x_odo.value) )
-
-            # update odometry uses values that require mutex
-            # (they are declared as value, so lock is implicitly done for atomic operations, BUT =+ is NOT atomic)
-
-            # Operations like += which involve a read and write are not atomic.
-            with x_odo.get_lock():
-                x_odo.value+=1
-
-            # to "lock" a whole set of operations, we can use a "mutex"
-            self.lock_odometry.acquire()
-            #x_odo.value+=1
-            y_odo.value+=1
-            th_odo.value+=1
-            self.lock_odometry.release()
-
-            try:
-                # Each of the following BP.get_motor_encoder functions returns the encoder value
-                # (what we want to store).
-                #print("Reading encoder values ....")
-                sys.stdout.write("Reading encoder values .... \n")
-                #[encoder1, encoder2] = [self.BP.get_motor_encoder(self.BP.PORT_B),
-                #    self.BP.get_motor_encoder(self.BP.PORT_C)]
-            except IOError as error:
-                #print(error)
-                sys.stdout.write(error)
-
-            #sys.stdout.write("Encoder (%s) increased (in degrees) B: %6d  C: %6d " %
-            #        (type(encoder1), encoder1, encoder2))
-
-
-            # save LOG
-            # Need to decide when to store a log with the updated odometry ...
-
-            ######## UPDATE UNTIL HERE with your code ########
-
-
-            tEnd = time.clock()
-            time.sleep(self.odometry_period - (tEnd-tIni))
-
-        #print("Stopping odometry ... X= %d" %(x_odo.value))
-        sys.stdout.write("Stopping odometry ... X=  %.2f, \
-                Y=  %.2f, th=  %.2f \n" %(x_odo.value, y_odo.value, th_odo.value))
-
     def updateOdometry(self):
         """
         The same as updateOdometry, but less scary (~º3º)~          (OJO QUE AQUI ESTOY HACIENDO COSAS QUE POSBOT ME HACE EN SAGE)
@@ -197,11 +140,11 @@ class Robot:
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
-           # logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
-           # with open(self.odometry_file, 'w', newline='') as csvfile:
-           #     writer = csv.writer(csvfile, delimiter=' ')
-           #     writer.writerow([self.x.value, self.y.value, self.th.value])
-        #logging.info("Odometry was stopped... :(")
+            logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
+            with open(self.odometry_file, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=' ')
+                writer.writerow([self.x.value, self.y.value, self.th.value])
+        logging.info("Odometry was stopped... :(")
 
     # Stop the odometry thread.
     def toaPolla(self):
