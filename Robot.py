@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import print_function # use python 3 syntax but make it compatible with python 2
 from __future__ import division
+from distutils.debug import DEBUG
 
 import sage
 import brickpi3 # import the BrickPi3 drivers
@@ -64,8 +65,8 @@ class Robot:
         # odometry update period
         self.odometry_period = 1.0
 
-        self.odometry_file = 'odometry/' + time.strftime('%Y%m%d%H%M%S') + '.csv'
-        self.log_file = 'log/' + time.strftime('%Y%m%d%H%M%S') + '.log'
+        self.odometry_logger = 'odometry/' + time.strftime('%Y%m%d%H%M%S') + '.csv'
+        self.log_logger = logging.basicConfig(filename='log/' + time.strftime('%Y%m%d%H%M%S') + '.log', level=logging.DEBUG)
 
     def setSpeed(self, v, w):
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
@@ -140,40 +141,20 @@ class Robot:
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
-            logging.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
+            self.log_logger.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
             with open(self.odometry_file, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=' ')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
-        logging.info("Odometry was stopped... :(")
+        self.log_logger.info("Odometry was stopped... :(")
 
-    # Stop the odometry thread.
-    def toaPolla(self):
-        #self.BP.set_motor_power(self.left_motor, 90)
-        #self.BP.set_motor_power(self.right_motor, 90)
-        self.setSpeed(0.3, 0)
-    def stopOdometry(self):
-        self.finished.value = True
-
-    def stopRobot(self):
-        """
-        Stops the robot
-        """
-        self.setSpeed(0, 0)
-        logging.info('Stopped the robot!')  
-
-    def kill(self):
-        self.stopRobot()
-        self.stopOdometry()
-        logging.warning('The robot has been annihilated')
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
-        logging.basicConfig(filename=self.log_file, level=logging.DEBUG)
         print('Log file is:' + self.log_file)
         logging.info('Started the robot!')
-        self.stopRobot()
+        self.setSpeed(0, 0)
         self.BP.reset_motor_encoder(self.left_motor + self.right_motor)
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)

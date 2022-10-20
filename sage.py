@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -78,3 +79,12 @@ def norm_pi(th):
     while th < -np.pi:
         th += 2 * np.pi
     return th
+
+
+def is_near(location, center, radius):
+    """
+    Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
+    """
+    robot_x, robot_y = location
+    center_x, center_y = center
+    return math.pow(robot_x - center_x, 2) + math.pow(robot_y - center_y, 2) <= math.pow(radius, 2)

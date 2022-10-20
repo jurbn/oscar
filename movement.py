@@ -11,6 +11,7 @@ import sys
 import sage
 import numpy as np
 import math
+import logging
 
 def spin(robot, w, t):
     robot.setSpeed(0, w)
@@ -40,23 +41,19 @@ def moveC(robot, pos, R, th, t=0):
     while (robot.readOdometry != obj):
         time.sleep(0.1)
 
-def eight(robot, r = 0.2, v = 0.2):
+def time_eight(robot, r = 0.2, v = 0.2):
     w = v / r
     spin(robot, -math.pi/2, 1)
-    print('screw you up the a$$')
     robot.setSpeed(v, w)
     time.sleep(math.pi/w)
-    print('half a circle yay')
     robot.setSpeed(v, -w)
     time.sleep(math.pi*2/w)
-    print('oh no is this a loop????')
     robot.setSpeed(v, w)
     time.sleep(math.pi/w)
-    print('yay :D')
     robot.stopRobot()
 
 
-def putivuelta(robot, r1=0.1, r2=0.2, d=1, v=0.2):
+def time_slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
     """
     Does a slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
     """
@@ -66,22 +63,34 @@ def putivuelta(robot, r1=0.1, r2=0.2, d=1, v=0.2):
     th1 = (np.pi/2 - th)    # angle to turn on the first circle (twice: while leaving and when arriving)
     th2 = 2*(np.pi/2 + th)
     o = math.sqrt(math.pow(d, 2)+math.pow(r2-r1, 2))  # distance to be covered in between circles
-    print('goin for a walk')
     robot.setSpeed(v, w1)
     time.sleep(th1/w1)
-    print('straight as a d')
     robot.setSpeed(v, 0)
     time.sleep(o/v)
-    print('tokio drift')
     robot.setSpeed(v, w2)
     time.sleep(th2/w2)
-    print('shit i forgot my purse')
     robot.setSpeed(v, 0)
     time.sleep(o/v)
-    print('almost there...')
     robot.setSpeed(v, w1)
     time.sleep(th1/w1)
-    print('back home')
     robot.stopRobot()
+
+def abruptStop(robot):
+        """
+        Quickly stops the robot
+        """
+        robot.setSpeed(0, 0)
+        robot.log_logger.warning('Stopped the robot!')  
+
+def softStop(robot):
+    """
+    Steadily stops the robot
+    """
+    v, w = robot.readSpeed()
+    robot.log_logger.info('Stopping the robot...')
+    for i in range(0.9, 0, 0.1):
+        robot.setSpeed(v*i, w*i)
+        time.sleep(0.05)
+    robot.log_logger.info('The robot was stopped!')
 
 
