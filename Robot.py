@@ -66,7 +66,7 @@ class Robot:
         self.odometry_period = 1.0
 
         self.odometry_logger = 'odometry/' + time.strftime('%Y%m%d%H%M%S') + '.csv'
-        self.log_logger = logging.basicConfig(filename='log/' + time.strftime('%Y%m%d%H%M%S') + '.log', level=logging.DEBUG)
+        self.logger = logging.basicConfig(filename='log/' + time.strftime('%Y%m%d%H%M%S') + '.log', level=logging.DEBUG)
 
     def setSpeed(self, v, w):
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
@@ -141,11 +141,11 @@ class Robot:
             self.lock_odometry.acquire()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
-            self.log_logger.info('Odometry\'s execution time: {}'.format(tEnd-tIni))
+            print('Odometry\'s execution time: {}'.format(tEnd-tIni))
             with open(self.odometry_file, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=' ')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
-        self.log_logger.info("Odometry was stopped... :(")
+        self.logger.info("Odometry was stopped... :(")
 
 
     def setup(self):
