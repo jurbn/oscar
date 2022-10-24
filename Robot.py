@@ -25,7 +25,7 @@ class Robot:
 
         # Robot construction parameters
         self.radius = 0.0275
-        self.length = 0.145
+        self.length = 0.15
         self.op_cl = 0 #value of the open claw (encoder)
         self.cl_cl = 0 #value of the closed claw (encoder)
         ##################################################

@@ -115,8 +115,7 @@ def slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
         robot.setSpeed(0, w1)
     while(robot.th.value > th1):
         robot.setSpeed(v, -w1)
-    ############3while(sage.is_near(robot, center, radius)) AAAAAAAAAAAAAA hay que calcular el punto donde empieza a girar en el segundo circulo!1!!!!!!1111!!
-
+    
     
     
 
