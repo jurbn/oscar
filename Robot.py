@@ -63,7 +63,7 @@ class Robot:
         #self.lock_odometry.release()
 
         # odometry update period
-        self.odometry_period = 1.0
+        self.odometry_period = 0.01
 
         self.odometry_logger = 'odometry/' + time.strftime('%Y%m%d%H%M%S') + '.csv'
         self.logger = logging.basicConfig(filename='log/' + time.strftime('%Y%m%d%H%M%S') + '.log', level=logging.DEBUG)
@@ -71,10 +71,8 @@ class Robot:
     def setSpeed(self, v, w):
         """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
         (Positive w values turn left, negative ones turn right) """
-        print("setting speed to %.2f m/s and %.2f rad/s" % (v, w))
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
-        print('Right rad/s: {}. Left rad/s: {}'.format(rps_left, rps_right))
         #speedPower = 100
         #BP.set_motor_power(BP.PORT_B + BP.PORT_C, speedPower)
 
@@ -138,26 +136,31 @@ class Robot:
             self.x.value += s * math.cos((self.th.value + th/2))
             self.y.value += s * math.sin((self.th.value + th/2))
             self.th.value = sage.norm_pi(self.th.value + th)
-            self.lock_odometry.acquire()
+            self.lock_odometry.release()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))    # 2 mimir que es 2 late
-            print('Odometry\'s execution time: {}'.format(tEnd-tIni))
-            with open(self.odometry_file, 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile, delimiter=' ')
-                writer.writerow([self.x.value, self.y.value, self.th.value])
-        self.logger.info("Odometry was stopped... :(")
+            #with open(self.odometry_file, 'w', newline='') as csvfile:
+            #    writer = csv.writer(csvfile, delimiter=' ')
+            #    writer.writerow([self.x.value, self.y.value, self.th.value])
+        #self.logger.info("Odometry was stopped... :(")
+        self.x.value = 0
+        self.y.value = 0
+        self.th.value = 0
+        
+    def stopOdometry(self):
+        self.finished.value = True
 
 
     def setup(self):
         """
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
-        print('Log file is:' + self.log_file)
         logging.info('Started the robot!')
         self.setSpeed(0, 0)
         self.BP.reset_motor_encoder(self.left_motor + self.right_motor)
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
         self.cl_cl = self.op_cl - 225
+        self.startOdometry()
 
 

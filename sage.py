@@ -72,7 +72,7 @@ def chord(th):
 
 def norm_pi(th):
     """
-    Normalizes the given angle (forces it to be between 0 and -pi)
+    Normalizes the given angle (forces it to be between pi and -pi)
     """
     while th > np.pi:
         th -= 2 * np.pi

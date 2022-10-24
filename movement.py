@@ -45,7 +45,6 @@ def time_eight(robot, r = 0.2, v = 0.2):
     """
     Does a time-based eight circuit with the given r and v.
     """
-    robot.logger.info('Starting a time-based eight.\n Initial position: ({}, {}, {})'.format(robot.x.value, robot.y.value, robot.th.value))
     w = v / r
     spin(robot, -math.pi/2, 1)  # 90 degree turn
     robot.setSpeed(v, w)
@@ -86,18 +85,29 @@ def eight(robot, r = 0.2, v = 0.2):
     """
     Does an odometry-based eight circuit with the given r and v.
     """
-    robot.logger.info('Starting an odometry-based eight.\n Initial position: ({}, {}, {})'.format(robot.x.value, robot.y.value, robot.th.value))
     w = v / r
+    print('PRIMER VALOR: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
+    print('spin: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(v, -w)
+    print('primer cacho: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(v, w)
-    while(robot.th.value > -math.pi/2):
+    print('media vuelta: {}'.format(robot.th.value/math.pi))
+    while(robot.th.value > 0):
         robot.setSpeed(v, w)
-    while(robot.th.value < math.pi/2):
+    print('tres cuartos vuelta: {}'.format(robot.th.value/math.pi))
+    while(robot.th.value < -math.pi/2):
+        robot.setSpeed(v,w)
+    print('final vuelta: {}'.format(robot.th.value/math.pi))
+    while(robot.th.value < 0):
         robot.setSpeed(v, -w)
+    print('penultimo tramo: {}'.format(robot.th.value/math.pi))
+    while(robot.th.value > math.pi/2):
+        robot.setSpeed(v, -w)
+    print('ultimo tramo: {}'.format(robot.th.value/math.pi))
     robot.setSpeed(0, 0)
 
 def slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
