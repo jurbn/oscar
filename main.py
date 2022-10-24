@@ -11,17 +11,22 @@ def main():
     try:
         oscar = Robot()
         oscar.setup()
-        #oscar.setSpeed(10, 0)
+        oscar.setSpeed(0, 0)
+        time.sleep(2)
+        #for i in range(0,5):
+        #oscar.setSpeed(0.5,0) #(i/10,0)
+            #time.sleep(0.1)
+            #print('heeey')
         #time.sleep(5)
-        #oscar.setSpeed(0, 10)
-        #time.sleep(5)
+        #mv.softStop(oscar)
+        #oscar.setSpeed(0,0)
+        print('man parao :(')
         #mv.putivuelta(oscar, 0.2, 0.3, 0.6, 0.2)
-        mv.eight(oscar)
-
+        #mv.eight(oscar)
+        mv.slalom(oscar)
     except KeyboardInterrupt:
         #oscar.stopOdometry()
         oscar.setSpeed(0, 0)
-        logging.info()
 
 if __name__ == "__main__":
     main()

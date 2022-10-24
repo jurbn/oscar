@@ -85,6 +85,8 @@ def is_near(location, center, radius):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
-    robot_x, robot_y = location
-    center_x, center_y = center
+    robot_x = location[0]
+    robot_y = location[1]
+    center_x = center[0]
+    center_y = center[1]
     return math.pow(robot_x - center_x, 2) + math.pow(robot_y - center_y, 2) <= math.pow(radius, 2)
