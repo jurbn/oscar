@@ -96,6 +96,9 @@ class Robot:
         """
         Updates the location values of the robot and writes them to a .csv file
         """
+        with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
+                writer = csv.writer(csvfile, delimiter=',')
+                writer.writerow(['x', 'y', 'th'])
         while not self.finished.value:
             tIni = time.clock()
             v, w = self.readSpeed()
@@ -112,7 +115,7 @@ class Robot:
             self.lock_odometry.release()
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))
-            with open(self.odometry_file, 'a') as csvfile:
+            with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
         self.x.value = 0

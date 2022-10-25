@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import argparse
-import numpy as np
 import time
 from Robot import Robot
 import movement as mv
 import logging
+import sage
 
 def main():
     try:
@@ -13,15 +13,13 @@ def main():
         logging.info('Program started')
         oscar = Robot()
         oscar.setup()
-        oscar.setSpeed(0, 0)
-        time.sleep(2)
-       
-        print('man parao :(')
-        mv.slalom(oscar)
+        mv.eight(oscar)
+        sage.plot_file(oscar.odometry_file)
     except KeyboardInterrupt:
         logging.warning('A keyboard interruption was detected!')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
+        sage.plot_file(oscar.odometry_file)
 
 if __name__ == "__main__":
     main()

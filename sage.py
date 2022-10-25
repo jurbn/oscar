@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
 
 def plot_robot(loc_eje, c, tamano):
@@ -32,6 +33,14 @@ def plot_robot(loc_eje, c, tamano):
                         trasera_dcha, trasera_izda, frontal_robot, trasera_dcha])
     robot = np.dot(Hwe, np.dot(Hec, np.transpose(extremos)))
     plt.plot(robot[0, :], robot[1, :], c)
+
+def plot_file(file_name):
+    with open(file_name, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            plt.arrow(row['x'], row['y'], np.cos(row['th']), np.sin(row['th']))
+        plt.show()
+    
 
 
 def pos_bot(vw, x_w_r, t):
