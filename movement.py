@@ -44,7 +44,7 @@ def soft_stop(robot, t = 0.5):
 ####################
 # COMPLEX MOVEMENTS#
 ####################
-def eight(robot, r = 0.2, v = 0.1):
+def eight(robot, r = 0.2, v = 0.05):
     """
     Does an odometry-based eight circuit with the given r and v.
     """

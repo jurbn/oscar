@@ -101,9 +101,10 @@ class Robot:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(['x', 'y', 'th'])
                 logging.info('holaquetal {},{},{}'.format(self.x.value, self.y.value, math.degrees(self.th.value)))
-        [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
+        #[enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
         tEnd = time.clock()
         time.sleep(self.odometry_period - (time.clock() - tEnd))
+        [enc_l_1, enc_r_1] = [0, 0]
         while not self.finished.value:
             tIni = time.clock()
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
