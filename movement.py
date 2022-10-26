@@ -44,7 +44,7 @@ def soft_stop(robot, t = 0.5):
 ####################
 # COMPLEX MOVEMENTS#
 ####################
-def eight(robot, r = 0.2, v = 0.2):
+def eight(robot, r = 0.2, v = 0.1):
     """
     Does an odometry-based eight circuit with the given r and v.
     """
@@ -73,7 +73,7 @@ def eight(robot, r = 0.2, v = 0.2):
     logging.info('yyy acabamos: {}'.format(robot.th.value/math.pi))
     robot.setSpeed(0, 0)
 
-def slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
+def slalom(robot, r1=0.1, r2=0.2, d=0.3, v=0.1):
     """
     Does a odometry-based slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
     """
@@ -81,7 +81,8 @@ def slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
     logging.info('Starting the slalom...')
     w1 = v / r1
     w2 = v / r2
-    th = math.abs(math.acos((r2-r1)/d)) # we abs it so we have a first cuadrant angle
+    th = math.pi/2 - abs(math.acos((r2-r1)/d)) # we abs it so we have a first cuadrant angle
+    print(th)
     tx1 = r1-r1*math.sin(th)
     ty1 = r1*math.cos(th)
     tx2 = r1+d-r2*math.sin(th)
@@ -91,23 +92,23 @@ def slalom(robot, r1=0.1, r2=0.2, d=1, v=0.2):
     t21 = np.array([tx2, ty2])
     t22 = np.array([tx2, -ty2])
 
-    logging.info('Spinning:')
-    while(robot.th.value < -math.pi/2):
-        robot.setSpeed(0, -w1)
-    logging.info('primer tramo!')
+    logging.info('Spinning at: {}, {}, {}'.format(robot.x.value, robot.y.value, robot.th.value))
+    while(robot.th.value > -math.pi/2):
+        robot.setSpeed(0, -w2)
+    logging.info('primer tramo! {}, {}, {}'.format(robot.x.value, robot.y.value, robot.th.value))
     while(robot.th.value <  -th):
         robot.setSpeed(v, w1)
-    logging.info('amo to recto')
-    while(not sage.is_near(robot, t21, 0.05)):
+    logging.info('amo to recto {}, {}, {}'.format(robot.x.value, robot.y.value, robot.th.value))
+    while(not sage.is_near([robot.x.value, robot.y.value], t21, 1)):
         robot.setSpeed(v,0)
     logging.info('y giramo')
     while(robot.th.value > math.pi-th):
         robot.setSpeed(v, w2)
     logging.info('giro terminao, to recto')
-    while(not sage.is_near(robot, t12, 0.05)):
+    while(not sage.is_near([robot.x.value, robot.y.value], t12, 0.05)):
         robot.setSpeed(v,0)
     logging.info('empezamo el ultimo giro')
-    while(robot.th.value < math.pi):    # primera parte por lo de la normalización (pasa de pi a -p)
+    while(robot.th.value > -math.pi):    # primera parte por lo de la normalización (pasa de pi a -p)
         robot.setSpeed(v, w1)
     while(robot.th.value < -math.pi/2): # vamos de -pi a -pi/2
         robot.setSpeed(v, w1)

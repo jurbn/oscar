@@ -10,11 +10,17 @@ import sage
 def main():
     try:
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
+        logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
         oscar = Robot()
         oscar.setup()
-        mv.eight(oscar)
+        logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
+        #sage.plot_animation(oscar)
+        #mv.eight(oscar)
+        mv.spin(oscar, 3.1416, 5)
+        oscar.stopOdometry()
         sage.plot_file(oscar.odometry_file)
+        
     except KeyboardInterrupt:
         logging.warning('A keyboard interruption was detected!')
         mv.abrupt_stop(oscar)
