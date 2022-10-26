@@ -113,3 +113,8 @@ def is_near(location, center, radius):
     center_x = center[0]
     center_y = center[1]
     return math.pow(robot_x - center_x, 2) + math.pow(robot_y - center_y, 2) <= math.pow(radius, 2)
+
+def enc_to_speed(robot, n_values, p_values, time):
+    v = 0
+    w = 0
+    return v, w
