@@ -16,8 +16,8 @@ def main():
         oscar.setup()
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         #sage.plot_animation(oscar)
-        #mv.eight(oscar)
-        mv.spin(oscar, 3.1416, 5)
+        mv.eight(oscar)
+        #mv.spin(oscar, 3.1416, 5)
         oscar.stopOdometry()
         sage.plot_file(oscar.odometry_file)
         

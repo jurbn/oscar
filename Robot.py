@@ -101,7 +101,7 @@ class Robot:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow(['x', 'y', 'th'])
                 logging.info('holaquetal {},{},{}'.format(self.x.value, self.y.value, math.degrees(self.th.value)))
-        [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motr)]
+        [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
         time.sleep(0.05)
         [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
         v_l = math.radians((enc_l_2 - enc_l_1) / 0.05) * self.radius
@@ -136,6 +136,7 @@ class Robot:
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
+            logging.info('{}, {}, {}'.format(self.x.value, self.y.value, self.th.value))
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))
         
