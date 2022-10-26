@@ -104,6 +104,7 @@ class Robot:
         [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
         time.sleep(0.05)
         [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
+        tLast = time.clock()
         v_l = math.radians((enc_l_2 - enc_l_1) / 0.05) * self.radius
         v_r = math.radians((enc_r_2 - enc_r_1) / 0.05) * self.radius
         w = (v_r - v_l) / self.length
@@ -112,6 +113,7 @@ class Robot:
             v = r * w
         except Exception:
             v = v_l
+        time.sleep(self.odometry_period - (time.clock() - tLast))
         while not self.finished.value:
             tIni = time.clock()
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
