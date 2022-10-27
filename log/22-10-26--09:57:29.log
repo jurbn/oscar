@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Setting up the robot!
+INFO:root:Odometry was started, PID: 9373
+INFO:root:PRIMER VALOR: 0.0
+INFO:root:spin: 0.9970953703703701
+INFO:root:primer cacho: -0.9997879629629632
+INFO:root:empieza media vuelta: 0.5007648148148148
+INFO:root:tres cuartos vuelta: -0.9969833333333342
+INFO:root:final vuelta: -0.4982861111111117
+INFO:root:casi acaba el ocho: 0.9995944444444445
+INFO:root:yyy acabamos: 0.49717962962963125
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

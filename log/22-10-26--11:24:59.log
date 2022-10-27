@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Setting up the robot!
+INFO:root:Odometry was started, PID: 22251
+INFO:root:Starting the slalom...
+INFO:root:Spinning at: 0.0, 0.0, 0.0
+INFO:root:primer tramo! -1.0049681459469801, -0.20894938925932213, -1.5750229324668052
+INFO:root:amo to recto -0.8851922150226305, -0.4039092147289667, -0.40941060928656486
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

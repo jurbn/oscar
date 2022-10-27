@@ -1,0 +1,3214 @@
+INFO:root:Program started
+INFO:root:Setting up the robot!
+INFO:root:Odometry was started, PID: 2503
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Starting the slalom...
+INFO:root:Spinning at: 0.0, 0.0, 0.0
+INFO:root:primer tramo! -0.00024710979071964045, 6.617547636302273e-05, -1.5996524370945362
+INFO:root:amo to recto 0.08096680781704275, -0.10494284664865076, -0.18896098034925235
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08096680781704275, -0.10494284664865076
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.08626838857401017, -0.10583192954017383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09135282729419734, -0.10652359000409044
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.09644378323684275, -0.10716552371307243
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10129330217104947, -0.10776899021425414
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.10638425811369487, -0.10841092392323613
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11123178525201781, -0.10903018667401368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.11656406510417304, -0.10971137569986898
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.12141159224249598, -0.11033063845064653
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1267438720946512, -0.11101182747650183
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13183482803729663, -0.11165376118548383
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.13692578397994204, -0.11229569489446582
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.14225806383209727, -0.11297688392032113
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1471055909704202, -0.11359614667109867
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15243787082257543, -0.11427733569695397
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.15728539796089835, -0.11489659844773152
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16237635390354377, -0.11553853215671352
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.16746730984618918, -0.11618046586569551
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1725582657888346, -0.11682239957467751
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.17764922173148, -0.1174643332836595
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18273805927297085, -0.1181228496258998
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.18782689681446169, -0.11878136596814011
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.1929178527571071, -0.1194232996771221
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.19800880869975251, -0.1200652333861041
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20285633583807544, -0.12068449613688165
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.20818861569023067, -0.12136568516273695
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.21327957163287609, -0.12200761887171895
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2183705275755215, -0.12264955258070094
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22321805471384443, -0.12326881533147849
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.22855033456599966, -0.12395000435733379
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2331545209130628, -0.12454580485745596
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.23872800964898133, -0.12526703704181438
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24406028950113656, -0.12594822606766967
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.24890577339087866, -0.12658327849505485
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.25423580566959497, -0.12728183616517855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2593246432110858, -0.12794035250741884
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.264656923063241, -0.12862154153327413
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2697478790058864, -0.12926347524225612
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.27459540614420935, -0.12988273799303368
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2794429332825323, -0.13050200074381124
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2850187421720963, -0.1312050709965058
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2901096981147417, -0.1318470047054878
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.2949572252530646, -0.13246626745626536
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30028950510521984, -0.13314745648212065
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.30538046104786526, -0.13378939019110264
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3104714169905107, -0.13443132390008464
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3153189441288336, -0.1350505866508622
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32065122398098883, -0.1357317756767175
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.32598350383314406, -0.13641296470257278
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.330831030971467, -0.13703222745335034
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3361633108236222, -0.13771341647920562
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34101083796194515, -0.13833267922998319
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.34610179390459056, -0.13897461293896518
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35167760279415455, -0.13967768319165974
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.35676855873679997, -0.14031961690064174
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3618595146794454, -0.14096155060962373
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3669504706220908, -0.14160348431860573
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3720414265647362, -0.14224541802758772
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.37688895370305914, -0.14286468077836528
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.38222123355521437, -0.14354586980422057
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3873121894978598, -0.14418780351320257
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3924031454405052, -0.14482973722218456
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.3974941013831506, -0.14547167093116656
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.402585057325796, -0.14611360464014855
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.40767601326844144, -0.14675553834913055
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41301048409606883, -0.14741935150043042
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.41810144003871424, -0.14806128520941242
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4234337198908695, -0.1487424742352677
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4287659997430247, -0.149423663261123
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43361352688134763, -0.15004292601190056
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.43894580673350286, -0.15072411503775585
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4437933338718258, -0.1513433777885334
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.449125613723981, -0.1520245668143887
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45397314086230395, -0.15264382956516626
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.45906409680494936, -0.15328576327414825
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46439856763257675, -0.15394957642544813
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.46924808656678346, -0.15455304292662983
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47458255739441085, -0.1552168560779297
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.47967351333705627, -0.1558587897869117
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4847644692797017, -0.1565007234958937
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4898554252223471, -0.1571426572048757
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.4949463811649925, -0.1577845909138577
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5000373371076379, -0.15842652462283968
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5051282930502833, -0.15906845833182168
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5102192489929287, -0.15971039204080367
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5153102049355741, -0.16035232574978567
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+DEBUG:root:Desired position: [ 0.56       -0.19595918]
+Current position: 0.5204011608782195, -0.16099425945876766
+INFO:root:y giramo
+INFO:root:giro terminao, to recto
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

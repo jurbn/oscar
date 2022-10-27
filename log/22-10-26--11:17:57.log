@@ -1,0 +1,10 @@
+INFO:root:Program started
+INFO:root:Setting up the robot!
+INFO:root:Odometry was started, PID: 21228
+INFO:root:Starting the slalom...
+INFO:root:Spinning at: 0.0, 0.0, 0.0
+INFO:root:primer tramo! -0.0002587857711366161, -0.00010460243341863475, -1.5859661468768151
+INFO:root:amo to recto 0.08923597959448124, -0.11437406000839344, -0.09311331559389872
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
