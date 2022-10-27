@@ -18,6 +18,8 @@ def main():
         #sage.plot_animation(oscar)
         mv.eight(oscar)
         #mv.spin(oscar, 3.1416, 5)
+        #oscar.setSpeed(0, 0)
+        #mv.slalom(oscar)
         oscar.stopOdometry()
         sage.plot_file(oscar.odometry_file)
         

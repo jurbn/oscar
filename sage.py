@@ -104,15 +104,11 @@ def norm_pi(th):
     return th
 
 
-def is_near(location, center, radius):
+def is_near(robot, center, threshold):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
-    robot_x = location[0]
-    robot_y = location[1]
-    center_x = center[0]
-    center_y = center[1]
-    return math.pow(robot_x - center_x, 2) + math.pow(robot_y - center_y, 2) <= math.pow(radius, 2)
+    return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
 def enc_to_speed(robot, n_values, p_values, time):
     v = 0
