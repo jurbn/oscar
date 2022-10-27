@@ -98,17 +98,17 @@ class Robot:
         Updates the location values of the robot and writes them to a .csv file
         """
         with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
-                writer = csv.writer(csvfile, delimiter=',')
-                writer.writerow(['x', 'y', 'th'])
-                logging.info('holaquetal {},{},{}'.format(self.x.value, self.y.value, math.degrees(self.th.value)))
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['x', 'y', 'th'])
+        logging.info('holaquetal {},{},{}'.format(self.x.value, self.y.value, math.degrees(self.th.value)))
         #[enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
         [enc_l_1, enc_r_1] = [0, 0]
-        tLast = time.clock()
+        time.sleep(self.odometry_period)
         while not self.finished.value:
             tIni = time.clock()
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
-            v_l = math.radians((enc_l_2 - enc_l_1) / (tIni - tLast)) * self.radius
-            v_r = math.radians((enc_r_2 - enc_r_1) / (tIni - tLast)) * self.radius
+            v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
+            v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             w = (v_r - v_l) / self.radius
             try:
                 r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
@@ -129,7 +129,6 @@ class Robot:
                 writer.writerow([self.x.value, self.y.value, self.th.value])
             logging.info('{}, {}, {}'.format(self.x.value, self.y.value, self.th.value))
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
-            tLast = tIni
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))
         
