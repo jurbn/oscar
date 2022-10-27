@@ -6,12 +6,15 @@ from distutils.debug import DEBUG
 
 import sage
 import brickpi3 # import the BrickPi3 drivers
+import movement as mv
+
 
 import time     # import the time library for the sleep function
 import sys
 import math
 import numpy as np
 import csv
+import cv2
 import logging
 from multiprocessing import Process, Value, Array, Lock
 
@@ -80,6 +83,66 @@ class Robot:
     def openClaw(self):
         """Pulls Oscar's claw down and opens it"""
         self.BP.set_motor_position(self.claw_motor, self.op_cl)  
+    
+    def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
+        finished = False
+        targetFound = False
+        targetPosition = False
+        targetCatched = False
+        ##################################
+
+        #ESC = 27
+        #KNN = 1
+        #MOG2 = 2
+
+        #cam = picamera.PiCamera()
+
+        #cam.resolution = (320, 240)
+        #cam.resolution = (640, 480)
+        #cam.framerate = 32
+        #rawCapture = PiRGBArray(cam, size=(320, 240))
+        #rawCapture = PiRGBArray(cam, size=(640, 480))
+ 
+        # allow the camera to warmup
+        #time.sleep(0.1)
+        """
+        for img in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        frame = img.array
+        cv2.imshow('Captura', frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # clear the stream in preparation for the next frame
+        rawCapture.truncate(0)
+        k = cv2.waitKey(1) & 0xff
+        if k == ESC:
+        cam.close()
+        break
+
+        cv2.destroyAllWindows()
+        """
+##################################################
+
+
+
+
+        while not finished:
+            #search for the thingy:
+            #mv.spin(w=0.5)
+            vid = cv2.VideoCapture(0)
+            while not targetFound:
+                logging.debug('im in')
+                ret, frame = vid.read()
+                cv2.imwrite('frame.png',frame)
+            vid.release()
+            cv2.destroyAllWindows() #AAAAAAAAAAAAAAAAAAAAaaaaaa
+            while targetFound: #yay u did it! now go get it!!
+                #
+                if catch:
+                    while not targetPosition: #go¡ go to grab¡¡¡
+                        pass
+                else: #corre detras sin mas nose
+                    pass
+
+        
     
     def readOdometry(self):
         """ Returns current value of odometry estimation """
