@@ -10,7 +10,7 @@ import sage
 def main(function=''):
     try:        
         #########################
-        #     initialisation    #
+        #     initialization    #
         #########################
 
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
