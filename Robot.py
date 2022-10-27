@@ -55,7 +55,7 @@ class Robot:
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
 
-        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left    ))  # BP works on degrees, so we have to transform it :/
+        self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
     def readSpeed(self):
@@ -85,6 +85,7 @@ class Robot:
         self.BP.set_motor_position(self.claw_motor, self.op_cl)  
     
     def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
+        """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
         finished = False
         targetFound = False
         targetPosition = False
@@ -105,41 +106,57 @@ class Robot:
  
         # allow the camera to warmup
         #time.sleep(0.1)
-        """
-        for img in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        frame = img.array
-        cv2.imshow('Captura', frame)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        # clear the stream in preparation for the next frame
-        rawCapture.truncate(0)
-        k = cv2.waitKey(1) & 0xff
-        if k == ESC:
-        cam.close()
-        break
-
-        cv2.destroyAllWindows()
-        """
-##################################################
-
-
-
+        
+        #for img in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        #    frame = img.array
+        #    cv2.imshow('Captura', frame)
+        #    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        #    # clear the stream in preparation for the next frame
+        #    rawCapture.truncate(0)
+        #    k = cv2.waitKey(1) & 0xff
+        #    if k == ESC:
+        #        cam.close()
+        #    break
+        #cv2.destroyAllWindows()
+        
+        ##################################################
 
         while not finished:
             #search for the thingy:
             #mv.spin(w=0.5)
             vid = cv2.VideoCapture(0)
             while not targetFound:
-                logging.debug('im in')
+                logging.debug('im lookin for sum')
                 ret, frame = vid.read()
-                cv2.imwrite('frame.png',frame)
-            vid.release()
-            cv2.destroyAllWindows() #AAAAAAAAAAAAAAAAAAAAaaaaaa
+                cv2.imwrite('im.png',frame)
+                # if (blob?in (im.png)):
+                #   targetFound=True
+
+            #vid.release()
+            #cv2.destroyAllWindows() #AAAAAAAAAAAAAAAAAAAAaaaaaa
+            
             while targetFound: #yay u did it! now go get it!!
-                #
+                logging.debug('im gon get the thing')
+                ret, frame = vid.read()
+                cv2.imwrite('im.png', frame)
+                # aquí hay que sacar la diferencia entre el área del blob y el deseado
+                # v = dA en plan separar en tramos para darle mas velocidad o menos
+                # IGUAL ES MEJOR DARLE PRIMERO SOLO W Y LUEGO YA AVANZAR CON V PERO SI
+
+                # sacamos la distancia del centro del blob al centro de la cámara y
+                # ajustamos la w en función de eso.
+                # lo ideal seria, centro_cam=0, posiciones L <0 y posR>0 para hacer menos cálculos
+                
+                # le asignamos estos valores al robote:
+                self.setSpeed(v,w)
+                #if posTarget==posDesired:
+                    #self.setSpeed(0,0)
+                    #targetPosition = True
+                
                 if catch:
                     while not targetPosition: #go¡ go to grab¡¡¡
-                        pass
-                else: #corre detras sin mas nose
+                        pass #inicia la secuencia de agarracion
+                else: #corre detras sin mas nose va bien para probar el seguimiento
                     pass
 
         
