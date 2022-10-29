@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as FuncAnimation
 import csv
 import pandas as pd
+import cv2 as cv
 import logging
+
 
 def plot_robot(loc_eje, c, tamano):
     """
@@ -36,17 +38,20 @@ def plot_robot(loc_eje, c, tamano):
     robot = np.dot(Hwe, np.dot(Hec, np.transpose(extremos)))
     plt.plot(robot[0, :], robot[1, :], c)
 
+
 def plot_file(file_name):
     df = pd.read_csv(file_name)
     plt.axis('equal')
     plt.plot(df['x'], df['y'])
     plt.show()
 
+
 def plot_animation(robot):
     fig = plt.figure(figsize=(6, 3))
     x = [0]
     y = [0]
     ln, = plt.plot(x, y, '-')
+
     def update(frame):
         x.append(robot.x.value)
         y.append(robot.y.value)
@@ -56,6 +61,7 @@ def plot_animation(robot):
         return ln,
     animation = FuncAnimation(fig, update_plot, interval=50)
     plt.show()
+
 
 def pos_bot(vw, x_w_r, t):
     """
@@ -72,11 +78,7 @@ def pos_bot(vw, x_w_r, t):
     return x_w_r2
 
 
-def hom(x: np.array):
-    """
-    Returns the Transformation matrix based on the location vector
-    """
-    return np.matrix([[np.cos(x[2]), -np.sin(x[2]), x[0]], [np.sin(x[2]), np.cos(x[2]), x[1]], [0, 0, 1]])
+def hom(x: np.array): ture
 
 
 def loc(T):
@@ -110,7 +112,56 @@ def is_near(robot, center, threshold):
     """
     return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
-def enc_to_speed(robot, n_values, p_values, time):
-    v = 0
-    w = 0
-    return v, w
+
+def detect_blob(file = None, frame = None, color='red', params=None):
+    if not params:
+        params = cv.SimpleBlobDetector_Params()
+        # Change thresholds
+        params.minThreshold = 10
+        params.maxThreshold = 200
+        # Filter by Area
+        params.filterByArea = True
+        params.minArea = 200
+        params.maxArea = 10000
+        # Filter by Circularity
+        params.filterByCircularity = True
+        params.minCircularity = 0.1
+        # Filter by Color
+        params.filterByColor = False
+        # not directly color, but intensity on the channel input
+        #params.blobColor = 0
+        params.filterByConvexity = False
+        params.filterByInertia = False
+
+    # Create a detector with the parameters
+    ver = (cv.__version__).split('.')
+    if int(ver[0]) < 3:
+        detector = cv.SimpleBlobDetector(params)
+    else:
+        detector = cv.SimpleBlobDetector_create(params)
+
+    if color == 'red':
+        lower = np.array([170, 50, 50])
+        # copiado de internet no tengo ni idea la verdad
+        upper = np.array([180, 255, 255])
+    elif color == 'blue':
+        pass
+    elif color == 'green':
+        pass
+    elif color == 'yellow':
+        pass
+    else:
+        raise NameError('{} is not a valid color.'.format(color))
+
+    if file:
+        frame = cv.imread(file, 0)
+        hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+    elif not file and not frame:
+        raise NameError('No file or frame was given.')
+    mask = cv.inRange(hsv, lower, upper)
+    res = cv.bitwise_and(frame, frame, mask=mask)
+    keypoints = detector.detect(255-mask)
+    cv.imshow('Holi', frame)
+    im_with_keypoints = cv.drawKeypoints(hsv, keypoints, np.array([]),
+	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    #cv.imshow("Keypoints on RED", im_with_keypoints)

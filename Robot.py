@@ -82,8 +82,16 @@ class Robot:
 
     def openClaw(self):
         """Pulls Oscar's claw down and opens it"""
-        self.BP.set_motor_position(self.claw_motor, self.op_cl)  
-    
+        self.BP.set_motor_position(self.claw_motor, self.op_cl)
+
+    def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
+        """Takes a nice picture and stores it as the save parameter"""
+        vid = cv2.VideoCapture(0)
+        ret, frame = vid.read()
+        if save:
+            cv2.imwrite(save, frame)
+        return frame
+
     def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
         """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
         finished = False
@@ -164,7 +172,6 @@ class Robot:
     def readOdometry(self):
         """ Returns current value of odometry estimation """
         return self.x.value, self.y.value, self.th.value
-
 
     def startOdometry(self):
         """ This starts a new process/thread that will be updating the odometry periodically """
