@@ -1,3 +1,6 @@
+from __future__ import print_function # use python 3 syntax but make it compatible with python 2
+from __future__ import division       #
+
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -142,8 +145,8 @@ def detect_blob(file = None, frame = None, color='red', params=None):
 
     if color == 'red':
         lower = np.array([170, 50, 50])
-        # copiado de internet no tengo ni idea la verdad
         upper = np.array([180, 255, 255])
+        # copiado de internet no tengo ni idea la verdad
     elif color == 'blue':
         pass
     elif color == 'green':
@@ -154,14 +157,21 @@ def detect_blob(file = None, frame = None, color='red', params=None):
         raise NameError('{} is not a valid color.'.format(color))
 
     if file:
-        frame = cv.imread(file, 0)
-        hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    elif not file and not frame:
+        print(file)
+        frame = cv.imread(file)
+    elif (not file) and (not frame):
         raise NameError('No file or frame was given.')
+    
+    hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     mask = cv.inRange(hsv, lower, upper)
     res = cv.bitwise_and(frame, frame, mask=mask)
     keypoints = detector.detect(255-mask)
-    cv.imshow('Holi', frame)
+    
     im_with_keypoints = cv.drawKeypoints(hsv, keypoints, np.array([]),
 	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    #cv.imshow("Keypoints on RED", im_with_keypoints)
+    output = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
+    cv.imshow('pp', output)
+    cv.waitKey(0)
+    return
+
+    
