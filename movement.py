@@ -10,9 +10,9 @@ import numpy as np
 import math
 import logging
 
-##################
-# BASIC MOVEMENTS#
-##################
+###################
+# BASIC MOVEMENTS #
+###################
 def spin(robot, w, t):
     robot.setSpeed(0, w)
     time.sleep(t)
@@ -41,9 +41,9 @@ def soft_stop(robot, t = 0.5):
         robot.setSpeed(v*i/10, w*i/10)
         time.sleep(delay)
 
-####################
-# COMPLEX MOVEMENTS#
-####################
+#####################
+# COMPLEX MOVEMENTS #
+#####################
 def eight(robot, r = 0.2, v = 0.1):
     """
     Does an odometry-based eight circuit with the given r and v.
@@ -126,6 +126,10 @@ def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
 ################
 # MESSY THINGS #
 ################
+
+def enc_test (robot):
+    print('encoder 3 = {}'.format(robot.BP.fet_motot_encoder(robot.claw_motor))) 
+
 def moveC(robot, pos, R, th, t=0):
     # voy a hacer el control con la funcion del cálculo de la posición tras el movimiento y los datos de odometría.
     if t == 0:

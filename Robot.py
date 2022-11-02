@@ -35,6 +35,7 @@ class Robot:
         self.left_motor = self.BP.PORT_A
         self.right_motor = self.BP.PORT_B
         self.claw_motor = self.BP.PORT_C
+        self.gyro = self.BP.PORT_2
 
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
@@ -61,20 +62,17 @@ class Robot:
     def readSpeed(self):
         """ Returns Oscar's linear (m/s) and angular (rad/s) speed """
         try:
-            speed_left = math.radians(self.BP.get_motor_status(self.left_motor)[3]) * self.radius       # get_motor_status returns an array, the 4th element is its dps
-            speed_right = math.radians(self.BP.get_motor_status(self.right_motor)[3]) * self.radius     # get_motor_status works in dps, and we need it to be rps
+            w_deg = self.BP.get_sensor(self.gyro)
+            w_rad = math.radians(w_deg)
+            [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
+            v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
+            v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
+            [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
+            r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
+            v = r * w_rad
         except Exception:
             print("There was an error while reading the speed of the motors")
-            return
-        
-        w = (speed_right - speed_left) / self.length
-        try:
-            r = (self.length / 2) * (speed_left + speed_right) / (speed_right - speed_left)
-            v = r * w
-        except Exception:
-            v = speed_left  # si salta algun error es pq R es infinita, en ese caso speed_right = speed_left --> v = speed_left = speed_right
         return v, w
-
 
     def closeClaw(self):
         """Closes Oscar's claw and pulls it up"""
@@ -91,7 +89,17 @@ class Robot:
         if save:
             cv2.imwrite(save, frame)
         return frame
-
+    
+    def searchBall(self):
+        """Uses the camera to locate the ball"""
+        found = False
+        self.setSpeed(0, 0.1)
+        while not found:
+            frame = self.takePic(self)
+            blob = sage.get_blob(frame = frame)
+            if blob:
+                found = True
+                
     def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
         """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
         finished = False
@@ -197,7 +205,7 @@ class Robot:
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
 
-            w = (v_r - v_l) / self.length
+            w = math.radians(self.BP.get_sensor(self.gyro))
             try:
                 r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
                 v = r * w
@@ -231,7 +239,8 @@ class Robot:
         Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
         """
         logging.info('Setting up the robot!')
-        self.BP.reset_motor_encoder(self.left_motor + self.right_motor)
+        self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
+        self.BP.reset_all()
         self.BP.set_motor_limits(self.claw_motor, 50, 60)
         self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
         self.cl_cl = self.op_cl - 225

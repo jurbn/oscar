@@ -9,6 +9,7 @@ import csv
 import pandas as pd
 import cv2 as cv
 import logging
+from datetime import datetime
 
 
 def plot_robot(loc_eje, c, tamano):
@@ -121,7 +122,7 @@ def get_blob(file = None, frame = None, color='red', params=None):
     # Parameter dealing n stuff
     if file:
         frame = cv.imread(file)
-    elif (not file) and (not frame):
+    elif (not file) and (not frame.any()):
         raise NameError('No file or frame was given.')
 
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
@@ -144,9 +145,10 @@ def get_blob(file = None, frame = None, color='red', params=None):
         params.maxThreshold = 200
         params.filterByArea = True
         params.minArea = 200
-        params.maxArea = 10000
+        params.maxArea = 1000000000
         params.filterByCircularity = True
-        params.minCircularity = 0.05
+        params.minCircularity = 0.5
+        params.maxCircularity = 1
         params.filterByColor = False
         params.filterByConvexity = False
         params.filterByInertia = False
@@ -157,19 +159,23 @@ def get_blob(file = None, frame = None, color='red', params=None):
     else:
         detector = cv.SimpleBlobDetector_create(params)
     res = cv.bitwise_and(frame, frame, mask=mask)
-    keypoints = detector.detect(255-mask)
+    keypoints = detector.detect(res)
+    if not keypoints:
+        biggest_kp = None
     # The only blob we want is the biggest one (chonk)
-    biggest_kp = keypoints[0]
-    for point in keypoints:
-        if point.size > biggest_kp.size:
-            biggest_kp = point
+    else:
+        biggest_kp = keypoints[0]
+        for point in keypoints:
+            if point.size > biggest_kp.size:
+                biggest_kp = point
 
-    im_with_keypoints = cv.drawKeypoints(hsv, keypoints, np.array([]),
+    im_with_keypoints = cv.drawKeypoints(res, keypoints, np.array([]),
 	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
     im_with_keypoints_bgr = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
-    cv.imshow('Look at all those chickens!', im_with_keypoints_bgr)
-    cv.waitKey(0)
+    #cv.imshow('Look at all those chickens!', im_with_keypoints_bgr)
+    #cv.waitKey(0)
+    now = datetime.now()
+    cv.imwrite('pictures/'+now.strftime('%H%M%S%f')+'.png', im_with_keypoints)
     
     return biggest_kp
 
-    

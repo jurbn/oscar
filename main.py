@@ -7,7 +7,7 @@ import movement as mv
 import logging
 import sage
 
-def main(function=''):
+def main(args):
     try:        
         #########################
         #     initialization    #
@@ -25,19 +25,29 @@ def main(function=''):
         #########################
 
         #sage.plot_animation(oscar)
-        if function == 'eight':
+        if  args.fcn == 'eight':
             mv.eight(oscar)
-        elif function == 'slalom' :
+        elif args.fcn == 'slalom' :
             mv.slalom(oscar)
-        elif function == 'spin' :
+        elif args.fcn == 'spin' :
             mv.spin(oscar, 3.1416, 5)
-        elif function == 'run' :
+        elif args.fcn == 'run' :
             mv.run(oscar, 0.25, 5)
-        elif function == 'stop' :
+        elif args.fcn == 'stop' :
             oscar.setSpeed(0, 0)
-        elif function == 'track' :
+        elif args.fcn == 'track' :
             oscar.trackObject()
-        
+        elif args.fcn == 'enc_test' :
+            mv.enc_test()
+        else:
+            while(True):
+                frame = oscar.takePic()
+                blob = sage.get_blob(frame=frame)
+                if blob:
+                    print('Blob position is {}, and its size is: {}'.format(blob.pt, blob.size))
+                    time.sleep(0.3)
+                else:
+                    print('It aint no blobo')
         #########################
         #      closing up       #
         #########################
@@ -55,7 +65,10 @@ def main(function=''):
         sage.plot_file(oscar.odometry_file)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f","--fcn",help = "Selec which function you wish to run", type = str)
+    args = parser.parse_args()
+    main(args)
 
 
 
