@@ -161,12 +161,8 @@ def get_blob(file = None, frame = None, color='red', params=None):
     # The only blob we want is the biggest one (chonk)
     biggest_kp = keypoints[0]
     for point in keypoints:
-        print(point)
-        print(point.size)
         if point.size > biggest_kp.size:
             biggest_kp = point
-    
-    print(biggest_kp.pt)
 
     im_with_keypoints = cv.drawKeypoints(hsv, keypoints, np.array([]),
 	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
