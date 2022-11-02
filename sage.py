@@ -116,36 +116,19 @@ def is_near(robot, center, threshold):
     return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
 
-def detect_blob(file = None, frame = None, color='red', params=None):
-    if not params:
-        params = cv.SimpleBlobDetector_Params()
-        # Change thresholds
-        params.minThreshold = 10
-        params.maxThreshold = 200
-        # Filter by Area
-        params.filterByArea = True
-        params.minArea = 200
-        params.maxArea = 10000
-        # Filter by Circularity
-        params.filterByCircularity = True
-        params.minCircularity = 0.1
-        # Filter by Color
-        params.filterByColor = False
-        # not directly color, but intensity on the channel input
-        #params.blobColor = 0
-        params.filterByConvexity = False
-        params.filterByInertia = False
+def get_blob(file = None, frame = None, color='red', params=None):
+    """ Searches for a blob and returns the center """
+    # Parameter dealing n stuff
+    if file:
+        frame = cv.imread(file)
+    elif (not file) and (not frame):
+        raise NameError('No file or frame was given.')
 
-    # Create a detector with the parameters
-    ver = (cv.__version__).split('.')
-    if int(ver[0]) < 3:
-        detector = cv.SimpleBlobDetector(params)
-    else:
-        detector = cv.SimpleBlobDetector_create(params)
-
+    hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     if color == 'red':
-        lower = np.array([170, 50, 50])
-        upper = np.array([180, 255, 255])
+        mask1 = cv.inRange(hsv, np.array([0, 70, 50]), np.array([10, 255, 255]))
+        mask2 = cv.inRange(hsv, np.array([170, 70, 50]), np.array([180, 255, 255]))
+        mask = mask1 | mask2
         # copiado de internet no tengo ni idea la verdad
     elif color == 'blue':
         pass
@@ -155,23 +138,42 @@ def detect_blob(file = None, frame = None, color='red', params=None):
         pass
     else:
         raise NameError('{} is not a valid color.'.format(color))
-
-    if file:
-        print(file)
-        frame = cv.imread(file)
-    elif (not file) and (not frame):
-        raise NameError('No file or frame was given.')
-    
-    hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    mask = cv.inRange(hsv, lower, upper)
+    if not params:
+        params = cv.SimpleBlobDetector_Params()
+        params.minThreshold = 10
+        params.maxThreshold = 200
+        params.filterByArea = True
+        params.minArea = 200
+        params.maxArea = 10000
+        params.filterByCircularity = True
+        params.minCircularity = 0.05
+        params.filterByColor = False
+        params.filterByConvexity = False
+        params.filterByInertia = False
+    # We create the detector, apply masks, etc
+    ver = (cv.__version__).split('.')   # check the version of opencv (idk just in case i guess....)
+    if int(ver[0]) < 3:
+        detector = cv.SimpleBlobDetector(params)
+    else:
+        detector = cv.SimpleBlobDetector_create(params)
     res = cv.bitwise_and(frame, frame, mask=mask)
     keypoints = detector.detect(255-mask)
+    # The only blob we want is the biggest one (chonk)
+    biggest_kp = keypoints[0]
+    for point in keypoints:
+        print(point)
+        print(point.size)
+        if point.size > biggest_kp.size:
+            biggest_kp = point
     
+    print(biggest_kp.pt)
+
     im_with_keypoints = cv.drawKeypoints(hsv, keypoints, np.array([]),
 	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    output = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
-    cv.imshow('pp', output)
+    im_with_keypoints_bgr = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
+    cv.imshow('Look at all those chickens!', im_with_keypoints_bgr)
     cv.waitKey(0)
-    return
+    
+    return biggest_kp
 
     
