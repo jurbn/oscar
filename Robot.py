@@ -90,15 +90,33 @@ class Robot:
             cv2.imwrite(save, frame)
         return frame
     
-    def searchBall(self):
+    def searchBall(self, last_pos = None):
         """Uses the camera to locate the ball"""
         found = False
-        self.setSpeed(0, 0.1)
+        self.setSpeed(0, 0.5)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
         while not found:
+            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
             frame = self.takePic(self)
             blob = sage.get_blob(frame = frame)
             if blob:
                 found = True
+        return blob.pt
+    
+    def approachBall(self, last_pos = None):
+        """The robot will try to get close enough to get the ball"""
+        ready = False
+        w = 0.1 # VELOCIDADES PROVISIONALES AAAAAAAA
+        v = 0.1
+        while not ready:
+            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
+            frame = self.takePic(self)
+            blob = sage.get_blob(frame = frame)
+            if blob:
+                last_pos = blob.pt
+            else:
+                self.searchBall(last_pos)
+                # POR TERMINAR
+
                 
     def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
         """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
