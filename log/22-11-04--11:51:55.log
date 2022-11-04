@@ -1,0 +1,5 @@
+INFO:root:Program started
+INFO:root:Setting up the robot!
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
