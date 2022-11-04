@@ -36,8 +36,10 @@ class Robot:
         self.right_motor = self.BP.PORT_B
         self.claw_motor = self.BP.PORT_C
         self.gyro = self.BP.PORT_2
+        self.ultrasonic = self.BP.PORT_1
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
+        self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
 
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
@@ -117,24 +119,18 @@ class Robot:
         """The robot will try to get close enough to get the ball, trying to get it centered if possible (not necessary as 
         it's goint to spin on the grabBall function)"""
         ready = False
-        w = 0.1 # VELOCIDADES PROVISIONALES AAAAAAAA
-        v = 0.1 # LO SUYO SERÍA QUE A MÁS CERCA DEL CENTRO, MENOS W Y A MÁS SIZE DEL BLOB, MENOR VELOCIDAD!
         while not ready:
             time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
-                last_pos = blob.pt
-                if blob.size >= 1000:   #por ejemplo
-                    self.setSpeed(0, 0)
+                if blob.size >= 90:   #por ejemplo
                     ready = True
                     logging.info('Ready to grab the ball.')
-                if blob.pt[0] > 320: # si está a la derecha
-                    self.setSpeed(v, -w)    # giramos a la izda
-                elif blob.pt[0] < 320:
-                    self.setSpeed(v, w)
                 else:
-                    self.setSpeed(v, 0)
+                    v = ((100 - blob.size) / 100) * 0.3
+                    w = ((320 - blob.pt[0]) / 320) * (math.pi/4)
+                    self.setSpeed(v, w)
             else:
                 logging.warning('Lost the ball! Searching again...')
                 return False
@@ -158,17 +154,19 @@ class Robot:
                     centered = True
                     logging.info('Ball centered and ready to be catched!')
             else:   # si no ve el blob, hace otra foto
-                time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
+                time.sleep(0.2)
                 frame = self.takePic(self)
                 blob = sage.get_blob(frame = frame)
-                if blob:
-                    pass
-                else:
+                if not blob:
                     return False
-        distance = 0
-        #distance = self.getSensorDistance()
+        distance_array = []
+        for i in range(5):
+            time.sleep(0.02)
+            distance_array.append(self.BP.get_sensor(self.ultrasonic))
+        distance = ((sum(distance) for distance in distance_array) / len(distance_array)) / 100 - 0.05 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+        logging.info('The distance to be covered is: {} meters'.format(distance))
         self.BP.set_motor_position(self.claw_motor, self.op_cl)
-        point = np.array([0, 0])  # MOVIDAS DE DONDE ESTARÁ POR ODOMETRIA
+        point = sage.absolute_offset(distance)
         while not sage.is_near(point, 0.05, robot=self):
             self.setSpeed(0.01, 0)
         self.setSpeed(0, 0)
@@ -198,81 +196,6 @@ class Robot:
                 else:
                     state = 0
                 
-    def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
-        """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
-        finished = False
-        targetFound = False
-        targetPosition = False
-        targetCatched = False
-        ##################################
-
-        #ESC = 27
-        #KNN = 1
-        #MOG2 = 2
-
-        #cam = picamera.PiCamera()
-
-        #cam.resolution = (320, 240)
-        #cam.resolution = (640, 480)
-        #cam.framerate = 32
-        #rawCapture = PiRGBArray(cam, size=(320, 240))
-        #rawCapture = PiRGBArray(cam, size=(640, 480))
- 
-        # allow the camera to warmup
-        #time.sleep(0.1)
-        
-        #for img in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        #    frame = img.array
-        #    cv2.imshow('Captura', frame)
-        #    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        #    # clear the stream in preparation for the next frame
-        #    rawCapture.truncate(0)
-        #    k = cv2.waitKey(1) & 0xff
-        #    if k == ESC:
-        #        cam.close()
-        #    break
-        #cv2.destroyAllWindows()
-        
-        ##################################################
-
-        while not finished:
-            #search for the thingy:
-            #mv.spin(w=0.5)
-            vid = cv2.VideoCapture(0)
-            while not targetFound:
-                logging.debug('im lookin for sum')
-                ret, frame = vid.read()
-                cv2.imwrite('im.png',frame)
-                # if (blob?in (im.png)):
-                #   targetFound=True
-
-            #vid.release()
-            #cv2.destroyAllWindows() #AAAAAAAAAAAAAAAAAAAAaaaaaa
-            
-            while targetFound: #yay u did it! now go get it!!
-                logging.debug('im gon get the thing')
-                ret, frame = vid.read()
-                cv2.imwrite('im.png', frame)
-                # aquí hay que sacar la diferencia entre el área del blob y el deseado
-                # v = dA en plan separar en tramos para darle mas velocidad o menos
-                # IGUAL ES MEJOR DARLE PRIMERO SOLO W Y LUEGO YA AVANZAR CON V PERO SI
-
-                # sacamos la distancia del centro del blob al centro de la cámara y
-                # ajustamos la w en función de eso.
-                # lo ideal seria, centro_cam=0, posiciones L <0 y posR>0 para hacer menos cálculos
-                
-                # le asignamos estos valores al robote:
-                self.setSpeed(v,w)
-                #if posTarget==posDesired:
-                    #self.setSpeed(0,0)
-                    #targetPosition = True
-                
-                if catch:
-                    while not targetPosition: #go¡ go to grab¡¡¡
-                        pass #inicia la secuencia de agarracion
-                else: #corre detras sin mas nose va bien para probar el seguimiento
-                    pass
-
 
     def readOdometry(self):
         """Returns current value of odometry estimation"""
