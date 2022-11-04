@@ -174,8 +174,8 @@ def get_blob(file = None, frame = None, color='red', params=None):
     im_with_keypoints_bgr = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
     #cv.imshow('Look at all those chickens!', im_with_keypoints_bgr)
     #cv.waitKey(0)
-    now = datetime.now()
-    cv.imwrite('pictures/'+now.strftime('%H%M%S%f')+'.png', im_with_keypoints)
-    
+    # now = datetime.now()
+    # cv.imwrite('pictures/'+now.strftime('%H%M%S%f')+'.png', im_with_keypoints)
+    logging.info('The blob\'s size is: {}'.format(biggest_kp.size))
     return biggest_kp
 
