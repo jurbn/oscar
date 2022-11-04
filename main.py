@@ -13,7 +13,7 @@ def main(args):
         #     initialization    #
         #########################
 
-        logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
+        logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
         oscar = Robot()
@@ -35,8 +35,8 @@ def main(args):
             mv.run(oscar, 0.25, 5)
         elif args.fcn == 'stop' :
             oscar.setSpeed(0, 0)
-        elif args.fcn == 'track' :
-            oscar.trackObject()
+        elif args.fcn == 'ball' :
+            oscar.goForBall()
         elif args.fcn == 'enc_test' :
             mv.enc_test()
         else:

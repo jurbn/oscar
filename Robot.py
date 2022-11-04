@@ -37,9 +37,15 @@ class Robot:
         self.claw_motor = self.BP.PORT_C
         self.gyro = self.BP.PORT_2
 
+        self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
+
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
         self.th = Value('d',0.0)
+        self.x2 = Value('d',0.0)
+        self.y2 = Value('d',0.0)
+        self.th2 = Value('d',0.0)
+
         self.finished = Value('b',1)
         self.w_max = 100
         self.v_max = 0.5
@@ -74,7 +80,6 @@ class Robot:
             print("There was an error while reading the speed of the motors")
         return v, w_rad
     
-
     def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
         """Takes a nice picture and stores it as the save parameter"""
         vid = cv2.VideoCapture(0)
@@ -116,7 +121,7 @@ class Robot:
         v = 0.1 # LO SUYO SERÍA QUE A MÁS CERCA DEL CENTRO, MENOS W Y A MÁS SIZE DEL BLOB, MENOR VELOCIDAD!
         while not ready:
             time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
-            frame = self.takePic(self)
+            frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
                 last_pos = blob.pt
@@ -124,9 +129,9 @@ class Robot:
                     self.setSpeed(0, 0)
                     ready = True
                     logging.info('Ready to grab the ball.')
-                if blob.pt.x > 320: # si está a la derecha
+                if blob.pt[0] > 320: # si está a la derecha
                     self.setSpeed(v, -w)    # giramos a la izda
-                elif blob.pt.x < 320:
+                elif blob.pt[0] < 320:
                     self.setSpeed(v, w)
                 else:
                     self.setSpeed(v, 0)
@@ -144,9 +149,9 @@ class Robot:
             frame = self.takePic(self)
             blob = sage.get_blob(frame = frame)
             if blob:
-                if blob.pt.x > 360: #un poco mas de la mitad
+                if blob.pt[0] > 360: #un poco mas de la mitad
                     self.setSpeed(0, -0.05)
-                elif blob.pt.x < 280:   # un poco menos de la mitad
+                elif blob.pt[0] < 280:   # un poco menos de la mitad
                     self.setSpeed(0, 0.05)
                 else:
                     self.setSpeed(0, 0)
@@ -175,6 +180,7 @@ class Robot:
         """Searches, and goes for the ball"""
         state = 0
         while state < 3:
+            self.setSpeed(0, 0)
             if state == 0:      # buscando el peloto
                 success = self.searchBall()
                 if success:
@@ -184,7 +190,7 @@ class Robot:
                 if success:
                     state = 2
                 else:
-                    state = 1
+                    state = 0
             elif state == 2:    # cogiendo el peloto
                 success = self.grabBall()
                 if success:
@@ -276,8 +282,10 @@ class Robot:
         """This starts a new process/thread that will be updating the odometry periodically"""
         self.finished.value = False
         self.process = Process(target=self.updateOdometry, args=())
+        self.process2 = Process(target=self.updateOdometry2, args=())
         self.process.start()
-        logging.info("Odometry was started, PID: {}".format(self.process.pid))
+        self.process2.start()
+        logging.info("Odometry was started, PID: {}:".format(self.process.pid))
 
     def updateOdometry(self):
         """Updates the location values of the robot and writes them to a .csv file"""
@@ -294,7 +302,7 @@ class Robot:
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
 
-            w = math.radians(self.BP.get_sensor(self.gyro))
+            w = (v_r - v_l) / self.length
             try:
                 r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
                 v = r * w
@@ -314,6 +322,35 @@ class Robot:
                 writer.writerow([self.x.value, self.y.value, self.th.value])
             tEnd = time.clock()
             time.sleep(self.odometry_period - (tEnd-tIni))
+   
+    def updateOdometry2(self):
+        """Updates the location values of the robot using the gyroscope"""
+        [enc_l_1, enc_r_1] = [0, 0]
+        time.sleep(self.odometry_period)
+        while not self.finished.value:
+            tIni = time.clock()
+            [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
+            v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
+            v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
+            [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
+
+            w = math.radians(self.BP.get_sensor(self.gyro)[1])
+            try:
+                r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
+                v = r * w
+            except Exception:
+                v = v_l
+            s = v*self.odometry_period
+            th = w*self.odometry_period
+
+            self.lock_odometry.acquire()
+            self.x2.value += s * math.cos((self.th.value + th/2))
+            self.y2.value += s * math.sin((self.th.value + th/2))
+            self.th2.value = sage.norm_pi(self.th.value + th)
+            self.lock_odometry.release()
+
+            tEnd = time.clock()
+            time.sleep(self.odometry_period - (tEnd-tIni))
         
     def stopOdometry(self):
         """Must be called when a stop on odometry is desired"""
@@ -324,8 +361,18 @@ class Robot:
     def setup(self):
         """Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)"""
         logging.info('Setting up the robot!')
-        self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.reset_all()
+        out = None
+        #self.gyro = self.BP.PORT_2
+        #self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
+
+        time.sleep(1)
+        #while out is not [0, 0]:
+        #    try:
+        #        out = self.BP.get_sensor(self.gyro)
+        #    except Exception:
+        #        print('pito')
+        #    time.sleep(1)
         self.startOdometry()
-
-
+        
+       

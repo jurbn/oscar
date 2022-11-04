@@ -168,7 +168,7 @@ def get_blob(file = None, frame = None, color='red', params=None):
         for point in keypoints:
             if point.size > biggest_kp.size:
                 biggest_kp = point
-
+        logging.info('The blob\'s size is: {}'.format(biggest_kp.size))
     im_with_keypoints = cv.drawKeypoints(res, keypoints, np.array([]),
 	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
     im_with_keypoints_bgr = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
@@ -176,6 +176,5 @@ def get_blob(file = None, frame = None, color='red', params=None):
     #cv.waitKey(0)
     # now = datetime.now()
     # cv.imwrite('pictures/'+now.strftime('%H%M%S%f')+'.png', im_with_keypoints)
-    logging.info('The blob\'s size is: {}'.format(biggest_kp.size))
     return biggest_kp
 

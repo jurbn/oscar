@@ -1,7 +1,0 @@
-INFO:root:Program started
-INFO:root:Setting up the robot!
-INFO:root:Odometry was started, PID: 1372
-INFO:root:PRIMER VALOR: 0.0
-WARNING:root:A keyboard interruption was detected!
-WARNING:root:Abruptly stopped the robot!
-INFO:root:Odometry was stopped

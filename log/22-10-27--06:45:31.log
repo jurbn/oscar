@@ -1,8 +1,0 @@
-INFO:root:Program started
-INFO:root:Setting up the robot!
-INFO:root:Odometry was started, PID: 1936
-INFO:root:Initial location: 0.0, 0.0, 0.0
-INFO:root:Starting the slalom...
-INFO:root:Spinning at: 0.0, 0.0, 0.0
-INFO:root:primer tramo! -0.00024334204810008418, -2.256519846986012e-05, -1.5801047494721998
-INFO:root:amo to recto 0.08182587865751267, -0.10331607177263712, -0.18244508447514057

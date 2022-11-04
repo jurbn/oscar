@@ -1,7 +1,0 @@
-INFO:root:Program started
-INFO:root:Setting up the robot!
-INFO:root:Odometry was started, PID: 1330
-INFO:root:Odometry was stopped
-DEBUG:matplotlib.axes._base:update_title_pos
-DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
-DEBUG:matplotlib.axes._base:update_title_pos
