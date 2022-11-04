@@ -51,8 +51,8 @@ class Robot:
 
 
     def setSpeed(self, v, w):
-        """ Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
-        (Positive w values turn left, negative ones turn right) """
+        """Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
+        (Positive w values turn left, negative ones turn right)"""
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
 
@@ -60,7 +60,7 @@ class Robot:
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
     def readSpeed(self):
-        """ Returns Oscar's linear (m/s) and angular (rad/s) speed """
+        """Returns Oscar's linear (m/s) and angular (rad/s) speed"""
         try:
             w_deg = self.BP.get_sensor(self.gyro)
             w_rad = math.radians(w_deg)
@@ -72,15 +72,8 @@ class Robot:
             v = r * w_rad
         except Exception:
             print("There was an error while reading the speed of the motors")
-        return v, w
-
-    def closeClaw(self):
-        """Closes Oscar's claw and pulls it up"""
-        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
-
-    def openClaw(self):
-        """Pulls Oscar's claw down and opens it"""
-        self.BP.set_motor_position(self.claw_motor, self.op_cl)
+        return v, w_rad
+    
 
     def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
         """Takes a nice picture and stores it as the save parameter"""
@@ -90,33 +83,114 @@ class Robot:
             cv2.imwrite(save, frame)
         return frame
     
+    def calibrateClaw(self):
+        """Calibrates the claw and sets its offset"""
+        located = False
+        while not located:
+            time.sleep(0.2)
+            frame = self.takePic()[0:640, 240:480]
+            blob = sage.get_blob(frame=frame, color='yellow')
+            if blob:
+                located = True
+        self.BP.reset_motor_encoder(self.claw_motor)
+
     def searchBall(self, last_pos = None):
         """Uses the camera to locate the ball"""
         found = False
         self.setSpeed(0, 0.5)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
         while not found:
             time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
-            frame = self.takePic(self)
+            frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
                 found = True
-        return blob.pt
+                self.setSpeed(0, 0)
+                logging.info('Found the ball! Approaching...')
+        return True
     
     def approachBall(self, last_pos = None):
-        """The robot will try to get close enough to get the ball"""
+        """The robot will try to get close enough to get the ball, trying to get it centered if possible (not necessary as 
+        it's goint to spin on the grabBall function)"""
         ready = False
         w = 0.1 # VELOCIDADES PROVISIONALES AAAAAAAA
-        v = 0.1
+        v = 0.1 # LO SUYO SERÍA QUE A MÁS CERCA DEL CENTRO, MENOS W Y A MÁS SIZE DEL BLOB, MENOR VELOCIDAD!
         while not ready:
             time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
             frame = self.takePic(self)
             blob = sage.get_blob(frame = frame)
             if blob:
                 last_pos = blob.pt
+                if blob.size >= 1000:   #por ejemplo
+                    self.setSpeed(0, 0)
+                    ready = True
+                    logging.info('Ready to grab the ball.')
+                if blob.pt.x > 320: # si está a la derecha
+                    self.setSpeed(v, -w)    # giramos a la izda
+                elif blob.pt.x < 320:
+                    self.setSpeed(v, w)
+                else:
+                    self.setSpeed(v, 0)
             else:
-                self.searchBall(last_pos)
-                # POR TERMINAR
+                logging.warning('Lost the ball! Searching again...')
+                return False
+        return True
+    
+    def grabBall(self):
+        """Once the robot is near the ball, it reorients itself and tries to grab it."""
+        # self.pauseProximity()
+        centered = False
+        while not centered:
+            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
+            frame = self.takePic(self)
+            blob = sage.get_blob(frame = frame)
+            if blob:
+                if blob.pt.x > 360: #un poco mas de la mitad
+                    self.setSpeed(0, -0.05)
+                elif blob.pt.x < 280:   # un poco menos de la mitad
+                    self.setSpeed(0, 0.05)
+                else:
+                    self.setSpeed(0, 0)
+                    centered = True
+                    logging.info('Ball centered and ready to be catched!')
+            else:   # si no ve el blob, hace otra foto
+                time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
+                frame = self.takePic(self)
+                blob = sage.get_blob(frame = frame)
+                if blob:
+                    pass
+                else:
+                    return False
+        distance = 0
+        #distance = self.getSensorDistance()
+        self.BP.set_motor_position(self.claw_motor, self.op_cl)
+        point = np.array([0, 0])  # MOVIDAS DE DONDE ESTARÁ POR ODOMETRIA
+        while not sage.is_near(point, 0.05, robot=self):
+            self.setSpeed(0.01, 0)
+        self.setSpeed(0, 0)
+        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
+        ####### CHECK IF BALL IN CLAW AND IF NOT RETURN FALSE
+        return True
 
+    def goForBall(self):
+        """Searches, and goes for the ball"""
+        state = 0
+        while state < 3:
+            if state == 0:      # buscando el peloto
+                success = self.searchBall()
+                if success:
+                    state = 1
+            elif state == 1:    # acercandose al peloto 
+                success = self.approachBall()
+                if success:
+                    state = 2
+                else:
+                    state = 1
+            elif state == 2:    # cogiendo el peloto
+                success = self.grabBall()
+                if success:
+                    state = 3   # ha cogido el peloto, sale del bucle
+                else:
+                    state = 0
                 
     def trackObject(self, colorRangeMin=[0, 0, 0], colorRangeMax=[255, 255, 255], targetSize='??', targetShape='??', catch='??'):
         """Locates, tracks and follows any kind of blob by its color, shape, size and, if specified on boolean parameter catch, catches it"""
@@ -193,23 +267,20 @@ class Robot:
                 else: #corre detras sin mas nose va bien para probar el seguimiento
                     pass
 
-        
-    
+
     def readOdometry(self):
-        """ Returns current value of odometry estimation """
+        """Returns current value of odometry estimation"""
         return self.x.value, self.y.value, self.th.value
 
     def startOdometry(self):
-        """ This starts a new process/thread that will be updating the odometry periodically """
+        """This starts a new process/thread that will be updating the odometry periodically"""
         self.finished.value = False
         self.process = Process(target=self.updateOdometry, args=())
         self.process.start()
         logging.info("Odometry was started, PID: {}".format(self.process.pid))
 
     def updateOdometry(self):
-        """
-        Updates the location values of the robot and writes them to a .csv file
-        """
+        """Updates the location values of the robot and writes them to a .csv file"""
         with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y', 'th'])
@@ -245,23 +316,16 @@ class Robot:
             time.sleep(self.odometry_period - (tEnd-tIni))
         
     def stopOdometry(self):
-        """
-        Must be called when a stop on odometry is desired.
-        """
+        """Must be called when a stop on odometry is desired"""
         logging.info('Odometry was stopped')
         self.finished.value = True
 
 
     def setup(self):
-        """
-        Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)
-        """
+        """Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)"""
         logging.info('Setting up the robot!')
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.reset_all()
-        self.BP.set_motor_limits(self.claw_motor, 50, 60)
-        self.op_cl = self.BP.get_motor_encoder(self.claw_motor)
-        self.cl_cl = self.op_cl - 225
         self.startOdometry()
 
 
