@@ -14,7 +14,7 @@ import sys
 import math
 import numpy as np
 import csv
-import cv2
+import cv2 as cv
 import logging
 from multiprocessing import Process, Value, Array, Lock
 
@@ -37,6 +37,7 @@ class Robot:
         self.claw_motor = self.BP.PORT_C
         self.gyro = self.BP.PORT_2
         self.ultrasonic = self.BP.PORT_1
+        self.cam = cv.VideoCapture(0)
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
@@ -56,6 +57,18 @@ class Robot:
         self.odometry_period = 0.05
 
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
+
+        logging.info('Robot set up!')
+        self.BP.reset_all()
+        error = True
+        while error:
+            try:
+                self.BP.get_sensor(self.gyro)
+            except Exception as error:
+                logging.error(error)
+            else:
+                error = False
+        self.startOdometry()
 
 
     def setSpeed(self, v, w):
@@ -84,10 +97,9 @@ class Robot:
     
     def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
         """Takes a nice picture and stores it as the save parameter"""
-        vid = cv2.VideoCapture(0)
-        ret, frame = vid.read()
+        ret, frame = self.cam.read()
         if save:
-            cv2.imwrite(save, frame)
+            cv.imwrite(save, frame)
         return frame
     
     def calibrateClaw(self):
@@ -279,23 +291,3 @@ class Robot:
         """Must be called when a stop on odometry is desired"""
         logging.info('Odometry was stopped')
         self.finished.value = True
-
-
-    def setup(self):
-        """Sets Oscar ready to fight: sets limits, detects claw position, checks the camera, etc (maybe a lil brake check / spin check would be okay too?)"""
-        logging.info('Setting up the robot!')
-        self.BP.reset_all()
-        out = None
-        #self.gyro = self.BP.PORT_2
-        #self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
-
-        time.sleep(1)
-        #while out is not [0, 0]:
-        #    try:
-        #        out = self.BP.get_sensor(self.gyro)
-        #    except Exception:
-        #        print('pito')
-        #    time.sleep(1)
-        self.startOdometry()
-        
-       

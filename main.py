@@ -2,10 +2,12 @@
 # -*- coding: UTF-8 -*-
 import argparse
 import time
+import logging
+
 from Robot import Robot
 import movement as mv
-import logging
 import sage
+
 
 def main(args):
     try:        
@@ -17,7 +19,6 @@ def main(args):
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
         oscar = Robot()
-        oscar.setup()
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -39,15 +40,8 @@ def main(args):
             oscar.goForBall()
         elif args.fcn == 'enc_test' :
             mv.enc_test()
-        else:
-            while(True):
-                frame = oscar.takePic()
-                blob = sage.get_blob(frame=frame)
-                if blob:
-                    print('Blob position is {}, and its size is: {}'.format(blob.pt, blob.size))
-                    time.sleep(0.3)
-                else:
-                    print('It aint no blobo')
+        elif args.fcn == 'pictures':
+            sage.show_cam_blobs(oscar) 
         #########################
         #      closing up       #
         #########################

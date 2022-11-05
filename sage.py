@@ -5,7 +5,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as FuncAnimation
-import csv
+import time
 import pandas as pd
 import cv2 as cv
 import logging
@@ -141,12 +141,25 @@ def get_blob(file = None, frame = None, color='red', params=None):
             if point.size > biggest_kp.size:
                 biggest_kp = point
         logging.info('The blob\'s size is: {}'.format(biggest_kp.size))
-    im_with_keypoints = cv.drawKeypoints(res, keypoints, np.array([]),
-	(255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    im_with_keypoints_bgr = cv.cvtColor(im_with_keypoints, cv.COLOR_HSV2BGR)
-    #cv.imshow('Look at all those chickens!', im_with_keypoints_bgr)
-    #cv.waitKey(0)
-    # now = datetime.now()
-    # cv.imwrite('pictures/'+now.strftime('%H%M%S%f')+'.png', im_with_keypoints)
     return biggest_kp
 
+def show_cam_blobs(robot):
+    """Shows a video and marks the blobs when found"""
+    while(True):
+        time.sleep(0.3)
+        tIni = time.clock()
+        frame = robot.takePic()
+        blob = get_blob(frame=frame)
+        tEnd = time.clock()
+        logging.debug('Frame detection time is {} seconds'.format(tEnd-tIni))
+        if blob:
+            print('Blob position is {}, and its size is: {}'.format(blob.pt, blob.size))
+            im_with_keypoints = cv.drawKeypoints(frame, blob, np.array([]),
+                (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        else:
+            print('It aint no blobo')
+            im_with_keypoints = frame
+        cv.imshow('img', im_with_keypoints)
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
+    cv.destroyAllWindows()
