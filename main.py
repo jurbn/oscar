@@ -49,7 +49,7 @@ def main(args):
         #########################
 
         oscar.stopOdometry()
-        sage.plot_file(oscar.odometry_file)
+        #sage.plot_file(oscar.odometry_file)
 
     
     # In the event of a keyboard interruption, we stop the robot's movement 
@@ -58,7 +58,7 @@ def main(args):
         logging.warning('A keyboard interruption was detected!')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
-        sage.plot_file(oscar.odometry_file)
+        #sage.plot_file(oscar.odometry_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

@@ -83,25 +83,26 @@ def eight2(robot, r = 0.2, v = 0.1):
     logging.info('PRIMER VALOR: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value < math.pi/2):
         robot.setSpeed(0, w)
-    logging.info('spin: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('spin: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        time.sleep(0.1)
     while(robot.th2.value > -math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('primer cacho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('primer cacho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value < math.pi/2):
         robot.setSpeed(v, w)
-    logging.info('empieza media vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('empieza media vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value > 0):
         robot.setSpeed(v, w)
-    logging.info('tres cuartos vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('tres cuartos vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value < -math.pi/2):
         robot.setSpeed(v,w)
-    logging.info('final vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('final vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value < 0):
         robot.setSpeed(v, -w)
-    logging.info('casi acaba el ocho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('casi acaba el ocho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value > math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('yyy acabamos: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+        print('yyy acabamos: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
     while(robot.th2.value > 0):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
