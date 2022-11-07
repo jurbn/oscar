@@ -92,11 +92,14 @@ def absolute_offset(robot, distance = 0):
 def get_blob(file = None, frame = None, color='red', params=None):
     """ Searches for a blob and returns the center """
     # Parameter dealing n stuff
-    if file:
-        frame = cv.imread(file)
-    elif (not file) and (not frame.any()):
-        raise NameError('No file or frame was given.')
-
+    try:
+        if file:
+            frame = cv.imread(file)
+        elif (not file) and (not frame.any()):
+            raise NameError('No file or frame was given.')
+    except Exception:
+            raise NameError('No file or frame was given.')
+            return False
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     if color == 'red':
         mask1 = cv.inRange(hsv, np.array([0, 70, 50]), np.array([10, 255, 255]))

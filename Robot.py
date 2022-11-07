@@ -60,14 +60,16 @@ class Robot:
 
         logging.info('Robot set up!')
         self.BP.reset_all()
-        error = True
-        while error:
+        error1 = True
+        while error1:
+            time.sleep(0.02)
             try:
                 self.BP.get_sensor(self.gyro)
             except Exception as error:
                 logging.error(error)
+                error1 = False
             else:
-                error = False
+                error1 = False
         self.startOdometry()
 
 
@@ -118,12 +120,11 @@ class Robot:
         found = False
         self.setSpeed(0, 0.5)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
         while not found:
-            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
+            tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
                 found = True
-                self.setSpeed(0, 0)
                 logging.info('Found the ball! Approaching...')
         return True
     
@@ -132,16 +133,15 @@ class Robot:
         it's goint to spin on the grabBall function)"""
         ready = False
         while not ready:
-            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
-                if blob.size >= 90:   #por ejemplo
+                if blob.size >= 97.5:   #por ejemplo
                     ready = True
                     logging.info('Ready to grab the ball.')
                 else:
-                    v = ((100 - blob.size) / 100) * 0.3
-                    w = ((320 - blob.pt[0]) / 320) * (math.pi/4)
+                    v = ((100 - blob.size) / 100) * 0.25
+                    w = ((320 - blob.pt[0]) / 320) * (math.pi/6)
                     self.setSpeed(v, w)
             else:
                 logging.warning('Lost the ball! Searching again...')
@@ -153,21 +153,19 @@ class Robot:
         # self.pauseProximity()
         centered = False
         while not centered:
-            time.sleep(0.2) # 5 fotos por segundo como máximo a mi me parece guapo la verdad
-            frame = self.takePic(self)
+            frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
-                if blob.pt[0] > 360: #un poco mas de la mitad
-                    self.setSpeed(0, -0.05)
-                elif blob.pt[0] < 280:   # un poco menos de la mitad
-                    self.setSpeed(0, 0.05)
+                if blob.pt[0] > 340: #un poco mas de la mitad
+                    self.setSpeed(0, -0.1)
+                elif blob.pt[0] < 300:   # un poco menos de la mitad
+                    self.setSpeed(0, 0.1)
                 else:
-                    self.setSpeed(0, 0)
                     centered = True
                     logging.info('Ball centered and ready to be catched!')
             else:   # si no ve el blob, hace otra foto
                 time.sleep(0.2)
-                frame = self.takePic(self)
+                frame = self.takePic()
                 blob = sage.get_blob(frame = frame)
                 if not blob:
                     return False
@@ -217,9 +215,9 @@ class Robot:
         """This starts a new process/thread that will be updating the odometry periodically"""
         self.finished.value = False
         self.process = Process(target=self.updateOdometry, args=())
-        self.process2 = Process(target=self.updateOdometry2, args=())
+        #self.process2 = Process(target=self.updateOdometry2, args=())
         self.process.start()
-        self.process2.start()
+        #self.process2.start()
         logging.info("Odometry was started, PID: {}:".format(self.process.pid))
 
     def updateOdometry(self):
