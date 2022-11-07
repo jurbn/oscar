@@ -42,6 +42,8 @@ def main(args):
             mv.enc_test()
         elif args.fcn == 'pictures':
             sage.show_cam_blobs(oscar) 
+        elif args.fcn == 'eight2':
+            mv.eight2(oscar)
         #########################
         #      closing up       #
         #########################

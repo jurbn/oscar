@@ -32,6 +32,8 @@ class Robot:
         self.cl_cl = 0
 
         self.BP = brickpi3.BrickPi3()
+        self.BP.reset_all()
+
         self.left_motor = self.BP.PORT_A
         self.right_motor = self.BP.PORT_B
         self.claw_motor = self.BP.PORT_C
@@ -55,11 +57,11 @@ class Robot:
 
         self.lock_odometry = Lock()
         self.odometry_period = 0.05
+        self.blob_period = 0.5 #!!!!!!!!!!!!!!! inntentar reducirlo jej
 
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
 
         logging.info('Robot set up!')
-        self.BP.reset_all()
         error1 = True
         while error1:
             time.sleep(0.02)
@@ -67,7 +69,6 @@ class Robot:
                 self.BP.get_sensor(self.gyro)
             except Exception as error:
                 logging.error(error)
-                error1 = False
             else:
                 error1 = False
         self.startOdometry()
@@ -99,7 +100,9 @@ class Robot:
     
     def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
         """Takes a nice picture and stores it as the save parameter"""
-        ret, frame = self.cam.read()
+        ret = False
+        while not ret:
+            ret, frame = self.cam.read()
         if save:
             cv.imwrite(save, frame)
         return frame
@@ -108,11 +111,13 @@ class Robot:
         """Calibrates the claw and sets its offset"""
         located = False
         while not located:
-            time.sleep(0.2)
+            tIni = time.clock()
             frame = self.takePic()[0:640, 240:480]
             blob = sage.get_blob(frame=frame, color='yellow')
             if blob:
                 located = True
+            tEnd = time.clock()
+            time.sleep(blob_period-tEnd+tIni)
         self.BP.reset_motor_encoder(self.claw_motor)
 
     def searchBall(self, last_pos = None):
@@ -126,6 +131,8 @@ class Robot:
             if blob:
                 found = True
                 logging.info('Found the ball! Approaching...')
+            tEnd = time.clock()
+            time.sleep(self.blob_period-tEnd+tIni)
         return True
     
     def approachBall(self, last_pos = None):
@@ -133,10 +140,11 @@ class Robot:
         it's goint to spin on the grabBall function)"""
         ready = False
         while not ready:
+            tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
-                if blob.size >= 97.5:   #por ejemplo
+                if blob.size >= 100:   #por ejemplo
                     ready = True
                     logging.info('Ready to grab the ball.')
                 else:
@@ -146,6 +154,8 @@ class Robot:
             else:
                 logging.warning('Lost the ball! Searching again...')
                 return False
+            tEnd = time.clock()
+            time.sleep(self.blob_period-tEnd+tIni)
         return True
     
     def grabBall(self):
@@ -153,6 +163,7 @@ class Robot:
         # self.pauseProximity()
         centered = False
         while not centered:
+            tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
@@ -164,20 +175,33 @@ class Robot:
                     centered = True
                     logging.info('Ball centered and ready to be catched!')
             else:   # si no ve el blob, hace otra foto
-                time.sleep(0.2)
                 frame = self.takePic()
                 blob = sage.get_blob(frame = frame)
                 if not blob:
                     return False
+            tEnd = time.clock()
+            time.sleep(self.blob_period-tEnd+tIni)
         distance_array = []
         for i in range(5):
-            time.sleep(0.02)
-            distance_array.append(self.BP.get_sensor(self.ultrasonic))
-        distance = ((sum(distance) for distance in distance_array) / len(distance_array)) / 100 - 0.05 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+            tIni = time.clock()
+            valid = False
+            while not valid:
+                try:
+                    data = self.BP.get_sensor(self.ultrasonic)
+                except Exception as error:
+                    logging.error(error)
+                else:
+                    valid = True
+            distance_array.append(data)
+            tEnd = time.clock()
+            time.sleep(self.odometry_period-tEnd+tIni)
+        distance = np.median(distance_array) / 100 - 0.05 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
         logging.info('The distance to be covered is: {} meters'.format(distance))
         self.BP.set_motor_position(self.claw_motor, self.op_cl)
-        point = sage.absolute_offset(distance)
+        print(distance)
+        point = sage.absolute_offset(self, distance)
         while not sage.is_near(point, 0.05, robot=self):
+            time.sleep(0.01)
             self.setSpeed(0.01, 0)
         self.setSpeed(0, 0)
         self.BP.set_motor_position(self.claw_motor, self.cl_cl)
@@ -204,8 +228,7 @@ class Robot:
                 if success:
                     state = 3   # ha cogido el peloto, sale del bucle
                 else:
-                    state = 0
-                
+                    state = 0                
 
     def readOdometry(self):
         """Returns current value of odometry estimation"""

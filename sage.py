@@ -11,6 +11,18 @@ import cv2 as cv
 import logging
 from datetime import datetime
 
+params = cv.SimpleBlobDetector_Params()
+params.minThreshold = 10
+params.maxThreshold = 200
+params.filterByArea = True
+params.minArea = 200
+params.maxArea = 1000000000
+params.filterByCircularity = True
+params.minCircularity = 0.5
+params.maxCircularity = 1
+params.filterByColor = False
+params.filterByConvexity = False
+params.filterByInertia = False
 
 def plot_file(file_name):
     df = pd.read_csv(file_name)
@@ -92,14 +104,10 @@ def absolute_offset(robot, distance = 0):
 def get_blob(file = None, frame = None, color='red', params=None):
     """ Searches for a blob and returns the center """
     # Parameter dealing n stuff
-    try:
-        if file:
-            frame = cv.imread(file)
-        elif (not file) and (not frame.any()):
-            raise NameError('No file or frame was given.')
-    except Exception:
-            raise NameError('No file or frame was given.')
-            return False
+    if file:
+        frame = cv.imread(file)
+    elif (file is None) and (frame is None):
+        raise NameError('No file or frame was given.')
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     if color == 'red':
         mask1 = cv.inRange(hsv, np.array([0, 70, 50]), np.array([10, 255, 255]))
@@ -114,25 +122,7 @@ def get_blob(file = None, frame = None, color='red', params=None):
         pass
     else:
         raise NameError('{} is not a valid color.'.format(color))
-    if not params:
-        params = cv.SimpleBlobDetector_Params()
-        params.minThreshold = 10
-        params.maxThreshold = 200
-        params.filterByArea = True
-        params.minArea = 200
-        params.maxArea = 1000000000
-        params.filterByCircularity = True
-        params.minCircularity = 0.5
-        params.maxCircularity = 1
-        params.filterByColor = False
-        params.filterByConvexity = False
-        params.filterByInertia = False
-    # We create the detector, apply masks, etc
-    ver = (cv.__version__).split('.')   # check the version of opencv (idk just in case i guess....)
-    if int(ver[0]) < 3:
-        detector = cv.SimpleBlobDetector(params)
-    else:
-        detector = cv.SimpleBlobDetector_create(params)
+    detector = cv.SimpleBlobDetector_create(params)
     res = cv.bitwise_and(frame, frame, mask=mask)
     keypoints = detector.detect(res)
     if not keypoints:
@@ -149,9 +139,9 @@ def get_blob(file = None, frame = None, color='red', params=None):
 def show_cam_blobs(robot):
     """Shows a video and marks the blobs when found"""
     while(True):
-        time.sleep(0.3)
         tIni = time.clock()
         frame = robot.takePic()
+        cv.imshow('ey', frame)
         blob = get_blob(frame=frame)
         tEnd = time.clock()
         logging.debug('Frame detection time is {} seconds'.format(tEnd-tIni))
@@ -165,4 +155,7 @@ def show_cam_blobs(robot):
         cv.imshow('img', im_with_keypoints)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
+
+        tEnd = time.clock()
+        time.sleep(0.5-(tIni-tEnd))
     cv.destroyAllWindows()
