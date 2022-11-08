@@ -11,6 +11,24 @@ import cv2 as cv
 import logging
 from datetime import datetime
 
+# Parameter dealing n stuff
+params = cv.SimpleBlobDetector_Params()
+params.minThreshold = 10
+params.maxThreshold = 200
+params.filterByArea = True
+params.minArea = 200
+params.maxArea = 10000
+params.filterByCircularity = True
+params.minCircularity = 0.1
+params.maxCircularity = 1
+params.filterByColor = False
+params.filterByConvexity = False
+detector = cv.SimpleBlobDetector_create(params)
+r11 = np.array([0, 70, 50])
+r12 = np.array([10, 255, 255])
+r21 = np.array([170, 70, 50])
+r22 = np.array([180, 255, 255])
+
 def plot_file(file_name):
     df = pd.read_csv(file_name)
     plt.axis('equal')
@@ -85,46 +103,30 @@ def is_near(robot, center, threshold):
     return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
 def absolute_offset(robot, distance = 0):
-    return np.array([distance*math.cos(robot.th), distance*math.sin(robot.th)])
+    return np.array([robot.x.value + distance*math.cos(robot.th.value), robot.y.value + distance*math.sin(robot.th.value)])
 
 
-def get_blob(file = None, frame = None, color='red', params=None):
+def get_blob(frame):
     """ Searches for a blob and returns the center """
     # Parameter dealing n stuff
-    params = cv.SimpleBlobDetector_Params()
-    params.minThreshold = 10
-    params.maxThreshold = 200
-    params.filterByArea = True
-    params.minArea = 200
-    params.maxArea = 100000000000
-    params.filterByCircularity = True
-    params.minCircularity = 0.3
-    params.maxCircularity = 1
-    params.filterByColor = False
-    params.filterByConvexity = False
-    params.filterByInertia = False
-
-    if file:
-        frame = cv.imread(file)
-    elif (file is None) and (frame is None):
-        raise NameError('No file or frame was given.')
+#    params = cv.SimpleBlobDetector_Params()
+#    params.minThreshold = 10
+#    params.maxThreshold = 200
+#    params.filterByArea = True
+#    params.minArea = 200
+#    params.maxArea = 10000
+#    params.filterByCircularity = True
+#    params.minCircularity = 0.1
+#    params.maxCircularity = 1
+#    params.filterByColor = False
+#    params.filterByConvexity = False
+#    params.filterByInertia = False
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    if color == 'red':
-        mask1 = cv.inRange(hsv, np.array([0, 70, 50]), np.array([10, 255, 255]))
-        mask2 = cv.inRange(hsv, np.array([175, 70, 50]), np.array([180, 255, 255]))
-        mask = mask1 | mask2
-        # copiado de internet no tengo ni idea la verdad
-    elif color == 'blue':
-        pass
-    elif color == 'green':
-        pass
-    elif color == 'yellow':
-        pass
-    else:
-        raise NameError('{} is not a valid color.'.format(color))
-    detector = cv.SimpleBlobDetector_create(params)
+    mask1 = cv.inRange(hsv, r11, r12)
+    mask2 = cv.inRange(hsv, r21, r22)
+    mask = mask1 | mask2
+    # copiado de internet no tengo ni idea la verdad
     res = cv.bitwise_and(frame, frame, mask=mask)
-    cv.imwrite('fotografio.png', res)
     keypoints = detector.detect(res)
     if not keypoints:
         biggest_kp = None
@@ -134,7 +136,6 @@ def get_blob(file = None, frame = None, color='red', params=None):
         for point in keypoints:
             if point.size > biggest_kp.size:
                 biggest_kp = point
-        logging.info('The blob\'s size is: {}'.format(biggest_kp.size))
     return biggest_kp
 
 def show_cam_blobs(robot):
@@ -143,16 +144,14 @@ def show_cam_blobs(robot):
         tIni = time.clock()
         frame = robot.takePic()
         blob = get_blob(frame=frame)
+        print('tiempo de procesado es: {}'.format(time.clock()-tIni))
         if blob:
-            print('Blob position is {}, and its size is: {}'.format(blob.pt, blob.size))
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array([]), (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
-            print('It aint no blobo')
             im_with_keypoints = frame
         cv.imshow('img', im_with_keypoints)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
 
         tEnd = time.clock()
-        time.sleep(0.5-(tIni-tEnd))
     cv.destroyAllWindows()
