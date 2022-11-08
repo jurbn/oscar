@@ -64,7 +64,7 @@ class Robot:
         logging.info('Robot set up!')
         error1 = True
         while error1:
-            time.sleep(0.02)
+            time.sleep(0.1)
             try:
                 self.BP.get_sensor(self.gyro)
             except Exception as error:

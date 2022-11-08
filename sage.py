@@ -11,19 +11,6 @@ import cv2 as cv
 import logging
 from datetime import datetime
 
-params = cv.SimpleBlobDetector_Params()
-params.minThreshold = 10
-params.maxThreshold = 200
-params.filterByArea = True
-params.minArea = 200
-params.maxArea = 1000000000
-params.filterByCircularity = True
-params.minCircularity = 0.5
-params.maxCircularity = 1
-params.filterByColor = False
-params.filterByConvexity = False
-params.filterByInertia = False
-
 def plot_file(file_name):
     df = pd.read_csv(file_name)
     plt.axis('equal')
@@ -104,6 +91,19 @@ def absolute_offset(robot, distance = 0):
 def get_blob(file = None, frame = None, color='red', params=None):
     """ Searches for a blob and returns the center """
     # Parameter dealing n stuff
+    params = cv.SimpleBlobDetector_Params()
+    params.minThreshold = 10
+    params.maxThreshold = 200
+    params.filterByArea = True
+    params.minArea = 200
+    params.maxArea = 100000000000
+    params.filterByCircularity = True
+    params.minCircularity = 0.3
+    params.maxCircularity = 1
+    params.filterByColor = False
+    params.filterByConvexity = False
+    params.filterByInertia = False
+
     if file:
         frame = cv.imread(file)
     elif (file is None) and (frame is None):
@@ -111,7 +111,7 @@ def get_blob(file = None, frame = None, color='red', params=None):
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     if color == 'red':
         mask1 = cv.inRange(hsv, np.array([0, 70, 50]), np.array([10, 255, 255]))
-        mask2 = cv.inRange(hsv, np.array([170, 70, 50]), np.array([180, 255, 255]))
+        mask2 = cv.inRange(hsv, np.array([175, 70, 50]), np.array([180, 255, 255]))
         mask = mask1 | mask2
         # copiado de internet no tengo ni idea la verdad
     elif color == 'blue':
@@ -124,6 +124,7 @@ def get_blob(file = None, frame = None, color='red', params=None):
         raise NameError('{} is not a valid color.'.format(color))
     detector = cv.SimpleBlobDetector_create(params)
     res = cv.bitwise_and(frame, frame, mask=mask)
+    cv.imwrite('fotografio.png', res)
     keypoints = detector.detect(res)
     if not keypoints:
         biggest_kp = None
@@ -141,14 +142,10 @@ def show_cam_blobs(robot):
     while(True):
         tIni = time.clock()
         frame = robot.takePic()
-        cv.imshow('ey', frame)
         blob = get_blob(frame=frame)
-        tEnd = time.clock()
-        logging.debug('Frame detection time is {} seconds'.format(tEnd-tIni))
         if blob:
             print('Blob position is {}, and its size is: {}'.format(blob.pt, blob.size))
-            im_with_keypoints = cv.drawKeypoints(frame, blob, np.array([]),
-                (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+            im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array([]), (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
             print('It aint no blobo')
             im_with_keypoints = frame
