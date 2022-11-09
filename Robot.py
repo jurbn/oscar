@@ -65,15 +65,15 @@ class Robot:
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
 
         logging.info('Robot set up!')
-        error1 = True
-        while error1:
+        error = True
+        while error:
             time.sleep(0.1)
             try:
                 self.BP.get_sensor(self.gyro)
-            except Exception as error:
-                logging.error(error)
+            except Exception:
+                pass
             else:
-                error1 = False
+                error = False
         self.startOdometry()
 
 
@@ -124,7 +124,6 @@ class Robot:
     def searchBall(self, last_pos = None):
         """Uses the camera to locate the ball"""
         found = False
-        self.setSpeed(0, 0.6)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
         while not found:
             #tIni = time.clock()
             frame = self.takePic()
@@ -132,6 +131,8 @@ class Robot:
             if blob:
                 found = True
                 logging.info('Found the ball! Approaching...')
+            else:
+                self.setSpeed(0, 0.6)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
             #tEnd = time.clock()
             #time.sleep(self.blob_period-tEnd+tIni)
         return True
@@ -147,7 +148,7 @@ class Robot:
             if blob:
                 if blob.size >= 93:   #por ejemplo
                     ready = True
-                    logging.info('Close enough to the ball, size is: {}'.blob.size)
+                    logging.info('Close enough to the ball, size is: {}'.format(blob.size))
                 else:
                     v = ((100 - blob.size) / 100) * 0.2
                     w = ((320 - blob.pt[0]) / 320) * (math.pi/6)
@@ -167,7 +168,7 @@ class Robot:
             #tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
-            logging.info('The ball\'s x position is: {}'.format(blob.pt.[0]))
+            logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
             if blob:
                 if blob.pt[0] > 325: #un poco mas de la mitad
                     self.setSpeed(0, -0.1)
