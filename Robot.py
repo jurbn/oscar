@@ -147,7 +147,7 @@ class Robot:
             if blob:
                 if blob.size >= 93:   #por ejemplo
                     ready = True
-                    logging.info('Ready to grab the ball.')
+                    logging.info('Close enough to the ball, size is: {}'.blob.size)
                 else:
                     v = ((100 - blob.size) / 100) * 0.2
                     w = ((320 - blob.pt[0]) / 320) * (math.pi/6)
@@ -159,14 +159,15 @@ class Robot:
             #time.sleep(self.blob_period-tEnd+tIni)
         return True
     
-    def grabBall(self):
-        """Once the robot is near the ball, it reorients itself and tries to grab it."""
-        # self.pauseProximity()
+    def centerBall(self):
+       # self.pauseProximity()
+        logging.info('Centering the ball...')
         centered = False
         while not centered:
             #tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
+            logging.info('The ball\'s x position is: {}'.format(blob.pt.[0]))
             if blob:
                 if blob.pt[0] > 325: #un poco mas de la mitad
                     self.setSpeed(0, -0.1)
@@ -183,6 +184,11 @@ class Robot:
                     return False
             #tEnd = time.clock()
             #time.sleep(self.blob_period-tEnd+tIni)
+        return True
+ 
+
+    def grabBall(self):
+        """Once the robot is near the ball, it reorients itself and tries to grab it."""
         distance_array = []
         for i in range(10):
             tIni = time.clock()
@@ -194,12 +200,14 @@ class Robot:
                     logging.error(error)
                 else:
                     print(data)
-                    valid = data < 35
+                    valid = data < 50
                 #time.sleep(self.odometry_period-tEnd+tIni)
             distance_array.append(data)
             tEnd = time.clock()
             time.sleep(self.odometry_period-tEnd+tIni)
         distance = np.median(distance_array) / 100 - 0.08 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+        if distance > 30:
+            return False
         logging.info('The distance to be covered is: {} meters'.format(distance))
         self.BP.set_motor_position(self.claw_motor, self.op_cl)
         point = sage.absolute_offset(self, distance)
@@ -214,7 +222,7 @@ class Robot:
     def goForBall(self):
         """Searches, and goes for the ball"""
         state = 0
-        while state < 3:
+        while state < 4:
             self.setSpeed(0, 0)
             if state == 0:      # buscando el peloto
                 success = self.searchBall()
@@ -226,13 +234,18 @@ class Robot:
                     state = 2
                 else:
                     state = 0
-            elif state == 2:    # cogiendo el peloto
-                success = self.grabBall()
+            elif state == 2:    # centrando el peloto
+                success = self.centerBall()
                 if success:
-                    state = 3   # ha cogido el peloto, sale del bucle
+                    state = 3
                 else:
                     state = 0                
-
+            elif state == 3:    # cogiendo el peloto
+                success = self.grabBall()
+                if success:
+                    state = 4
+                else:
+                    state = 2
     def readOdometry(self):
         """Returns current value of odometry estimation"""
         return self.x.value, self.y.value, self.th.value
