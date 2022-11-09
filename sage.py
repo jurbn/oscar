@@ -16,8 +16,8 @@ params = cv.SimpleBlobDetector_Params()
 params.minThreshold = 10
 params.maxThreshold = 200
 params.filterByArea = True
-params.minArea = 200
-params.maxArea = 10000
+params.minArea = 100
+params.maxArea = 1000000
 params.filterByCircularity = True
 params.minCircularity = 0.1
 params.maxCircularity = 1
@@ -146,6 +146,7 @@ def show_cam_blobs(robot):
         blob = get_blob(frame=frame)
         print('tiempo de procesado es: {}'.format(time.clock()-tIni))
         if blob:
+            print(blob.size)
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array([]), (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
             im_with_keypoints = frame

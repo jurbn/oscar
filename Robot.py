@@ -32,20 +32,23 @@ class Robot:
         self.cl_cl = 0
 
         self.BP = brickpi3.BrickPi3()
-        self.BP.reset_all()
 
         self.left_motor = self.BP.PORT_A
         self.right_motor = self.BP.PORT_B
         self.claw_motor = self.BP.PORT_C
+
+        self.BP.reset_all()
+        
         self.gyro = self.BP.PORT_2
         self.ultrasonic = self.BP.PORT_1
         self.cam = cv.VideoCapture(0)
+        self.reduction = 0.5
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
     
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
-        self.BP.set_motor_limits(self.claw_motor, 100, 200)
+        self.BP.set_motor_limits(self.claw_motor, 100, 300)
 
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
@@ -106,6 +109,8 @@ class Robot:
         ret = False
         while not ret:
             ret, frame = self.cam.read()
+        frame  = cv.rotate(frame, cv.ROTATE_180)
+        frame = cv.resize(frame, None, fx = self.reduction, fy = self.reduction, interpolation = cv.INTER_LANCZOS4)
         return frame
     
     def calibrateClaw(self):
@@ -132,7 +137,7 @@ class Robot:
                 found = True
                 logging.info('Found the ball! Approaching...')
             else:
-                self.setSpeed(0, 0.6)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
+                self.setSpeed(0, 1.5)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
             #tEnd = time.clock()
             #time.sleep(self.blob_period-tEnd+tIni)
         return True
@@ -146,12 +151,12 @@ class Robot:
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
-                if blob.size >= 93:   #por ejemplo
+                if blob.size >= 70:   #por ejemplo
                     ready = True
                     logging.info('Close enough to the ball, size is: {}'.format(blob.size))
                 else:
-                    v = ((100 - blob.size) / 100) * 0.2
-                    w = ((320 - blob.pt[0]) / 320) * (math.pi/6)
+                    v = ((72.5 - blob.size) / 72.5) * 0.25
+                    w = ((160 - blob.pt[0]) / 160) * (math.pi/6)
                     self.setSpeed(v, w)
             else:
                 logging.warning('Lost the ball! Searching again...')
@@ -168,11 +173,11 @@ class Robot:
             #tIni = time.clock()
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
-            logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
             if blob:
-                if blob.pt[0] > 325: #un poco mas de la mitad
+                logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
+                if blob.pt[0] > 162: #un poco mas de la mitad
                     self.setSpeed(0, -0.1)
-                elif blob.pt[0] < 315:   # un poco menos de la mitad
+                elif blob.pt[0] < 158:   # un poco menos de la mitad
                     self.setSpeed(0, 0.1)
                 else:
                     self.setSpeed(0, 0)
@@ -201,12 +206,12 @@ class Robot:
                     logging.error(error)
                 else:
                     print(data)
-                    valid = data < 50
-                #time.sleep(self.odometry_period-tEnd+tIni)
+                    valid = True
+                time.sleep(self.odometry_period-time.clock()+tIni)
             distance_array.append(data)
             tEnd = time.clock()
             time.sleep(self.odometry_period-tEnd+tIni)
-        distance = np.median(distance_array) / 100 - 0.08 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+        distance = np.median(distance_array) / 100 - 0.1 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
         if distance > 30:
             return False
         logging.info('The distance to be covered is: {} meters'.format(distance))
@@ -308,7 +313,6 @@ class Robot:
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
             
-            # w = math.radians(self.BP.get_sensor(self.gyro)[1])
             w = math.radians(self.BP.get_sensor(self.gyro)[1])
             try:
                 r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
@@ -318,8 +322,8 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x2.value += s * math.cos((self.th2.value + th/2))
-            self.y2.value += s * math.sin((self.th2.value + th/2))
+            self.x2.value += s * math.cos(th)
+            self.y2.value += s * math.sin(th)
             self.th2.value = th
             self.lock_odometry.release()
 
