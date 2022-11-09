@@ -3,11 +3,10 @@
 import argparse
 import time
 import logging
-
+import matplotlib.pyplot as plt
 from Robot import Robot
 import movement as mv
 import sage
-
 
 def main(args):
     try:        
@@ -42,16 +41,18 @@ def main(args):
             mv.enc_test()
         elif args.fcn == 'pictures':
             sage.show_cam_blobs(oscar) 
-        elif args.fcn == 'eight2':
-            mv.eight2(oscar)
+        elif args.fcn == 'square':
+            mv.square(oscar)
+
         #########################
         #      closing up       #
         #########################
 
         oscar.stopOdometry()
-        #sage.plot_file(oscar.odometry_file)
+        sage.plot_file(oscar.odometry_file)
+        sage.plot_file(oscar.odometry_file_old)
 
-    
+   
     # In the event of a keyboard interruption, we stop the robot's movement 
     # and close the odometry process, as well as log the event as a warning.    
     except KeyboardInterrupt:
@@ -59,6 +60,7 @@ def main(args):
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         #sage.plot_file(oscar.odometry_file)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

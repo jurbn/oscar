@@ -53,9 +53,6 @@ class Robot:
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
         self.th = Value('d',0.0)
-        self.x2 = Value('d',0.0)
-        self.y2 = Value('d',0.0)
-        self.th2 = Value('d',0.0)
 
         self.finished = Value('b',1)
         self.w_max = 100
@@ -66,7 +63,7 @@ class Robot:
         self.blob_period = 0.5 #!!!!!!!!!!!!!!! inntentar reducirlo jej
 
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
-
+        
         logging.info('Robot set up!')
         error = True
         while error:
@@ -78,6 +75,24 @@ class Robot:
             else:
                 error = False
         self.startOdometry()
+
+    def startTeabag():
+        self.finish_tb.value = False
+        self.teabag = Process(target=self.updateTeabag, args=())
+        self.teabag.start()
+        logging.info('Teabag started, PID: {}'.format(self.teabag.pid))
+
+    def updateTeabag():
+        while not self.finish_tb.value:
+            tIni = time.clock()
+            try:
+                distance = self.BP.get_sensor(self.ultrasonic)
+                if distance < 15:
+                    pass
+            except Exception:
+                pass
+            tEnd = time.clock()
+            time.sleep(self.odometry_period - tEnd + tIni)
 
 
     def setSpeed(self, v, w):
@@ -260,53 +275,19 @@ class Robot:
         """This starts a new process/thread that will be updating the odometry periodically"""
         self.finished.value = False
         self.process = Process(target=self.updateOdometry, args=())
-        self.process2 = Process(target=self.updateOdometry2, args=())
         self.process.start()
-        self.process2.start()
         logging.info("Odometry was started, PID: {}:".format(self.process.pid))
-
-    def updateOdometry(self):
-        """Updates the location values of the robot and writes them to a .csv file"""
-        #with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
-            #writer = csv.writer(csvfile, delimiter=',')
-            #writer.writerow(['x', 'y', 'th'])
-        #[enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
-        [enc_l_1, enc_r_1] = [0, 0]
-        time.sleep(self.odometry_period)
-        while not self.finished.value:
-            tIni = time.clock()
-            [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
-            v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
-            v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
-            [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
-
-            w = (v_r - v_l) / self.length
-            try:
-                r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
-                v = r * w
-            except Exception:
-                v = v_l
-            s = v*self.odometry_period
-            th = w*self.odometry_period
-
-            self.lock_odometry.acquire()
-            self.x.value += s * math.cos((self.th.value + th/2))
-            self.y.value += s * math.sin((self.th.value + th/2))
-            self.th.value = sage.norm_pi(self.th.value + th)
-            self.lock_odometry.release()
-
-            #with open(self.odometry_file, 'a', newline='') as csvfile:
-            #    writer = csv.writer(csvfile, delimiter=',')
-            #    writer.writerow([self.x.value, self.y.value, self.th.value])
-            tEnd = time.clock()
-            time.sleep(self.odometry_period - tEnd + tIni)
    
-    def updateOdometry2(self):
+    def updateOdometry(self):
         """Updates the location values of the robot using the gyroscope"""
+        with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['x', 'y', 'th'])
+        [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
         [enc_l_1, enc_r_1] = [0, 0]
         time.sleep(self.odometry_period)
         while not self.finished.value:
-            th = sage.norm_pi(math.radians(self.BP.get_sensor(self.gyro)[0]))
+            th = -sage.norm_pi(math.radians(self.BP.get_sensor(self.gyro)[0]))
             tIni = time.clock()
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
@@ -322,10 +303,14 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x2.value += s * math.cos(th)
-            self.y2.value += s * math.sin(th)
-            self.th2.value = th
+            self.x.value += s * math.cos(th)
+            self.y.value += s * math.sin(th)
+            self.th.value = th
             self.lock_odometry.release()
+            
+            with open(self.odometry_file, 'a', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',')
+                writer.writerow([self.x.value, self.y.value, self.th.value])
 
             tEnd = time.clock()
             time.sleep(self.odometry_period - tEnd + tIni)

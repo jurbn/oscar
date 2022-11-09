@@ -122,6 +122,14 @@ def get_blob(frame):
 #    params.filterByConvexity = False
 #    params.filterByInertia = False
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+    #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
+    #print('brightness: {}'.format(avg_brightness))
+    #if avg_brightness > 140:
+    #    diff = avg_brightness - 140
+    #    for pixel in hsv:
+    #        pixel[2] = pixel[2] - diff
+    #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
+    #print('brightness: {}'.format(avg_brightness))
     mask1 = cv.inRange(hsv, r11, r12)
     mask2 = cv.inRange(hsv, r21, r22)
     mask = mask1 | mask2
@@ -146,7 +154,7 @@ def show_cam_blobs(robot):
         blob = get_blob(frame=frame)
         print('tiempo de procesado es: {}'.format(time.clock()-tIni))
         if blob:
-            print(blob.size)
+            #print(blob.size)
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array([]), (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
             im_with_keypoints = frame

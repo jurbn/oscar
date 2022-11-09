@@ -44,69 +44,75 @@ def soft_stop(robot, t = 0.5):
 #####################
 # COMPLEX MOVEMENTS #
 #####################
+def square (robot, l=0.8):
+    w = 1.5
+    v = 0.275
+    while(robot.th.value < math.pi/2):
+        robot.setSpeed(0, w)
+    logging.info('primer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.y.value < l/2):
+        robot.setSpeed(v, 0)
+    logging.info('primera recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.th.value > 0):
+        robot.setSpeed(0, -w)
+    logging.info('segundo giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.x.value < l):
+        robot.setSpeed(v, 0)
+    logging.info('segunda recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.th.value > -math.pi/2):
+        robot.setSpeed(0, -w)
+    logging.info('tercer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.y.value > -l):
+        robot.setSpeed(v, 0)
+    logging.info('tercera recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.th.value < 0):
+        robot.setSpeed(0, -w)
+    logging.info('cuarto giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.x.value > 0):
+        robot.setSpeed(v, 0)
+    logging.info('cuarta recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.th.value > math.pi/2):
+        robot.setSpeed(0, -w)
+    logging.info('ultimo giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.y.value < 0):
+        robot.setSpeed(v, 0)
+    logging.info('ultima recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    while(robot.th.value > 0):
+        robot.setSpeed(0, -w)
+    logging.info('y ya estaría. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+
+
 def eight(robot, r = 0.2, v = 0.1):
     """
     Does an odometry-based eight circuit with the given r and v.
     """
     w = v / r
-    logging.info('PRIMER VALOR: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('PRIMER VALOR: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
-    logging.info('spin: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('spin: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('primer cacho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('primer cacho: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(v, w)
-    logging.info('empieza media vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('empieza media vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(v, w)
-    logging.info('tres cuartos vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('tres cuartos vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < -math.pi/2):
         robot.setSpeed(v,w)
-    logging.info('final vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('final vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < 0):
         robot.setSpeed(v, -w)
-    logging.info('casi acaba el ocho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('casi acaba el ocho: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('yyy acabamos: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
+    logging.info('yyy acabamos: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def eight2(robot, r = 0.2, v = 0.1):
-    """
-    Does an odometry-based eight circuit with the given r and v.
-    """
-    w = v / r
-    logging.info('PRIMER VALOR: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value < math.pi/2):
-        robot.setSpeed(0, w)
-        print('spin: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-        time.sleep(0.1)
-    while(robot.th2.value > -math.pi/2):
-        robot.setSpeed(v, -w)
-        print('primer cacho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value < math.pi/2):
-        robot.setSpeed(v, w)
-        print('empieza media vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value > 0):
-        robot.setSpeed(v, w)
-        print('tres cuartos vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value < -math.pi/2):
-        robot.setSpeed(v,w)
-        print('final vuelta: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value < 0):
-        robot.setSpeed(v, -w)
-        print('casi acaba el ocho: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value > math.pi/2):
-        robot.setSpeed(v, -w)
-        print('yyy acabamos: {},{}'.format(robot.th.value/math.pi,robot.th2.value/math.pi))
-    while(robot.th2.value > 0):
-        robot.setSpeed(0, -w)
-    robot.setSpeed(0, 0)
-    
 def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     """
     Does a odometry-based slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
