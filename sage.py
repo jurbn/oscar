@@ -16,7 +16,7 @@ params = cv.SimpleBlobDetector_Params()
 params.minThreshold = 10
 params.maxThreshold = 200
 params.filterByArea = True
-params.minArea = 100
+params.minArea = 50
 params.maxArea = 1000000
 params.filterByCircularity = True
 params.minCircularity = 0.1
@@ -103,8 +103,12 @@ def is_near(robot, center, threshold):
     return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
 def absolute_offset(robot, distance = 0):
-    return np.array([robot.x.value + distance*math.cos(robot.th.value), robot.y.value + distance*math.sin(robot.th.value)])
-
+    final_pos = np.array([robot.x.value + distance*math.sin(robot.th.value), robot.y.value + distance*math.cos(robot.th.value)])
+    #plt.arrow(robot.x.value, robot.y.value, math.cos(robot.th.value), math.sin(robot.th.value))
+    #plt.plot(robot.x.value, robot.y.value, 'rx')
+    #plt.plot(final_pos[0], final_pos[1], 'bx')
+    #plt.show()
+    return final_pos
 
 def get_blob(frame):
     """ Searches for a blob and returns the center """

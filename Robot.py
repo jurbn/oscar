@@ -48,7 +48,7 @@ class Robot:
         self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
     
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
-        self.BP.set_motor_limits(self.claw_motor, 100, 300)
+        self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
         self.x = Value('d',0.0)
         self.y = Value('d',0.0)
@@ -226,17 +226,19 @@ class Robot:
             distance_array.append(data)
             tEnd = time.clock()
             time.sleep(self.odometry_period-tEnd+tIni)
-        distance = np.median(distance_array) / 100 - 0.1 # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+        distance = np.median(distance_array) / 100 - 0.1# lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
         if distance > 30:
             return False
         logging.info('The distance to be covered is: {} meters'.format(distance))
         self.BP.set_motor_position(self.claw_motor, self.op_cl)
-        point = sage.absolute_offset(self, distance)
-        while not sage.is_near(self, point, 0.01):
-            time.sleep(0.01)
-            self.setSpeed(0.05, 0)
+        time.sleep(0.5)
+        #point = sage.absolute_offset(self, distance)
+        #while not sage.is_near(self, point, 0.01):
+        self.setSpeed(0.1, 0)
+        time.sleep(distance/0.1 + 0.12)
         self.setSpeed(0, 0)
         self.BP.set_motor_position(self.claw_motor, self.cl_cl)
+        time.sleep(0.6)
         ####### CHECK IF BALL IN CLAW AND IF NOT RETURN FALSE
         return True
 

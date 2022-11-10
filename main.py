@@ -43,15 +43,18 @@ def main(args):
             sage.show_cam_blobs(oscar) 
         elif args.fcn == 'square':
             mv.square(oscar)
+        elif args.fcn == 'reset':
+            oscar.BP.reset_all()
 
         #########################
         #      closing up       #
         #########################
 
         oscar.stopOdometry()
-        sage.plot_file(oscar.odometry_file)
-        sage.plot_file(oscar.odometry_file_old)
+        oscar.BP.reset_all()
+        #sage.plot_file(oscar.odometry_file)
 
+        
    
     # In the event of a keyboard interruption, we stop the robot's movement 
     # and close the odometry process, as well as log the event as a warning.    
@@ -59,6 +62,7 @@ def main(args):
         logging.warning('A keyboard interruption was detected!')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
+        oscar.BP.reset_all()
         #sage.plot_file(oscar.odometry_file)
 
 

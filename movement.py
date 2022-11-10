@@ -62,7 +62,7 @@ def square (robot, l=0.8):
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(0, -w)
     logging.info('tercer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
-    while(robot.y.value > -l):
+    while(robot.y.value > -l/2):
         robot.setSpeed(v, 0)
     logging.info('tercera recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value < 0):
