@@ -154,11 +154,11 @@ def show_cam_blobs(robot):
     """Shows a video and marks the blobs when found"""
     while(True):
         tIni = time.clock()
-        frame = robot.takePic()
+        frame = robot.takePic()[139:179, 219:239]
         blob = get_blob(frame=frame)
         print('tiempo de procesado es: {}'.format(time.clock()-tIni))
         if blob:
-            #print(blob.size)
+            print(blob.size)
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array([]), (255,255,255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
             im_with_keypoints = frame

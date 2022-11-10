@@ -54,6 +54,9 @@ class Robot:
         self.y = Value('d',0.0)
         self.th = Value('d',0.0)
 
+        self.v = Value('d', 0.0)
+        self.w = Value('d', 0.0)
+
         self.finished = Value('b',1)
         self.w_max = 100
         self.v_max = 0.5
@@ -61,6 +64,8 @@ class Robot:
         self.lock_odometry = Lock()
         self.odometry_period = 0.05
         self.blob_period = 0.5 
+        self.last_seen_left = False
+        self.changed = False
 
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
         
@@ -98,6 +103,8 @@ class Robot:
     def setSpeed(self, v, w):
         """Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
         (Positive w values turn left, negative ones turn right)"""
+        self.v.value = v
+        self.w.value = w
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
 
@@ -141,10 +148,10 @@ class Robot:
             time.sleep(blob_period-tEnd+tIni)
         self.BP.reset_motor_encoder(self.claw_motor)
 
-    def searchBall(self, last_seen_left = False):
+    def searchBall(self):
         """Uses the camera to locate the ball"""
         found = False
-        if  last_seen_left:
+        if  self.last_seen_left:
             w = 1.5
         else: w = -1.5
         while not found:
@@ -170,10 +177,10 @@ class Robot:
             blob = sage.get_blob(frame = frame)
             if blob:
                 if blob.pt[0] > 160: #derecha
-                    last_seen_left = False
+                    self.last_seen_left = False
                 elif blob.pt[0] < 160:   #izquierda
-                    last_seen_left = True
-                if blob.size >= 70:   #por ejemplo
+                    self.last_seen_left = True
+                if blob.size >= 60:   #por ejemplo
                     ready = True
                     logging.info('Close enough to the ball, size is: {}'.format(blob.size))
                 else:
@@ -199,10 +206,10 @@ class Robot:
                 logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
                 if blob.pt[0] > 162: #un poco mas de la mitad
                     self.setSpeed(0, -0.1)
-                    last_seen_left = False
+                    self.last_seen_left = False
                 elif blob.pt[0] < 158:   # un poco menos de la mitad
                     self.setSpeed(0, 0.1)
-                    last_seen_left = True
+                    self.last_seen_left = True
                 else:
                     self.setSpeed(0, 0)
                     centered = True
@@ -236,7 +243,7 @@ class Robot:
             tEnd = time.clock()
             time.sleep(self.odometry_period-tEnd+tIni)
         distance = np.median(distance_array) / 100 - 0.1# lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
-        if distance > 30:
+        if distance > 0.30:
             return False
         logging.info('The distance to be covered is: {} meters'.format(distance))
         self.BP.set_motor_position(self.claw_motor, self.op_cl)
@@ -278,6 +285,18 @@ class Robot:
                     state = 4
                 else:
                     state = 2
+
+    def ballCaught(self):
+        """Checks wether or not oscar got the ball"""
+        frame = self.takePic()[219:239, 139:179]
+        rows, cols, _ = frame.shape
+        rowsA, colsA = 0,0
+
+        print ('tamaño imagen: {}x{} pixels comprobados: {}x{} (origen en centro inferior: ({}, 0))'.format(rows,cols,rowsA,colsA,cols/2))
+
+        return ballCaught
+            
+
     def readOdometry(self):
         """Returns current value of odometry estimation"""
         return self.x.value, self.y.value, self.th.value
@@ -298,19 +317,26 @@ class Robot:
         [enc_l_1, enc_r_1] = [0, 0]
         time.sleep(self.odometry_period)
         while not self.finished.value:
-            th = -sage.norm_pi(math.radians(self.BP.get_sensor(self.gyro)[0]))
             tIni = time.clock()
+            #if self.changed:
+            #    self.setSpeed(self.v.value, 0)
+            th = -sage.norm_pi(math.radians(self.BP.get_sensor(self.gyro)[0]))
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
             
             w = math.radians(self.BP.get_sensor(self.gyro)[1])
+            #if (self.w.value == 0) and (w != 0):
+            #    self.changed = True
+            #    self.setSpeed(self.v.value, w)
             try:
                 r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
                 v = r * w
             except Exception:
                 v = v_l
+            if self.v.value == 0:
+                v = 0
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()

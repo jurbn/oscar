@@ -42,11 +42,11 @@ def soft_stop(robot, t = 0.5):
         time.sleep(delay)
 
 #####################
-# COMPLEX MOVEMENTS #
+# COMPLEX MOVEMENTS =0.4):
 #####################
-def square (robot, l=0.8):
-    w = 1.5
-    v = 0.275
+def square (robot, l=0.4):
+    w = 1
+    v = 0.2
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
     logging.info('primer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))

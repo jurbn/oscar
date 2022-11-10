@@ -32,7 +32,7 @@ def main(args):
         elif args.fcn == 'spin' :
             mv.spin(oscar, 3.1416, 5)
         elif args.fcn == 'run' :
-            mv.run(oscar, 0.25, 5)
+            mv.run(oscar, 0.1, 10)
         elif args.fcn == 'stop' :
             oscar.setSpeed(0, 0)
         elif args.fcn == 'ball' :
@@ -42,7 +42,9 @@ def main(args):
         elif args.fcn == 'pictures':
             sage.show_cam_blobs(oscar) 
         elif args.fcn == 'square':
-            mv.square(oscar)
+            mv.square(oscar, l = 0.8)
+        elif args.fcn == 'ballCheck':
+            oscar.ballCaught()
         elif args.fcn == 'reset':
             oscar.BP.reset_all()
 
@@ -52,7 +54,7 @@ def main(args):
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        #sage.plot_file(oscar.odometry_file)
+        sage.plot_file(oscar.odometry_file)
 
         
    
@@ -63,7 +65,7 @@ def main(args):
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        #sage.plot_file(oscar.odometry_file)
+        sage.plot_file(oscar.odometry_file)
 
 
 if __name__ == "__main__":
