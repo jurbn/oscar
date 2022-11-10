@@ -60,7 +60,7 @@ class Robot:
 
         self.lock_odometry = Lock()
         self.odometry_period = 0.05
-        self.blob_period = 0.5 #!!!!!!!!!!!!!!! inntentar reducirlo jej
+        self.blob_period = 0.5 
 
         self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
         
@@ -141,9 +141,12 @@ class Robot:
             time.sleep(blob_period-tEnd+tIni)
         self.BP.reset_motor_encoder(self.claw_motor)
 
-    def searchBall(self, last_pos = None):
+    def searchBall(self, last_seen_left = False):
         """Uses the camera to locate the ball"""
         found = False
+        if  last_seen_left:
+            w = 1.5
+        else: w = -1.5
         while not found:
             #tIni = time.clock()
             frame = self.takePic()
@@ -152,7 +155,7 @@ class Robot:
                 found = True
                 logging.info('Found the ball! Approaching...')
             else:
-                self.setSpeed(0, 1.5)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
+                self.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
             #tEnd = time.clock()
             #time.sleep(self.blob_period-tEnd+tIni)
         return True
@@ -166,6 +169,10 @@ class Robot:
             frame = self.takePic()
             blob = sage.get_blob(frame = frame)
             if blob:
+                if blob.pt[0] > 160: #derecha
+                    last_seen_left = False
+                elif blob.pt[0] < 160:   #izquierda
+                    last_seen_left = True
                 if blob.size >= 70:   #por ejemplo
                     ready = True
                     logging.info('Close enough to the ball, size is: {}'.format(blob.size))
@@ -192,8 +199,10 @@ class Robot:
                 logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
                 if blob.pt[0] > 162: #un poco mas de la mitad
                     self.setSpeed(0, -0.1)
+                    last_seen_left = False
                 elif blob.pt[0] < 158:   # un poco menos de la mitad
                     self.setSpeed(0, 0.1)
+                    last_seen_left = True
                 else:
                     self.setSpeed(0, 0)
                     centered = True
