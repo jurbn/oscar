@@ -11,7 +11,6 @@ import cv2 as cv
 import logging
 from datetime import datetime
 
-# Parameter dealing n stuff
 params = cv.SimpleBlobDetector_Params()
 params.minThreshold = 10
 params.maxThreshold = 200
@@ -28,6 +27,10 @@ r11 = np.array([0, 70, 50])
 r12 = np.array([10, 255, 255])
 r21 = np.array([170, 70, 50])
 r22 = np.array([180, 255, 255])
+
+##################
+# PLOT FUNCTIONS #
+##################
 
 def plot_file(file_name):
     df = pd.read_csv(file_name)
@@ -51,7 +54,6 @@ def plot_animation(robot):
     animation = FuncAnimation(fig, update_plot, interval=50)
     plt.show()
 
-
 def pos_bot(vw, x_w_r, t):
     """
     Returns the position of the robot with vc=[v, w] during t seconds and starting on x_w_r.
@@ -66,10 +68,12 @@ def pos_bot(vw, x_w_r, t):
     x_w_r2 = loc(np.matmul(hom(x_w_r), hom(x_r_r2)))   # new location x_w_r
     return x_w_r2
 
+##################
+# MATH FUNCTIONS #
+##################
 
 def hom(x: np.array):
     print('Holi soy el metodo hom y no estoy terminado :(')
-
 
 def loc(T):
     """
@@ -77,13 +81,11 @@ def loc(T):
     """
     return np.array([T.item(0, 2), T.item(1, 2), np.arctan2(T.item(1, 0), T.item(0, 0))])
 
-
 def chord(th):
     """
     Returns the cord function of the given angle
     """
     return 2*np.sin(th/2)
-
 
 def norm_pi(th):
     """
@@ -95,6 +97,9 @@ def norm_pi(th):
         th += 2 * np.pi
     return th
 
+#####################
+# SPATIAL FUNCTIONS #
+#####################
 
 def is_near(robot, center, threshold):
     """
@@ -109,6 +114,10 @@ def absolute_offset(robot, distance = 0):
     #plt.plot(final_pos[0], final_pos[1], 'bx')
     #plt.show()
     return final_pos
+
+####################
+# VISION FUNCTIONS #
+####################
 
 def get_blob(frame):
     """ Searches for a blob and returns the center """
@@ -152,6 +161,9 @@ def show_cam_blobs(robot):
         tEnd = time.clock()
     cv.destroyAllWindows()
 
+#################
+# MAP FUNCTIONS #
+#################
 
 def read_map(file):
     """This function returns the size and arrays of the given map.
@@ -185,5 +197,4 @@ def generate_grid(map, goal):
         else:
             finished = True
     return grid
-
 
