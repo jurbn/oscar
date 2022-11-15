@@ -112,19 +112,6 @@ def absolute_offset(robot, distance = 0):
 
 def get_blob(frame):
     """ Searches for a blob and returns the center """
-    # Parameter dealing n stuff
-#    params = cv.SimpleBlobDetector_Params()
-#    params.minThreshold = 10
-#    params.maxThreshold = 200
-#    params.filterByArea = True
-#    params.minArea = 200
-#    params.maxArea = 10000
-#    params.filterByCircularity = True
-#    params.minCircularity = 0.1
-#    params.maxCircularity = 1
-#    params.filterByColor = False
-#    params.filterByConvexity = False
-#    params.filterByInertia = False
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
     #print('brightness: {}'.format(avg_brightness))
@@ -133,25 +120,22 @@ def get_blob(frame):
     #    for pixel in hsv:
     #        pixel[2] = pixel[2] - diff
     #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
-    #print('brightness: {}'.format(avg_brightness))
     mask1 = cv.inRange(hsv, r11, r12)
     mask2 = cv.inRange(hsv, r21, r22)
     mask = mask1 | mask2
-    # copiado de internet no tengo ni idea la verdad
-    res = cv.bitwise_and(frame, frame, mask=mask)
-    keypoints = detector.detect(res)
+    res = cv.bitwise_and(frame, frame, mask=mask)   # we apply the mask...
+    keypoints = detector.detect(res)    # detect the blobs (detector params are outside for performance)
     if not keypoints:
         biggest_kp = None
-    # The only blob we want is the biggest one (chonk)
-    else:
+    else:   # we only keep the biggest blob!
         biggest_kp = keypoints[0]
         for point in keypoints:
             if point.size > biggest_kp.size:
                 biggest_kp = point
-    return biggest_kp
+    return biggest_kp   # return the chonky one
 
 def show_cam_blobs(robot):
-    """Shows a video and marks the blobs when found"""
+    """Shows a video and marks the biggest blob if any are found"""
     while(True):
         tIni = time.clock()
         frame = robot.takePic()[139:179, 219:239]
@@ -165,6 +149,41 @@ def show_cam_blobs(robot):
         cv.imshow('img', im_with_keypoints)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
-
         tEnd = time.clock()
     cv.destroyAllWindows()
+
+
+def read_map(file):
+    """This function returns the size and arrays of the given map.
+    Size is given by a nxn map of tiles of a mm.
+    The map represents the accessible points (0's beign accessible and 1's inaccessible)"""
+    size = np.loadtxt(file, dtype='int', max_rows=1)
+    map = np.loadtxt(file, dtype='int', skiprows=1)
+    return size, map
+
+def generate_grid(map, goal):
+    grid = -2 * np.ones(map.shape)   # unvisited cells contain -2
+    for i in range(map.shape[0]):
+        for j in range(map.shape[1]):
+            if map[i, j] == 0:
+                grid[i, j] = -1     # we set the obstacles and walls to -1
+    grid[goal[0], goal[1]] = 0      # we set the goal to 0
+    current_cells = np.array([[goal[0], goal[1]]])  # cells that are on the wavefront
+    moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]])  # 4 direction neighbours
+    finished = False
+    while not finished:
+    #for n in range(current_cells.size):     # for every cell on the wavefront
+        if current_cells.size > 0:
+            cell = current_cells[0]     # check if there are any
+            for move in moves:  # we create a cell for each move
+                next_cell = cell + move
+                if next_cell[0] >= 0 and next_cell[0] < map.shape[0] and next_cell[1] >= 0 and next_cell[1] < map.shape[1]:     # we check if they are valid
+                    if grid[next_cell[0], next_cell[1]] == -2:  # we only modify its value if the cell hasn't been explored yet (-2)
+                        current_cells = np.append(current_cells, [[next_cell[0], next_cell[1]]], axis=0)  # we add it to the wavefront
+                        grid[next_cell[0], next_cell[1]] = grid[cell[0], cell[1]] + 1   # new cell's value is its parent's +1
+            current_cells = np.delete(current_cells, 0, axis=0)     # we delete the current cell from the wavefront
+        else:
+            finished = True
+    return grid
+
+
