@@ -40,6 +40,9 @@ def soft_stop(robot, t = 0.5):
     for i in range(9, 0):
         robot.setSpeed(v*i/10, w*i/10)
         time.sleep(delay)
+def go_to(robot, position):
+    """Moves the robot from its original position to the given one drawing an arc"""
+    original_pos = [robot.x.value, robot.y.value, robot.th.value]
 
 #####################
 # COMPLEX MOVEMENTS =0.4):
