@@ -174,6 +174,8 @@ def read_map(file):
     return size, map
 
 def generate_grid(map, goal):
+    """Generates a grid with the given map and goal.\n
+    This is meant to be executed once and use this information to navigate through the circuit (though we may need to run it when we find unexpected obstacles)"""
     grid = -2 * np.ones(map.shape)   # unvisited cells contain -2
     for i in range(map.shape[0]):
         for j in range(map.shape[1]):
