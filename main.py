@@ -42,12 +42,13 @@ def main(args):
         elif args.fcn == 'pictures':
             sage.show_cam_blobs(oscar) 
         elif args.fcn == 'square':
-            mv.square(oscar, l = 0.8)
+            mv.square(oscar, l = 0.4)
         elif args.fcn == 'ballCheck':
             oscar.ballCaught()
         elif args.fcn == 'reset':
             oscar.BP.reset_all()
-
+        elif args.fcn == 'arc':
+            mv.go_to(oscar, [0.4, 0])
         #########################
         #      closing up       #
         #########################

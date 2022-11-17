@@ -62,7 +62,7 @@ class Robot:
         self.v_max = 0.5
 
         self.lock_odometry = Lock()
-        self.odometry_period = 0.05
+        self.odometry_period = 0.01
         self.blob_period = 0.5 
         self.last_seen_left = False
         self.changed = False
@@ -80,6 +80,29 @@ class Robot:
             else:
                 error = False
         self.startOdometry()
+
+    def navigateMap(self):
+        """The robot navigates the map to reach a goal"""
+        [size, map] = read_map(self.map)
+        grid = generate_grid(map)
+        finished = False
+        moves = [[1,0], [1,-1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,1]]
+        while not finished:
+            if self.BP.get_sensor(self.ultrasonic) < 100:
+                return False
+            map_pos = sage.pos_to_map(size, map, origin, robot_pos)
+            if grid[map_pos] == 0:
+                finished = True
+            for move in moves:
+                possible_cell = map_pos + move
+                if grid[possible_cell]  == grid[map_pos]:
+                    destination = possible_cell
+                    break
+            mv.go_to(sage.map_to_pos(size, map, origin, pos), self)
+        return True
+
+            
+            
 
     def startTeabag():
         self.finish_tb.value = False
@@ -340,15 +363,14 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x.value += s * math.cos(th)
-            self.y.value += s * math.sin(th)
+            self.x.value += s * math.cos(th)*2
+            self.y.value += s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
             
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
-
             tEnd = time.clock()
             time.sleep(self.odometry_period - tEnd + tIni)
         

@@ -101,7 +101,7 @@ def norm_pi(th):
 # SPATIAL FUNCTIONS #
 #####################
 
-def is_near(robot, center, threshold):
+def is_near(robot, center, threshold = 0.05):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
@@ -200,3 +200,5 @@ def generate_grid(map, goal):
             finished = True
     return grid
 
+def pos_to_map():
+    pass

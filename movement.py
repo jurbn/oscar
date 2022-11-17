@@ -40,16 +40,36 @@ def soft_stop(robot, t = 0.5):
     for i in range(9, 0):
         robot.setSpeed(v*i/10, w*i/10)
         time.sleep(delay)
-def go_to(robot, position):
+
+def go_to(robot, pos, v = 0.1):
     """Moves the robot from its original position to the given one drawing an arc"""
-    original_pos = [robot.x.value, robot.y.value, robot.th.value]
+    og_pos = [robot.x.value, robot.y.value, robot.th.value]
+    if len(pos) == 2:
+        x = pos[0]-og_pos[0]
+        y = pos[1]-og_pos[1]
+        th_f = og_pos[2] + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
+        if (y == 0):
+            print('soy cero :(')
+            while not sage.is_near(robot, pos, threshold=0.01): 
+                robot.setSpeed(v,0)
+            robot.setSpeed(0,0)
+        else:
+            print('no soy cero :)')
+            R = (pow(x,2) + pow(y,2))/(2*y)
+            while ((not sage.is_near(robot, pos)) and (robot.th.value < abs(th_f))):
+                robot.setSpeed(v,v/R)
+            robot.setSpeed(0,0)
+    #elif len(pos) == 3: #si la th.final calculada en el arco no coincide nos acercamos a un punto aproximado (habrá que ver si aproximamos en x o y o los dos),
+        # luego giramos en el punto aproximado y vamos en linea recta al destino o lo q sea
+        # VALE NO SERIA COS y SEN del th deseado para sacar el pto de aproximacion sino no se puede ir en linea recta al final 
+
 
 #####################
 # COMPLEX MOVEMENTS =0.4):
 #####################
 def square (robot, l=0.4):
     w = 1
-    v = 0.2
+    v = 0.1
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
     logging.info('primer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
