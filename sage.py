@@ -200,5 +200,31 @@ def generate_grid(map, goal):
             finished = True
     return grid
 
-def pos_to_map():
-    pass
+def pos_to_map(pos, map_size):    #for now im considering the origin of coordinates in the map's array origin (map[0][0] = (0,0))
+    """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
+    You can use the map's size vector or the tile size directly.\n
+    The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
+    if  isinstance(map_size,(int,float)):
+        if pos[0] % map_size == 0: #if the position matches a tile separation
+            cell[0] = 2 * math.ceil(pos[0]/map_size)
+        else:
+            cell[0] = 2 * math.ceil(pos[0]/map_size) - 1
+      
+        if pos[1] % map_size == 0: 
+            cell[1] = 2 * math.ceil(pos[1]/map_size)
+        else:
+            cell[1] = 2 * math.ceil(pos[1]/map_size) - 1
+    else:
+        if pos[0] % map_size[2] == 0: 
+            cell[0] = 2 * math.ceil(pos[0]/map_size[2])
+        else:
+            cell[0] = 2 * math.ceil(pos[0]/map_size[2]) - 1
+      
+        if pos[1] % map_size[2] == 0: 
+            cell[1] = 2 * math.ceil(pos[1]/map_size[2])
+        else:
+            cell[1] = 2 * math.ceil(pos[1]/map_size[2]) - 1
+    
+    #since every map cell isn't an actual tile, we'll need to count them in pairs
+    return cell #we could also return a modified map maybe with the -3 value in the given position?
+        
