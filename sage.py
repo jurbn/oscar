@@ -204,17 +204,19 @@ def pos_to_map(pos, map_size):    #for now im considering the origin of coordina
     """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
-    if  isinstance(map_size,(int,float)):
-        if pos[0] % map_size == 0: #if the position matches a tile separation
+    if  isinstance(map_size,(int,float)):#in case the map_size is strictly specified
+        if pos[0] % map_size == 0: #if the position matches a tile separation.
             cell[0] = 2 * math.ceil(pos[0]/map_size)
-        else:
+        else:                                           #a tile of the map is represented by 2 cells in the map, we need to count them in pairs
             cell[0] = 2 * math.ceil(pos[0]/map_size) - 1
       
         if pos[1] % map_size == 0: 
             cell[1] = 2 * math.ceil(pos[1]/map_size)
         else:
             cell[1] = 2 * math.ceil(pos[1]/map_size) - 1
-    else:
+    
+    
+    else: #in case the map_size is given in its array form.
         if pos[0] % map_size[2] == 0: 
             cell[0] = 2 * math.ceil(pos[0]/map_size[2])
         else:
@@ -224,7 +226,17 @@ def pos_to_map(pos, map_size):    #for now im considering the origin of coordina
             cell[1] = 2 * math.ceil(pos[1]/map_size[2])
         else:
             cell[1] = 2 * math.ceil(pos[1]/map_size[2]) - 1
-    
-    #since every map cell isn't an actual tile, we'll need to count them in pairs
-    return cell #we could also return a modified map maybe with the -3 value in the given position?
+    return cell #we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
+
+def map_to_pos(cell, map_size):    #for now im considering the origin of coordinates in the map's array origin (map[0][0] = (0,0))
+    """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
+    You can use the map's size vector or the tile size directly.\n
+    The value will go to the middle of every tile or tile border"""
+    if isinstance(map_size,(int,float)):
+        pos [0] = map_size * cell[0]/2
+        pos [1] = map_size * cell[1]/2
+        
+    else:
+        pos [0] = map_size[2] * cell[0]/2
+        pos [1] = map_size[2] * cell[1]/2
         
