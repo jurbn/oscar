@@ -38,7 +38,7 @@ class Robot:
         self.claw_motor = self.BP.PORT_C
 
         self.BP.reset_all()
-        
+
         self.gyro = self.BP.PORT_2
         self.ultrasonic = self.BP.PORT_1
         self.cam = cv.VideoCapture(0)
@@ -46,7 +46,7 @@ class Robot:
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
-    
+
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
@@ -98,11 +98,14 @@ class Robot:
                 if grid[possible_cell]  == grid[map_pos]:
                     destination = possible_cell
                     break
-            mv.go_to(sage.map_to_pos(size, map, origin, pos), self)
+            finished = mv.go_to(sage.map_to_pos(size, map, origin, pos), self)
+            if not finished:
+                grid = self.updateMap()
         return True
 
-            
-            
+    def updateMap(self):
+        """Updates the map when the robot encounters an obstacle"""
+        pass
 
     def startTeabag():
         self.finish_tb.value = False

@@ -49,16 +49,18 @@ def go_to(robot, pos, v = 0.1):
         y = pos[1]-og_pos[1]
         th_f = og_pos[2] + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
         if (y == 0):
-            print('soy cero :(')
-            while not sage.is_near(robot, pos, threshold=0.01): 
-                robot.setSpeed(v,0)
-            robot.setSpeed(0,0)
+                w = 0
         else:
-            print('no soy cero :)')
             R = (pow(x,2) + pow(y,2))/(2*y)
-            while ((not sage.is_near(robot, pos)) and (robot.th.value < abs(th_f))):
-                robot.setSpeed(v,v/R)
-            robot.setSpeed(0,0)
+            w = v/R
+        while not sage.is_near(robot, pos, threshold=0.01):
+            if robot.BP.get_sensor(robot.ultrasonic) < 100: # si esta cerca de pared, se para y devuelve false (obstaculo)
+                robot.setSpeed(0, 0)
+                return False
+            else:
+                robot.setSpeed(v, w)
+        robot.setSpeed(0, 0)
+    return True
     #elif len(pos) == 3: #si la th.final calculada en el arco no coincide nos acercamos a un punto aproximado (habrá que ver si aproximamos en x o y o los dos),
         # luego giramos en el punto aproximado y vamos en linea recta al destino o lo q sea
         # VALE NO SERIA COS y SEN del th deseado para sacar el pto de aproximacion sino no se puede ir en linea recta al final 
