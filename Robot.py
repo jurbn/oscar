@@ -100,12 +100,30 @@ class Robot:
                     break
             finished = mv.go_to(sage.map_to_pos(size, map, origin, pos), self)
             if not finished:
-                grid = self.updateMap()
+                self.setSpeed(0, 0)
+                grid = self.remakeMap(size, map)
+        self.setSpeed(0, 0)
         return True
 
-    def updateMap(self):
+    def remakeMap(self, size, map):
         """Updates the map when the robot encounters an obstacle"""
-        pass
+        pos = sage.pos_to_map([self.x.value, self.y.value], size)
+        th = self.th.value
+        # check which direction is it facing...
+        while (self.th.value < th + math.pi/4):
+            self.setSpeed(0, math.pi/4)
+        self.setSpeed(0, 0)
+        obstacle_right = self.BP.get_sensor(self.ultrasonic) < 100
+        while (self.th.value > th - math.pi/4): # ESTO ESTA MAL, CALCULAR LA DIFERENCIA ENTRE TH Y SELF.TH Y NORMALIZARLAAAA
+            self.setSpeed(0, -math.pi/4)
+        self.setSpeed(0, 0)
+        obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
+        if th < math.pi/4 and th > -math.pi/4: # mirando hacia arriba
+            map[pos[0], -pos[1]] = -1
+            map[pos[0]-1, pos[1]] = -1 * obstacle_left
+            map[pos[0]+1, pos[1]] = -1 * obstacle_right
+         
+
 
     def startTeabag():
         self.finish_tb.value = False
