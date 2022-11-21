@@ -118,11 +118,16 @@ class Robot:
             self.setSpeed(0, -math.pi/4)
         self.setSpeed(0, 0)
         obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
-        if th < math.pi/4 and th > -math.pi/4: # mirando hacia arriba
+        if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
             map[pos[0], -pos[1]] = -1
             map[pos[0]-1, pos[1]] = -1 * obstacle_left
             map[pos[0]+1, pos[1]] = -1 * obstacle_right
-         
+        elif th >= math.pi/4 and th <= 3*math.pi/4: # mirando dcha
+            pass
+        elif th >= 3*math.pi/4 and th <= -3*math.pi/4: # mirando abajo
+            pass
+        elif th <= 3*math.pi/4 and th >= math.pi/4: # mirando izda
+            pass
 
 
     def startTeabag():
