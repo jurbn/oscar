@@ -54,7 +54,7 @@ def go_to(robot, pos, v = 0.1):
             R = (pow(x,2) + pow(y,2))/(2*y)
             w = v/R
         while not sage.is_near(robot, pos, threshold=0.01):
-            if robot.BP.get_sensor(robot.ultrasonic) < 100: # si esta cerca de pared, se para y devuelve false (obstaculo)
+            if robot.BP.get_sensor(robot.ultrasonic) < 20: # si esta cerca de pared, se para y devuelve false (obstaculo)
                 robot.setSpeed(0, 0)
                 return False
             else:

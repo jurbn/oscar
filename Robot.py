@@ -25,6 +25,8 @@ class Robot:
 
         Initialize Motors and Sensors according to the set up in your robot
         """
+        
+        self.map = 'mapa3.txt'
 
         self.radius = 0.028
         self.length = 0.15
@@ -81,54 +83,68 @@ class Robot:
                 error = False
         self.startOdometry()
 
-    def navigateMap(self):
+    def navigateMap(self, origin, goal):
         """The robot navigates the map to reach a goal"""
-        [size, map] = read_map(self.map)
-        grid = generate_grid(map)
+        [size, map] = sage.read_map(self.map)
+        origin = sage.them_to_us(size, origin)
+        goal = sage.them_to_us(size, goal)
+        grid = sage.generate_grid(map, goal)
         finished = False
         moves = [[1,0], [1,-1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,1]]
-        while not finished:
-            if self.BP.get_sensor(self.ultrasonic) < 100:
-                return False
-            map_pos = sage.pos_to_map(size, map, origin, robot_pos)
-            if grid[map_pos] == 0:
+        while not finished: # cuando no haya acabado, sigue recorriendo el mapa
+            if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
+                self.remakeMap(size, map, goal, origin)
+            map_pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
+            if grid[map_pos[0], map_pos[1]] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
                 finished = True
-            for move in moves:
-                possible_cell = map_pos + move
-                if grid[possible_cell]  == grid[map_pos]:
-                    destination = possible_cell
-                    break
-            finished = mv.go_to(sage.map_to_pos(size, map, origin, pos), self)
-            if not finished:
+            else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
+                for move in moves:
+                    possible_cell = map_pos + move
+                    if grid[possible_cell[0], possible_cell[1]]  == (grid[map_pos[0], map_pos[1]] - 1):
+                        destination = possible_cell
+                        break
+                print(destination)
+                arrived = mv.go_to(self, sage.map2pos(size, map, origin, destination))
+            if not arrived:
                 self.setSpeed(0, 0)
-                grid = self.remakeMap(size, map)
+                grid = self.remakeMap(size, map, goal, origin)
         self.setSpeed(0, 0)
         return True
 
-    def remakeMap(self, size, map):
+    def remakeMap(self, size, map, goal, origin):
         """Updates the map when the robot encounters an obstacle"""
-        pos = sage.pos_to_map([self.x.value, self.y.value], size)
+        pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value])
         th = self.th.value
         # check which direction is it facing...
-        while (self.th.value < th + math.pi/4):
+        while (abs(th-self.th.value) < math.pi/4):
             self.setSpeed(0, math.pi/4)
         self.setSpeed(0, 0)
         obstacle_right = self.BP.get_sensor(self.ultrasonic) < 100
-        while (self.th.value > th - math.pi/4): # ESTO ESTA MAL, CALCULAR LA DIFERENCIA ENTRE TH Y SELF.TH Y NORMALIZARLAAAA
+        self.setSpeed(0, -math.pi/4)
+        time.sleep(0.1)
+        while (abs(th-self.th.value) < math.pi/4):
             self.setSpeed(0, -math.pi/4)
         self.setSpeed(0, 0)
         obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
         if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
-            map[pos[0], -pos[1]] = -1
-            map[pos[0]-1, pos[1]] = -1 * obstacle_left
-            map[pos[0]+1, pos[1]] = -1 * obstacle_right
-        elif th >= math.pi/4 and th <= 3*math.pi/4: # mirando dcha
-            pass
+            map[pos[0], pos[1]-1] = 0
+            map[pos[0]-1, pos[1]-1] = 1 * (not obstacle_left)
+            map[pos[0]+1, pos[1]-1] = 1 * (not obstacle_right)
+        elif th >= math.pi/4 and th <= 3*math.pi/4: # mirando izda
+            map[pos[0]-1, pos[1]] = 0
+            map[pos[0]-1, pos[1]+1] = 1 * (not obstacle_left)
+            map[pos[0]-1, pos[1]-1] = 1 * (not obstacle_right)
         elif th >= 3*math.pi/4 and th <= -3*math.pi/4: # mirando abajo
-            pass
-        elif th <= 3*math.pi/4 and th >= math.pi/4: # mirando izda
-            pass
-
+            map[pos[0], pos[1]+1] = 0
+            map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_left)
+            map[pos[0]-1, pos[1]+1] = 1 * (not obstacle_right) 
+        elif th <= -math.pi/4 and th >= -3*math.pi/4: # mirando dcha
+            map[pos[0]+1, pos[1]] = 0
+            map[pos[0]+1, pos[1]-1] = 1 * (not obstacle_left)
+            map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_right) 
+        grid = sage.generate_grid(map, goal)
+        # AQUI HABRIA QUE METER LA MIERDA DE QUE GIRE SI LO TIENE JUSTO EN FRENTE
+        return grid
 
     def startTeabag():
         self.finish_tb.value = False

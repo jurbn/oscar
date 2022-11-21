@@ -49,6 +49,8 @@ def main(args):
             oscar.BP.reset_all()
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
+        elif args.fcn == 'nav':
+            oscar.navigateMap([0, 0], [4, 1])
         #########################
         #      closing up       #
         #########################
