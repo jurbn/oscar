@@ -3,17 +3,16 @@
 import argparse
 import time
 import logging
-import matplotlib.pyplot as plt
 from Robot import Robot
 import movement as mv
 import sage
 
 def main(args):
-    try:        
+
         #########################
         #     initialization    #
         #########################
-
+    try:
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
@@ -57,25 +56,30 @@ def main(args):
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        sage.plot_file(oscar.odometry_file)
+        #sage.plot_file(oscar.odometry_file)
 
-        
-   
-    # In the event of a keyboard interruption, we stop the robot's movement 
-    # and close the odometry process, as well as log the event as a warning.    
     except KeyboardInterrupt:
-        logging.warning('A keyboard interruption was detected!')
+        logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        sage.plot_file(oscar.odometry_file)
+    except Exception as excp:
+        logging.warning('ERROR: {}'.format(excp))
+        mv.abrupt_stop(oscar)
+        oscar.stopOdometry()
+        oscar.BP.reset_all()
+        #sage.plot_file(oscar.odometry_file)
 
+   
+   
+    # In the event of a keyboard interruption, we stop the robot's movement 
+    # and close the odometry process, as well as log the event as a warning.    
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-f","--fcn",help = "Selec which function you wish to run", type = str)
     args = parser.parse_args()
     main(args)
-
 
 

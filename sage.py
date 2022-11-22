@@ -220,13 +220,8 @@ def map2pos(map_size, map, origin, cell):     #for now im considering the origin
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
     pos = np.array([0,0])
-    if isinstance(map_size,(int,float)):
-        pos [0] = map_size * cell[0]/2
-        pos [1] = map_size * cell[1]/2
-
-    else:
-        pos [0] = map_size[2] * cell[0]/2
-        pos [1] = map_size[2] * cell[1]/2
+    pos [0] = map_size[2] * (cell[0]-origin[0])/200
+    pos [1] = map_size[2] * (cell[1]-origin[1])/200
     return pos
 
 def them_to_us(size, their_coord):

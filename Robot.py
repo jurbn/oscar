@@ -89,12 +89,14 @@ class Robot:
         origin = sage.them_to_us(size, origin)
         goal = sage.them_to_us(size, goal)
         grid = sage.generate_grid(map, goal)
+        print(grid)
         finished = False
         moves = [[1,0], [1,-1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,1]]
         while not finished: # cuando no haya acabado, sigue recorriendo el mapa
-            if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
-                self.remakeMap(size, map, goal, origin)
+            #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
+            #    self.remakeMap(size, map, goal, origin)
             map_pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
+            print('im in {}'.format(map_pos))
             if grid[map_pos[0], map_pos[1]] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
                 finished = True
             else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
@@ -103,7 +105,7 @@ class Robot:
                     if grid[possible_cell[0], possible_cell[1]]  == (grid[map_pos[0], map_pos[1]] - 1):
                         destination = possible_cell
                         break
-                print(destination)
+                print('next pos is {}'.format(destination))
                 arrived = mv.go_to(self, sage.map2pos(size, map, origin, destination))
             if not arrived:
                 self.setSpeed(0, 0)
@@ -116,6 +118,7 @@ class Robot:
         pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value])
         th = self.th.value
         # check which direction is it facing...
+        print('looking one way')
         while (abs(th-self.th.value) < math.pi/4):
             self.setSpeed(0, math.pi/4)
         self.setSpeed(0, 0)
@@ -123,6 +126,7 @@ class Robot:
         self.setSpeed(0, -math.pi/4)
         time.sleep(0.1)
         while (abs(th-self.th.value) < math.pi/4):
+            print('looking the other way')
             self.setSpeed(0, -math.pi/4)
         self.setSpeed(0, 0)
         obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
@@ -143,6 +147,7 @@ class Robot:
             map[pos[0]+1, pos[1]-1] = 1 * (not obstacle_left)
             map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_right) 
         grid = sage.generate_grid(map, goal)
+        print(grid)
         # AQUI HABRIA QUE METER LA MIERDA DE QUE GIRE SI LO TIENE JUSTO EN FRENTE
         return grid
 

@@ -44,17 +44,30 @@ def soft_stop(robot, t = 0.5):
 def go_to(robot, pos, v = 0.1):
     """Moves the robot from its original position to the given one drawing an arc"""
     og_pos = [robot.x.value, robot.y.value, robot.th.value]
+    print('original: {}'.format(og_pos))
     if len(pos) == 2:
         x = pos[0]-og_pos[0]
         y = pos[1]-og_pos[1]
+        print('going to {}, {}'.format(x, y))
+        if x > 100: # si está en frente
+            print('to recto')
+        elif x < -100: # si está detrás
+            print('atrás')
+            #while robot.th.value < math.pi: # ESTO DEBERIA SER QUE SE DE MEDIA VUELTA
+            #    robot.setSpeed(0, -math.pi/4)
+        elif y > 100: # está a su dcha
+            print('dcha')
+        elif y < -100:
+            print('izda')
         th_f = og_pos[2] + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
         if (y == 0):
                 w = 0
         else:
             R = (pow(x,2) + pow(y,2))/(2*y)
             w = v/R
-        while not sage.is_near(robot, pos, threshold=0.01):
+        while not sage.is_near(robot, pos, threshold=0.05):
             if robot.BP.get_sensor(robot.ultrasonic) < 20: # si esta cerca de pared, se para y devuelve false (obstaculo)
+                print('obs')
                 robot.setSpeed(0, 0)
                 return False
             else:
