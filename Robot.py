@@ -109,7 +109,7 @@ class Robot:
                 print(destination)
                 destination_coord = sage.array2pos(size, map, destination)
                 print('next pos coord {}'.format(destination_coord))
-                arrived = gt.go_to(self, destination_coord)
+                arrived = mv.go_to(self, destination_coord)
             if not arrived:
                 self.setSpeed(0, 0)
                 grid = self.remakeMap(size, map, goal, origin)
