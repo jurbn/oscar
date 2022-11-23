@@ -201,13 +201,14 @@ def generate_grid(map, goal):
             finished = True
     return grid
 
-def pos2map(map_size, map, origin, pos):    #for now im considering the origin of coordinates in the map's array origin (map[0][0] = (0,0)) (top left!)
+def pos2array(map_size, map, pos):    #for now im considering the origin of coordinates in the map's array origin (map[0][0] = (0,0)) (top left!)
     """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
     cell = np.array([0,0])
-    cell[0] = pos[0] / (2*map_size[2]) + origin[0]
-    cell[1] = pos[1] / (2*map_size[2]) + origin[1]
+    cell[0] = (pos[0] - map_size[2]/2 )/ map_size[2]
+    cell[1] = (pos[1] - map_size[2]/2 )/ map_size[2]
+    cell = tile2array(map_size, cell)
     # if ((pos[0] % map_size[2] < map_size[2]/4) or (400 - pos[0] % map_size[2] < map_size[2]/4)):
     #     cell[0] = 2 * math.ceil(pos[0]/map_size[2]) + 1
     # else:
@@ -219,20 +220,17 @@ def pos2map(map_size, map, origin, pos):    #for now im considering the origin o
     cell = cell.astype(np.float32)
     return cell #we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
 
-def map2pos(map_size, map, origin, cell):     #for now im considering the origin of coordinates in the map's array origin map[0][0] = 0,0
+def array2pos(map_size, map, cell):     #for now im considering the origin of coordinates in the map's array origin map[0][0] = 0,0
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
     pos = np.array([0,0], dtype=np.float32)
-    print('m2p origin{}'.format(origin))
-    print('m2p cell {}'.format(cell))
-    print('m2p size {}'.format(map_size[2]))
-    pos [0] = map_size[2] * (cell[0]-origin[0])/2
-    pos [1] = map_size[2] * (cell[1]-origin[1])/2
-    print('m2p next_pos {}'.format(map_size[2] * (cell[1]-origin[1])/2))
+    pos[0] = cell[0]/2 * map_size[2] 
+    pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
+    #pos [1] = ((map_size[1] - 1) - (cell[1] - 1)/2) * map_size[2]
     return pos
 
-def them_to_us(size, their_coord):
+def tile2array(size, their_coord):
     x = 2 * their_coord[0] + 1
     y = 2 * size[1] - 1 - 2 * their_coord[1]
     return np.array([x, y])

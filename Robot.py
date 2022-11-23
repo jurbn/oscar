@@ -7,7 +7,7 @@ from distutils.debug import DEBUG
 import sage
 import brickpi3 # import the BrickPi3 drivers
 import movement as mv
-
+import go_to4 as gt
 
 import time     # import the time library for the sleep function
 import sys
@@ -51,9 +51,9 @@ class Robot:
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
-        self.x = Value('d',0.0)
-        self.y = Value('d',0.0)
-        self.th = Value('d',0.0)
+        self.x = Value('d', init_position[0])
+        self.y = Value('d', init_position[1])
+        self.th = Value('d', init_position[2])
 
         self.v = Value('d', 0.0)
         self.w = Value('d', 0.0)
@@ -85,34 +85,36 @@ class Robot:
     def navigateMap(self, origin, goal):
         """The robot navigates the map to reach a goal"""
         [size, map] = sage.read_map(self.map)
-        origin = sage.them_to_us(size, origin)
-        goal = sage.them_to_us(size, goal)
+        #origin = sage.them_to_us(size, origin)
+        goal = sage.tile2array(size, goal)
         grid = sage.generate_grid(map, goal)
         print(grid)
         finished = False
-        moves = [[1,0], [1,-1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,1]]
+        moves = [[1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]
+        arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
         while not finished: # cuando no haya acabado, sigue recorriendo el mapa
             #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
             #    self.remakeMap(size, map, goal, origin)
-            map_pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
-            print('im in {}'.format(map_pos))
-            print('and my grid value is {}'.format(grid[int(map_pos[0]), int(map_pos[1])]))
-            if grid[int(map_pos[0]), int(map_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
+            print('im in {}'.format(arr_pos))
+            print('and my grid value is {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
+            if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
                 finished = True
             else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
                 for move in moves:
-                    possible_cell = map_pos + move
+                    possible_cell = arr_pos + move
                     print('possible cell value: {}'.format(grid[int(possible_cell[0]), int(possible_cell[1])]))
-                    if grid[int(possible_cell[0]), int(possible_cell[1])]  == (grid[int(map_pos[0]), int(map_pos[1])] - 1):
+                    if grid[int(possible_cell[0]), int(possible_cell[1])]  == (grid[int(arr_pos[0]), int(arr_pos[1])] - 1):
                         destination = possible_cell
                         break
                 print(destination)
-                destination_coord = sage.map2pos(size, map, origin, destination)
+                destination_coord = sage.array2pos(size, map, destination)
                 print('next pos coord {}'.format(destination_coord))
-                arrived = mv.go_to(self, destination_coord)
+                arrived = gt.go_to(self, destination_coord)
             if not arrived:
                 self.setSpeed(0, 0)
                 grid = self.remakeMap(size, map, goal, origin)
+            else:
+                arr_pos = destination
         self.setSpeed(0, 0)
         return True
 

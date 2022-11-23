@@ -46,33 +46,39 @@ def go_to(robot, pos, v = 0.1):
     og_pos = [robot.x.value, robot.y.value, robot.th.value]
     print('original: {}'.format(og_pos))
     if len(pos) == 2:
-        x = pos[0]-og_pos[0]
-        y = pos[1]-og_pos[1]
+        x = pos[0]-og_pos[0]    # x2-x1
+        y = pos[1]-og_pos[1]    # y2-y1
         print('distance is {}, {}'.format(x, y))
-        if x > -0.1: # si está en frente
+        direction = math.atan2(y, x)    # angulo del vector (oscar-pos) con x
+        angle = sage.norm_pi(robot.th.value - direction)  # diferencia entre donde mira oscar y donde mira el vector que los une
+        if -3*math.pi/8 <= angle <= 3*math.pi/8: # si está en frente
             print('to recto')
-        else:   # si no está en frente tendrá que girar o algo digo yo
-            if x < 0.1: # si está detrás
+        else:   # si no está en frente, SE GIRA PARA MIRAR AL DESTINO
+            if angle > 7*math.pi/8 or angle < -7*math.pi/8:# si está detrás
                 print('atrás')
-                destiny = abs(sage.norm_pi(og_pos[2]+math.pi))
-                ang_sp = math.pi/2
+                destiny = sage.norm_pi(og_pos[2]+math.pi)
+                while sage.norm_pi(robot.th.value-destiny)>0.05:
+                    robot.setSpeed(0, math.pi/4)
                 #while robot.th.value < math.pi: # ESTO DEBERIA SER QUE SE DE MEDIA VUELTA
                 #    robot.setSpeed(0, -math.pi/4)
-            elif y > 0.1: # está a su izda
+            elif 3*math.pi/8 < angle <= 7*math.pi/8: # está a su izda
                 print('izda')
-                destiny = abs(sage.norm_pi(og_pos[2]+math.pi/2))
-                ang_sp = math.pi/4
-            elif y < -0.1:
+                destiny = sage.norm_pi(og_pos[2]+math.pi/2)
+                while sage.norm_pi(robot.th.value-destiny)>0.05:
+                    robot.setSpeed(0, math.pi/4)
+            elif -3*math.pi/8 > angle >= -7*math.pi/8:
                 print('dcha')
-                destiny = abs(sage.norm_pi(og_pos[2]-math.pi/2))
-                ang_sp = -math.pi/4
-            while (destiny - abs(robot.th.value)) > 0.05:
-                robot.setSpeed(0, ang_sp)
-
-        th_f = og_pos[2] + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
-        if (y == 0):
+                destiny = sage.norm_pi(og_pos[2]-math.pi/2)
+                while sage.norm_pi(robot.th.value-destiny)>0.05:
+                    robot.setSpeed(0, -math.pi/4)
+        robot.setSpeed(0, 0)
+        time.sleep(1)
+        print('I should be {}, and im {}'.format(direction, robot.th.value))
+        th_f = robot.th.value + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
+        # YA ESTA MIRANDO AL DESTINO
+        if (y == 0):    # SI NO TIENE QUE GIRAR
                 w = 0
-        else:
+        else:           # SI TIENE QUE GIRAR
             R = (pow(x,2) + pow(y,2))/(2*y)
             w = v/R
         while not sage.is_near(robot, pos, threshold=0.05):
@@ -81,6 +87,7 @@ def go_to(robot, pos, v = 0.1):
                 robot.setSpeed(0, 0)
                 return False
             else:
+                print('toy yendo')
                 robot.setSpeed(v, w)
             time.sleep(0.05)
         robot.setSpeed(0, 0)

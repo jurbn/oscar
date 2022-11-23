@@ -17,7 +17,7 @@ def main(args):
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot()
+        oscar = Robot(init_position=[0.2, 1.8, 0])
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -50,7 +50,7 @@ def main(args):
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
-            oscar.navigateMap([0, 0], [4, 1])
+            oscar.navigateMap([0, 4], [4, 1])
         #########################
         #      closing up       #
         #########################
