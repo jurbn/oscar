@@ -49,23 +49,23 @@ def go_to(robot, pos, v = 0.1):
         x = pos[0]-og_pos[0]
         y = pos[1]-og_pos[1]
         print('distance is {}, {}'.format(x, y))
-        if x > 0.1: # si está en frente
+        if x > -0.1: # si está en frente
             print('to recto')
         else:   # si no está en frente tendrá que girar o algo digo yo
-            if x < -0.1: # si está detrás
+            if x < 0.1: # si está detrás
                 print('atrás')
                 destiny = abs(sage.norm_pi(og_pos[2]+math.pi))
                 ang_sp = math.pi/2
                 #while robot.th.value < math.pi: # ESTO DEBERIA SER QUE SE DE MEDIA VUELTA
                 #    robot.setSpeed(0, -math.pi/4)
-            elif y > 0.1: # está a su dcha
-                print('dcha')
-                destiny = abs(sage.norm_pi(og_pos[2]-math.pi/2))
-                ang_sp = -math.pi/4
-            elif y < -0.1:
+            elif y > 0.1: # está a su izda
                 print('izda')
                 destiny = abs(sage.norm_pi(og_pos[2]+math.pi/2))
                 ang_sp = math.pi/4
+            elif y < -0.1:
+                print('dcha')
+                destiny = abs(sage.norm_pi(og_pos[2]-math.pi/2))
+                ang_sp = -math.pi/4
             while (destiny - abs(robot.th.value)) > 0.05:
                 robot.setSpeed(0, ang_sp)
 
@@ -82,7 +82,7 @@ def go_to(robot, pos, v = 0.1):
                 return False
             else:
                 robot.setSpeed(v, w)
-            time.sleep(0.02)
+            time.sleep(0.05)
         robot.setSpeed(0, 0)
     return True
     #elif len(pos) == 3: #si la th.final calculada en el arco no coincide nos acercamos a un punto aproximado (habrá que ver si aproximamos en x o y o los dos),

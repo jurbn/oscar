@@ -134,21 +134,21 @@ class Robot:
         self.setSpeed(0, 0)
         obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
         if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
-            map[pos[0], pos[1]-1] = 0
-            map[pos[0]-1, pos[1]-1] = 1 * (not obstacle_left)
-            map[pos[0]+1, pos[1]-1] = 1 * (not obstacle_right)
+            map[int(pos[0]), int(pos[1])-1] = 0
+            map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_left)
+            map[int(pos[0])+1, int(pos[1])-1] = 1 * (not obstacle_right)
         elif th >= math.pi/4 and th <= 3*math.pi/4: # mirando izda
-            map[pos[0]-1, pos[1]] = 0
-            map[pos[0]-1, pos[1]+1] = 1 * (not obstacle_left)
-            map[pos[0]-1, pos[1]-1] = 1 * (not obstacle_right)
+            map[int(pos[0])-1, int(pos[1])] = 0
+            map[int(pos[0])-1, int(pos[1])+1] = 1 * (not obstacle_left)
+            map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_right)
         elif th >= 3*math.pi/4 and th <= -3*math.pi/4: # mirando abajo
-            map[pos[0], pos[1]+1] = 0
-            map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_left)
-            map[pos[0]-1, pos[1]+1] = 1 * (not obstacle_right) 
+            map[int(pos[0]), int(pos[1])+1] = 0
+            map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_left)
+            map[int(pos[0])-1, int(pos[1])+1] = 1 * (not obstacle_right) 
         elif th <= -math.pi/4 and th >= -3*math.pi/4: # mirando dcha
-            map[pos[0]+1, pos[1]] = 0
-            map[pos[0]+1, pos[1]-1] = 1 * (not obstacle_left)
-            map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_right) 
+            map[int(pos[0])+1, int(pos[1])] = 0
+            map[int(pos[0])+1, int(pos[1])-1] = 1 * (not obstacle_left)
+            map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_right) 
         grid = sage.generate_grid(map, goal)
         print(grid)
         return grid
