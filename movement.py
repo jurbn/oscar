@@ -76,11 +76,14 @@ def go_to(robot, pos, v = 0.1):
         th_f = robot.th.value + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
         # YA ESTA MIRANDO AL DESTINO
         if (y == 0):    # SI NO TIENE QUE GIRAR
-                w = 0
+            print('turborecto')
+            w = 0
         else:           # SI TIENE QUE GIRAR
+            print('no tan turborecto')
             R = (pow(x,2) + pow(y,2))/(2*y)
             w = v/R
-        while not sage.is_near(robot, pos, threshold=0.08):
+        while not sage.is_near(robot, pos, threshold=0.1):
+            print(robot.th.value, th_f)
             if robot.BP.get_sensor(robot.ultrasonic) < 20: # si esta cerca de pared, se para y devuelve false (obstaculo)
                 print('AAAAA UN OBSTACULO ME ASUSTE')
                 robot.setSpeed(0, 0)
