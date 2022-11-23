@@ -96,16 +96,20 @@ class Robot:
             #    self.remakeMap(size, map, goal, origin)
             map_pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
             print('im in {}'.format(map_pos))
-            if grid[map_pos[0], map_pos[1]] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
+            print('and my grid value is {}'.format(grid[int(map_pos[0]), int(map_pos[1])]))
+            if grid[int(map_pos[0]), int(map_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
                 finished = True
             else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
                 for move in moves:
                     possible_cell = map_pos + move
-                    if grid[possible_cell[0], possible_cell[1]]  == (grid[map_pos[0], map_pos[1]] - 1):
+                    print('possible cell value: {}'.format(grid[int(possible_cell[0]), int(possible_cell[1])]))
+                    if grid[int(possible_cell[0]), int(possible_cell[1])]  == (grid[int(map_pos[0]), int(map_pos[1])] - 1):
                         destination = possible_cell
                         break
-                print('next pos is {}'.format(destination))
-                arrived = mv.go_to(self, sage.map2pos(size, map, origin, destination))
+                print(destination)
+                destination_coord = sage.map2pos(size, map, origin, destination)
+                print('next pos coord {}'.format(destination_coord))
+                arrived = mv.go_to(self, destination_coord)
             if not arrived:
                 self.setSpeed(0, 0)
                 grid = self.remakeMap(size, map, goal, origin)

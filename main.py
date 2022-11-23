@@ -6,6 +6,7 @@ import logging
 from Robot import Robot
 import movement as mv
 import sage
+import traceback
 
 def main(args):
 
@@ -63,8 +64,8 @@ def main(args):
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-    except Exception as excp:
-        logging.warning('ERROR: {}'.format(excp))
+    except Exception as error:
+        logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()

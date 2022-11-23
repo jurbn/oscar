@@ -169,8 +169,8 @@ def read_map(file):
     """This function returns the size and arrays of the given map.
     Size is given by a nxn map of tiles of a mm.
     The map represents the accessible points (0's beign accessible and 1's inaccessible)"""
-    size = np.loadtxt(file, dtype='int', max_rows=1)
-    size[2] = size[2]/100
+    size = np.loadtxt(file, max_rows=1)
+    size[2] = size[2]/1000
     map = np.loadtxt(file, dtype='int', skiprows=1)
     return size, map
 
@@ -182,7 +182,7 @@ def generate_grid(map, goal):
         for j in range(map.shape[1]):
             if map[i, j] == 0:
                 grid[i, j] = -1     # we set the obstacles and walls to -1
-    grid[goal[0], goal[1]] = 0      # we set the goal to 0
+    grid[int(goal[0]), int(goal[1])] = 0      # we set the goal to 0
     current_cells = np.array([[goal[0], goal[1]]])  # cells that are on the wavefront
     moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]])  # 4 direction neighbours
     finished = False
@@ -193,9 +193,9 @@ def generate_grid(map, goal):
             for move in moves:  # we create a cell for each move
                 next_cell = cell + move
                 if next_cell[0] >= 0 and next_cell[0] < map.shape[0] and next_cell[1] >= 0 and next_cell[1] < map.shape[1]:     # we check if they are valid
-                    if grid[next_cell[0], next_cell[1]] == -2:  # we only modify its value if the cell hasn't been explored yet (-2)
+                    if grid[int(next_cell[0]), int(next_cell[1])] == -2:  # we only modify its value if the cell hasn't been explored yet (-2)
                         current_cells = np.append(current_cells, [[next_cell[0], next_cell[1]]], axis=0)  # we add it to the wavefront
-                        grid[next_cell[0], next_cell[1]] = grid[cell[0], cell[1]] + 1   # new cell's value is its parent's +1
+                        grid[int(next_cell[0]), int(next_cell[1])] = grid[int(cell[0]), int(cell[1])] + 1   # new cell's value is its parent's +1
             current_cells = np.delete(current_cells, 0, axis=0)     # we delete the current cell from the wavefront
         else:
             finished = True
@@ -206,7 +206,8 @@ def pos2map(map_size, map, origin, pos):    #for now im considering the origin o
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
     cell = np.array([0,0])
-    cell = pos / (2*size[2]) + origin
+    cell[0] = pos[0] / (2*map_size[2]) + origin[0]
+    cell[1] = pos[1] / (2*map_size[2]) + origin[1]
     # if ((pos[0] % map_size[2] < map_size[2]/4) or (400 - pos[0] % map_size[2] < map_size[2]/4)):
     #     cell[0] = 2 * math.ceil(pos[0]/map_size[2]) + 1
     # else:
@@ -215,15 +216,20 @@ def pos2map(map_size, map, origin, pos):    #for now im considering the origin o
     #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) + 1
     # else:
     #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) 
+    cell = cell.astype(np.float32)
     return cell #we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
 
 def map2pos(map_size, map, origin, cell):     #for now im considering the origin of coordinates in the map's array origin map[0][0] = 0,0
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
-    pos = np.array([0,0])
+    pos = np.array([0,0], dtype=np.float32)
+    print('m2p origin{}'.format(origin))
+    print('m2p cell {}'.format(cell))
+    print('m2p size {}'.format(map_size[2]))
     pos [0] = map_size[2] * (cell[0]-origin[0])/2
     pos [1] = map_size[2] * (cell[1]-origin[1])/2
+    print('m2p next_pos {}'.format(map_size[2] * (cell[1]-origin[1])/2))
     return pos
 
 def them_to_us(size, their_coord):

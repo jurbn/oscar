@@ -48,17 +48,27 @@ def go_to(robot, pos, v = 0.1):
     if len(pos) == 2:
         x = pos[0]-og_pos[0]
         y = pos[1]-og_pos[1]
-        print('going to {}, {}'.format(x, y))
-        if x > 100: # si está en frente
+        print('distance is {}, {}'.format(x, y))
+        if x > 0.1: # si está en frente
             print('to recto')
-        elif x < -100: # si está detrás
-            print('atrás')
-            #while robot.th.value < math.pi: # ESTO DEBERIA SER QUE SE DE MEDIA VUELTA
-            #    robot.setSpeed(0, -math.pi/4)
-        elif y > 100: # está a su dcha
-            print('dcha')
-        elif y < -100:
-            print('izda')
+        else:   # si no está en frente tendrá que girar o algo digo yo
+            if x < -0.1: # si está detrás
+                print('atrás')
+                destiny = abs(sage.norm_pi(og_pos[2]+math.pi))
+                ang_sp = math.pi/2
+                #while robot.th.value < math.pi: # ESTO DEBERIA SER QUE SE DE MEDIA VUELTA
+                #    robot.setSpeed(0, -math.pi/4)
+            elif y > 0.1: # está a su dcha
+                print('dcha')
+                destiny = abs(sage.norm_pi(og_pos[2]-math.pi/2))
+                ang_sp = -math.pi/4
+            elif y < -0.1:
+                print('izda')
+                destiny = abs(sage.norm_pi(og_pos[2]+math.pi/2))
+                ang_sp = math.pi/4
+            while (destiny - abs(robot.th.value)) > 0.05:
+                robot.setSpeed(0, ang_sp)
+
         th_f = og_pos[2] + np.arctan2(2*x*y, pow(x,2)-pow(y,2))
         if (y == 0):
                 w = 0
@@ -67,11 +77,12 @@ def go_to(robot, pos, v = 0.1):
             w = v/R
         while not sage.is_near(robot, pos, threshold=0.05):
             if robot.BP.get_sensor(robot.ultrasonic) < 20: # si esta cerca de pared, se para y devuelve false (obstaculo)
-                print('obs')
+                print('AAAAA UN OBSTACULO ME ASUSTE')
                 robot.setSpeed(0, 0)
                 return False
             else:
                 robot.setSpeed(v, w)
+            time.sleep(0.02)
         robot.setSpeed(0, 0)
     return True
     #elif len(pos) == 3: #si la th.final calculada en el arco no coincide nos acercamos a un punto aproximado (habrá que ver si aproximamos en x o y o los dos),
