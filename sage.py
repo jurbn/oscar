@@ -170,6 +170,7 @@ def read_map(file):
     Size is given by a nxn map of tiles of a mm.
     The map represents the accessible points (0's beign accessible and 1's inaccessible)"""
     size = np.loadtxt(file, dtype='int', max_rows=1)
+    size[2] = size[2]/100
     map = np.loadtxt(file, dtype='int', skiprows=1)
     return size, map
 
@@ -205,14 +206,15 @@ def pos2map(map_size, map, origin, pos):    #for now im considering the origin o
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
     cell = np.array([0,0])
-    if ((pos[0] % map_size[2] < map_size[2]/4) or (400 - pos[0] % map_size[2] < map_size[2]/4)):
-        cell[0] = 2 * math.ceil(pos[0]/map_size[2]) + 1
-    else:
-        cell[0] = 2 * math.ceil(pos[0]/map_size[2])
-    if (pos[1] % map_size[2] < map_size[2]/4) or (400 - pos[1] % map_size[2] < map_size[2]/4):
-        cell[1] = 2 * math.ceil(pos[1]/map_size[2]) + 1
-    else:
-        cell[1] = 2 * math.ceil(pos[1]/map_size[2]) 
+    cell = pos / (2*size[2]) + origin
+    # if ((pos[0] % map_size[2] < map_size[2]/4) or (400 - pos[0] % map_size[2] < map_size[2]/4)):
+    #     cell[0] = 2 * math.ceil(pos[0]/map_size[2]) + 1
+    # else:
+    #     cell[0] = 2 * math.ceil(pos[0]/map_size[2])
+    # if (pos[1] % map_size[2] < map_size[2]/4) or (400 - pos[1] % map_size[2] < map_size[2]/4):
+    #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) + 1
+    # else:
+    #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) 
     return cell #we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
 
 def map2pos(map_size, map, origin, cell):     #for now im considering the origin of coordinates in the map's array origin map[0][0] = 0,0
@@ -220,8 +222,8 @@ def map2pos(map_size, map, origin, cell):     #for now im considering the origin
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
     pos = np.array([0,0])
-    pos [0] = map_size[2] * (cell[0]-origin[0])/200
-    pos [1] = map_size[2] * (cell[1]-origin[1])/200
+    pos [0] = map_size[2] * (cell[0]-origin[0])/2
+    pos [1] = map_size[2] * (cell[1]-origin[1])/2
     return pos
 
 def them_to_us(size, their_coord):

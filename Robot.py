@@ -25,7 +25,6 @@ class Robot:
 
         Initialize Motors and Sensors according to the set up in your robot
         """
-        
         self.map = 'mapa3.txt'
 
         self.radius = 0.028
@@ -148,7 +147,6 @@ class Robot:
             map[pos[0]+1, pos[1]+1] = 1 * (not obstacle_right) 
         grid = sage.generate_grid(map, goal)
         print(grid)
-        # AQUI HABRIA QUE METER LA MIERDA DE QUE GIRE SI LO TIENE JUSTO EN FRENTE
         return grid
 
     def startTeabag():
