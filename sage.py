@@ -107,6 +107,12 @@ def is_near(robot, center, threshold = 0.05):
     """
     return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
 
+def is_near_angle(robot_th, th, threshold = 0.1):
+    """ Returns True if the robot's angle matches that of the one specified in the th argument (with a default threshold value of 5.7º)"""    
+    if abs(norm_pi(robot_th)-norm_pi(th)) < threshold:
+        return True
+    return (math.pi - abs(norm_pi(robot_th)) + math.pi - abs(norm_pi(th)) < threshold)
+
 def absolute_offset(robot, distance = 0):
     final_pos = np.array([robot.x.value + distance*math.sin(robot.th.value), robot.y.value + distance*math.cos(robot.th.value)])
     #plt.arrow(robot.x.value, robot.y.value, math.cos(robot.th.value), math.sin(robot.th.value))

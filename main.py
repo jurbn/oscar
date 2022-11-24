@@ -3,6 +3,7 @@
 import argparse
 import time
 import logging
+import math
 from Robot import Robot
 import movement as mv
 import sage
@@ -17,7 +18,7 @@ def main(args):
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, 0])
+        oscar = Robot(init_position=[0.2, 1.8, math.pi])
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -57,20 +58,20 @@ def main(args):
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        #sage.plot_file(oscar.odometry_file)
+        sage.plot_file(oscar.odometry_file)
 
     except KeyboardInterrupt:
         logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
+        sage.plot_file(oscar.odometry_file)
     except Exception as error:
         logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        #sage.plot_file(oscar.odometry_file)
-
+        sage.plot_file(oscar.odometry_file)
    
    
     # In the event of a keyboard interruption, we stop the robot's movement 

@@ -55,6 +55,8 @@ class Robot:
         self.y = Value('d', init_position[1])
         self.th = Value('d', init_position[2])
 
+        self.offset = init_position
+
         self.v = Value('d', 0.0)
         self.w = Value('d', 0.0)
 
@@ -90,37 +92,36 @@ class Robot:
         grid = sage.generate_grid(map, goal)
         print(grid)
         finished = False
-        moves = [[1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]
+        moves = [[1,0], [1,1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,-1]]
         arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
         while not finished: # cuando no haya acabado, sigue recorriendo el mapa
             #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
             #    self.remakeMap(size, map, goal, origin)
-            print('im in {}'.format(arr_pos))
-            print('and my grid value is {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
+            print('im in {}, {}'.format(arr_pos, self.th.value))
+            print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
             if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
                 finished = True
             else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
-                for move in moves:
-                    possible_cell = arr_pos + move
-                    print('possible cell value: {}'.format(grid[int(possible_cell[0]), int(possible_cell[1])]))
-                    if grid[int(possible_cell[0]), int(possible_cell[1])]  == (grid[int(arr_pos[0]), int(arr_pos[1])] - 1):
-                        destination = possible_cell
-                        break
-                print(destination)
-                destination_coord = sage.array2pos(size, map, destination)
-                print('next pos coord {}'.format(destination_coord))
-                arrived = mv.go_to(self, destination_coord)
+                smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]
+                for i in range(len(moves)):
+                    possible_cell = arr_pos + moves[i]
+                    if -1 < grid[int(possible_cell[0]), int(possible_cell[1])]  < smallest_value:
+                        move = i
+                        smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+                #destination_coord = sage.array2pos(size, map, destination)
+                arrived = mv.go_to_cell(self, map, move)
             if not arrived:
                 self.setSpeed(0, 0)
                 grid = self.remakeMap(size, map, goal, origin)
             else:
-                arr_pos = destination
+                arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value])
+            time.sleep(1)
         self.setSpeed(0, 0)
         return True
 
     def remakeMap(self, size, map, goal, origin):
         """Updates the map when the robot encounters an obstacle"""
-        pos = sage.pos2map(size, map, origin, [self.x.value, self.y.value])
+        pos = sage.pos2array(size, map, [self.x.value, self.y.value])
         th = self.th.value
         # check which direction is it facing...
         print('looking one way')
@@ -130,7 +131,7 @@ class Robot:
         obstacle_right = self.BP.get_sensor(self.ultrasonic) < 100
         self.setSpeed(0, -math.pi/4)
         time.sleep(0.1)
-        while (abs(th-self.th.value) < math.pi/4):
+        while (abs(th-self.th.value) < math.pi/4): # MAL MAL MAL MAL MAL
             print('looking the other way')
             self.setSpeed(0, -math.pi/4)
         self.setSpeed(0, 0)
@@ -153,6 +154,7 @@ class Robot:
             map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_right) 
         grid = sage.generate_grid(map, goal)
         print(grid)
+        time.sleep(0.05)
         return grid
 
     def startTeabag():
@@ -394,7 +396,7 @@ class Robot:
             tIni = time.clock()
             #if self.changed:
             #    self.setSpeed(self.v.value, 0)
-            th = -sage.norm_pi(math.radians(self.BP.get_sensor(self.gyro)[0]))
+            th = sage.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0]))
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
