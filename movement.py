@@ -41,7 +41,7 @@ def soft_stop(robot, t = 0.5):
         robot.setSpeed(v*i/10, w*i/10)
         time.sleep(delay)
 
-def go_to_cell(robot, map, move):
+def go_to_cell(robot, map, move):   #TODO: meter los movimientos y tal
     """moves the robot given the goal array position being:\n
         7   0   1\n
         6   x   2\n
