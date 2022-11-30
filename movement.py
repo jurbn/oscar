@@ -46,14 +46,21 @@ def go_to_cell(robot, map, move):
         7   0   1\n
         6   x   2\n
         5   4   3\n
-        with x facing up(0) and y facing left(6)"""
-        if move == 0
-        elif move == 1 
-        elif move == 2
-        elif move == 3 
-        elif move == 4
-        elif move == 5 
+    with x facing up(0) and y facing left(6)"""
+    if move == 0:
+        robot.setSpeed(1.5, 0)
+    elif move == 1:
+        pass
+    elif move == 2:
+        pass
+    elif move == 3:
+        pass
+    elif move == 4:
+        pass
+    elif move == 5:
+        pass
     elif move == 6: #case cosa de java cosa case
+        pass
 
 def go_to_useless(robot, pos, v = 0.1):
     """Moves the robot from its original position to the given one drawing an arc"""
