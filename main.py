@@ -4,6 +4,7 @@ import argparse
 import time
 import logging
 import math
+import numpy as np
 from Robot import Robot
 import movement as mv
 import sage
@@ -15,6 +16,7 @@ def main(args):
         #     initialization    #
         #########################
     try:
+        print(type(np.array([1, 2])))
         logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')

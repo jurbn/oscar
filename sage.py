@@ -109,13 +109,13 @@ def is_near(pos, center, threshold = 0.05):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
-    if pos:     # TODO: cosas de tipo de dato y movidas asi y same es is_near_angle
+    if type(pos) != np.ndarray:     # TODO: cosas de tipo de dato y movidas asi y same es is_near_angle
         pos = [pos.x.value, pos.y.value]
     return math.pow(pos[0] - center[0], 2) + math.pow(pos[1] - center[1], 2) <= math.pow(threshold, 2)
 
 def is_near_angle(robot_th, th, threshold = 0.1):
     """ Returns True if the robot's angle matches that of the one specified in the th argument (with a default threshold value of 5.7º)"""    
-    if isinstance(robot_th):
+    if not isinstance(robot_th, (int, float)):
         robot_th = robot_th.th.value
     if abs(norm_pi(robot_th)-norm_pi(th)) < threshold:
         return True

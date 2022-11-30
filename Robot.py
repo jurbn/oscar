@@ -126,8 +126,9 @@ class Robot:
                                 watchout_1 += len(moves)
                             while watchout_2 > (len(moves)-1):  # if we surpassed the array's limits, loop through the begginning
                                 watchout_2 -= len(moves)
-                            if not ((grid(possible_cell + watchout_1) == -1) and (grid(possible_cell + watchout_2) == -1)): # SI NO ESTAN OCUPADAS LAS DOS
-                                if (grid(possible_cell + watchout_1) != -1) and (grid(possible_cell + watchout_2) != -1):   # si ninguna de las dos esta ocupada!
+                            # FIXME: ESTA MIERDA TIENE QUE SER INT
+                            if not ((grid[possible_cell + watchout_1] == -1) and (grid[possible_cell + watchout_2] == -1)): # SI NO ESTAN OCUPADAS LAS DOS
+                                if (grid[possible_cell + watchout_1] != -1) and (grid[possible_cell + watchout_2] != -1):   # si ninguna de las dos esta ocupada!
                                     clockwise = False   # FIXME: pongo esto por ejemplo, pero podría elegir qué opción es mejor!
                                 elif grid(possible_cell + watchout_1) == -1:  # si esta ocupada la anterior
                                     clockwise = False
