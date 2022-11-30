@@ -1,0 +1,7 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 9268:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:ERROR: get_sensor error: Invalid sensor data
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

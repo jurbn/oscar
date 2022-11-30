@@ -1,0 +1,4 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 5003:
+INFO:root:Initial location: 0.0, 0.0, 0.0

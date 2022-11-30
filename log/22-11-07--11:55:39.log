@@ -1,0 +1,66 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Sensor not configured or not supported.
+INFO:root:Odometry was started, PID: 7528:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:The blob's size is: 26.157333374023438
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 23.350908279418945
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 19.719860076904297
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 27.2026424407959
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 19.756635665893555
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 23.439605712890625
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 22.225055694580078
+INFO:root:The blob's size is: 22.03203582763672
+INFO:root:The blob's size is: 23.979063034057617
+INFO:root:The blob's size is: 24.939334869384766
+INFO:root:The blob's size is: 24.536283493041992
+INFO:root:The blob's size is: 22.971372604370117
+INFO:root:The blob's size is: 24.37777328491211
+INFO:root:The blob's size is: 24.037023544311523
+INFO:root:The blob's size is: 22.99433708190918
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 28.02664566040039
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 29.521223068237305
+INFO:root:The blob's size is: 31.31780242919922
+INFO:root:The blob's size is: 33.99465560913086
+INFO:root:The blob's size is: 37.494873046875
+INFO:root:The blob's size is: 39.61916732788086
+INFO:root:The blob's size is: 39.8282585144043
+INFO:root:The blob's size is: 39.79118347167969
+INFO:root:The blob's size is: 44.301727294921875
+INFO:root:The blob's size is: 47.63731384277344
+INFO:root:The blob's size is: 51.373329162597656
+INFO:root:The blob's size is: 54.47126388549805
+INFO:root:The blob's size is: 60.4424934387207
+INFO:root:The blob's size is: 71.02392578125
+INFO:root:The blob's size is: 85.09208679199219
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 70.35879516601562
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 97.7876968383789
+INFO:root:Ready to grab the ball.
+INFO:root:The blob's size is: 113.92498016357422
+INFO:root:The blob's size is: 113.83518981933594
+INFO:root:The blob's size is: 110.89263153076172
+INFO:root:The blob's size is: 109.21475219726562
+INFO:root:The blob's size is: 107.42401885986328
+INFO:root:The blob's size is: 107.41831970214844
+INFO:root:The blob's size is: 107.40717315673828
+INFO:root:The blob's size is: 107.23066711425781
+INFO:root:The blob's size is: 107.1356201171875
+INFO:root:The blob's size is: 106.50341796875
+INFO:root:The blob's size is: 106.25721740722656
+INFO:root:The blob's size is: 106.2074203491211
+INFO:root:The blob's size is: 105.10308837890625
+INFO:root:The blob's size is: 105.48656463623047
+INFO:root:The blob's size is: 105.0803451538086
+INFO:root:The blob's size is: 104.474365234375
+INFO:root:Ball centered and ready to be catched!

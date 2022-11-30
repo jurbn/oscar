@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 3175:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:PRIMER VALOR: 0.0,0.0
+INFO:root:spin: 0.5074074074074,-0.4333333333333333
+INFO:root:primer cacho: -0.5037037037037113,-0.4333333333333333
+INFO:root:empieza media vuelta: 0.5022222222222148,-0.04444444444444451
+INFO:root:tres cuartos vuelta: -0.9937777777777851,0.14444444444444451
+INFO:root:final vuelta: -0.4980740740740812,0.3277777777777777
+INFO:root:casi acaba el ocho: 0.9927407407407334,0.5055555555555555
+INFO:root:yyy acabamos: 0.4970370370370295,0.6944444444444445
+INFO:root:Odometry was stopped

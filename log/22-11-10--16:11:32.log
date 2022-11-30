@@ -1,0 +1,8 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 3120:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:primer giro. Pos: (-0.0005017840692615288m, -4.255628007013843e-06m, 0.5055555555555555pi rad)
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

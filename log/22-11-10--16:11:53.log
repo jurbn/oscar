@@ -1,0 +1,12 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 3169:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:primer giro. Pos: (-6.739960706504652e-05m, -8.674586231729962e-05m, 0.5055555555555555pi rad)
+INFO:root:primera recta. Pos: (-0.07065952817962476m, 0.4088502118122058m, 0.5666666666666667pi rad)
+INFO:root:segundo giro. Pos: (-0.07059326009812403m, 0.4091938897286572m, -0.016666666666666666pi rad)
+INFO:root:segunda recta. Pos: (1.0305853200980568m, 0.3365135810794067m, -0.027777777777777776pi rad)
+INFO:root:tercer giro. Pos: (1.0060043721944738m, 0.34126949936677586m, -0.5055555555555555pi rad)
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

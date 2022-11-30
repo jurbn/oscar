@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 15286:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 0], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 112, in navigateMap
+    arrived = mv.go_to(self, destination_coord)
+  File "/home/pi/oscar/movement.py", line 69, in go_to
+    while (destiny - abs(robot.th.value)) > 0.05:
+UnboundLocalError: local variable 'destiny' referenced before assignment
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

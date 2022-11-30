@@ -1,0 +1,7 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 11588:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:ERROR: setting an array element with a sequence.
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

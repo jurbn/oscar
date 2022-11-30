@@ -1,0 +1,37 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:Odometry was started, PID: 13375:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Found the ball! Approaching...
+INFO:root:Ready to grab the ball.
+INFO:root:Ball centered and ready to be catched!

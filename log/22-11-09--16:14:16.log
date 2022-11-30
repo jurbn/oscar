@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 7494:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:PRIMER VALOR: 0.0,0.0
+INFO:root:spin: 0.5041481481481497,0.6222222222222222
+INFO:root:primer cacho: -0.5059259259259249,-0.4166666666666667
+INFO:root:empieza media vuelta: 0.5010370370370384,0.5777777777777777
+INFO:root:tres cuartos vuelta: -0.9970370370370354,0.08333333333333325
+INFO:root:final vuelta: -0.4919999999999982,-0.36111111111111127
+INFO:root:casi acaba el ocho: 0.9936296296296313,0.11111111111111098
+INFO:root:yyy acabamos: 0.4989629629629644,0.5888888888888887
+INFO:root:Odometry was stopped

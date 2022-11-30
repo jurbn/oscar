@@ -1,0 +1,71 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Sensor not configured or not supported.
+INFO:root:Odometry was started, PID: 8629:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:The blob's size is: 47.17203903198242
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 46.688987731933594
+INFO:root:The blob's size is: 44.09923553466797
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 44.56000518798828
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 45.872886657714844
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 45.899200439453125
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 44.50827407836914
+INFO:root:The blob's size is: 44.82683181762695
+INFO:root:The blob's size is: 45.6320686340332
+INFO:root:The blob's size is: 45.947330474853516
+INFO:root:The blob's size is: 45.7949333190918
+INFO:root:The blob's size is: 47.732810974121094
+INFO:root:The blob's size is: 47.880828857421875
+INFO:root:The blob's size is: 47.43880081176758
+INFO:root:The blob's size is: 48.25141143798828
+INFO:root:The blob's size is: 49.11360168457031
+INFO:root:The blob's size is: 50.37302017211914
+INFO:root:The blob's size is: 50.65525817871094
+INFO:root:The blob's size is: 50.595497131347656
+INFO:root:The blob's size is: 51.23411178588867
+INFO:root:The blob's size is: 51.644561767578125
+INFO:root:The blob's size is: 52.969696044921875
+INFO:root:The blob's size is: 53.30055236816406
+INFO:root:The blob's size is: 53.527366638183594
+INFO:root:The blob's size is: 54.72197341918945
+INFO:root:The blob's size is: 56.4722785949707
+INFO:root:The blob's size is: 56.60986328125
+INFO:root:The blob's size is: 57.63077926635742
+INFO:root:The blob's size is: 58.98299789428711
+INFO:root:The blob's size is: 59.35708236694336
+INFO:root:The blob's size is: 60.41336441040039
+INFO:root:The blob's size is: 62.18883514404297
+INFO:root:The blob's size is: 62.883827209472656
+INFO:root:The blob's size is: 64.60240173339844
+INFO:root:The blob's size is: 64.1312255859375
+INFO:root:The blob's size is: 65.78266143798828
+INFO:root:The blob's size is: 67.3246078491211
+INFO:root:The blob's size is: 68.65052032470703
+INFO:root:The blob's size is: 69.51644134521484
+INFO:root:The blob's size is: 70.1541519165039
+INFO:root:The blob's size is: 71.27104949951172
+INFO:root:The blob's size is: 72.13077545166016
+INFO:root:The blob's size is: 73.82627868652344
+INFO:root:The blob's size is: 75.0772705078125
+INFO:root:The blob's size is: 76.19667053222656
+INFO:root:The blob's size is: 77.80839538574219
+INFO:root:The blob's size is: 78.03446197509766
+INFO:root:The blob's size is: 79.13724517822266
+INFO:root:The blob's size is: 80.27018737792969
+INFO:root:The blob's size is: 81.21294403076172
+INFO:root:The blob's size is: 82.78314971923828
+INFO:root:The blob's size is: 83.3033447265625
+INFO:root:The blob's size is: 84.60200500488281
+INFO:root:The blob's size is: 86.24203491210938
+INFO:root:The blob's size is: 87.3872299194336
+INFO:root:The blob's size is: 87.99313354492188
+INFO:root:The blob's size is: 89.05033111572266
+INFO:root:The blob's size is: 90.17622375488281
+INFO:root:Ready to grab the ball.
+INFO:root:The blob's size is: 90.80792999267578
+INFO:root:Ball centered and ready to be catched!

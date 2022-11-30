@@ -1,0 +1,21 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 2499:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 86.21934509277344
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 330.0248718261719
+INFO:root:The ball's x position is: 329.1507568359375
+INFO:root:The ball's x position is: 329.46954345703125
+INFO:root:The ball's x position is: 330.9378662109375
+INFO:root:The ball's x position is: 331.0548095703125
+INFO:root:The ball's x position is: 332.2096252441406
+INFO:root:The ball's x position is: 331.57379150390625
+INFO:root:The ball's x position is: 330.2433166503906
+INFO:root:The ball's x position is: 327.36529541015625
+INFO:root:The ball's x position is: 325.7362976074219
+INFO:root:The ball's x position is: 321.0602722167969
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.255 meters
+INFO:root:Odometry was stopped

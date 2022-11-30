@@ -1,0 +1,275 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8881:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 74.31147003173828
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 122.57132720947266
+INFO:root:The ball's x position is: 118.4967041015625
+INFO:root:The ball's x position is: 115.1465835571289
+INFO:root:The ball's x position is: 111.33943939208984
+INFO:root:The ball's x position is: 110.27525329589844
+INFO:root:The ball's x position is: 108.95941925048828
+INFO:root:The ball's x position is: 108.34979248046875
+INFO:root:The ball's x position is: 108.0514144897461
+INFO:root:The ball's x position is: 107.82347106933594
+INFO:root:The ball's x position is: 108.09274291992188
+INFO:root:The ball's x position is: 107.64070892333984
+INFO:root:The ball's x position is: 106.44007873535156
+INFO:root:The ball's x position is: 106.10945129394531
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 72.67009735107422
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 168.59706115722656
+INFO:root:The ball's x position is: 166.85733032226562
+INFO:root:The ball's x position is: 167.43263244628906
+INFO:root:The ball's x position is: 165.44998168945312
+INFO:root:The ball's x position is: 165.01144409179688
+INFO:root:The ball's x position is: 163.77310180664062
+INFO:root:The ball's x position is: 162.64967346191406
+INFO:root:The ball's x position is: 163.16104125976562
+INFO:root:The ball's x position is: 163.0400848388672
+INFO:root:The ball's x position is: 162.17588806152344
+INFO:root:The ball's x position is: 161.17678833007812
+INFO:root:Ball centered and ready to be catched!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:The distance to be covered is: 0.0 meters
+INFO:root:Odometry was stopped

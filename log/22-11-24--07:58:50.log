@@ -1,0 +1,17 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8655:
+INFO:root:Initial location: 0.2, 1.8, -1.5707963267948966
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 54, in main
+    oscar.navigateMap([0, 4], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 112, in navigateMap
+    arrived = mv.go_to(self, destination_coord)
+  File "/home/pi/oscar/movement.py", line 52, in go_to
+    if sage.is_near_angle(og_pos[2], direction, 3*math.pi/8): # si está en frente
+  File "/home/pi/oscar/sage.py", line 112, in is_near_angle
+    if abs(norm_pi(robot.th.value)-norm_pi(th)) < threshold:
+AttributeError: 'float' object has no attribute 'th'
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

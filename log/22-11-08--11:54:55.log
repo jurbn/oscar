@@ -1,0 +1,46 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:Odometry was started, PID: 1781:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:The blob's size is: 34.80560302734375
+INFO:root:The blob's size is: 35.06798553466797
+INFO:root:The blob's size is: 35.21888732910156
+INFO:root:The blob's size is: 35.4141960144043
+INFO:root:The blob's size is: 35.50155258178711
+INFO:root:The blob's size is: 35.388671875
+INFO:root:The blob's size is: 39.776302337646484
+INFO:root:The blob's size is: 40.0579719543457
+INFO:root:The blob's size is: 39.14530563354492
+INFO:root:The blob's size is: 38.23078155517578
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

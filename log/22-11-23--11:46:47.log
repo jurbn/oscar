@@ -1,0 +1,17 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8044:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 0], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 108, in navigateMap
+    arrived = mv.go_to(self, sage.map2pos(size, map, origin, destination))
+  File "/home/pi/oscar/movement.py", line 79, in go_to
+    if robot.BP.get_sensor(robot.ultrasonic) < 20: # si esta cerca de pared, se para y devuelve false (obstaculo)
+  File "/home/pi/oscar/brickpi3.py", line 707, in get_sensor
+    raise SensorError("get_sensor error: Invalid sensor data")
+brickpi3.SensorError: get_sensor error: Invalid sensor data
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

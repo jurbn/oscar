@@ -84,7 +84,7 @@ class Robot:
                 error = False
         self.startOdometry()
 
-    def navigateMap(self, origin, goal):
+    def navigateMap(self, origin, goal):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
         """The robot navigates the map to reach a goal"""
         [size, map] = sage.read_map(self.map)
         #origin = sage.them_to_us(size, origin)
@@ -92,8 +92,9 @@ class Robot:
         grid = sage.generate_grid(map, goal)
         print(grid)
         finished = False
-        moves = [[1,0], [1,1], [0,-1], [-1,-1], [-1,0], [-1,1], [0,1], [1,-1]]
+        moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]
         arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
+        offset_angle = 0
         while not finished: # cuando no haya acabado, sigue recorriendo el mapa
             #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
             #    self.remakeMap(size, map, goal, origin)
@@ -103,13 +104,41 @@ class Robot:
                 finished = True
             else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
                 smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]
+                if sage.is_near_angle(self.th.value, math.pi):
+                    offset_angle = 0
+                elif sage.is_near_angle(self.th.value, math.pi/2):
+                    offset_angle = 2
+                elif sage.is_near_angle(self.th.value, 0):
+                    offset_angle = 4
+                elif sage.is_near_angle(self.th.value, -math.pi/2):
+                    offset_angle = 6
+
                 for i in range(len(moves)):
-                    possible_cell = arr_pos + moves[i]
+                    real_index = i+offset_angle # the index corresponding to the non-relative values
+                    while real_index > (len(moves)-1):  # if we surpassed the array's limits, loop through the begginning
+                        real_index -= len(moves)
+                    possible_cell = arr_pos + moves[real_index] 
                     if -1 < grid[int(possible_cell[0]), int(possible_cell[1])]  < smallest_value:
-                        move = i
-                        smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+                        if real_index % 2 != 0:  # if we have to go to a corner, we check its availability
+                            watchout_1 = real_index - 1 # indexes of moves we have be careful with!
+                            watchout_2 = real_index + 1
+                            while watchout_1 < 0:  # if we surpassed the array's limits, loop through the begginning
+                                watchout_1 += len(moves)
+                            while watchout_2 > (len(moves)-1):  # if we surpassed the array's limits, loop through the begginning
+                                watchout_2 -= len(moves)
+                            if not ((grid(possible_cell + watchout_1) == -1) and (grid(possible_cell + watchout_2) == -1)): # SI NO ESTAN OCUPADAS LAS DOS
+                                if (grid(possible_cell + watchout_1) != -1) and (grid(possible_cell + watchout_2) != -1):   # si ninguna de las dos esta ocupada!
+                                    clockwise = False   # FIXME: pongo esto por ejemplo, pero podría elegir qué opción es mejor!
+                                elif grid(possible_cell + watchout_1) == -1:  # si esta ocupada la anterior
+                                    clockwise = False
+                                elif grid(possible_cell + watchout_2) == -1:
+                                    clockwise = True
+                                
+                                relative_move = i
+                                abs_destination = possible_cell
+                                smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
                 #destination_coord = sage.array2pos(size, map, destination)
-                arrived = mv.go_to_cell(self, map, move)
+                arrived = mv.go_to_cell(self, map, relative_move, abs_destination, clockwise)
             if not arrived:
                 self.setSpeed(0, 0)
                 grid = self.remakeMap(size, map, goal, origin)

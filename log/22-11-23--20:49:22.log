@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 12342:
+INFO:root:Initial location: 0.2, 1.8, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 4], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 110, in navigateMap
+    destination_coord = sage.array2pos(size, map, destination)
+  File "/home/pi/oscar/sage.py", line 230, in array2pos
+    pos = array2tile(map_size, pos)
+NameError: name 'array2tile' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

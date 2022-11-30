@@ -1,0 +1,3 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Sensor not configured or not supported.

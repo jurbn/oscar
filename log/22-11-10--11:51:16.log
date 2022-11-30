@@ -1,0 +1,76 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8776:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 75.76017761230469
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 156.64112854003906
+INFO:root:The ball's x position is: 138.72918701171875
+INFO:root:The ball's x position is: 155.06008911132812
+INFO:root:The ball's x position is: 149.5261993408203
+INFO:root:The ball's x position is: 145.82162475585938
+INFO:root:The ball's x position is: 150.2552490234375
+INFO:root:The ball's x position is: 177.58799743652344
+INFO:root:The ball's x position is: 190.61126708984375
+INFO:root:The ball's x position is: 219.55091857910156
+INFO:root:The ball's x position is: 289.49566650390625
+INFO:root:The ball's x position is: 293.6014404296875
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 71.59420013427734
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 215.1653594970703
+INFO:root:The ball's x position is: 196.6578826904297
+INFO:root:The ball's x position is: 180.0535430908203
+INFO:root:The ball's x position is: 165.2734375
+INFO:root:The ball's x position is: 150.8847198486328
+INFO:root:The ball's x position is: 139.5229034423828
+INFO:root:The ball's x position is: 128.47549438476562
+INFO:root:The ball's x position is: 119.17981719970703
+INFO:root:The ball's x position is: 106.70849609375
+INFO:root:The ball's x position is: 96.98062896728516
+INFO:root:The ball's x position is: 83.72151947021484
+INFO:root:The ball's x position is: 75.32706451416016
+INFO:root:The ball's x position is: 67.80240631103516
+INFO:root:The ball's x position is: 60.394657135009766
+INFO:root:The ball's x position is: 50.667808532714844
+INFO:root:The ball's x position is: 45.56835174560547
+INFO:root:The ball's x position is: 42.54401397705078
+INFO:root:The ball's x position is: 40.11487579345703
+INFO:root:The ball's x position is: 39.703800201416016
+INFO:root:The ball's x position is: 40.595699310302734
+INFO:root:The ball's x position is: 41.10738754272461
+INFO:root:The ball's x position is: 42.380348205566406
+INFO:root:The ball's x position is: 44.27365493774414
+INFO:root:The ball's x position is: 46.12622833251953
+INFO:root:The ball's x position is: 53.621158599853516
+INFO:root:The ball's x position is: 60.5694694519043
+INFO:root:The ball's x position is: 66.56991577148438
+INFO:root:The ball's x position is: 72.4425048828125
+INFO:root:The ball's x position is: 84.1197280883789
+INFO:root:The ball's x position is: 89.96084594726562
+INFO:root:The ball's x position is: 96.58009338378906
+INFO:root:The ball's x position is: 103.7881088256836
+INFO:root:The ball's x position is: 109.97080993652344
+INFO:root:The ball's x position is: 115.08148193359375
+INFO:root:The ball's x position is: 124.01570892333984
+INFO:root:The ball's x position is: 130.15943908691406
+INFO:root:The ball's x position is: 135.18649291992188
+INFO:root:The ball's x position is: 139.64227294921875
+INFO:root:The ball's x position is: 144.78839111328125
+INFO:root:The ball's x position is: 148.718505859375
+INFO:root:The ball's x position is: 154.787841796875
+INFO:root:The ball's x position is: 159.3340301513672
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.12 meters
+INFO:root:Odometry was stopped

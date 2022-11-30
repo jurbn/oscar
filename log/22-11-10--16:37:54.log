@@ -1,0 +1,16 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 6877:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:primer giro. Pos: (0.0m, 0.0m, 0.5055555555555555pi rad)
+INFO:root:primera recta. Pos: (-0.008835350920863738m, 0.20102132397836245m, 0.5222222222222223pi rad)
+INFO:root:segundo giro. Pos: (-0.008835350920863738m, 0.20102132397836245m, -0.0pi rad)
+INFO:root:segunda recta. Pos: (0.4022144521830681m, 0.19275198671686866m, 0.005555555555555556pi rad)
+INFO:root:tercer giro. Pos: (0.4022144521830681m, 0.19275198671686866m, -0.5pi rad)
+INFO:root:tercera recta. Pos: (0.39964708808891347m, -0.20413479454191533m, -0.49444444444444446pi rad)
+INFO:root:cuarto giro. Pos: (0.39964708808891347m, -0.20413479454191533m, 0.9888888888888889pi rad)
+INFO:root:cuarta recta. Pos: (-0.0010959363952118767m, -0.18699300308775627m, 0.9944444444444444pi rad)
+INFO:root:ultimo giro. Pos: (-0.0010959363952118767m, -0.18699300308775627m, 0.5pi rad)
+INFO:root:ultima recta. Pos: (0.006659887920297567m, 0.0038450951866635837m, 0.4944444444444445pi rad)
+INFO:root:y ya estaría. Pos: (0.006659887920297567m, 0.0038450951866635837m, -0.0055555555555554925pi rad)
+INFO:root:Odometry was stopped

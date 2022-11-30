@@ -1,0 +1,17 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 1696:
+INFO:root:Initial location: 0.2, 1.8, -1.5707963267948966
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 54, in main
+    oscar.navigateMap([0, 4], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 112, in navigateMap
+    arrived = mv.go_to(self, destination_coord)
+  File "/home/pi/oscar/movement.py", line 95, in go_to
+    finished_move = (sage.is_near(robot, pos, threshold=0.05)) or (sage.is_near_angle(robot.th.value, th_f, 0.5))
+  File "/home/pi/oscar/sage.py", line 114, in is_near_angle
+    return (math.pi - abs(nrom_pi(robot_th)) + math.pi - abs(norm_pi(th)) < threshold)
+NameError: name 'nrom_pi' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

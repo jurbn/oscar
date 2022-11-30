@@ -1,0 +1,16 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 2756:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:PRIMER VALOR: 0.0,0.0
+INFO:root:spin: 0.5125925925926085,0.5055555555555555
+INFO:root:primer cacho: -0.5524444444444289,-0.5055555555555555
+INFO:root:empieza media vuelta: 0.4482962962963122,0.5
+INFO:root:tres cuartos vuelta: -0.7677037037036876,-0.9888888888888889
+INFO:root:final vuelta: -0.2699259259259096,-0.5
+INFO:root:casi acaba el ocho: -0.7957037037036875,0.9944444444444445
+INFO:root:yyy acabamos: 0.688888888888905,0.5
+INFO:root:Odometry was stopped
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

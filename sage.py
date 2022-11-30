@@ -11,6 +11,7 @@ import cv2 as cv
 import logging
 from datetime import datetime
 
+
 params = cv.SimpleBlobDetector_Params()
 params.minThreshold = 10
 params.maxThreshold = 200
@@ -73,7 +74,10 @@ def pos_bot(vw, x_w_r, t):
 ##################
 
 def hom(x: np.array):
-    print('Holi soy el metodo hom y no estoy terminado :(')
+    """
+    Returns the Transformation matrix based on the location vector
+    """
+    return np.matrix([[np.cos(x[2]), -np.sin(x[2]) , x[0]], [np.sin(x[2]), np.cos(x[2]), x[1]], [0, 0, 1]])
 
 def loc(T):
     """
@@ -101,14 +105,18 @@ def norm_pi(th):
 # SPATIAL FUNCTIONS #
 #####################
 
-def is_near(robot, center, threshold = 0.05):
+def is_near(pos, center, threshold = 0.05):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
-    return math.pow(robot.x.value - center[0], 2) + math.pow(robot.y.value - center[1], 2) <= math.pow(threshold, 2)
+    if pos:     # TODO: cosas de tipo de dato y movidas asi y same es is_near_angle
+        pos = [pos.x.value, pos.y.value]
+    return math.pow(pos[0] - center[0], 2) + math.pow(pos[1] - center[1], 2) <= math.pow(threshold, 2)
 
 def is_near_angle(robot_th, th, threshold = 0.1):
     """ Returns True if the robot's angle matches that of the one specified in the th argument (with a default threshold value of 5.7º)"""    
+    if isinstance(robot_th):
+        robot_th = robot_th.th.value
     if abs(norm_pi(robot_th)-norm_pi(th)) < threshold:
         return True
     return (math.pi - abs(norm_pi(robot_th)) + math.pi - abs(norm_pi(th)) < threshold)
@@ -215,14 +223,6 @@ def pos2array(map_size, map, pos):    #for now im considering the origin of coor
     cell[0] = (pos[0] - map_size[2]/2 )/ map_size[2]
     cell[1] = (pos[1] - map_size[2]/2 )/ map_size[2]
     cell = tile2array(map_size, cell)
-    # if ((pos[0] % map_size[2] < map_size[2]/4) or (400 - pos[0] % map_size[2] < map_size[2]/4)):
-    #     cell[0] = 2 * math.ceil(pos[0]/map_size[2]) + 1
-    # else:
-    #     cell[0] = 2 * math.ceil(pos[0]/map_size[2])
-    # if (pos[1] % map_size[2] < map_size[2]/4) or (400 - pos[1] % map_size[2] < map_size[2]/4):
-    #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) + 1
-    # else:
-    #     cell[1] = 2 * math.ceil(pos[1]/map_size[2]) 
     cell = cell.astype(np.float32)
     return cell #we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
 
@@ -233,7 +233,6 @@ def array2pos(map_size, map, cell):     #for now im considering the origin of co
     pos = np.array([0,0], dtype=np.float32)
     pos[0] = cell[0]/2 * map_size[2] 
     pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
-    #pos [1] = ((map_size[1] - 1) - (cell[1] - 1)/2) * map_size[2]
     return pos
 
 def tile2array(size, their_coord):

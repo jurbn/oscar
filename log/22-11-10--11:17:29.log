@@ -1,0 +1,25 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 3896:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 70.58443450927734
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 165.30197143554688
+INFO:root:The ball's x position is: 164.74179077148438
+INFO:root:The ball's x position is: 164.45358276367188
+INFO:root:The ball's x position is: 163.81741333007812
+INFO:root:The ball's x position is: 163.5602569580078
+INFO:root:The ball's x position is: 163.00579833984375
+INFO:root:The ball's x position is: 162.24554443359375
+INFO:root:The ball's x position is: 162.32003784179688
+INFO:root:The ball's x position is: 161.9330596923828
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.12 meters
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

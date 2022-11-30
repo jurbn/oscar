@@ -1,0 +1,5 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 4401:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:KeyboardInterrupt raised

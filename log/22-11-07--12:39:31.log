@@ -1,0 +1,8 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Sensor not configured or not supported.
+INFO:root:Odometry was started, PID: 5016:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

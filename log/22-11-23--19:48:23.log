@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 3380:
+INFO:root:Initial location: 0.2, 18.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 4], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 99, in navigateMap
+    print('and my grid value is {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
+IndexError: index 22 is out of bounds for axis 1 with size 17
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

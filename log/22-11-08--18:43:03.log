@@ -1,0 +1,61 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:Odometry was started, PID: 7123:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:la foto se ha hecho en 0.0049120000000000275 segundos
+INFO:root:The blob's size is: 65.07772064208984
+INFO:root:la foto se ha hecho en 0.006052999999999642 segundos
+INFO:root:The blob's size is: 85.75204467773438
+INFO:root:la foto se ha hecho en 0.004764999999999908 segundos
+INFO:root:The blob's size is: 90.66938781738281
+INFO:root:la foto se ha hecho en 0.004701999999999984 segundos
+INFO:root:The blob's size is: 94.04846954345703
+INFO:root:la foto se ha hecho en 0.004832999999999643 segundos
+INFO:root:The blob's size is: 88.53278350830078
+INFO:root:la foto se ha hecho en 0.004591000000000456 segundos
+INFO:root:The blob's size is: 88.55509185791016
+INFO:root:la foto se ha hecho en 0.004850000000000243 segundos
+INFO:root:The blob's size is: 87.15301513671875
+INFO:root:la foto se ha hecho en 0.0038049999999998363 segundos
+INFO:root:The blob's size is: 88.18231964111328
+INFO:root:la foto se ha hecho en 0.00355799999999995 segundos
+INFO:root:The blob's size is: 87.41786193847656
+INFO:root:la foto se ha hecho en 0.0041210000000013736 segundos
+INFO:root:The blob's size is: 89.814697265625
+INFO:root:la foto se ha hecho en 0.004794999999999661 segundos
+INFO:root:The blob's size is: 88.62863159179688
+INFO:root:la foto se ha hecho en 0.004803000000000779 segundos
+INFO:root:The blob's size is: 88.15129089355469
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

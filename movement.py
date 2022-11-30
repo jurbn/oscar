@@ -13,15 +13,26 @@ import logging
 ###################
 # BASIC MOVEMENTS #
 ###################
-def spin(robot, w, t):
-    robot.setSpeed(0, w)
-    time.sleep(t)
+def spin(robot, th, w = 1.5):
+    """Makes Oscar turn a specified angle (in radians)"""
+    th = sage.norm_pi(th) 
+    while not sage.is_near_angle(robot, th):
+        robot.setSpeed(0, th/abs(th)*w)
     robot.setSpeed(0, 0)
 
-def run(robot, v, t):
-    robot.setSpeed(v, 0)
-    time.sleep(t)
+def run(robot, objctv, v = 1.5):
+    """Makes Oscar go straight forward to the specified position (in meters)"""
+    while not sage.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+        robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
+
+def arc(robot, objctv, v = 1.5):
+    """Makes Oscar advance in a circular motion to the specified location (in meters)"""
+    R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
+    w = v/R
+    while not (sage.is_near(robot, objctv) or sage.is_near_angle(robot, w/abs(w)*math.pi()/2)):
+        robot.setSpeed(v, w)
+    robot.SetSpeed(0,0)
 
 def abrupt_stop(robot):
     """
@@ -41,26 +52,59 @@ def soft_stop(robot, t = 0.5):
         robot.setSpeed(v*i/10, w*i/10)
         time.sleep(delay)
 
-def go_to_cell(robot, map, move):   #TODO: meter los movimientos y tal
+def go_to_cell(robot, map, move, goal, clockwise):   #TODO: meter los movimientos y tal
     """moves the robot given the goal array position being:\n
-        7   0   1\n
-        6   x   2\n
-        5   4   3\n
+        moves:          relative goals:\n
+        7   0   1       [-1,-1]  [0,-1]  [1,-1]\n
+        6   x   2       [-1,0]      x    [1,0]\n
+        5   4   3       [-1,1]    [0,1]   [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    if move == 0:
-        robot.setSpeed(1.5, 0)
+    goal = arr2pos(goal)
+    if move == 0: 
+        print('voy recto')
+        run(robot, goal)
+    elif (move == 1) and not clockwise:
+        print('arco a la derecha')
+        arc(robot, goal)
     elif move == 1:
-        pass
+        print('giro derecha y arco a la izquierda')
+        spin(robot, -math.pi()/2)
+        arc(robot, goal)
     elif move == 2:
-        pass
+        print('giro derecha y voy recto')
+        spin(robot, -math.pi()/2)
+        run(robot, goal)
+    elif (move == 3) and not clockwise:
+        print('giro derecha y arco a la derecha')
+        spin(robot, -math.pi()/2)
+        arc(robot, goal)
     elif move == 3:
-        pass
+        print('giro 180 y arco a la izquierda')
+        spin(robot, math.pi())
+        arc(robot, goal)
     elif move == 4:
-        pass
+        print('giro 180 y voy recto')
+        spin(robot, math.pi())
+        run(robot, goal)
+    elif (move == 5) and not clockwise:
+        print('giro 180 y giro derecha')
+        spin(robot, math.pi())
+        arc(robot, goal)
     elif move == 5:
-        pass
-    elif move == 6: #case cosa de java cosa case
-        pass
+        print('giro izquierda y arco a la izquierda')
+        spin(robot, math.pi()/2)
+        arc(robot, goal)
+    elif move == 6: 
+        print('giro izquierda y voy recto')
+        spin(robot, math.pi()/2)
+        run(robot, goal)
+    elif (move == 7) and clockwise:
+        print('arco a la izquierda')
+        arc(robot,goal)
+    elif move == 7:
+        print('giro izquierda y arco a la derecha')
+        spin(robot, math.pi()/2)
+        arc(robot,goal)
 
 def go_to_useless(robot, pos, v = 0.1):
     """Moves the robot from its original position to the given one drawing an arc"""

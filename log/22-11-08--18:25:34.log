@@ -1,0 +1,99 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:Odometry was started, PID: 4574:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:The blob's size is: 16.36049461364746
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 18.440277099609375
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 16.764131546020508
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 16.50815200805664
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 16.613887786865234
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 34.728511810302734
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 31.3200740814209
+INFO:root:The blob's size is: 38.42219543457031
+INFO:root:The blob's size is: 36.49867630004883
+INFO:root:The blob's size is: 33.6495246887207
+INFO:root:The blob's size is: 35.480899810791016
+INFO:root:The blob's size is: 36.694244384765625
+INFO:root:The blob's size is: 32.48298263549805
+INFO:root:The blob's size is: 38.246028900146484
+INFO:root:The blob's size is: 36.4000358581543
+INFO:root:The blob's size is: 31.691070556640625
+INFO:root:The blob's size is: 46.165035247802734
+INFO:root:The blob's size is: 42.85558319091797
+INFO:root:The blob's size is: 35.89196014404297
+INFO:root:The blob's size is: 53.1066780090332
+INFO:root:The blob's size is: 40.0185661315918
+INFO:root:The blob's size is: 49.09117889404297
+INFO:root:The blob's size is: 46.69600296020508
+INFO:root:The blob's size is: 30.5478515625
+INFO:root:The blob's size is: 44.79241943359375
+INFO:root:The blob's size is: 44.70921325683594
+INFO:root:The blob's size is: 50.88146209716797
+INFO:root:The blob's size is: 59.741485595703125
+INFO:root:The blob's size is: 74.04530334472656
+INFO:root:The blob's size is: 52.02444076538086
+INFO:root:The blob's size is: 51.18510437011719
+INFO:root:The blob's size is: 93.07513427734375
+INFO:root:The blob's size is: 65.94319915771484
+INFO:root:The blob's size is: 80.12586975097656
+INFO:root:The blob's size is: 82.11747741699219
+INFO:root:The blob's size is: 106.41292572021484
+INFO:root:Ready to grab the ball.
+INFO:root:The blob's size is: 41.43156433105469
+INFO:root:Found the ball! Approaching...
+INFO:root:The blob's size is: 109.61824798583984
+INFO:root:Ready to grab the ball.
+INFO:root:The blob's size is: 38.764854431152344
+INFO:root:The blob's size is: 50.17782211303711
+INFO:root:The blob's size is: 44.767948150634766
+INFO:root:The blob's size is: 67.92035675048828
+INFO:root:The blob's size is: 55.94931411743164
+INFO:root:The blob's size is: 20.763288497924805
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 50.6381721496582
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:The blob's size is: 18.31778907775879
+INFO:root:Found the ball! Approaching...
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

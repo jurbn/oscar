@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 18075:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 0], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 115, in navigateMap
+    grid = self.remakeMap(size, map, goal, origin)
+  File "/home/pi/oscar/Robot.py", line 141, in remakeMap
+    map[pos[0]-1, pos[1]] = 0
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 4703:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 54, in main
+    oscar.navigateMap([0, 4], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 107, in navigateMap
+    if sage.is_near_angle(self.th.value, math.pi):
+  File "/home/pi/oscar/sage.py", line 117, in is_near_angle
+    if type(robot_th) is Robot:
+NameError: name 'Robot' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

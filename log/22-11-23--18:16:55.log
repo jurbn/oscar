@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 4685:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 0], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 113, in navigateMap
+    arrived = mv.go_to(self, destination_coord)
+  File "/home/pi/oscar/movement.py", line 67, in go_to
+    while sage.norm_pi(self.th.value-destiny)>0.05:
+NameError: name 'self' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

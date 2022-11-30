@@ -1,0 +1,70 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+ERROR:root:get_sensor error: Invalid sensor data
+INFO:root:Odometry was started, PID: 7654:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:transformation 0.29774800000000035
+INFO:root:transformation 0.2942469999999995
+INFO:root:transformation 0.28801200000000016
+INFO:root:transformation 0.2868680000000001
+INFO:root:transformation 0.2877409999999996
+INFO:root:transformation 0.2875950000000005
+INFO:root:transformation 0.2875420000000002
+INFO:root:transformation 0.2797539999999996
+INFO:root:transformation 0.2790220000000003
+INFO:root:transformation 0.28002599999999944
+INFO:root:transformation 0.28069599999999983
+INFO:root:transformation 0.2816489999999998
+INFO:root:transformation 0.28280999999999956
+INFO:root:transformation 0.281917
+INFO:root:transformation 0.2784980000000008
+INFO:root:transformation 0.28188500000000083
+INFO:root:transformation 0.2797750000000008
+INFO:root:transformation 0.28982300000000016
+INFO:root:transformation 0.29631399999999886
+INFO:root:transformation 0.2930299999999999
+INFO:root:transformation 0.2888629999999992
+INFO:root:transformation 0.28354999999999997
+INFO:root:transformation 0.28326799999999963
+INFO:root:transformation 0.28608999999999973
+INFO:root:transformation 0.29009600000000013
+INFO:root:transformation 0.2961430000000007
+INFO:root:transformation 0.28661199999999987
+INFO:root:transformation 0.27714699999999937
+INFO:root:transformation 0.2771259999999991
+INFO:root:transformation 0.287782
+INFO:root:transformation 0.28016299999999994
+INFO:root:transformation 0.278417000000001
+INFO:root:transformation 0.2814149999999991
+INFO:root:transformation 0.2878600000000002
+WARNING:root:A keyboard interruption was detected!
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

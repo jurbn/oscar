@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 10119:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+INFO:root:Starting the slalom...
+INFO:root:Spinning at: 0.0, 0.0, 0.0
+INFO:root:primer tramo! 0.0, 0.0, -1.5707963267948966
+INFO:root:amo to recto -0.073405901929563, 0.09101599113083955, -0.19198621771937624
+INFO:root:y giramo
+INFO:root:giro terminao, to recto
+INFO:root:empezamo el ultimo giro
+INFO:root:Finished the circuit!!!
+INFO:root:Odometry was stopped

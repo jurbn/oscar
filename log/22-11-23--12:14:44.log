@@ -1,0 +1,13 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 12089:
+INFO:root:Initial location: 0.0, 0.0, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 53, in main
+    oscar.navigateMap([0, 0], [4, 1])
+  File "/home/pi/oscar/Robot.py", line 99, in navigateMap
+    print('and my grid value is {}'.format((np.rint(some_floats)).astype(int)))
+NameError: name 'some_floats' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
