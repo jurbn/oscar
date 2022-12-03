@@ -11,6 +11,7 @@ import pandas as pd
 import cv2 as cv
 import logging
 from datetime import datetime
+from tabulate import tabulate
 
 
 params = cv.SimpleBlobDetector_Params()
@@ -195,6 +196,16 @@ def show_cam_blobs(robot):
 # MAP FUNCTIONS #
 #################
 
+def draw_map(grid, direction = None, pos = None):
+    """
+    Prints the grid and, if given, the direction of the robot
+    """
+    lim_str = '+---' * len(grid[0, :]) + '+'
+    arrow_list = ['↓', '←', '↑', '→']
+    ascii_grid = grid.astype(int).tolist()
+    if direction and pos:
+        ascii_grid[(int(pos[0])), int(pos[1])] = arrow_list[direction]
+    print(tabulate(ascii_grid, tablefmt='grid'))
 
 def read_map(file):
     """This function returns the size and arrays of the given map.
@@ -206,7 +217,7 @@ def read_map(file):
     return size, map
 
 
-def next_cell(grid, moves, offset_angle, arr_pos):
+def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
     for i in range(len(moves)):
         real_index = i+offset_angle  # the index corresponding to the non-relative values
         # if we surpassed the array's limits, loop through the begginning

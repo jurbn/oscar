@@ -95,11 +95,11 @@ class Robot:
         print(grid)
         finished = False
         moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]
-        arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
         offset_angle = 0
         while not finished: # cuando no haya acabado, sigue recorriendo el mapa
             #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
             #    self.remakeMap(size, map, goal, origin)
+            arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
             print('im in {}, {}'.format(arr_pos, self.th.value))
             print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
             if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
@@ -116,16 +116,17 @@ class Robot:
                 elif sage.is_near_angle(self.th.value, -math.pi/2):
                     offset_angle = 6
 
-                [relative_move, abs_destination, clockwise] = sage.next_cell(moves, offset_angle, arr_pos)  # sacamos la siguiente celda a la que tenemos que ir!
+                [relative_move, abs_destination, clockwise] = sage.next_cell(moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
                 
                 arrived = mv.go_to_cell(self, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
 
                 if not arrived: # no ha llegao
                     self.setSpeed(0, 0)
                     grid = self.remakeMap(size, map, goal, origin)
-                else:   # ha llegao
-                    arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value])
-                time.sleep(1)
+                else:
+                    sage.draw_map(grid, offset_angle/2, arr_pos)
+
+                    time.sleep(1)
 
         self.setSpeed(0, 0)
         return True
