@@ -25,7 +25,24 @@ class Robot:
 
         Initialize Motors and Sensors according to the set up in your robot
         """
-        self.map = 'mapa3.txt'
+
+        self.x = Value('d', init_position[0])
+        self.y = Value('d', init_position[1])
+        self.th = Value('d', init_position[2])
+
+        self.v = Value('d', 0.0)
+        self.w = Value('d', 0.0)
+
+        self.finished = Value('b',1)
+        self.w_max = 100
+        self.v_max = 0.5
+        
+        self.location = [0, 0, 0]
+        self.offset = init_position
+
+        self.map_file = 'maps/mapa3.txt'
+        self.cell = [0, 0]
+        [self.map_size, self.map] = sage.read_map(self.map)
 
         self.radius = 0.028
         self.length = 0.15
@@ -51,21 +68,6 @@ class Robot:
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
-        self.x = Value('d', init_position[0])
-        self.y = Value('d', init_position[1])
-        self.th = Value('d', init_position[2])
-        
-        self.location = [0, 0, 0]
-
-        self.offset = init_position
-
-        self.v = Value('d', 0.0)
-        self.w = Value('d', 0.0)
-
-        self.finished = Value('b',1)
-        self.w_max = 100
-        self.v_max = 0.5
-
         self.lock_odometry = Lock()
         self.odometry_period = 0.01
         self.blob_period = 0.5 
@@ -86,8 +88,12 @@ class Robot:
                 error = False
         self.startOdometry()
 
+    #################
+    # MAP FUNCTIONS #
+    #################
+
     def navigateMap(self, origin, goal):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
-        """The robot navigates the map to reach a goal"""
+        """The robot navigates the map to reach a given goal"""
         [size, map] = sage.read_map(self.map)
         #origin = sage.them_to_us(size, origin)
         goal = sage.tile2array(size, goal)
@@ -384,8 +390,11 @@ class Robot:
 
         return 'holi soy ballCaught y estoy incompleta'
             
+    #####################
+    # ODOMETRY THINGIES #
+    #####################
 
-    def readOdometry(self):
+    def readOdometry(self): #TODO: borrar esto pq no se usa y ahora tenemos self.location
         """Returns current value of odometry estimation"""
         return self.x.value, self.y.value, self.th.value
 
@@ -433,6 +442,7 @@ class Robot:
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]
+            self.cell = sage.pos2array(self.map_size, self.map, self.location)  # updates the cell!
             
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')

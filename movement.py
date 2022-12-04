@@ -304,7 +304,7 @@ def moveC(robot, pos, R, th, t=0):
         v = w*R
         obj = sage.pos_bot([v, w], pos, t)
         robot.setSpeed(v, w)
-    while (robot.readOdometry != obj):
+    while (robot.location != obj):
         time.sleep(0.1)
 
 def time_eight(robot, r = 0.2, v = 0.2):
