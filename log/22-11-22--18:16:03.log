@@ -1,5 +1,0 @@
-INFO:root:Program started
-INFO:root:Robot set up!
-INFO:root:Odometry was started, PID: 4323:
-INFO:root:Initial location: 0.0, 0.0, 0.0
-WARNING:root:ERROR: get_sensor error: Invalid sensor data

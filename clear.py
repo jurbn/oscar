@@ -1,3 +1,4 @@
+# TODO: move to ~/.local/bin/
 import os
 import logging
 

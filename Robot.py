@@ -5,12 +5,10 @@ from __future__ import division
 from distutils.debug import DEBUG
 
 import sage
-import brickpi3 # import the BrickPi3 drivers
+import libs.brickpi3 as brickpi3 # import the BrickPi3 drivers
 import movement as mv
-import go_to4 as gt
 
 import time     # import the time library for the sleep function
-import sys
 import math
 import numpy as np
 import csv
