@@ -1,4 +1,5 @@
 import numpy as np
+import maths
 
 def pos_bot(vw, x_w_r, t):
     """
@@ -10,6 +11,6 @@ def pos_bot(vw, x_w_r, t):
         r = vw[0] / vw[1]
         th = vw[1] * t
         al = (np.pi - th) / 2
-        x_r_r2 = np.array([r*chord(th)*np.sin(al), r*chord(th)*np.cos(al), th])
-    x_w_r2 = loc(np.matmul(hom(x_w_r), hom(x_r_r2)))   # new location x_w_r
+        x_r_r2 = np.array([r*maths.chord(th)*np.sin(al), r*maths.chord(th)*np.cos(al), th])
+    x_w_r2 = maths.loc(np.matmul(maths.hom(x_w_r), maths.hom(x_r_r2)))   # new location x_w_r
     return x_w_r2

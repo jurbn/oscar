@@ -1,7 +1,12 @@
 import time
 import logging
 import math
+import sys
 import numpy as np
+
+sys.path.append('../oscar')
+
+import oscar.helpers as helpers
 
 def calibrateClaw(robot):
     """Calibrates the claw and sets its offset"""
@@ -9,7 +14,7 @@ def calibrateClaw(robot):
     while not located:
         tIni = time.clock()
         frame = robot.takePic()[0:640, 240:480]
-        blob = sage.get_blob(frame=frame, color='yellow')
+        blob = helpers.vision.get_blob(frame=frame, color='yellow')
         if blob:
             located = True
         tEnd = time.clock()
@@ -25,7 +30,7 @@ def searchBall(robot):
     while not found:
         #tIni = time.clock()
         frame = robot.takePic()
-        blob = sage.get_blob(frame = frame)
+        blob = helpers.vision.get_blob(frame = frame)
         if blob:
             found = True
             logging.info('Found the ball! Approaching...')
@@ -42,7 +47,7 @@ def approachBall(robot, last_pos = None):
     while not ready:
         #tIni = time.clock()
         frame = robot.takePic()
-        blob = sage.get_blob(frame = frame)
+        blob = helpers.vision.get_blob(frame = frame)
         if blob:
             if blob.pt[0] > 160: #derecha
                 robot.last_seen_left = False
@@ -84,7 +89,7 @@ def centerBall(robot):
                 logging.info('Ball centered and ready to be catched!')
         else:   # si no ve el blob, hace otra foto
             frame = robot.takePic()
-            blob = sage.get_blob(frame = frame)
+            blob = helpers.vision.get_blob(frame = frame)
             if not blob:
                 return False
         #tEnd = time.clock()

@@ -4,21 +4,24 @@ import time     # import the time library for the sleep function
 import numpy as np
 import math
 import logging
+import sys
 
+sys.path.append('../oscar')
+import oscar.helpers as helpers
 
 ###################
 # BASIC MOVEMENTS #
 ###################
 def spin(robot, th, w = 1.5):
     """Makes Oscar turn a specified angle (in radians)"""
-    th = sage.norm_pi(th) 
-    while not sage.is_near_angle(robot, th):
+    th = helpers.maths.norm_pi(th) 
+    while not helpers.location.is_near_angle(robot, th):
         robot.setSpeed(0, th/abs(th)*w)
     robot.setSpeed(0, 0)
 
 def run(robot, objctv, v = 1.5):
     """Makes Oscar go straight forward to the specified position (in meters)"""
-    while not sage.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+    while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
 
@@ -26,7 +29,7 @@ def arc(robot, objctv, v = 1.5):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
     w = v/R
-    while not (sage.is_near(robot, objctv) or sage.is_near_angle(robot, w/abs(w)*math.pi()/2)):
+    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, w/abs(w)*math.pi()/2)):
         robot.setSpeed(v, w)
     robot.SetSpeed(0,0)
 
@@ -147,7 +150,7 @@ def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     while(robot.th.value <  -th):
         robot.setSpeed(v, w1)
     logging.info('amo to recto {}, {}, {}'.format(robot.x.value, robot.y.value, robot.th.value))
-    while((not sage.is_near(robot, t21, 0.01)) and robot.x.value < tx2):
+    while((not helpers.location.is_near(robot, t21, 0.01)) and robot.x.value < tx2):
         logging.debug('Desired position: {}\nCurrent position: {}, {}'.format(t21, robot.x.value, robot.y.value))
         robot.setSpeed(v,0)
     logging.info('y giramo')
@@ -158,7 +161,7 @@ def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     while(robot.th.value < (-math.pi + th)):
         robot.setSpeed(v, w2)
     logging.info('giro terminao, to recto')
-    while((not sage.is_near(robot, t12, 0.01)) and robot.x.value > tx1):
+    while((not helpers.location.is_near(robot, t12, 0.01)) and robot.x.value > tx1):
         logging.debug('Desired position: {}\nCurrent position: {}, {}'.format(t12, robot.x.value, robot.y.value))
         robot.setSpeed(v,0)
     logging.info('empezamo el ultimo giro')
@@ -182,12 +185,12 @@ def moveC(robot, pos, R, th, t=0):
         w = robot.w_max*0.75
         v = w*R
         t = th*R/v
-        obj = sage.pos_bot([v, w], pos, t)
+        obj = helpers.simulation.pos_bot([v, w], pos, t)
         robot.setSpeed(v, w)
     else:
         w = th/t
         v = w*R
-        obj = sage.pos_bot([v, w], pos, t)
+        obj = helpers.simulation.pos_bot([v, w], pos, t)
         robot.setSpeed(v, w)
     while (robot.location != obj):
         time.sleep(0.1)

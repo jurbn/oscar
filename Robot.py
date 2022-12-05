@@ -4,17 +4,18 @@ from __future__ import print_function # use python 3 syntax but make it compatib
 from __future__ import division
 from distutils.debug import DEBUG
 
-import sage
+
 import libs.brickpi3 as brickpi3 # import the BrickPi3 drivers
-import movement as mv
+
+import helpers.map
+import helpers.maths
 
 import time     # import the time library for the sleep function
 import math
-import numpy as np
 import csv
 import cv2 as cv
 import logging
-from multiprocessing import Process, Value, Array, Lock
+from multiprocessing import Process, Value, Lock
 
 class Robot:
     def __init__(self, init_position=[0.0, 0.0, 0.0]):
@@ -86,93 +87,6 @@ class Robot:
                 error = False
         self.startOdometry()
 
-    #################
-    # MAP FUNCTIONS #
-    #################
-
-    def navigateMap(self, origin, goal):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
-        """The robot navigates the map to reach a given goal"""
-        [size, map] = sage.read_map(self.map)
-        #origin = sage.them_to_us(size, origin)
-        goal = sage.tile2array(size, goal)
-        grid = sage.generate_grid(map, goal)
-        print(grid)
-        finished = False
-        moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]
-        offset_angle = 0
-        while not finished: # cuando no haya acabado, sigue recorriendo el mapa
-            #if self.BP.get_sensor(self.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
-            #    self.remakeMap(size, map, goal, origin)
-            arr_pos = sage.pos2array(size, map, [self.x.value, self.y.value]) # calcula la pos que tiene en el mapa
-            print('im in {}, {}'.format(arr_pos, self.th.value))
-            print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
-            if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
-                finished = True
-            else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
-                smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
-
-                if sage.is_near_angle(self.th.value, math.pi):  # sacamos el offset del movimiento relativo!
-                    offset_angle = 0
-                elif sage.is_near_angle(self.th.value, math.pi/2):
-                    offset_angle = 2
-                elif sage.is_near_angle(self.th.value, 0):
-                    offset_angle = 4
-                elif sage.is_near_angle(self.th.value, -math.pi/2):
-                    offset_angle = 6
-
-                [relative_move, abs_destination, clockwise] = sage.next_cell(moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
-                
-                arrived = mv.go_to_cell(self, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
-
-                if not arrived: # no ha llegao
-                    self.setSpeed(0, 0)
-                    grid = self.remakeMap(size, map, goal, origin)
-                else:
-                    sage.draw_map(grid, offset_angle/2, arr_pos)
-
-                    time.sleep(1)
-
-        self.setSpeed(0, 0)
-        return True
-
-    def remakeMap(self, size, map, goal, origin):
-        """Updates the map when the robot encounters an obstacle"""
-        pos = sage.pos2array(size, map, [self.x.value, self.y.value])
-        th = self.th.value
-        # check which direction is it facing...
-        print('looking one way')
-        while (abs(th-self.th.value) < math.pi/4):
-            self.setSpeed(0, math.pi/4)
-        self.setSpeed(0, 0)
-        obstacle_right = self.BP.get_sensor(self.ultrasonic) < 100
-        self.setSpeed(0, -math.pi/4)
-        time.sleep(0.1)
-        while (abs(th-self.th.value) < math.pi/4): # MAL MAL MAL MAL MAL
-            print('looking the other way')
-            self.setSpeed(0, -math.pi/4)
-        self.setSpeed(0, 0)
-        obstacle_left = self.BP.get_sensor(self.ultrasonic) < 100
-        if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
-            map[int(pos[0]), int(pos[1])-1] = 0
-            map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_left)
-            map[int(pos[0])+1, int(pos[1])-1] = 1 * (not obstacle_right)
-        elif th >= math.pi/4 and th <= 3*math.pi/4: # mirando izda
-            map[int(pos[0])-1, int(pos[1])] = 0
-            map[int(pos[0])-1, int(pos[1])+1] = 1 * (not obstacle_left)
-            map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_right)
-        elif th >= 3*math.pi/4 and th <= -3*math.pi/4: # mirando abajo
-            map[int(pos[0]), int(pos[1])+1] = 0
-            map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_left)
-            map[int(pos[0])-1, int(pos[1])+1] = 1 * (not obstacle_right) 
-        elif th <= -math.pi/4 and th >= -3*math.pi/4: # mirando dcha
-            map[int(pos[0])+1, int(pos[1])] = 0
-            map[int(pos[0])+1, int(pos[1])-1] = 1 * (not obstacle_left)
-            map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_right) 
-        grid = sage.generate_grid(map, goal)
-        print(grid)
-        time.sleep(0.05)
-        return grid
-
     def startTeabag():
         self.finish_tb.value = False
         self.teabag = Process(target=self.updateTeabag, args=())
@@ -226,171 +140,7 @@ class Robot:
         frame  = cv.rotate(frame, cv.ROTATE_180)
         frame = cv.resize(frame, None, fx = self.reduction, fy = self.reduction, interpolation = cv.INTER_LANCZOS4)
         return frame
-    
-    def calibrateClaw(self):
-        """Calibrates the claw and sets its offset"""
-        located = False
-        while not located:
-            tIni = time.clock()
-            frame = self.takePic()[0:640, 240:480]
-            blob = sage.get_blob(frame=frame, color='yellow')
-            if blob:
-                located = True
-            tEnd = time.clock()
-            time.sleep(blob_period-tEnd+tIni)
-        self.BP.reset_motor_encoder(self.claw_motor)
 
-    def searchBall(self):
-        """Uses the camera to locate the ball"""
-        found = False
-        if  self.last_seen_left:
-            w = 1.5
-        else: w = -1.5
-        while not found:
-            #tIni = time.clock()
-            frame = self.takePic()
-            blob = sage.get_blob(frame = frame)
-            if blob:
-                found = True
-                logging.info('Found the ball! Approaching...')
-            else:
-                self.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
-            #tEnd = time.clock()
-            #time.sleep(self.blob_period-tEnd+tIni)
-        return True
-    
-    def approachBall(self, last_pos = None):
-        """The robot will try to get close enough to get the ball, trying to get it centered if possible (not necessary as 
-        it's goint to spin on the grabBall function)"""
-        ready = False
-        while not ready:
-            #tIni = time.clock()
-            frame = self.takePic()
-            blob = sage.get_blob(frame = frame)
-            if blob:
-                if blob.pt[0] > 160: #derecha
-                    self.last_seen_left = False
-                elif blob.pt[0] < 160:   #izquierda
-                    self.last_seen_left = True
-                if blob.size >= 60:   #por ejemplo
-                    ready = True
-                    logging.info('Close enough to the ball, size is: {}'.format(blob.size))
-                else:
-                    v = ((72.5 - blob.size) / 72.5) * 0.25
-                    w = ((160 - blob.pt[0]) / 160) * (math.pi/6)
-                    self.setSpeed(v, w)
-            else:
-                logging.warning('Lost the ball! Searching again...')
-                return False
-            #tEnd = time.clock()
-            #time.sleep(self.blob_period-tEnd+tIni)
-        return True
-    
-    def centerBall(self):
-       # self.pauseProximity()
-        logging.info('Centering the ball...')
-        centered = False
-        while not centered:
-            #tIni = time.clock()
-            frame = self.takePic()
-            blob = sage.get_blob(frame = frame)
-            if blob:
-                logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
-                if blob.pt[0] > 162: #un poco mas de la mitad
-                    self.setSpeed(0, -0.1)
-                    self.last_seen_left = False
-                elif blob.pt[0] < 158:   # un poco menos de la mitad
-                    self.setSpeed(0, 0.1)
-                    self.last_seen_left = True
-                else:
-                    self.setSpeed(0, 0)
-                    centered = True
-                    logging.info('Ball centered and ready to be catched!')
-            else:   # si no ve el blob, hace otra foto
-                frame = self.takePic()
-                blob = sage.get_blob(frame = frame)
-                if not blob:
-                    return False
-            #tEnd = time.clock()
-            #time.sleep(self.blob_period-tEnd+tIni)
-        return True
- 
-
-    def grabBall(self):
-        """Once the robot is near the ball, it reorients itself and tries to grab it."""
-        distance_array = []
-        for i in range(10):
-            tIni = time.clock()
-            valid = False
-            while not valid:
-                try:
-                    data = self.BP.get_sensor(self.ultrasonic)
-                except Exception as error:
-                    logging.error(error)
-                else:
-                    print(data)
-                    valid = True
-                time.sleep(self.odometry_period-time.clock()+tIni)
-            distance_array.append(data)
-            tEnd = time.clock()
-            time.sleep(self.odometry_period-tEnd+tIni)
-        distance = np.median(distance_array) / 100 - 0.1# lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
-        if distance > 0.30:
-            return False
-        logging.info('The distance to be covered is: {} meters'.format(distance))
-        self.BP.set_motor_position(self.claw_motor, self.op_cl)
-        time.sleep(0.5)
-        #point = sage.absolute_offset(self, distance)
-        #while not sage.is_near(self, point, 0.01):
-        self.setSpeed(0.1, 0)
-        time.sleep(distance/0.1 + 0.12)
-        self.setSpeed(0, 0)
-        self.BP.set_motor_position(self.claw_motor, self.cl_cl)
-        time.sleep(0.6)
-        ####### CHECK IF BALL IN CLAW AND IF NOT RETURN FALSE
-        return True
-
-    def goForBall(self):
-        """Searches, and goes for the ball"""
-        state = 0
-        while state < 4:
-            self.setSpeed(0, 0)
-            if state == 0:      # buscando el peloto
-                success = self.searchBall()
-                if success:
-                    state = 1
-            elif state == 1:    # acercandose al peloto 
-                success = self.approachBall()
-                if success:
-                    state = 2
-                else:
-                    state = 0
-            elif state == 2:    # centrando el peloto
-                success = self.centerBall()
-                if success:
-                    state = 3
-                else:
-                    state = 0                
-            elif state == 3:    # cogiendo el peloto
-                success = self.grabBall()
-                if success:
-                    state = 4
-                else:
-                    state = 2
-
-    def ballCaught(self):
-        """Checks wether or not oscar got the ball"""
-        frame = self.takePic()[219:239, 139:179]
-        rows, cols, _ = frame.shape
-        rowsA, colsA = 0,0
-
-        print ('tamaño imagen: {}x{} pixels comprobados: {}x{} (origen en centro inferior: ({}, 0))'.format(rows,cols,rowsA,colsA,cols/2))
-
-        return 'holi soy ballCaught y estoy incompleta'
-            
-    #####################
-    # ODOMETRY THINGIES #
-    #####################
 
     def readOdometry(self): #TODO: borrar esto pq no se usa y ahora tenemos self.location
         """Returns current value of odometry estimation"""
@@ -415,7 +165,7 @@ class Robot:
             tIni = time.clock()
             #if self.changed:
             #    self.setSpeed(self.v.value, 0)
-            th = sage.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0]))
+            th = helpers.maths.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0]))
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
@@ -440,7 +190,7 @@ class Robot:
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]
-            self.cell = sage.pos2array(self.map_size, self.map, self.location)  # updates the cell!
+            self.cell = helpers.map.pos2array(self.map_size, self.map, self.location)  # updates the cell!
             
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
