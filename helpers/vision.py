@@ -1,4 +1,5 @@
 import time
+import logging
 import cv2 as cv
 import numpy as np
 
@@ -23,7 +24,7 @@ def get_blob(frame):
     """ Searches for a blob and returns the center """
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
     #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
-    #print('brightness: {}'.format(avg_brightness))
+    #logging.debug('brightness: {}'.format(avg_brightness))
     # if avg_brightness > 140:
     #    diff = avg_brightness - 140
     #    for pixel in hsv:
@@ -51,9 +52,9 @@ def show_cam_blobs(robot):
         tIni = time.clock()
         frame = robot.takePic()[139:179, 219:239]
         blob = get_blob(frame=frame)
-        print('tiempo de procesado es: {}'.format(time.clock()-tIni))
+        logging.debug('tiempo de procesado es: {}'.format(time.clock()-tIni))
         if blob:
-            print(blob.size)
+            logging.debug(blob.size)
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array(
                 []), (255, 255, 255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:

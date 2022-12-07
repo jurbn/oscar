@@ -20,27 +20,25 @@ import helpers.simulation
 ###################
 def spin(robot, th, w = 1.5):
     """Makes Oscar turn a specified angle (in radians)"""
-    print(th)
     th = helpers.maths.norm_pi(th + robot.th.value) 
-    print(th)
     w = (2*(th >= 0)-1)*w
     while not helpers.location.is_near_angle(robot, th):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 1):
+def run(robot, objctv, v = 0.5):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
 
-def arc(robot, objctv, v = 1):
+def arc(robot, objctv, v = 0.5):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
     w = v/R
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
     while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
-        print('{},{} | {},{}'.format(robot.x.value, robot.y.value, objctv[0], objctv[1]))
+        logging.debug('{},{} | {},{}'.format(robot.x.value, robot.y.value, objctv[0], objctv[1]))
         robot.setSpeed(v, w)
         time.sleep(0.1)
     robot.SetSpeed(0,0)
@@ -145,7 +143,7 @@ def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     w1 = v / r1
     w2 = v / r2
     th = math.pi/2 - abs(math.acos((r2-r1)/d)) # we abs it so we have a first cuadrant angle
-    print(th)
+    logging.debug(th)
     tx1 = r1-r1*math.sin(th)
     ty1 = -r1*math.cos(th)
     tx2 = r1+d-r2*math.sin(th)
@@ -189,7 +187,7 @@ def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
 ################
 
 def enc_test (robot):
-    print('encoder 3 = {}'.format(robot.BP.fet_motot_encoder(robot.claw_motor))) 
+    logging.debug('encoder 3 = {}'.format(robot.BP.fet_motot_encoder(robot.claw_motor))) 
 
 def moveC(robot, pos, R, th, t=0):
     # voy a hacer el control con la funcion del cálculo de la posición tras el movimiento y los datos de odometría.

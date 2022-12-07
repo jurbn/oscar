@@ -2,6 +2,7 @@ import math
 import time
 import sys
 import os
+import logging
 
 import actions.moves
 
@@ -16,36 +17,38 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
     """The robot navigates the map to reach a given goal"""
     [size, map] = helpers.map.read_map(robot.map_file)
     #origin = sage.them_to_us(size, origin)
+    logging.debug('GOLES')
     goal = helpers.map.tile2array(size, goal)
     grid = helpers.map.generate_grid(map, goal)
     finished = False
-    moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]
+    moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]  # 0,1,2,3,4,5,6,7 en array
     offset_angle = 0
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
         #    robot.remakeMap(size, map, goal, origin)
         arr_pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
-        #print('im in {}, {}'.format(arr_pos, robot.th.value))
-        #print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
+        #logging.debug('im in {}, {}'.format(arr_pos, robot.th.value))
+        #logging.debug('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
         if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
             finished = True
         else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
             smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
 
-            if helpers.location.is_near_angle(robot.th.value, math.pi):  # sacamos el offset del movimiento relativo!
+            if helpers.location.is_near_angle(robot.th.value, math.pi/2):  # sacamos el offset del movimiento relativo!
                 offset_angle = 0
-            elif helpers.location.is_near_angle(robot.th.value, math.pi/2):
-                offset_angle = 2
             elif helpers.location.is_near_angle(robot.th.value, 0):
-                offset_angle = 4
+                offset_angle = 2
             elif helpers.location.is_near_angle(robot.th.value, -math.pi/2):
+                offset_angle = 4
+            elif helpers.location.is_near_angle(robot.th.value, math.pi):
                 offset_angle = 6
+            logging.debug('my offset is {} and my angle is {}'.format(offset_angle, robot.th.value))
 
             helpers.map.draw_map(grid, offset_angle/2, arr_pos)
 
             [relative_move, abs_destination, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             
-            arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
+            arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)   # recorremos el mapa hasta llegar a la siguiente celda
 
             if not arrived: # no ha llegao
                 robot.setSpeed(0, 0)
@@ -61,7 +64,7 @@ def remakeMap(robot, size, map, goal, origin):
     pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value])
     th = robot.th.value
     # check which direction is it facing...
-    print('looking one way')
+    logging.debug('looking one way')
     while (abs(th-robot.th.value) < math.pi/4):
         robot.setSpeed(0, math.pi/4)
     robot.setSpeed(0, 0)
@@ -69,7 +72,7 @@ def remakeMap(robot, size, map, goal, origin):
     robot.setSpeed(0, -math.pi/4)
     time.sleep(0.1)
     while (abs(th-robot.th.value) < math.pi/4): # MAL MAL MAL MAL MAL
-        print('looking the other way')
+        logging.debug('looking the other way')
         robot.setSpeed(0, -math.pi/4)
     robot.setSpeed(0, 0)
     obstacle_left = robot.BP.get_sensor(robot.ultrasonic) < 100
@@ -90,60 +93,61 @@ def remakeMap(robot, size, map, goal, origin):
         map[int(pos[0])+1, int(pos[1])-1] = 1 * (not obstacle_left)
         map[int(pos[0])+1, int(pos[1])+1] = 1 * (not obstacle_right) 
     grid = helpers.map.generate_grid(map, goal)
-    print(grid)
+    logging.debug(grid)
     time.sleep(0.05)
     return grid
 
-def go_to_cell(robot, map, move, goal, clockwise):   #TODO: meter los movimientos y tal
+def go_to_cell(robot, map, move, goal, clockwise, map_size):   #TODO: meter los movimientos y tal
     """actions.moves the robot given the goal array position being:\n
         actions.moves:          relative goals:\n
         7   0   1       [-1,-1]  [0,-1]  [1,-1]\n
         6   x   2       [-1,0]      x    [1,0]\n
         5   4   3       [-1,1]    [0,1]   [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    #?????goal = helpers.map(goal)
+    logging.debug('r move is {}'.format(move))
+    goal = helpers.map.array2pos(map_size, map, goal)
     if move == 0: 
-        print('voy recto')
+        logging.debug('voy recto')
         actions.moves.run(robot, goal)
     elif (move == 1) and not clockwise:
-        print('arco a la derecha')
+        logging.debug('arco a la derecha')
         actions.moves.arc(robot, goal)
     elif move == 1:
-        print('giro derecha y arco a la izquierda')
+        logging.debug('giro derecha y arco a la izquierda')
         actions.moves.spin(robot, -math.pi/2)
         actions.moves.arc(robot, goal)
     elif move == 2:
-        print('giro derecha y voy recto')
+        logging.debug('giro derecha y voy recto')
         actions.moves.spin(robot, -math.pi/2)
         actions.moves.run(robot, goal)
     elif (move == 3) and not clockwise:
-        print('giro derecha y arco a la derecha')
+        logging.debug('giro derecha y arco a la derecha')
         actions.moves.spin(robot, -math.pi/2)
         actions.moves.arc(robot, goal)
     elif move == 3:
-        print('giro 180 y arco a la izquierda')
+        logging.debug('giro 180 y arco a la izquierda')
         actions.moves.spin(robot, math.pi)
         actions.moves.arc(robot, goal)
     elif move == 4:
-        print('giro 180 y voy recto')
+        logging.debug('giro 180 y voy recto')
         actions.moves.spin(robot, math.pi)
         actions.moves.run(robot, goal)
     elif (move == 5) and not clockwise:
-        print('giro 180 y giro derecha')
+        logging.debug('giro 180 y giro derecha')
         actions.moves.spin(robot, math.pi)
         actions.moves.arc(robot, goal)
     elif move == 5:
-        print('giro izquierda y arco a la izquierda')
+        logging.debug('giro izquierda y arco a la izquierda')
         actions.moves.spin(robot, math.pi/2)
         actions.moves.arc(robot, goal)
     elif move == 6: 
-        print('giro izquierda y voy recto')
+        logging.debug('giro izquierda y voy recto')
         actions.moves.spin(robot, math.pi/2)
         actions.moves.run(robot, goal)
     elif (move == 7) and clockwise:
-        print('arco a la izquierda')
+        logging.debug('arco a la izquierda')
         actions.moves.arc(robot,goal)
     elif move == 7:
-        print('giro izquierda y arco a la derecha')
+        logging.debug('giro izquierda y arco a la derecha')
         actions.moves.spin(robot, math.pi/2)
         actions.moves.arc(robot,goal)

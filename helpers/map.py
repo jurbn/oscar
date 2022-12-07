@@ -1,3 +1,4 @@
+import logging
 from tabulate import tabulate
 import numpy as np
 
@@ -6,14 +7,18 @@ def draw_map(grid, direction = None, pos = None):
     """
     Prints the grid and, if given, the direction of the robot
     """
-    print('o → Y \n↓ \nX')
+    logging.debug('Y \n↑ \no → X')
     lim_str = '+---' * len(grid[0, :]) + '+'
     arrow_list = ['↑', '→', '↓', '←']
-    #sustituimos las paredes por 'bloques' (ASCII 219) TODO: AÑADIR!!
     ascii_grid = grid.astype(int).tolist()
+    #sustituimos las paredes por 'bloques' (ASCII 219) 
+    for j in range (len(grid[0, :])):
+        for i in range (len(grid[:, 0])):
+            if (grid[i,j] == -1):
+                ascii_grid[i][j] = '█'
     if (direction is not None) and (pos is not None):
         ascii_grid[int(pos[0])][int(pos[1])] = arrow_list[int(direction)]
-    print(tabulate(ascii_grid, tablefmt='grid'))
+    logging.debug(tabulate(ascii_grid, tablefmt='grid'))
 
 
 def read_map(file):
@@ -74,9 +79,9 @@ def generate_grid(map, goal):
         for j in range(map.shape[1]):
             if map[i, j] == 0:
                 grid[i, j] = -1     # we set the obstacles and walls to -1
-    grid[int(goal[0]), int(goal[1])] = 0      # we set the goal to 0
+    grid[int(goal[1]), int(goal[0])] = 0      # we set the goal to 0
     # cells that are on the wavefront
-    current_cells = np.array([[goal[0], goal[1]]])
+    current_cells = np.array([[goal[1], goal[0]]])
     moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]]
                      )  # 4 direction neighbours
     finished = False
@@ -118,6 +123,8 @@ def array2pos(map_size, map, cell):
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
+    logging.debug(map_size)
+    logging.debug(cell)
     pos = np.array([0, 0], dtype=np.float32)
     pos[0] = cell[0]/2 * map_size[2]
     pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
@@ -125,6 +132,6 @@ def array2pos(map_size, map, cell):
 
 
 def tile2array(size, their_coord):
-    x = 2 * their_coord[0] + 1
+    x = (2 * their_coord[0]) + 1
     y = 2 * size[1] - 1 - 2 * their_coord[1]
     return np.array([x, y])

@@ -129,7 +129,7 @@ class Robot:
             r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
             v = r * w_rad
         except Exception:
-            print("There was an error while reading the speed of the motors")
+            logging.debug("There was an error while reading the speed of the motors")
         return v, w_rad
     
     def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)

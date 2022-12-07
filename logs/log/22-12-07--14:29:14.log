@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8283:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 57, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 49, in navigateMap
+    arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
+  File "/home/pi/oscar/actions/map.py", line 105, in go_to_cell
+    goal = helpers.map.array2pos(goal)
+TypeError: array2pos() missing 2 required positional arguments: 'map' and 'cell'
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
