@@ -1,0 +1,21 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 12722:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 57, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 48, in navigateMap
+    arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
+  File "/home/pi/oscar/actions/map.py", line 125, in go_to_cell
+    actions.moves.spin(robot, math.pi)
+  File "/home/pi/oscar/actions/moves.py", line 25, in spin
+    robot.setSpeed(0, th/np.sign(th)*w)
+  File "/home/pi/oscar/Robot.py", line 117, in setSpeed
+    self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
+  File "/home/pi/oscar/libs/brickpi3.py", line 922, in set_motor_dps
+    dps = int(dps)
+ValueError: cannot convert float NaN to integer
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

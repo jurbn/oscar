@@ -20,22 +20,28 @@ import helpers.simulation
 ###################
 def spin(robot, th, w = 1.5):
     """Makes Oscar turn a specified angle (in radians)"""
-    th = helpers.maths.norm_pi(th) 
+    print(th)
+    th = helpers.maths.norm_pi(th + robot.th.value) 
+    print(th)
+    w = (2*(th >= 0)-1)*w
     while not helpers.location.is_near_angle(robot, th):
-        robot.setSpeed(0, th/abs(th)*w)
+        print('im spinning')
+        robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 1.5):
+def run(robot, objctv, v = 1):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
 
-def arc(robot, objctv, v = 1.5):
+def arc(robot, objctv, v = 1):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
     w = v/R
-    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, w/abs(w)*math.pi/2)):
+    th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
+    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
+        print('im arching')
         robot.setSpeed(v, w)
     robot.SetSpeed(0,0)
 

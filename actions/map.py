@@ -18,7 +18,6 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
     #origin = sage.them_to_us(size, origin)
     goal = helpers.map.tile2array(size, goal)
     grid = helpers.map.generate_grid(map, goal)
-    print(grid)
     finished = False
     moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]
     offset_angle = 0
@@ -26,8 +25,8 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
         #    robot.remakeMap(size, map, goal, origin)
         arr_pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
-        print('im in {}, {}'.format(arr_pos, robot.th.value))
-        print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
+        #print('im in {}, {}'.format(arr_pos, robot.th.value))
+        #print('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
         if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
             finished = True
         else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
@@ -42,6 +41,8 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             elif helpers.location.is_near_angle(robot.th.value, -math.pi/2):
                 offset_angle = 6
 
+            helpers.map.draw_map(grid, offset_angle/2, arr_pos)
+
             [relative_move, abs_destination, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             
             arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
@@ -50,8 +51,6 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
                 robot.setSpeed(0, 0)
                 grid = robot.remakeMap(size, map, goal, origin)
             else:
-                helpers.map.draw_map(grid, offset_angle/2, arr_pos)
-
                 time.sleep(1)
 
     robot.setSpeed(0, 0)

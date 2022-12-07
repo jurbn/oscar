@@ -1,0 +1,15 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 8551:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 57, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 44, in navigateMap
+    helpers.map.draw_map(grid, offset_angle/2, arr_pos)
+  File "/home/pi/oscar/helpers/map.py", line 15, in draw_map
+    ascii_grid[(int(pos[0])), int(pos[1])] = arrow_list[int(direction)]
+TypeError: list indices must be integers or slices, not tuple
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

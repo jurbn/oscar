@@ -1,4 +1,4 @@
-import tabulate
+from tabulate import tabulate
 import numpy as np
 
 
@@ -6,11 +6,13 @@ def draw_map(grid, direction = None, pos = None):
     """
     Prints the grid and, if given, the direction of the robot
     """
+    print('o → Y \n↓ \nX')
     lim_str = '+---' * len(grid[0, :]) + '+'
-    arrow_list = ['↓', '←', '↑', '→']
+    arrow_list = ['↑', '→', '↓', '←']
+    #sustituimos las paredes por 'bloques' (ASCII 219) TODO: AÑADIR!!
     ascii_grid = grid.astype(int).tolist()
-    if direction and pos:
-        ascii_grid[(int(pos[0])), int(pos[1])] = arrow_list[direction]
+    if (direction is not None) and (pos is not None):
+        ascii_grid[int(pos[0])][int(pos[1])] = arrow_list[int(direction)]
     print(tabulate(ascii_grid, tablefmt='grid'))
 
 

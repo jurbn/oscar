@@ -68,7 +68,7 @@ class Robot:
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
         self.lock_odometry = Lock()
-        self.odometry_period = 0.01
+        self.odometry_period = 0.05
         self.blob_period = 0.5 
         self.last_seen_left = False
         self.changed = False
