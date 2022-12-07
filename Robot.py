@@ -57,12 +57,12 @@ class Robot:
         self.BP.reset_all()
 
         self.gyro = self.BP.PORT_2
-        self.ultrasonic = self.BP.PORT_1
+        self.frontasonic = self.BP.PORT_1
         self.cam = cv.VideoCapture(0)
         self.reduction = 0.5
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
-        self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
+        self.BP.set_sensor_type(self.frontasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
 
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
@@ -86,6 +86,8 @@ class Robot:
             else:
                 error = False
         self.startOdometry()
+    def getFrontsonic():
+        self.BP.get_sensor(self.frontasonic)
 
     def startTeabag():
         self.finish_tb.value = False
@@ -97,7 +99,7 @@ class Robot:
         while not self.finish_tb.value:
             tIni = time.clock()
             try:
-                distance = self.BP.get_sensor(self.ultrasonic)
+                distance = getFrontsonic()
                 if distance < 15:
                     pass
             except Exception:
@@ -165,7 +167,7 @@ class Robot:
             tIni = time.clock()
             #if self.changed:
             #    self.setSpeed(self.v.value, 0)
-            th = helpers.maths.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0]))
+            th = helpers.maths.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0])) # se le mete el offset al giroscopio pq el cabron lo reinicia
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
@@ -185,8 +187,8 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x.value += s * math.cos(th)*2
-            self.y.value += s * math.sin(th)*2
+            self.x.value -= s * math.cos(th)*2
+            self.y.value -= s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]

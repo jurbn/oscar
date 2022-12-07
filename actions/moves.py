@@ -21,7 +21,7 @@ import helpers.simulation
 def spin(robot, th, w = 1.5):
     """Makes Oscar turn a specified angle (in radians)"""
     th = helpers.maths.norm_pi(th + robot.th.value) 
-    w = (2*(th >= 0)-1)*w
+    w = -(2*(th >= 0)-1)*w
     while not helpers.location.is_near_angle(robot, th):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
@@ -29,19 +29,24 @@ def spin(robot, th, w = 1.5):
 def run(robot, objctv, v = 0.5):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+        if robot.geFrontsonic() < 25:
+            raise Exception('OMG A WALL ')
         robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
 
-def arc(robot, objctv, v = 0.5):
+def arc(robot, objctv, v = 0.1):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
-    R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
+    #R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
+    R = 0.2
+    logging.debug('LA R ES: {}'.format(R))
     w = v/R
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
     while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
-        logging.debug('{},{} | {},{}'.format(robot.x.value, robot.y.value, objctv[0], objctv[1]))
+        if robot.geFrontsonic() < 25:
+            raise Exception('OMG A WALL ')
         robot.setSpeed(v, w)
-        time.sleep(0.1)
-    robot.SetSpeed(0,0)
+        time.sleep(0.01)
+    robot.setSpeed(0,0)
 
 def abrupt_stop(robot):
     """
