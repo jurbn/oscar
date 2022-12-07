@@ -25,7 +25,6 @@ def spin(robot, th, w = 1.5):
     print(th)
     w = (2*(th >= 0)-1)*w
     while not helpers.location.is_near_angle(robot, th):
-        print('im spinning')
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
@@ -41,8 +40,9 @@ def arc(robot, objctv, v = 1):
     w = v/R
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
     while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
-        print('im arching')
+        print('{},{} | {},{}'.format(robot.x.value, robot.y.value, objctv[0], objctv[1]))
         robot.setSpeed(v, w)
+        time.sleep(0.1)
     robot.SetSpeed(0,0)
 
 def abrupt_stop(robot):
