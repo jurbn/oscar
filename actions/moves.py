@@ -5,9 +5,15 @@ import numpy as np
 import math
 import logging
 import sys
+import os
 
-sys.path.append('../oscar')
-import oscar.helpers as helpers
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+import helpers.location
+import helpers.maths
+import helpers.simulation
 
 ###################
 # BASIC MOVEMENTS #
@@ -29,7 +35,7 @@ def arc(robot, objctv, v = 1.5):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
     w = v/R
-    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, w/abs(w)*math.pi()/2)):
+    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, w/abs(w)*math.pi/2)):
         robot.setSpeed(v, w)
     robot.SetSpeed(0,0)
 

@@ -1,15 +1,20 @@
 import math
 import time
 import sys
+import os
 
-import moves
+import actions.moves
 
-sys.path.append('../oscar')
-import oscar.helpers as helpers
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+import helpers.location
+import helpers.map
 
 def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
     """The robot navigates the map to reach a given goal"""
-    [size, map] = helpers.map.read_map(robot.map)
+    [size, map] = helpers.map.read_map(robot.map_file)
     #origin = sage.them_to_us(size, origin)
     goal = helpers.map.tile2array(size, goal)
     grid = helpers.map.generate_grid(map, goal)
@@ -37,7 +42,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             elif helpers.location.is_near_angle(robot.th.value, -math.pi/2):
                 offset_angle = 6
 
-            [relative_move, abs_destination, clockwise] = helpers.map.next_cell(moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
+            [relative_move, abs_destination, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             
             arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise)   # recorremos el mapa hasta llegar a la siguiente celda
 
@@ -91,55 +96,55 @@ def remakeMap(robot, size, map, goal, origin):
     return grid
 
 def go_to_cell(robot, map, move, goal, clockwise):   #TODO: meter los movimientos y tal
-    """moves the robot given the goal array position being:\n
-        moves:          relative goals:\n
+    """actions.moves the robot given the goal array position being:\n
+        actions.moves:          relative goals:\n
         7   0   1       [-1,-1]  [0,-1]  [1,-1]\n
         6   x   2       [-1,0]      x    [1,0]\n
         5   4   3       [-1,1]    [0,1]   [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    goal = helpers.map(goal)
+    #?????goal = helpers.map(goal)
     if move == 0: 
         print('voy recto')
-        moves.run(robot, goal)
+        actions.moves.run(robot, goal)
     elif (move == 1) and not clockwise:
         print('arco a la derecha')
-        moves.arc(robot, goal)
+        actions.moves.arc(robot, goal)
     elif move == 1:
         print('giro derecha y arco a la izquierda')
-        moves.spin(robot, -math.pi()/2)
-        moves.arc(robot, goal)
+        actions.moves.spin(robot, -math.pi/2)
+        actions.moves.arc(robot, goal)
     elif move == 2:
         print('giro derecha y voy recto')
-        moves.spin(robot, -math.pi()/2)
-        moves.run(robot, goal)
+        actions.moves.spin(robot, -math.pi/2)
+        actions.moves.run(robot, goal)
     elif (move == 3) and not clockwise:
         print('giro derecha y arco a la derecha')
-        moves.spin(robot, -math.pi()/2)
-        moves.arc(robot, goal)
+        actions.moves.spin(robot, -math.pi/2)
+        actions.moves.arc(robot, goal)
     elif move == 3:
         print('giro 180 y arco a la izquierda')
-        moves.spin(robot, math.pi())
-        moves.arc(robot, goal)
+        actions.moves.spin(robot, math.pi)
+        actions.moves.arc(robot, goal)
     elif move == 4:
         print('giro 180 y voy recto')
-        moves.spin(robot, math.pi())
-        moves.run(robot, goal)
+        actions.moves.spin(robot, math.pi)
+        actions.moves.run(robot, goal)
     elif (move == 5) and not clockwise:
         print('giro 180 y giro derecha')
-        moves.spin(robot, math.pi())
-        moves.arc(robot, goal)
+        actions.moves.spin(robot, math.pi)
+        actions.moves.arc(robot, goal)
     elif move == 5:
         print('giro izquierda y arco a la izquierda')
-        moves.spin(robot, math.pi()/2)
-        moves.arc(robot, goal)
+        actions.moves.spin(robot, math.pi/2)
+        actions.moves.arc(robot, goal)
     elif move == 6: 
         print('giro izquierda y voy recto')
-        moves.spin(robot, math.pi()/2)
-        moves.run(robot, goal)
+        actions.moves.spin(robot, math.pi/2)
+        actions.moves.run(robot, goal)
     elif (move == 7) and clockwise:
         print('arco a la izquierda')
-        moves.arc(robot,goal)
+        actions.moves.arc(robot,goal)
     elif move == 7:
         print('giro izquierda y arco a la derecha')
-        moves.spin(robot, math.pi()/2)
-        moves.arc(robot,goal)
+        actions.moves.spin(robot, math.pi/2)
+        actions.moves.arc(robot,goal)

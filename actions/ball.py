@@ -2,11 +2,14 @@ import time
 import logging
 import math
 import sys
+import os
 import numpy as np
 
-sys.path.append('../oscar')
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
 
-import oscar.helpers as helpers
+import helpers.vision
 
 def calibrateClaw(robot):
     """Calibrates the claw and sets its offset"""

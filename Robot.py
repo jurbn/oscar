@@ -41,7 +41,7 @@ class Robot:
 
         self.map_file = 'maps/mapa3.txt'
         self.cell = [0, 0]
-        [self.map_size, self.map] = sage.read_map(self.map)
+        [self.map_size, self.map] = helpers.map.read_map(self.map_file)
 
         self.radius = 0.028
         self.length = 0.15

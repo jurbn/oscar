@@ -6,8 +6,9 @@ import logging
 import math
 import numpy as np
 from Robot import Robot
-import movement as mv
-import sage
+import actions.moves as mv
+import actions.map
+import helpers.plot
 import traceback
 
 def main(args):
@@ -43,7 +44,7 @@ def main(args):
         elif args.fcn == 'enc_test' :
             mv.enc_test()
         elif args.fcn == 'pictures':
-            sage.show_cam_blobs(oscar) 
+            helpers.vision.show_cam_blobs(oscar) 
         elif args.fcn == 'square':
             mv.square(oscar, l = 0.4)
         elif args.fcn == 'ballCheck':
@@ -53,27 +54,27 @@ def main(args):
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
-            oscar.navigateMap([0, 4], [4, 1])
+            actions.map.navigateMap(oscar, [0, 4], [4, 1])
         #########################
         #      closing up       #
         #########################
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        sage.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file)
 
     except KeyboardInterrupt:
         logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        sage.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file)
     except Exception as error:
         logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        sage.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file)
    
    
     # In the event of a keyboard interruption, we stop the robot's movement 
