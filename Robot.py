@@ -73,7 +73,7 @@ class Robot:
         self.last_seen_left = False
         self.changed = False
 
-        self.odometry_file = 'odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
+        self.odometry_file = 'logs/odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
         
         logging.info('Robot set up!')
         error = True

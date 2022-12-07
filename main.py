@@ -17,7 +17,7 @@ def main(args):
         #########################
     try:
         print(type(np.array([1, 2])))
-        logging.basicConfig(filename='log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
+        logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.INFO)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
         oscar = Robot(init_position=[0.2, 1.8, math.pi])
