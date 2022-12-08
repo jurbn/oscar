@@ -117,8 +117,10 @@ def pos2array(map_size, map, pos):
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
     cell = np.array([0, 0])
-    cell[0] = (pos[0] - map_size[2]/2) / map_size[2]
-    cell[1] = (pos[1] - map_size[2]/2) / map_size[2]
+    #cell[0] = (pos[0] - map_size[2]/2) / (map_size[2])
+    #cell[1] = (pos[1] - map_size[2]/2) / (map_size[2])
+    cell[0] = (pos[0]*2)/map_size[2]
+    cell[1] = (pos[1]*2)/map_size[2]
     cell = tile2array(map_size, cell)
     cell = cell.astype(np.float32)
     return cell  # we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
@@ -136,7 +138,9 @@ def array2pos(map_size, map, cell):
     return pos
 
 
-def tile2array(size, their_coord):
-    x = (2 * their_coord[0]) + 1
-    y = 2 * size[1] - 1 - 2 * their_coord[1]
+def tile2array(map_size, tile):
+    #x = (2 * their_coord[0]) + 1
+    #y = 2 * size[1] - 1 - 2 * their_coord[1]
+    x = 2*map_size[1] - tile[1]
+    y = tile[0]
     return np.array([x, y])

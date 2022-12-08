@@ -26,19 +26,19 @@ def spin(robot, th, w = 1.5):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.5):
+def run(robot, objctv, v = 0.1):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         near = robot.getFrontsonic() < 25
         if near:
             logging.debug(robot.getFrontsonic())
-            raise Exception('OH NOOO A WALL ;o')
+            raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, 0)
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
-    mvmnt = objctv - [robot.x.value, robot.y.value]
+    mvmnt = - objctv + [robot.x.value, robot.y.value]   # FIXME: LO HE PUESTO AL REVES PQ ASI PARECE QUE VA BIEN????
     R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1])  
     logging.debug('LA R ES: {}'.format(R))
     w = v/R
@@ -47,7 +47,7 @@ def arc(robot, objctv, v = 0.1):
         near = robot.getFrontsonic() < 25
         if near:
             logging.debug(robot.getFrontsonic())
-            raise Exception('OH NOOO A WALL ;o')
+            raise Exception('OH NOOO A WALL >:o')
         robot.setSpeed(v, w)
     robot.setSpeed(0,0)
 
@@ -144,16 +144,40 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def slalom(robot, map_size, origin, v = 0.5, R = 0.282842712): #TODO: obtener la R con el map_size
+def slalom(robot, map_size, map, v = 0.5):
     """
     Slaloms around the columns depending on the given map (A or B)
     """
-    if map_size
-    if 'B' in map:  #estamos en el lado derecho del mapa
-        spin(robot, -math.pi/4)
-        run(robot,[2.4, 2.8])
-        arc(robot, [2.4, 2.4])
-        run(robot, [2, 2])
+    try:
+        tile_size = map_size[2]
+    except Exception:
+        tile_size = map_size
+    #estamos en el lado derecho del mapa da positivo, sino negativo
+    if 'B' in map:
+        origin = [0.2, 1.8, math.pi] #origin_B
+        logging.debug('al menos sé leer')
+    else:
+        origin = [0.6, 3, -math.pi/2] #origin_A    
+    
+    R = tile_size/math.sqrt(2) 
+    logging.debug('voy a girar')
+    logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[robot.x.value,robot.y.value, origin[2] + math.pi/4 * ('B' in map)*2-1]))
+    spin(robot, origin[2] + math.pi/4 * (('B' in map)*2-1))
+    logging.debug('he girado, voy recto')
+    logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[origin[0] + tile_size/2 * (('B' in map)*2-1), origin[1]- 3*tile_size/2, robot.th.value]))
+    run(robot, [origin[0] + tile_size/2 * (('B' in map)*2-1), origin[1]- 3*tile_size/2])
+    logging.debug('he ido recto, voy a hacer un arco')
+    arc(robot, [origin[0] + tile_size/2 * (('B' in map)*2-1), origin[1]- 3*tile_size/2])
+    logging.debug('he hecho un arco, voy recto')
+    run(robot, [origin[0] - tile_size/2 * (('B' in map)*2-1), origin[1]- 5*tile_size/2])
+    logging.debug('he ido recto, voy a hacer un arco')
+    arc(robot, [origin[0] - tile_size/2 * (('B' in map)*2-1), origin[1]- 7*tile_size/2])
+    logging.debug('he hecho un arco, recolocacion final')
+    while not helpers.location.is_near(robot, [origen[0], origen[1]+ 11*tile_size/2], 0.05):
+        robot.setSpeed(v, robot. math.pi/2 * (('B' in map)*2-1)/((math.sqrt(pow(tile_size, 2) + pow(tile_size, 2)/4))/v))
+    robot.setSpeed(0, 0)
+    logging.debug('he acabado el slalom')
+
 
    
 

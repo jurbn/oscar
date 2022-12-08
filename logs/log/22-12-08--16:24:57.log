@@ -1,0 +1,31 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 6945:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+DEBUG:root:al menos sé leer
+DEBUG:root:voy a girar
+DEBUG:root:mi pos es: [0.2, 1.8, 3.141592653589793]
+ voy a girar hasta: [0.2, 1.8, -1.0]
+
+DEBUG:root:he girado, voy recto
+DEBUG:root:mi pos es: [0.2, 1.8, 2.4085543677521746]
+ voy a girar hasta: [2.4000000000000004, 2.4, 2.4085543677521746]
+
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 34, in main
+    mv.slalom(oscar, 0.4, "jaja B")
+  File "/home/pi/oscar/actions/moves.py", line 168, in slalom
+    run(robot, [origin[0] + tile_size/2 * (int('B' in map)*2-1), origin[1]- 3*tile_size/2])
+  File "/home/pi/oscar/actions/moves.py", line 32, in run
+    near = robot.getFrontsonic() < 25
+  File "/home/pi/oscar/Robot.py", line 94, in getFrontsonic
+    value = self.BP.get_sensor(self.frontasonic)
+  File "/home/pi/oscar/libs/brickpi3.py", line 707, in get_sensor
+    raise SensorError("get_sensor error: Invalid sensor data")
+libs.brickpi3.SensorError: get_sensor error: Invalid sensor data
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

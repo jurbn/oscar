@@ -90,7 +90,7 @@ class Robot:
 
 
     def getFrontsonic(self):
-        time.sleep(0.02)
+        time.sleep(0.05)
         value = self.BP.get_sensor(self.frontasonic)
         return value
 

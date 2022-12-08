@@ -1,0 +1,12 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 14270:
+INFO:root:Initial location: 0.2, 1.8, -1.5707963267948966
+DEBUG:root:voy a girar
+DEBUG:root:mi pos es: [0.2, 1.8, -1.5707963267948966]
+ voy a girar hasta: [0.2, 1.8, -2.5707963267948966]
+
+DEBUG:root:he girado, voy recto
+DEBUG:root:mi pos es: [0.2, 1.8, 2.4085543677521746]
+ voy a girar hasta: [0.39999999999999997, 2.4, 2.4085543677521746]
+

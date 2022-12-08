@@ -1,0 +1,18 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 20828:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+DEBUG:root:GOLES
+DEBUG:root:[-35.   1.]
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 58, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 34, in navigateMap
+    if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!
+IndexError: index -35 is out of bounds for axis 0 with size 11
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

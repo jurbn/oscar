@@ -106,8 +106,9 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
         6   x   2       [-1,0]      x    [1,0]\n
         5   4   3       [-1,1]    [0,1]   [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    logging.debug('r move is {}'.format(move))
+    logging.debug('HOLA AHORA VOY A IR A {}'.format(goal))
     goal = helpers.map.array2pos(map_size, map, goal)
+    logging.debug('HOLA AHORA VOY A IR A {}'.format(goal))
     try:
         if move == 0: 
             logging.debug('voy recto')
