@@ -3,11 +3,11 @@ from tabulate import tabulate
 import numpy as np
 
 
-def draw_map(grid, direction = None, pos = None):
+def draw_map(grid, robot, direction = None, pos = None):
     """
     Prints the grid and, if given, the direction of the robot
     """
-    logging.debug('Y \n↑ \no → X')
+    logging.debug("""Y \n↑ \no → X      MY POSITION IS [{}, {}, {}]""".format(robot.x.value, robot.y.value, robot.th.value))
     lim_str = '+---' * len(grid[0, :]) + '+'
     arrow_list = ['↑', '→', '↓', '←']
     ascii_grid = grid.astype(int).tolist()

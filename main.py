@@ -20,7 +20,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, math.pi])
+        oscar = Robot(init_position=[0.2, 1.8, math.pi]) # init_position=[0.1, 0.9, math.pi]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -30,8 +30,8 @@ def main(args):
         #sage.plot_animation(oscar)
         if  args.fcn == 'eight':
             mv.eight(oscar)
-        elif args.fcn == 'slalom' :
-            mv.slalom(oscar)
+        elif args.fcn == 'tronchopocho' :
+            mv.tronchopocho(oscar)
         elif args.fcn == 'spin' :
             mv.spin(oscar, 3.1416, 5)
         elif args.fcn == 'run' :

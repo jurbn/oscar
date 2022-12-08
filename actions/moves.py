@@ -29,27 +29,29 @@ def spin(robot, th, w = 1.5):
 def run(robot, objctv, v = 0.5):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
-        if robot.getFrontsonic() < 25:
+        near = robot.getFrontsonic() < 25
+        if near:
             logging.debug(robot.getFrontsonic())
             raise Exception('OH NOOO A WALL ;o')
         robot.setSpeed(v, 0)
-        time.sleep(0.01)
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
-    #R = (pow(objctv[0],2) + pow(objctv[1],2))/(2*objctv[1])
-    R = 0.2
+    mvmnt = objctv - [robot.x.value, robot.y.value]
+    R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1])  
     logging.debug('LA R ES: {}'.format(R))
     w = v/R
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
-    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
-        if robot.getFrontsonic() < 25:
+    while not (helpers.location.is_near(robot, mvmnt) or helpers.location.is_near_angle(robot, th)):
+        near = robot.getFrontsonic() < 25
+        if near:
             logging.debug(robot.getFrontsonic())
             raise Exception('OH NOOO A WALL ;o')
         robot.setSpeed(v, w)
-        time.sleep(0.01)
     robot.setSpeed(0,0)
+
+#TODO: def arc(robot, goal) funcion que calcule arcos en funcion del destino O del radio especificado
 
 def abrupt_stop(robot):
     """
@@ -71,7 +73,7 @@ def soft_stop(robot, t = 0.5):
 
 
 #####################
-# COMPLEX MOVEMENTS =0.4):
+# COMPLEX MOVEMENTS #
 #####################
 def square (robot, l=0.4):
     w = 1
@@ -142,7 +144,20 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def slalom(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
+def slalom(robot, map_size, origin, v = 0.5, R = 0.282842712): #TODO: obtener la R con el map_size
+    """
+    Slaloms around the columns depending on the given map (A or B)
+    """
+    if map_size
+    if 'B' in map:  #estamos en el lado derecho del mapa
+        spin(robot, -math.pi/4)
+        run(robot,[2.4, 2.8])
+        arc(robot, [2.4, 2.4])
+        run(robot, [2, 2])
+
+   
+
+def tronchopocho(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     """
     Does a odometry-based slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
     """

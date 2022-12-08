@@ -108,7 +108,7 @@ def grabBall(robot):
         valid = False
         while not valid:
             try:
-                data = robot.BP.get_sensor(robot.ultrasonic)
+                data = robot.getFrontsonic()
             except Exception as error:
                 logging.error(error)
             else:

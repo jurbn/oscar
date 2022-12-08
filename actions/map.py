@@ -46,7 +46,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
                 offset_angle = 6
             logging.debug('my offset is {} and my angle is {}'.format(offset_angle, robot.th.value))
 
-            helpers.map.draw_map(grid, offset_angle/2, arr_pos)
+            helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos)
 
             [relative_move, abs_destination, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             
@@ -70,14 +70,14 @@ def remakeMap(robot, size, map, goal, origin):
     while (abs(th-robot.th.value) < math.pi/4):
         robot.setSpeed(0, math.pi/4)
     robot.setSpeed(0, 0)
-    obstacle_right = robot.BP.get_sensor(robot.ultrasonic) < 100
+    obstacle_right = robot.getFrontsonic() < 100
     robot.setSpeed(0, -math.pi/4)
     time.sleep(0.1)
     while (abs(th-robot.th.value) < math.pi/4): # MAL MAL MAL MAL MAL
         logging.debug('looking the other way')
         robot.setSpeed(0, -math.pi/4)
     robot.setSpeed(0, 0)
-    obstacle_left = robot.BP.get_sensor(robot.ultrasonic) < 100
+    obstacle_left = robot.getFrontsonic() < 100
     if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
         map[int(pos[0]), int(pos[1])-1] = 0
         map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_left)

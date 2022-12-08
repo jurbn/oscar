@@ -54,10 +54,11 @@ class Robot:
         self.right_motor = self.BP.PORT_B
         self.claw_motor = self.BP.PORT_C
 
-        self.BP.reset_all()
-
         self.gyro = self.BP.PORT_2
         self.frontasonic = self.BP.PORT_1
+
+        self.BP.reset_all()
+        
         self.cam = cv.VideoCapture(0)
         self.reduction = 0.5
 
@@ -89,7 +90,9 @@ class Robot:
 
 
     def getFrontsonic(self):
-        return self.BP.get_sensor(self.frontasonic)
+        time.sleep(0.02)
+        value = self.BP.get_sensor(self.frontasonic)
+        return value
 
     def startTeabag(self):
         self.finish_tb.value = False
@@ -175,7 +178,7 @@ class Robot:
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
             
-            w = math.radians(self.BP.get_sensor(self.gyro)[1])
+            w = -math.radians(self.BP.get_sensor(self.gyro)[1])
             #if (self.w.value == 0) and (w != 0):
             #    self.changed = True
             #    self.setSpeed(self.v.value, w)
@@ -189,8 +192,8 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x.value -= s * math.cos(th)*2
-            self.y.value -= s * math.sin(th)*2
+            self.x.value += s * math.cos(th)*2
+            self.y.value += s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]

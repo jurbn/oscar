@@ -13,8 +13,16 @@
 from __future__ import print_function # use python 3 syntax but make it compatible with python 2
 from __future__ import division       #                           ''
 
+import os
+import sys
+
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
 import time     # import the time library for the sleep function
 import libs.brickpi3 as brickpi3 # import the BrickPi3 drivers
+
 
 BP = brickpi3.BrickPi3() # Create an instance of the BrickPi3 class. BP will be the BrickPi3 object.
 
@@ -22,8 +30,8 @@ BP = brickpi3.BrickPi3() # Create an instance of the BrickPi3 class. BP will be 
 # BP.set_sensor_type configures the BrickPi3 for a specific sensor.
 # BP.PORT_1 specifies that the sensor will be on sensor port 1.
 # BP.SENSOR_TYPE.NXT_ULTRASONIC specifies that the sensor will be an NXT ultrasonic sensor.
-sensor = BP.PORT_2
-BP.set_sensor_type(sensor, BP.SENSOR_TYPE.EV3_ULTRASONIC_CM)
+gyro = BP.PORT_2
+BP.set_sensor_type(gyro, BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
 
 try:
     while True:
@@ -32,7 +40,7 @@ try:
         # BP.PORT_1 specifies that we are looking for the value of sensor port 1.
         # BP.get_sensor returns the sensor value (what we want to display).
         try:
-            value = BP.get_sensor(sensor)
+            value = BP.get_sensor(gyro)
             print(value)                         # print the distance in CM
         except brickpi3.SensorError as error:
             print(error)
