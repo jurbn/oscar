@@ -3,6 +3,7 @@ import time
 import sys
 import os
 import logging
+import traceback
 
 import actions.moves
 
@@ -27,6 +28,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
         #    robot.remakeMap(size, map, goal, origin)
         arr_pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
+        logging.debug(arr_pos)
         #logging.debug('im in {}, {}'.format(arr_pos, robot.th.value))
         #logging.debug('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
         if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
@@ -97,7 +99,7 @@ def remakeMap(robot, size, map, goal, origin):
     time.sleep(0.05)
     return grid
 
-def go_to_cell(robot, map, move, goal, clockwise, map_size):   #TODO: meter los movimientos y tal
+def go_to_cell(robot, map, move, goal, clockwise, map_size):
     """actions.moves the robot given the goal array position being:\n
         actions.moves:          relative goals:\n
         7   0   1       [-1,-1]  [0,-1]  [1,-1]\n
@@ -152,6 +154,8 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):   #TODO: meter los 
             logging.debug('giro izquierda y arco a la derecha')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.arc(robot,goal)
+        logging.debug('ole ole terminao')
         return True
     except Exception:
+        print(traceback.format_exc())
         return False

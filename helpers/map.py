@@ -31,7 +31,8 @@ def read_map(file):
     return size, map
 
 
-def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
+def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limpiar este codigo que esta guarro guarro
+    # FUCIONAMIENTO DE ESTA COSA: basicamente recorremos los moves
     for i in range(len(moves)):
         real_index = i+offset_angle  # the index corresponding to the non-relative values
         # if we surpass the array's limits, loop through the begginning
@@ -67,7 +68,11 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
                     relative_move = i
                     abs_destination = possible_cell
                     smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
-    
+            else:
+                relative_move = i
+                abs_destination = possible_cell
+                smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+                clockwise = False
     return relative_move, abs_destination, clockwise
         
 

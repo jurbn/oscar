@@ -29,9 +29,11 @@ def spin(robot, th, w = 1.5):
 def run(robot, objctv, v = 0.5):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
-        if robot.geFrontsonic() < 25:
-            raise Exception('OMG A WALL ')
+        if robot.getFrontsonic() < 25:
+            logging.debug(robot.getFrontsonic())
+            raise Exception('OH NOOO A WALL ;o')
         robot.setSpeed(v, 0)
+        time.sleep(0.01)
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1):
@@ -42,8 +44,9 @@ def arc(robot, objctv, v = 0.1):
     w = v/R
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
     while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th)):
-        if robot.geFrontsonic() < 25:
-            raise Exception('OMG A WALL ')
+        if robot.getFrontsonic() < 25:
+            logging.debug(robot.getFrontsonic())
+            raise Exception('OH NOOO A WALL ;o')
         robot.setSpeed(v, w)
         time.sleep(0.01)
     robot.setSpeed(0,0)

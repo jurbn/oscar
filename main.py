@@ -54,6 +54,19 @@ def main(args):
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
             actions.map.navigateMap(oscar, [0, 4], [4, 1])
+        
+        #########################
+        #       the thing       #
+        #########################
+
+        #TODO: comprobar con el sensor laser que hay que poner, el color de la baldosa
+        # dar valores a las distintas variables in conscecuence to said sensor:
+        # map, A o B; slalom, bool+2-1; color de la salida azul o naranja;
+        # 
+        #
+        #
+        #
+
         #########################
         #      closing up       #
         #########################

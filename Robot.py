@@ -86,20 +86,22 @@ class Robot:
             else:
                 error = False
         self.startOdometry()
-    def getFrontsonic():
-        self.BP.get_sensor(self.frontasonic)
 
-    def startTeabag():
+
+    def getFrontsonic(self):
+        return self.BP.get_sensor(self.frontasonic)
+
+    def startTeabag(self):
         self.finish_tb.value = False
         self.teabag = Process(target=self.updateTeabag, args=())
         self.teabag.start()
         logging.info('Teabag started, PID: {}'.format(self.teabag.pid))
 
-    def updateTeabag():
+    def updateTeabag(self):
         while not self.finish_tb.value:
             tIni = time.clock()
             try:
-                distance = getFrontsonic()
+                distance = self.getFrontsonic()
                 if distance < 15:
                     pass
             except Exception:
