@@ -1,8 +1,0 @@
-INFO:root:Program started
-WARNING:root:Traceback (most recent call last):
-  File "/home/pi/oscar/main.py", line 23, in main
-    oscar = Robot(init_position=[0.2, 1.8, math.pi])
-  File "/home/pi/oscar/Robot.py", line 65, in __init__
-    self.BP.set_sensor_type(self.ultrasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
-AttributeError: 'Robot' object has no attribute 'ultrasonic'
-

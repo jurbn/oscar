@@ -113,10 +113,10 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
         if move == 0: 
             logging.debug('voy recto')
             actions.moves.run(robot, goal)
-        elif (move == 1) and not clockwise:
+        elif move == 1 and clockwise:
             logging.debug('arco a la derecha')
             actions.moves.arc(robot, goal)
-        elif move == 1:
+        elif move == 1 and not clockwise:
             logging.debug('giro derecha y arco a la izquierda')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.arc(robot, goal)
@@ -124,11 +124,11 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
             logging.debug('giro derecha y voy recto')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.run(robot, goal)
-        elif (move == 3) and not clockwise:
+        elif move == 3 and clockwise:
             logging.debug('giro derecha y arco a la derecha')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.arc(robot, goal)
-        elif move == 3:
+        elif move == 3 and not clockwise:
             logging.debug('giro 180 y arco a la izquierda')
             actions.moves.spin(robot, math.pi)
             actions.moves.arc(robot, goal)
@@ -136,11 +136,11 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
             logging.debug('giro 180 y voy recto')
             actions.moves.spin(robot, math.pi)
             actions.moves.run(robot, goal)
-        elif (move == 5) and not clockwise:
+        elif move == 5 and clockwise:
             logging.debug('giro 180 y giro derecha')
             actions.moves.spin(robot, math.pi)
             actions.moves.arc(robot, goal)
-        elif move == 5:
+        elif move == 5 and not clockwise:
             logging.debug('giro izquierda y arco a la izquierda')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.arc(robot, goal)
@@ -148,13 +148,13 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
             logging.debug('giro izquierda y voy recto')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.run(robot, goal)
-        elif (move == 7) and clockwise:
-            logging.debug('arco a la izquierda')
-            actions.moves.arc(robot,goal)
-        elif move == 7:
+        elif move == 7 and clockwise:
             logging.debug('giro izquierda y arco a la derecha')
             actions.moves.spin(robot, math.pi/2)
-            actions.moves.arc(robot,goal)
+            actions.moves.arc(robot, goal)
+        elif move == 7 and not clockwise:
+            logging.debug('arco a la izquierda')
+            actions.moves.arc(robot, goal)
         logging.debug('ole ole terminao')
         return True
     except Exception:

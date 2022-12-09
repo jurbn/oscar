@@ -21,19 +21,23 @@ import helpers.simulation
 def spin(robot, th, w = 1.5):
     """Makes Oscar turn a specified angle (in radians)"""
     th = helpers.maths.norm_pi(th + robot.th.value) 
-    w = -(2*(th >= 0)-1)*w
+    w = (2*(th >= 0)-1)*w
     while not helpers.location.is_near_angle(robot, th):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
 def run(robot, objctv, v = 0.1):
     """Makes Oscar go straight forward to the specified position (in meters)"""
-    while not helpers.location.is_near(robot, objctv): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+    th = robot.th.value
+    print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
+    print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
+    while (not helpers.location.is_near(robot, objctv, threshold=0.005)) and (math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) < math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         near = robot.getFrontsonic() < 25
         if near:
             logging.debug(robot.getFrontsonic())
             raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, 0)
+        print('está: {} quiere llegar a: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)), math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1):
@@ -144,7 +148,39 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def slalom(robot, map_size, map, v = 0.5):
+def slalom_right(robot, map_size, v = 0.5): 
+    """
+    Slaloms around the columns ehen on the A map (white tile)
+    """
+    try:
+        tile_size = map_size[2]
+    except Exception:
+        tile_size = map_size
+    #estamos en el lado izquierdo
+    origin = [0.6, 3, -math.pi/2] #origin_A    
+    R = tile_size/math.sqrt(2) 
+    logging.debug('voy a girar')
+    #logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[robot.x.value,robot.y.value, origin[2] + math.pi/4 * ('B' in map)*2-1]))
+    spin(robot, origin[2] - math.pi/4)
+    logging.debug('he girado, voy recto')
+    #logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[origin[0] + tile_size/2 * (('B' in map)*2-1), origin[1]- 3*tile_size/2, robot.th.value]))
+    run(robot, [origin[0] - tile_size/2, origin[1]- 3*tile_size/2])
+    logging.debug('he ido recto, voy a hacer un arco')
+    arc(robot, [origin[0] - tile_size/2, origin[1]- 3*tile_size/2])
+    logging.debug('he hecho un arco, voy recto')
+    run(robot, [origin[0] + tile_size/2, origin[1]- 5*tile_size/2])
+    logging.debug('he ido recto, voy a hacer un arco')
+    arc(robot, [origin[0] + tile_size/2, origin[1]- 7*tile_size/2])
+    logging.debug('he hecho un arco, recolocacion final')
+    while not helpers.location.is_near(robot, [origen[0], origen[1]+ 11*tile_size/2], 0.05):
+        robot.setSpeed(v, robot. math.pi/2 * (('B' in map)*2-1)/((math.sqrt(pow(tile_size, 2) + pow(tile_size, 2)/4))/v))
+    robot.setSpeed(0, 0)
+    logging.debug('he acabado el slalom')
+
+
+
+
+def slalom_useless(robot, map_size, map, v = 0.5): #TODO: arreglarlo o quitarlo antes de entregar <3
     """
     Slaloms around the columns depending on the given map (A or B)
     """

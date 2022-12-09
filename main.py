@@ -20,7 +20,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2]) # init_position=[0.1, 0.9, math.pi]
+        oscar = Robot(init_position=[0.2, 1.8, 0]) # init_position=[0.1, 0.9, math.pi]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -36,8 +36,8 @@ def main(args):
             mv.tronchopocho(oscar)
         elif args.fcn == 'spin' :
             mv.spin(oscar, 3.1416, 5)
-        elif args.fcn == 'run' :
-            mv.run(oscar, 0.1, 10)
+        elif args.fcn == 'run' :    # TODO:MODULOOOO
+            mv.run(oscar, [1,1.8])
         elif args.fcn == 'stop' :
             oscar.setSpeed(0, 0)
         elif args.fcn == 'ball' :
@@ -56,6 +56,8 @@ def main(args):
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
             actions.map.navigateMap(oscar, [0, 4], [4, 1])
+        elif args.fcn == 'cell':
+            actions.map.go_to_cell(oscar, oscar.map, 1, [2,2], False, oscar.map_size)
         
         #########################
         #       the thing       #

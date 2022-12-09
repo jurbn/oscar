@@ -4,7 +4,7 @@ import numpy as np
 
 import helpers
 
-def is_near(pos, center, threshold=0.05):
+def is_near(pos, center, threshold=0.01):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
