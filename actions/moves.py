@@ -31,18 +31,21 @@ def run(robot, objctv, v = 0.1):
     th = robot.th.value
     print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
     print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
-    while (not helpers.location.is_near(robot, objctv, threshold=0.005)) and (math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) < math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+    print('abs resta: ', abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)
+    print('is near: ',helpers.location.is_near(robot, objctv, threshold=0.02))
+    while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         near = robot.getFrontsonic() < 25
         if near:
             logging.debug(robot.getFrontsonic())
             raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, 0)
-        print('está: {} quiere llegar a: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)), math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
+        print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
-    mvmnt = - objctv + [robot.x.value, robot.y.value]   # FIXME: LO HE PUESTO AL REVES PQ ASI PARECE QUE VA BIEN????
+    objctv = np.array(objctv)
+    mvmnt = objctv - [robot.x.value, robot.y.value]   # FIXME: LO HE PUESTO AL REVES PQ ASI PARECE QUE VA BIEN????
     R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1])  
     logging.debug('LA R ES: {}'.format(R))
     w = v/R
@@ -157,14 +160,14 @@ def slalom_right(robot, map_size, v = 0.5):
     except Exception:
         tile_size = map_size
     #estamos en el lado izquierdo
-    origin = [0.6, 3, -math.pi/2] #origin_A    
+    origin = [0.6, 3, -math.pi/2] #origin_A  DEBERIA SER -PI/2 PERO LO CAMBIO PARA PROBAR  
     R = tile_size/math.sqrt(2) 
     logging.debug('voy a girar')
     #logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[robot.x.value,robot.y.value, origin[2] + math.pi/4 * ('B' in map)*2-1]))
-    spin(robot, origin[2] - math.pi/4)
+    spin(robot, - math.pi/4)
     logging.debug('he girado, voy recto')
     #logging.debug('mi pos es: {}\n voy a girar hasta: {}\n'.format([robot.x.value,robot.y.value,robot.th.value],[origin[0] + tile_size/2 * (('B' in map)*2-1), origin[1]- 3*tile_size/2, robot.th.value]))
-    run(robot, [origin[0] - tile_size/2, origin[1]- 3*tile_size/2])
+    run(robot, [0.4, 1.6])#[origin[0] - tile_size/2, origin[1]- 3*tile_size/2])
     logging.debug('he ido recto, voy a hacer un arco')
     arc(robot, [origin[0] - tile_size/2, origin[1]- 3*tile_size/2])
     logging.debug('he hecho un arco, voy recto')
@@ -172,8 +175,11 @@ def slalom_right(robot, map_size, v = 0.5):
     logging.debug('he ido recto, voy a hacer un arco')
     arc(robot, [origin[0] + tile_size/2, origin[1]- 7*tile_size/2])
     logging.debug('he hecho un arco, recolocacion final')
+    l = (math.sqrt(pow(tile_size, 2) + pow(tile_size, 2)/4))
+    t = l/v
+    w = (math.pi/4)/t
     while not helpers.location.is_near(robot, [origen[0], origen[1]+ 11*tile_size/2], 0.05):
-        robot.setSpeed(v, robot. math.pi/2 * (('B' in map)*2-1)/((math.sqrt(pow(tile_size, 2) + pow(tile_size, 2)/4))/v))
+        robot.setSpeed(v, w)
     robot.setSpeed(0, 0)
     logging.debug('he acabado el slalom')
 

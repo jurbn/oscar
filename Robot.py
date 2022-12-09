@@ -192,8 +192,8 @@ class Robot:
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x.value += s * math.cos(th)*2
-            self.y.value += s * math.sin(th)*2
+            self.x.value += s * math.cos(self.th.value+(th-self.th.value)/2)    #s * math.cos(th)*2
+            self.y.value += s * math.sin(self.th.value+(th-self.th.value)/2)    #s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]

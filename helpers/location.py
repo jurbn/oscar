@@ -4,7 +4,7 @@ import numpy as np
 
 import helpers
 
-def is_near(pos, center, threshold=0.01):
+def is_near(pos, center, threshold=0.03):
     """
     Returns a true if the robot is inside a certain area determined by an xy center and a given radius.
     """
@@ -13,7 +13,7 @@ def is_near(pos, center, threshold=0.01):
     return math.pow(pos[0] - center[0], 2) + math.pow(pos[1] - center[1], 2) <= math.pow(threshold, 2)
 
 
-def is_near_angle(robot_th, th, threshold=0.1):
+def is_near_angle(robot_th, th, threshold=0.03):
     """ Returns True if the robot's angle matches that of the one specified in the th argument (with a default threshold value of 5.7º)"""
     if not isinstance(robot_th, (int, float)):
         robot_th = robot_th.th.value

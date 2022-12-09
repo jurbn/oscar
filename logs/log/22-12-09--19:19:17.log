@@ -1,0 +1,52 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 1884:
+INFO:root:Initial location: 0.2, 1.8, 3.141592653589793
+DEBUG:root:GOLES
+DEBUG:root:[1. 1.]
+DEBUG:root:my offset is 6 and my angle is 3.141592653589793
+DEBUG:root:Y 
+↑ 
+o → X      MY POSITION IS [0.2, 1.8, 3.141592653589793]
+DEBUG:root:+---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | █  | █  | █  | █  | █  | █  | █  | █  | █  | █  | █ | █ | █ | █  | █  | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | ←  | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 8  | 9  | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 18 | 17 | 16 | 15 | 14 | █  | █  | █  | █  | █  | █ | █ | 6 | █  | 10 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 17 | 16 | 15 | 14 | 13 | █  | 3  | 2  | 1  | 2  | 3 | 4 | 5 | █  | 11 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 18 | █  | 14 | 13 | 12 | █  | 4  | █  | 0  | 1  | 2 | 3 | 4 | █  | 12 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 19 | █  | 13 | 12 | 11 | █  | 5  | █  | 1  | 2  | 3 | 4 | 5 | █  | 11 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 20 | █  | 12 | 11 | 10 | █  | 6  | █  | 2  | 3  | 4 | 5 | 6 | █  | 10 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 21 | █  | 11 | 10 | 9  | 8  | 7  | █  | 3  | 4  | 5 | 6 | 7 | 8  | 9  | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 22 | █  | █  | █  | █  | █  | 8  | █  | 4  | 5  | 6 | 7 | 8 | 9  | 10 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | 23 | 24 | 25 | 26 | 27 | █  | 9  | █  | 5  | 6  | 7 | 8 | 9 | 10 | 11 | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+| █ | █  | █  | █  | █  | █  | █  | █  | █  | █  | █  | █ | █ | █ | █  | █  | █ |
++---+----+----+----+----+----+----+----+----+----+----+---+---+---+----+----+---+
+DEBUG:root:HOLA AHORA VOY A IR A [2. 2.]
+DEBUG:root:[8.  5.  0.4]
+DEBUG:root:[2. 2.]
+DEBUG:root:HOLA AHORA VOY A IR A [0.4 1.6]
+DEBUG:root:giro 180 y giro derecha
+DEBUG:root:LA R ES: -0.2000000059604667
+DEBUG:root:22
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 58, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 57, in navigateMap
+    grid = remakeMap(size, map, goal, origin)
+TypeError: remakeMap() missing 1 required positional argument: 'origin'
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

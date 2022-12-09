@@ -12,7 +12,6 @@ import helpers.plot
 import traceback
 
 def main(args):
-
         #########################
         #     initialization    #
         #########################
@@ -20,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, 0]) # init_position=[0.1, 0.9, math.pi]
+        oscar = Robot(init_position=[0.2, 1.8, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -31,7 +30,7 @@ def main(args):
         if  args.fcn == 'eight':
             mv.eight(oscar)
         elif args.fcn == 'slalom' :
-            mv.slalom(oscar, 0.4, "jaja") 
+            mv.slalom_right(oscar, 0.4) 
         elif args.fcn == 'tronchopocho' :
             mv.tronchopocho(oscar)
         elif args.fcn == 'spin' :
