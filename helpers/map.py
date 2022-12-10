@@ -7,8 +7,9 @@ def draw_map(grid, robot, direction = None, pos = None):
     """
     Prints the grid and, if given, the direction of the robot
     """
-    logging.debug("""Y \n↑ \no → X      MY POSITION IS [{}, {}, {}]""".format(robot.x.value, robot.y.value, robot.th.value))
-    lim_str = '+---' * len(grid[0, :]) + '+'
+    logging.debug('Y \n↑ \no → X')
+    logging.debug('MY LOCATION IS [{}, {}, {}]'.format(robot.x.value, robot.y.value, robot.th.value))
+    logging.debug('MY CELL IS [{}]'.format(pos))
     arrow_list = ['↑', '→', '↓', '←']
     ascii_grid = grid.astype(int).tolist()
     #sustituimos las paredes por 'bloques' (ASCII 219) 
@@ -112,30 +113,26 @@ def generate_grid(map, goal):
     return grid
 
 
+def array2pos(map_size, map, cell):
+    """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
+    You can use the map's size vector or the tile size directly.\n
+    The value will go to the middle of every tile or tile border"""
+    pos = np.array([0, 0], dtype=float)
+    pos[0] = cell[0]/2 * map_size[2]
+    pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
+    return pos
+
 def pos2array(map_size, map, pos):
     """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
-    cell = np.array([0, 0])
+    cell = np.array([0, 0], dtype=float)
     #cell[0] = (pos[0] - map_size[2]/2) / (map_size[2])
     #cell[1] = (pos[1] - map_size[2]/2) / (map_size[2])
     cell[0] = (pos[0]*2)/map_size[2]
     cell[1] = (pos[1]*2)/map_size[2]
     cell = base_map2array(map_size, cell)
-    cell = cell.astype(np.float32)
     return cell  # we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
-
-
-def array2pos(map_size, map, cell):
-    """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
-    You can use the map's size vector or the tile size directly.\n
-    The value will go to the middle of every tile or tile border"""
-    logging.debug(map_size)
-    logging.debug(cell)
-    pos = np.array([0, 0], dtype=np.float32)
-    pos[0] = cell[0]/2 * map_size[2]
-    pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
-    return pos
 
 def base_map2array(map_size, tile):
     x = 2 * map_size[1] - tile[1]

@@ -29,19 +29,19 @@ def main(args):
         #sage.plot_animation(oscar)
         if  args.fcn == 'eight':
             mv.eight(oscar)
-        elif args.fcn == 'slalom' :
+        elif args.fcn == 'slalom':
             mv.slalom_right(oscar, 0.4) 
-        elif args.fcn == 'tronchopocho' :
+        elif args.fcn == 'tronchopocho':
             mv.tronchopocho(oscar)
-        elif args.fcn == 'spin' :
+        elif args.fcn == 'spin':
             mv.spin(oscar, 3.1416, 5)
-        elif args.fcn == 'run' :    # TODO:MODULOOOO
+        elif args.fcn == 'run':
             mv.run(oscar, [1,1.8])
-        elif args.fcn == 'stop' :
+        elif args.fcn == 'stop':
             oscar.setSpeed(0, 0)
-        elif args.fcn == 'ball' :
+        elif args.fcn == 'ball':
             oscar.goForBall()
-        elif args.fcn == 'enc_test' :
+        elif args.fcn == 'enc_test':
             mv.enc_test()
         elif args.fcn == 'pictures':
             helpers.vision.show_cam_blobs(oscar) 
@@ -67,7 +67,7 @@ def main(args):
         # map, A o B; slalom, bool+2-1; color de la salida azul o naranja;
         # 
         #
-        #
+        # :) <3
         #
 
         #########################

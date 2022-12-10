@@ -36,24 +36,24 @@ def run(robot, objctv, v = 0.1):
     while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         near = robot.getFrontsonic() < 25
         if near:
-            logging.debug(robot.getFrontsonic())
             raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, 0)
         print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
     robot.setSpeed(0, 0)
 
-def arc(robot, objctv, v = 0.1):
+def arc(robot, objctv, v = 0.1, clockwise = True):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
-    mvmnt = objctv - [robot.x.value, robot.y.value]   # FIXME: LO HE PUESTO AL REVES PQ ASI PARECE QUE VA BIEN????
-    R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1])  
+    mvmnt = objctv - [robot.x.value, robot.y.value]
+    logging.debug('el vector es: {}'.format(mvmnt))
+    R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1]) * (2*clockwise-1)  # TODO:OJO QUE R DEPENDE DE Y, aunque nos tenemos que fijar en el signo de x a veces tambien???
     logging.debug('LA R ES: {}'.format(R))
-    w = v/R
+    w = v/R 
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
     while not (helpers.location.is_near(robot, mvmnt) or helpers.location.is_near_angle(robot, th)):
         near = robot.getFrontsonic() < 25
         if near:
-            logging.debug(robot.getFrontsonic())
+            robot.setSpeed(0,0)
             raise Exception('OH NOOO A WALL >:o')
         robot.setSpeed(v, w)
     robot.setSpeed(0,0)
