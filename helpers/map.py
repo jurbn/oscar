@@ -8,8 +8,6 @@ def draw_map(grid, robot, direction = None, pos = None):
     Prints the grid and, if given, the direction of the robot
     """
     logging.debug('Y \n↑ \no → X')
-    logging.debug('MY LOCATION IS [{}, {}, {}]'.format(robot.x.value, robot.y.value, robot.th.value))
-    logging.debug('MY CELL IS [{}]'.format(pos))
     arrow_list = ['↑', '→', '↓', '←']
     ascii_grid = grid.astype(int).tolist()
     #sustituimos las paredes por 'bloques' (ASCII 219) 
@@ -31,16 +29,49 @@ def read_map(file):
     map = np.loadtxt(file, dtype='int', skiprows=1)
     return size, map
 
-def next_cell_2(grid, moves, offset_angle, arr_pos, smallest_value):
+def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
     max_move = len(moves)-1
-    for i in range(0, max_move):    # i is the relative move
+    for i in range(0, max_move+1):    # i is the relative move
         real_index = offset_angle + i   # real_index is used to get the nearest cells
         while real_index > max_move:    # if we're out of bounds, return to the boundaries
-            real_index -= max_move
+            real_index -= (max_move + 1)    # if its 9, 9-8 = 1 :)
         possible_cell = arr_pos + moves[real_index]
+        grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+        #logging.debug('MY OFFSET VALUE IS {}'.format(offset_angle))
+        #logging.debug('im considering {} ({}, {}) w/ grid value {}'.format(i, real_index, possible_cell, grid_value))
+        if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell
+            if i % 2 == 0:    # if its an edge
+                clockwise = 2   # 2 means idgaf
+                relative_move = i
+                abs_destination = possible_cell
+                smallest_value = grid_value
+            else:   # if its a corner
+                watchout_index_1 = real_index - 1
+                watchout_index_2 = real_index + 1
+                #logging.debug('indexes are {}, {}'.format(watchout_index_1, watchout_index_2))
+                while watchout_index_1 < 0:  # correct the indexes in case we went oob
+                    watchout_index_1 += (max_move + 1)
+                while watchout_index_2 > max_move:
+                    watchout_index_2 -= (max_move + 1)
+                #logging.debug('NEW indexes are {}, {}'.format(watchout_index_1, watchout_index_2))
+                watchout_1 = arr_pos + moves[watchout_index_1]  # we determine the pos of each watchout on the array
+                watchout_2 = arr_pos + moves[watchout_index_2]
+                watchout_grid_1 = grid[int(watchout_1[0]), int(watchout_1[1])]    # we get the grid value of each watchout
+                watchout_grid_2 = grid[int(watchout_2[0]), int(watchout_2[1])]
+                if not (watchout_grid_1 == -1 and watchout_grid_2 == -1):   # if not both of them are -1
+                    if watchout_grid_1 == -1:   # if it's just the first
+                        clockwise = 0
+                    elif watchout_grid_2 == -1:   # if it's just the second
+                        clockwise = 1
+                    elif watchout_grid_1 != -1 and watchout_grid_2 != -1:
+                        clockwise = 2
+                relative_move = i
+                abs_destination = possible_cell
+                smallest_value = grid_value
+    return relative_move, abs_destination, clockwise
 
 
-def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limpiar este codigo que esta guarro guarro
+def next_cell_va_mal(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limpiar este codigo que esta guarro guarro
     # FUCIONAMIENTO DE ESTA COSA: basicamente recorremos los moves
     for i in range(len(moves)):
         real_index = i+offset_angle  # the index corresponding to the non-relative values
@@ -97,11 +128,10 @@ def generate_grid(map, goal):
         for j in range(map.shape[1]):
             if map[i, j] == 0:
                 grid[i, j] = -1     # we set the obstacles and walls to -1
-    grid[int(goal[1]), int(goal[0])] = 0      # we set the goal to 0
+    grid[int(goal[0]), int(goal[1])] = 0      # we set the goal to 0
     # cells that are on the wavefront
-    current_cells = np.array([[goal[1], goal[0]]])
-    moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]]
-                     )  # 4 direction neighbours
+    current_cells = np.array([[goal[0], goal[1]]])
+    moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]])  # 4 direction neighbours
     finished = False
     while not finished:
         # for n in range(current_cells.size):     # for every cell on the wavefront
@@ -116,8 +146,7 @@ def generate_grid(map, goal):
                         # we add it to the wavefront
                         current_cells = np.append(
                             current_cells, [[next_cell[0], next_cell[1]]], axis=0)
-                        grid[int(next_cell[0]), int(next_cell[1])] = grid[int(cell[0]), int(
-                            cell[1])] + 1   # new cell's value is its parent's +1
+                        grid[int(next_cell[0]), int(next_cell[1])] = grid[int(cell[0]), int(cell[1])] + 1   # new cell's value is its parent's +1
             # we delete the current cell from the wavefront
             current_cells = np.delete(current_cells, 0, axis=0)
         else:
@@ -130,8 +159,8 @@ def array2pos(map_size, map, cell):
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
     pos = np.array([0, 0], dtype=float)
-    pos[0] = cell[0]/2 * map_size[2]
-    pos[1] = (map_size[1]-(cell[1])/2)*map_size[2]
+    pos[0] = cell[1] * (map_size[2]/2)
+    pos[1] = (map_size[1]*2-cell[0]) * (map_size[2]/2)
     return pos
 
 def pos2array(map_size, map, pos):
@@ -152,6 +181,6 @@ def base_map2array(map_size, tile):
     return np.array([round(x, 0), round(y, 0)])
 
 def tile2array(size, their_coord):
-    x = (2 * their_coord[0]) + 1
-    y = 2 * size[1] - 1 - 2 * their_coord[1]
+    y = (2 * their_coord[0]) + 1
+    x = 2 * size[1] - 1 - 2 * their_coord[1]
     return np.array([round(x, 0), round(y, 0)])

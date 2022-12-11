@@ -21,7 +21,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
     goal = helpers.map.tile2array(size, goal)
     grid = helpers.map.generate_grid(map, goal)
     finished = False
-    moves = [[0,-1], [1,-1], [1,0], [1,1], [0,1], [-1,1], [-1,0], [-1,-1]]  # 0,1,2,3,4,5,6,7 en array
+    moves = [[-1,0], [-1,1], [0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1]]  # 0,1,2,3,4,5,6,7 en array
     #offset_angle = 0   # vamo a no declararlo no vaya a ser que se este saltando los ifs...
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
@@ -98,12 +98,12 @@ def remakeMap(robot, size, map, goal, origin):
 def go_to_cell(robot, map, move, goal, clockwise, map_size):
     """actions.moves the robot given the goal array position being:\n
         actions.moves:          relative goals:\n
-        7   0   1       [-1,-1]  [0,-1]  [1,-1]\n
-        6   x   2       [-1,0]      x    [1,0]\n
-        5   4   3       [-1,1]    [0,1]   [1,1]\n
+        7   0   1       [-1,-1]  [-1,0]  [-1,1]\n
+        6   x   2       [0,-1]      x    [0,1]\n
+        5   4   3       [1,-1]    [1,0]  [1,1]\n
     with x facing up(0) and y facing left(6)"""
     goal = helpers.map.array2pos(map_size, map, goal)
-    logging.debug('RELATIVE CELL: {}\n IM GOING TO DO:'.format(move))
+    logging.debug('RELATIVE CELL: {}, IM GOING TO DO:'.format(move))
     try:
         if move == 0: 
             logging.debug('voy recto')
@@ -150,7 +150,6 @@ def go_to_cell(robot, map, move, goal, clockwise, map_size):
             logging.debug('giro izquierda y arco a la derecha')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.arc(robot, goal, clockwise = True)
-        logging.debug('ole ole terminao')
         return True
     except Exception:
         print(traceback.format_exc())

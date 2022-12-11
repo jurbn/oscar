@@ -46,8 +46,7 @@ def arc(robot, objctv, v = 0.1, clockwise = True):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
     mvmnt = objctv - [robot.x.value, robot.y.value]
-    logging.debug('el vector es: {}'.format(mvmnt))
-    R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1]) * (2*clockwise-1)  # TODO:OJO QUE R DEPENDE DE Y, aunque nos tenemos que fijar en el signo de x a veces tambien???
+    R = (pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1]) * (2*clockwise-1)
     logging.debug('LA R ES: {}'.format(R))
     w = v/R 
     th = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 

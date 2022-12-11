@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[0.1, 0.9, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
