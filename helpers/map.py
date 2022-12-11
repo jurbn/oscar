@@ -31,6 +31,14 @@ def read_map(file):
     map = np.loadtxt(file, dtype='int', skiprows=1)
     return size, map
 
+def next_cell_2(grid, moves, offset_angle, arr_pos, smallest_value):
+    max_move = len(moves)-1
+    for i in range(0, max_move):    # i is the relative move
+        real_index = offset_angle + i   # real_index is used to get the nearest cells
+        while real_index > max_move:    # if we're out of bounds, return to the boundaries
+            real_index -= max_move
+        possible_cell = arr_pos + moves[real_index]
+
 
 def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limpiar este codigo que esta guarro guarro
     # FUCIONAMIENTO DE ESTA COSA: basicamente recorremos los moves
@@ -59,12 +67,15 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limp
                 if not ((grid[watchout_cell_1[0], watchout_cell_1[1]] == -1) and (grid[watchout_cell_2[0], watchout_cell_2[1]] == -1)):
                     # si ninguna de las dos esta ocupada!
                     if (grid[watchout_cell_1[0], watchout_cell_1[1]] != -1) and (grid[watchout_cell_2[0], watchout_cell_2[1]] != -1):
-                        clockwise = 2   # TODO: pongo esto por ejemplo, pero podría elegir qué opción es mejor!
+                        logging.debug('Ninguna de las celdas está ocupada')
+                        clockwise = 2   # clockwise 2 implica que se elige el mejor en cada caso!
                     # si esta ocupada la anterior
                     elif grid[watchout_cell_1[0], watchout_cell_1[1]] == -1:
+                        logging.debug('Está ocupada la de la izda')
                         clockwise = 0
                     # si está ocupada la siguiente
                     elif grid[watchout_cell_2[0], watchout_cell_2[1]] == -1:
+                        logging.debug('Está ocupada la de la dcha')
                         clockwise = 1
                     relative_move = i
                     abs_destination = possible_cell
@@ -73,7 +84,8 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limp
                 relative_move = i
                 abs_destination = possible_cell
                 smallest_value = grid[int(possible_cell[0]), int(possible_cell[1])]
-                clockwise = 2
+                clockwise = 2   # clockwise 2 implica que se elige el mejor en cada caso!
+            logging.debug('Estoy considerando celda {} con grid_value {}'.format(relative_move, smallest_value))
     return relative_move, abs_destination, clockwise
 
 

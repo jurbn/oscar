@@ -29,16 +29,17 @@ def spin(robot, th, w = 1.5):
 def run(robot, objctv, v = 0.1):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     th = robot.th.value
-    print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
-    print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
-    print('abs resta: ', abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)
-    print('is near: ',helpers.location.is_near(robot, objctv, threshold=0.02))
+    # te los comento pq a mi me funciona el run y no los necesito! <3
+    #print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
+    #print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
+    #print('abs resta: ', abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)
+    #print('is near: ',helpers.location.is_near(robot, objctv, threshold=0.02))
     while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         near = robot.getFrontsonic() < 25
         if near:
             raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, 0)
-        print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
+        #print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
     robot.setSpeed(0, 0)
 
 def arc(robot, objctv, v = 0.1, clockwise = True):
