@@ -1,6 +1,8 @@
 import logging
 from tabulate import tabulate
 import numpy as np
+import helpers.location
+import math
 
 
 def draw_map(grid, robot, direction = None, pos = None):
@@ -163,7 +165,7 @@ def array2pos(map_size, map, cell):
     pos[1] = (map_size[1]*2-cell[0]) * (map_size[2]/2)
     return pos
 
-def pos2array(map_size, map, pos):
+def pos2array(map_size, pos): 
     """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
@@ -184,3 +186,45 @@ def tile2array(size, their_coord):
     y = (2 * their_coord[0]) + 1
     x = 2 * size[1] - 1 - 2 * their_coord[1]
     return np.array([round(x, 0), round(y, 0)])
+
+def distance_front_wall(robot, map, map_size, cells = 3):
+    rob_cell = pos2array(map_size, [robot.x.value, robot.y.value])
+    rob_cell = [int(cell) for cell in rob_cell]
+    if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # mira hacia arriba
+            for i in range (1, cells):
+                if (map[rob_cell[0] + i, rob_cell[1]]) == -1:
+                    return 0.2*i 
+    elif helpers.location.is_near_angle(robot.th.value, 0, threshold=math.pi/5): #derecha
+        for i in range (1, cells):
+                if (map[rob_cell[0], rob_cell[1] + i]) == -1:
+                    return 0.2*i 
+    elif helpers.location.is_near_angle(robot.th.value, -math.pi/2, threshold=math.pi/5): #abajo
+        for i in range (1, cells):
+                if (map[rob_cell[0] - i, rob_cell[1]]) == -1:
+                    return 0.2*i
+    elif helpers.location.is_near_angle(robot.th.value, math.pi, threshold=math.pi/5): #izquierda
+        for i in range (1, cells):
+                if (map[rob_cell[0], rob_cell[1] - i]) == -1:
+                    return 0.2*i
+    return None
+
+def distance_left_wall(robot, map, map_size, cells = 3):
+    rob_cell = pos2array(map_size, [robot.x.value, robot.y.value])
+    rob_cell = [int(cell) for cell in rob_cell]
+    if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # mira hacia arriba
+            for i in range (1, cells):
+                if (map[rob_cell[0], rob_cell[1] - i]) == -1:
+                    return 0.2*i 
+    elif helpers.location.is_near_angle(robot.th.value, 0, threshold=math.pi/5): #derecha
+        for i in range (1, cells):
+                if (map[rob_cell[0] + i, rob_cell[1]]) == -1:
+                    return 0.2*i 
+    elif helpers.location.is_near_angle(robot.th.value, -math.pi/2, threshold=math.pi/5): #abajo
+        for i in range (1, cells):
+                if (map[rob_cell[0], rob_cell[1] +i]) == -1:
+                    return 0.2*i
+    elif helpers.location.is_near_angle(robot.th.value, math.pi, threshold=math.pi/5): #izquierda
+        for i in range (1, cells):
+                if (map[rob_cell[0] - i, rob_cell[1]]) == -1:
+                    return 0.2*i
+    return None

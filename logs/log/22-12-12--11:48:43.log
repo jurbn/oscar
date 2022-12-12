@@ -1,0 +1,18 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 26629:
+INFO:root:Initial location: 0.2, 1.8, 0.0
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 57, in main
+    actions.map.navigateMap(oscar, [0, 4], [4, 1])
+  File "/home/pi/oscar/actions/map.py", line 36, in navigateMap
+    print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
+  File "/home/pi/oscar/helpers/map.py", line 191, in distance_front_wall
+    if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # mira hacia arriba
+NameError: name 'math' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

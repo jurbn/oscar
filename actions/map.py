@@ -26,14 +26,14 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
         #    robot.remakeMap(size, map, goal, origin)
-        arr_pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
+        arr_pos = helpers.map.pos2array(size, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
         #logging.debug('im in {}, {}'.format(arr_pos, robot.th.value))
         #logging.debug('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
         if grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
             finished = True
         else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
             smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
-
+            print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
             if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # sacamos el offset del movimiento relativo!
                 offset_angle = 0
             elif helpers.location.is_near_angle(robot.th.value, 0, threshold=math.pi/5):
@@ -49,17 +49,13 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)   # recorremos el mapa hasta llegar a la siguiente celda
 
             if not arrived: # no ha llegao
-                robot.setSpeed(0, 0)
                 grid = remakeMap(size, map, goal, origin)
-            else:
-                time.sleep(1)
-
     robot.setSpeed(0, 0)
     return True
 
 def remakeMap(robot, size, map, goal, origin):
     """Updates the map when the robot encounters an obstacle"""
-    pos = helpers.map.pos2array(size, map, [robot.x.value, robot.y.value])
+    pos = helpers.map.pos2array(size, [robot.x.value, robot.y.value])
     th = robot.th.value
     # check which direction is it facing...
     logging.debug('looking one way')
