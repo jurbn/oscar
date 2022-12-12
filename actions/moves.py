@@ -18,49 +18,52 @@ import helpers.simulation
 ###################
 # BASIC MOVEMENTS #
 ###################
-def spin(robot, th, w = 1.0):
+def spin(robot, th, w = 0.8):
     """Makes Oscar turn a specified angle (in radians)"""
+    w = (2*(th>=0)-1)*w
     th = helpers.maths.norm_pi(th + robot.th.value) 
-    w = (2*(th >= 0)-1)*w
-    while not helpers.location.is_near_angle(robot, th):
+    while not helpers.location.is_near_angle(robot, th, threshold=0.02):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.1):
+def run(robot, objctv, v = 0.2, detect_obstacles = False):
     """Makes Oscar go straight forward to the specified position (in meters)"""
-    th = robot.th.value
     # te los comento pq a mi me funciona el run y no los necesito! <3
     #print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
     #print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
     #print('abs resta: ', abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)
     #print('is near: ',helpers.location.is_near(robot, objctv, threshold=0.02))
+    th = robot.th.value
     while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
-        near = robot.getFrontsonic() < 10
-        if near:
+        near = robot.getFrontsonic() < 20
+        th = robot.th.value
+        if helpers.location.is_near_angle(th, 0, threshold=math.pi/5):
+            ob_th = 0
+        elif helpers.location.is_near_angle(th, math.pi/2, threshold=math.pi/5):
+            ob_th = math.pi/2
+        elif helpers.location.is_near_angle(th, math.pi, threshold=math.pi/5):
+            ob_th = math.pi
+        elif helpers.location.is_near_angle(th, -math.pi/2, threshold=math.pi/5):
+            ob_th = -math.pi/2
+        w = (ob_th-th)
+        if near and detect_obstacles:
             raise Exception('OH NOOO A WALL <:o')
-        robot.setSpeed(v, 0)
+        robot.setSpeed(v, w)
         #print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
-    robot.setSpeed(0, 0)
-
-def arc(robot, objctv, v = 0.1, clockwise = True):
+def arc(robot, objctv, v = 0.15, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
     mvmnt = objctv - [robot.x.value, robot.y.value]
-    th_end = helpers.maths.norm_pi((2*clockwise-1)*math.pi/2 + robot.th.value)
-    x = math.sin(robot.th.value) * mvmnt[0]
-    y = math.cos(robot.th.value) * mvmnt[1]
-    R = (pow(x,2) + pow(y,2))/(y)
+    R = abs((pow(mvmnt[0],2) + pow(mvmnt[1],2))/(2*mvmnt[1]))
     logging.debug('LA R ES: {}'.format(R))
-    w = v/R
-    while not (helpers.location.is_near(robot, objctv) or helpers.location.is_near_angle(robot, th_end)):
-        print(robot.th.value)
-        near = robot.getFrontsonic() < 10
-        if near:
+    w = v/R  * -(2*clockwise-1)
+    th_end = helpers.maths.norm_pi((2*(w >= 0)-1)*math.pi/2 + robot.th.value) 
+    while not (helpers.location.is_near(robot, objctv, threshold=0.001) or helpers.location.is_near_angle(robot, th_end, threshold=0.02)):
+        near = robot.getFrontsonic() < 20
+        if near and detect_obstacles:
             robot.setSpeed(0,0)
             raise Exception('OH NOOO A WALL >:o')
         robot.setSpeed(v, w)
-    robot.setSpeed(0,0)
-
 #TODO: def arc(robot, goal) funcion que calcule arcos en funcion del destino O del radio especificado
 
 def abrupt_stop(robot):

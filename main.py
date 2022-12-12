@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[1, 1.6, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -34,7 +34,7 @@ def main(args):
         elif args.fcn == 'tronchopocho':
             mv.tronchopocho(oscar)
         elif args.fcn == 'spin':
-            mv.spin(oscar, 3.1416, 5)
+            mv.spin(oscar, math.pi, 0.8)
         elif args.fcn == 'run':
             mv.run(oscar, [1,1.8])
         elif args.fcn == 'stop':
@@ -57,6 +57,8 @@ def main(args):
             actions.map.navigateMap(oscar, [0, 4], [4, 1])
         elif args.fcn == 'cell':
             actions.map.go_to_cell(oscar, oscar.map, 1, [2,2], False, oscar.map_size)
+        elif args.fcn == 'plot':
+            helpers.plot.plot_file('logs/odometry/22-12-12--13:19:07.csv', 'maps/mapa3.txt')
         
         #########################
         #       the thing       #
@@ -76,20 +78,20 @@ def main(args):
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file)
 
     except KeyboardInterrupt:
         logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file)
     except Exception as error:
         logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file)
+        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file)
    
    
     # In the event of a keyboard interruption, we stop the robot's movement 

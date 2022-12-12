@@ -197,15 +197,15 @@ class Robot:
             self.th.value = th
             self.lock_odometry.release()
             self.location = [self.x.value, self.y.value, self.th.value]
-            self.cell = helpers.map.pos2array(self.map_size, self.map, self.location)  # updates the cell!
-            
+            self.cell = helpers.map.pos2array(self.map_size, self.location)  # updates the cell!     
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
             tEnd = time.clock()
             time.sleep(self.odometry_period - tEnd + tIni)
+        logging.info('Odometry was stopped')
+
         
     def stopOdometry(self):
         """Must be called when a stop on odometry is desired"""
-        logging.info('Odometry was stopped')
         self.finished.value = True
