@@ -59,14 +59,14 @@ def remakeMap(robot, size, map, goal):
     th = robot.th.value
     # check which direction is it facing...
     logging.debug('looking right')
-    actions.moves.spin(robot, -2.2143)
-    time.sleep(2)
+    actions.moves.spin(robot, -1.1075)
+    time.sleep(0.05)
     obstacle_right = robot.getFrontsonic() < 50  # 50 is more than enough (calculated it :D)
-    actions.moves.spin(robot, 4.4286)
-    time.sleep(2)
+    actions.moves.spin(robot, 2.2149)
+    time.sleep(0.05)
     obstacle_left = robot.getFrontsonic() < 50  # 50 is more than enough (calculated it :D)
-    actions.moves.spin(robot, -2.2143)
-    time.sleep(2)
+    actions.moves.spin(robot, -1.1075)
+    time.sleep(0.05)
     if th <= math.pi/4 and th >= -math.pi/4: # mirando hacia arriba
         map[int(pos[0]), int(pos[1])-1] = 0
         map[int(pos[0])-1, int(pos[1])-1] = 1 * (not obstacle_left)

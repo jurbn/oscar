@@ -31,7 +31,8 @@ def read_map(file):
     map = np.loadtxt(file, dtype='int', skiprows=1)
     return size, map
 
-def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
+def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMALLEST VALUE CUANDO TIENES QUE REMAKEAR EL MAPA???
+    smallest_value = 100
     max_move = len(moves)-1
     for i in range(0, max_move+1):    # i is the relative move
         real_index = offset_angle + i   # real_index is used to get the nearest cells

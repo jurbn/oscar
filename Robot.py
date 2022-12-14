@@ -14,6 +14,7 @@ import time     # import the time library for the sleep function
 import math
 import csv
 import cv2 as cv
+import numpy as np
 import logging
 from multiprocessing import Process, Value, Lock
 
@@ -50,12 +51,14 @@ class Robot:
 
         self.BP = brickpi3.BrickPi3()
 
-        self.left_motor = self.BP.PORT_A
+        self.left_motor = self.BP.PORT_C
         self.right_motor = self.BP.PORT_B
-        self.claw_motor = self.BP.PORT_C
+        self.claw_motor = self.BP.PORT_A
 
         self.gyro = self.BP.PORT_2
         self.frontasonic = self.BP.PORT_1
+        self.laterasonic = self.BP.PORT_4
+        self.light = self.BP.PORT_3
 
         self.BP.reset_all()
         
@@ -64,6 +67,7 @@ class Robot:
 
         self.BP.set_sensor_type(self.gyro, self.BP.SENSOR_TYPE.EV3_GYRO_ABS_DPS)
         self.BP.set_sensor_type(self.frontasonic, self.BP.SENSOR_TYPE.NXT_ULTRASONIC)
+        self.BP.set_sensor_type(self.light, self.BP.SENSOR_TYPE.NXT_LIGHT_ON)
 
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
@@ -88,11 +92,37 @@ class Robot:
                 error = False
         self.startOdometry()
 
+    def isFloorBlack(self):
+        """Returns True if black, False if white"""
+        i = 0
+        value_arr = np.array([], dtype='float')
+        while i < 5:
+            time.sleep(0.02)
+            try:
+                value = self.BP.get_sensor(self.light)
+            except Exception:
+                logging.info('One of the light values was not valid')
+            else:
+                value_arr = np.append(value_arr, value)
+        value = np.median(value_arr)
+        return value > 2700 # if true, black; if false, white
+            
 
     def getFrontsonic(self):
+        #i = 0
+        #value_arr = np.array([], dtype='float')
+        #while i < 5:
         time.sleep(0.05)
-        value = self.BP.get_sensor(self.frontasonic)
-        return value
+        try:
+            value = self.BP.get_sensor(self.frontasonic)
+        except Exception:
+            logging.info('One of the frontsonic values was invalid.')
+        else:
+        #        value_arr = np.append(value_arr, value)
+        #        print(value_arr)
+        #        i += 1
+        #value = np.median(value_arr)
+            return value
 
     def startTeabag(self):
         self.finish_tb.value = False

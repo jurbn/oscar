@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[1, 1.6, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -58,7 +58,7 @@ def main(args):
         elif args.fcn == 'cell':
             actions.map.go_to_cell(oscar, oscar.map, 1, [2,2], False, oscar.map_size)
         elif args.fcn == 'plot':
-            helpers.plot.plot_file('logs/odometry/22-12-12--13:19:07.csv', 'maps/mapa3.txt')
+            helpers.plot.plot_file('logs/odometry/22-12-14--17:16:48.csv', 'maps/mapa3.txt')
         
         #########################
         #       the thing       #
