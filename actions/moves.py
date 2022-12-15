@@ -26,7 +26,7 @@ def spin(robot, th, w = 0.8):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.125, detect_obstacles = False):
+def run(robot, objctv, v = 0.1, detect_obstacles = False):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     # te los comento pq a mi me funciona el run y no los necesito! <3
     #print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
@@ -53,7 +53,7 @@ def run(robot, objctv, v = 0.125, detect_obstacles = False):
             raise Exception('OH NOOO A WALL <:o')
         robot.setSpeed(v, w)
         #print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
-def arc(robot, objctv, v = 0.125, clockwise = True, detect_obstacles = False):
+def arc(robot, objctv, v = 0.1, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
     mvmnt = objctv - [robot.x.value, robot.y.value]

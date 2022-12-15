@@ -68,9 +68,9 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
                         clockwise = 1
                     elif watchout_grid_1 != -1 and watchout_grid_2 != -1:
                         clockwise = 2
-                relative_move = i
-                abs_destination = possible_cell
-                smallest_value = grid_value
+                    relative_move = i
+                    abs_destination = possible_cell
+                    smallest_value = grid_value
     return relative_move, abs_destination, clockwise
 
 
