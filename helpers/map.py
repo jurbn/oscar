@@ -32,6 +32,7 @@ def read_map(file):
 def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMALLEST VALUE CUANDO TIENES QUE REMAKEAR EL MAPA???
     smallest_value = 100
     max_move = len(moves)-1
+
     for i in range(0, max_move+1):    # i is the relative move
         real_index = offset_angle + i   # real_index is used to get the nearest cells
         while real_index > max_move:    # if we're out of bounds, return to the boundaries
@@ -39,44 +40,64 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
         possible_cell = arr_pos + moves[real_index]
         grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
         if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell
+            
+            #FIXME: hay que tener en cuenta los casos en los cuales los index 1 se pueden salirrr
+            right_index_2 = real_index - 2
+            left_index_2 = real_index + 2
+            while right_index_2 < 0:  # correct the indexes in case we went oob
+                right_index_2 += (max_move + 1)
+            right_index_1 = right_index_2 + 1
+            while left_index_2 > max_move:
+                left_index_2 -= (max_move + 1)
+            left_index_1 = left_index_2 - 1
+
+            #TODO: que priorice clockwise o no en pl<n eficiencia o algo
             if i % 2 == 0:    # if its a lateral
-                clockwise = 2   # 2 means idgaf TODO: Aquí van los arcos grandes y taL
-                relative_move = i
-                abs_destination = possible_cell
-                smallest_value = grid_value
-            else:   # if its a corner
-                watchout_index_1 = real_index - 1
-                watchout_index_2 = real_index + 1
-                while watchout_index_1 < 0:  # correct the indexes in case we went oob
-                    watchout_index_1 += (max_move + 1)
-                while watchout_index_2 > max_move:
-                    watchout_index_2 -= (max_move + 1)
-                watchout_1 = arr_pos + moves[watchout_index_1]  # we determine the pos of each watchout on the array
-                watchout_2 = arr_pos + moves[watchout_index_2]
-                watchout_grid_1 = grid[int(watchout_1[0]), int(watchout_1[1])]    # we get the grid value of each watchout
-                watchout_grid_2 = grid[int(watchout_2[0]), int(watchout_2[1])]
-                if not (watchout_grid_1 == -1 and watchout_grid_2 == -1):   # if not both of them are -1
-                    if watchout_grid_1 == -1:   # if it's just the first
-                        clockwise = 0
-                    elif watchout_grid_2 == -1:   # if it's just the second
-                        clockwise = 1
-                    elif watchout_grid_1 != -1 and watchout_grid_2 != -1:
-                        clockwise = 2
+                #can go straight to the tile:
+                if are_cells_connected([arr_pos, arr_pos+moves[i]], grid): 
+                    clockwise = 3
                     relative_move = i
                     abs_destination = possible_cell
                     smallest_value = grid_value
+                #can make a big clockwise turn:
+                elif are_cells_connected([arr_pos, arr_pos+moves[right_index_2], arr_pos+moves[right_index_1], arr_pos+moves[i]], grid): 
+                    clockwise = 1   
+                    relative_move = i
+                    abs_destination = possible_cell
+                    smallest_value = grid_value
+                #can make a big anti-clockwise turn:
+                elif are_cells_connected([arr_pos, arr_pos+moves[left_index_2], arr_pos+moves[left_index_1], arr_pos+moves[i]], grid): 
+                    clockwise = 0   
+                    relative_move = i
+                    abs_destination = possible_cell
+                    smallest_value = grid_value
+
+            else:   # if its a corner 
+                #can make a clockwise turn:
+                if are_cells_connected([arr_pos, arr_pos+moves[right_index_1], arr_pos+moves[i]], grid):
+                    clockwise = 1   
+                    relative_move = i
+                    abs_destination = possible_cell
+                    smallest_value = grid_value
+                #can make a anti-clockwise turn:
+                elif are_cells_connected([arr_pos, arr_pos+moves[right_index_1], arr_pos+moves[i]], grid):
+                    clockwise = 0   
+                    relative_move = i
+                    abs_destination = possible_cell
+                    smallest_value = grid_value
+
     return relative_move, abs_destination, clockwise
 
 def are_cells_connected(cells, grid):
     connected = True
     i = 0
-    while (i < len(cells)) and connected:
+    while (i < len(cells) - 1) and connected:
         if(cells[i][0] == cells[i+1][0]): #coinciden en X
-            wall_check = [cells[i][0], (cells[i][1]+cells[i+1][1])/2]
-            connected = (grid[wall_check] == -1)
+            wall_check = [int(cells[i][0]), int((cells[i][1]+cells[i+1][1])/2)]
+            connected = (grid[wall_check[0], wall_check[1]] != -1)
         else: #coinciden en Y
-            wall_check = [(cells[i][0] + cells[i+1][0])/2, cells[i][1]]
-            connected = (grid[wall_check] == -1)
+            wall_check = [int((cells[i][0] + cells[i+1][0])/2), int(cells[i][1])]
+            connected = (grid[wall_check[0], wall_check[1]] != -1)
         i += 1
     return connected
 
