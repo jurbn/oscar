@@ -30,3 +30,28 @@ def absolute_offset(robot, distance=0):
     #plt.plot(final_pos[0], final_pos[1], 'bx')
     # plt.show()
     return final_pos
+
+def get_robot_quadrant(robot, index = False):
+    """Returns the nearest n*pi/2"""
+    th = robot.th.value
+    if is_near_angle(th, 0, threshold=math.pi/5):
+        if index:
+            ob_th = 0
+        else:
+            ob_th = 0
+    elif is_near_angle(th, math.pi/2, threshold=math.pi/5):
+        if index:
+            ob_th = 6
+        else:
+            ob_th = math.pi/2
+    elif is_near_angle(th, math.pi, threshold=math.pi/5):
+        if index:
+            ob_th = 4
+        else:
+            ob_th = math.pi
+    elif is_near_angle(th, -math.pi/2, threshold=math.pi/5):
+        if index:
+            ob_th = 2
+        else:
+            ob_th = -math.pi/2
+    return ob_th

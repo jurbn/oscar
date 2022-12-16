@@ -26,33 +26,31 @@ def spin(robot, th, w = 0.8):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.1, detect_obstacles = False):
+def run(robot, objctv, relative = False, v = 0.1, detect_obstacles = False):
     """Makes Oscar go straight forward to the specified position (in meters)"""
-    # te los comento pq a mi me funciona el run y no los necesito! <3
-    #print('IM IN: {}'.format(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2))))
-    #print('I NEED: {}'.format(math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))))
-    #print('abs resta: ', abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)
-    #print('is near: ',helpers.location.is_near(robot, objctv, threshold=0.02))
     th = robot.th.value
-    while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
-        if detect_obstacles:
-            near = robot.getFrontsonic() < 20
-        else:
-            near = False
-        th = robot.th.value
-        if helpers.location.is_near_angle(th, 0, threshold=math.pi/5):
-            ob_th = 0
-        elif helpers.location.is_near_angle(th, math.pi/2, threshold=math.pi/5):
-            ob_th = math.pi/2
-        elif helpers.location.is_near_angle(th, math.pi, threshold=math.pi/5):
-            ob_th = math.pi
-        elif helpers.location.is_near_angle(th, -math.pi/2, threshold=math.pi/5):
-            ob_th = -math.pi/2
-        w = (ob_th-th)
-        if near:
+    if detect_obstacles:
+        if robot.getFrontsonic() < 20:
             raise Exception('OH NOOO A WALL <:o')
+    if relative:
+        relative_moves = [[0,objctv], [objctv, 0], [0, -objctv], [-objctv, 0]]
+        angle_index = helpers.location.get_robot_quadrant(robot, index=True)/2
+        move = relative_moves[int(angle_index)]
+        objctv = [robot.x.value + move[0], robot.y.value + move[1]]
+    print(objctv)
+    print('c1: {}'.format((not helpers.location.is_near(robot, objctv, threshold=0.02))))
+    print('c2: {}'.format((abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)))
+    
+    while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
+        th = robot.th.value
+        ob_th = helpers.location.get_robot_quadrant(robot)
+        w = (ob_th-th)
         robot.setSpeed(v, w)
-        #print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
+        time.sleep(0.01)
+        print('c1: {}'.format((not helpers.location.is_near(robot, objctv, threshold=0.02))))
+        print('c2: {}'.format((abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02)))
+    robot.setSpeed(0, 0)
+
 def arc(robot, objctv, v = 0.1, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)

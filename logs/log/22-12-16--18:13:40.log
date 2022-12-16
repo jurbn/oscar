@@ -1,0 +1,17 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 20390:
+INFO:root:Initial location: 0.2, 1.8, -1.5707963267948966
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 41, in main
+    mv.run(oscar, 0.2, relative=True)
+  File "/home/pi/oscar/actions/moves.py", line 38, in run
+    objctv = [robot.x.value, robot.y.value] +  relative_moves[angle_index]
+TypeError: list indices must be integers or slices, not float
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos

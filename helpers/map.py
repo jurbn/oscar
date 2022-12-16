@@ -4,7 +4,6 @@ import numpy as np
 import helpers.location
 import math
 
-
 def draw_map(grid, robot, direction = None, pos = None):
     """
     Prints the grid and, if given, the direction of the robot
@@ -20,7 +19,6 @@ def draw_map(grid, robot, direction = None, pos = None):
     if (direction is not None) and (pos is not None):
         ascii_grid[int(pos[0])][int(pos[1])] = arrow_list[int(direction)]
     logging.debug(tabulate(ascii_grid, tablefmt='grid'))
-
 
 def read_map(file):
     """This function returns the size and arrays of the given map.
@@ -40,23 +38,19 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
             real_index -= (max_move + 1)    # if its 9, 9-8 = 1 :)
         possible_cell = arr_pos + moves[real_index]
         grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
-        #logging.debug('MY OFFSET VALUE IS {}'.format(offset_angle))
-        #logging.debug('im considering {} ({}, {}) w/ grid value {}'.format(i, real_index, possible_cell, grid_value))
         if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell
-            if i % 2 == 0:    # if its an edge
-                clockwise = 2   # 2 means idgaf
+            if i % 2 == 0:    # if its a lateral
+                clockwise = 2   # 2 means idgaf TODO: Aquí van los arcos grandes y taL
                 relative_move = i
                 abs_destination = possible_cell
                 smallest_value = grid_value
             else:   # if its a corner
                 watchout_index_1 = real_index - 1
                 watchout_index_2 = real_index + 1
-                #logging.debug('indexes are {}, {}'.format(watchout_index_1, watchout_index_2))
                 while watchout_index_1 < 0:  # correct the indexes in case we went oob
                     watchout_index_1 += (max_move + 1)
                 while watchout_index_2 > max_move:
                     watchout_index_2 -= (max_move + 1)
-                #logging.debug('NEW indexes are {}, {}'.format(watchout_index_1, watchout_index_2))
                 watchout_1 = arr_pos + moves[watchout_index_1]  # we determine the pos of each watchout on the array
                 watchout_2 = arr_pos + moves[watchout_index_2]
                 watchout_grid_1 = grid[int(watchout_1[0]), int(watchout_1[1])]    # we get the grid value of each watchout
@@ -73,6 +67,18 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
                     smallest_value = grid_value
     return relative_move, abs_destination, clockwise
 
+def are_cells_connected(cells, grid):
+    connected = True
+    i = 0
+    while (i < len(cells)) and connected:
+        if(cells[i][0] == cells[i+1][0]): #coinciden en X
+            wall_check = [cells[i][0], (cells[i][1]+cells[i+1][1])/2]
+            connected = (grid[wall_check] == -1)
+        else: #coinciden en Y
+            wall_check = [(cells[i][0] + cells[i+1][0])/2, cells[i][1]]
+            connected = (grid[wall_check] == -1)
+        i += 1
+    return connected
 
 def next_cell_va_mal(grid, moves, offset_angle, arr_pos, smallest_value):  # TODO: limpiar este codigo que esta guarro guarro
     # FUCIONAMIENTO DE ESTA COSA: basicamente recorremos los moves
@@ -122,7 +128,6 @@ def next_cell_va_mal(grid, moves, offset_angle, arr_pos, smallest_value):  # TOD
             logging.debug('Estoy considerando celda {} con grid_value {}'.format(relative_move, smallest_value))
     return relative_move, abs_destination, clockwise
 
-
 def generate_grid(map, goal):
     """Generates a grid with the given map and goal.\n
     This is meant to be executed once and use this information to navigate through the circuit (though we may need to run it when we find unexpected obstacles)"""
@@ -155,7 +160,6 @@ def generate_grid(map, goal):
         else:
             finished = True
     return grid
-
 
 def array2pos(map_size, map, cell):
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n

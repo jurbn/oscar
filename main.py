@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2+0.1]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -37,6 +37,8 @@ def main(args):
             mv.spin(oscar, math.pi, 0.8)
         elif args.fcn == 'run':
             mv.run(oscar, [1,1.8])
+        elif args.fcn == 'relrun':
+            mv.run(oscar, 0.2, relative=True)
         elif args.fcn == 'stop':
             oscar.setSpeed(0, 0)
         elif args.fcn == 'ball':
