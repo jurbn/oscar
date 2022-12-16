@@ -58,7 +58,7 @@ def main(args):
         elif args.fcn == 'cell':
             actions.map.go_to_cell(oscar, oscar.map, 1, [2,2], False, oscar.map_size)
         elif args.fcn == 'plot':
-            helpers.plot.plot_file('logs/odometry/22-12-14--17:16:48.csv', 'maps/mapa3.txt')
+            helpers.plot.plot_file('logs/odometry/22-12-15--11:49:12.csv', 'maps/mapa3.txt')
         
         #########################
         #       the thing       #

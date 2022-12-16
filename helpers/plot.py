@@ -13,15 +13,14 @@ def plot_file(file_name, map_name):
     size = [int(param) for param in size]
     fig = plt.figure()
     mapLine = 'p-'
-    pathLine = 'r-'
     df = pd.read_csv(file_name)
-    axi = fig.add_subplot(111)   
+    ax = fig.add_subplot(111)   
     
     # Creamos una figura grid, que represente las paredes del mapa:
     plt.rc('grid', linestyle ="--", color='gray')
     plt.grid(True)
     plt.tight_layout()
-    x_t = range(0, (size[0] + 1)* size[2], size[2])
+    x_t = range(0, (size[0] + 1)* size[2], size[2]) #TODO: bajar las escalas del grid para que se vea cuadrado y coincida con las baldosas
     y_t = range(0, (size[1] + 1) * size[2], size[2])
     #x_labels = [str(n/1000) for n in x_t]
     #y_labels = [str(n/1000) for n in y_t]
@@ -29,31 +28,32 @@ def plot_file(file_name, map_name):
     #plt.yticks(y_t, y_labels)
 
     #the main frame of the map:
-    X = np.array([0, size[0], size[0], 0, 0]) * size[2] 
-    Y = np.array([0, 0, size[1], size[1], 0]) * size[2]
+    X = np.array([0, size[0], size[0], 0, 0]) * size[2] / 1000 
+    Y = np.array([0, 0, size[1], size[1], 0]) * size[2] / 1000
     base = plt.gca().transData
     rot = trans.Affine2D().rotate_deg(270)
-    #axi.plot(X, Y, mapLine)
+    ax.plot(X, Y, mapLine)
     #vertical walls:
     for i in range(2, 2 * size[1], 2):
         for j in range(1, 2 * size[0], 2):
             if not map[i,j]:
                 cx = np.floor((i-1)/2) - 5
-                cy = np.floor((j-1)/2) 
-                X = np.array([cx + 1, cx + 1]) * size[2]
-                Y = np.array([cy, cy + 1]) * size[2]
-                #axi.plot(X, Y, mapLine, transform = rot + base)
+                cy = np.floor((j-1)/2)
+                X = np.array([cx + 1, cx + 1]) * size[2] / 1000
+                Y = np.array([cy, cy + 1]) * size[2] / 1000
+                ax.plot(X, Y, mapLine, transform = rot + base)
     #horizontal walls:
     for j in range(2, 2 * size[0], 2):
         for i in range(1, 2 * size[1], 2):
             if not map[i,j]:
                 cx = np.floor((i-1)/2) - 5
-                cy = np.floor((j-1)/2) 
-                X = np.array([cx, cx + 1]) * size[2]
-                Y = np.array([cy + 1, cy + 1]) * size[2]
-                #axi.plot(X, Y, mapLine, transform = rot + base)
+                cy = np.floor((j-1)/2)
+                X = np.array([cx, cx + 1]) * size[2] / 1000
+                Y = np.array([cy + 1, cy + 1]) * size[2] / 1000
+                ax.plot(X, Y, mapLine, transform = rot + base)
+    ax.plot(df['x'], df['y']) 
     #plt.axis('equal')
-    axi.plot(df['x'], df['y']) #TODO: plotear la wea del recorrido q no se me olvide IGUAL encajar en unos ejes fijos como opción?
+    plt.gca().set_aspect("equal")
     plt.show()    
 
 
