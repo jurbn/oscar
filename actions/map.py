@@ -45,6 +45,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos)
             [relative_move, abs_destination, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)   # recorremos el mapa hasta llegar a la siguiente celda
+            print('ARRIVED???? {}'.format(arrived))
             if not arrived: # no ha llegao
                 grid = remakeMap(robot, size, map, goal, offset_angle=offset_angle)
     robot.setSpeed(0, 0)
