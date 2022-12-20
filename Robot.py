@@ -37,7 +37,6 @@ class Robot:
         self.w_max = 100
         self.v_max = 0.5
         
-        self.location = [0, 0, 0]
         self.offset = init_position
 
         self.map_file = 'maps/mapa3.txt'
@@ -179,7 +178,7 @@ class Robot:
         return frame
 
 
-    def readOdometry(self): #TODO: borrar esto pq no se usa y ahora tenemos self.location
+    def readOdometry(self):
         """Returns current value of odometry estimation"""
         return self.x.value, self.y.value, self.th.value
 
@@ -226,8 +225,6 @@ class Robot:
             self.y.value += s * math.sin(self.th.value+(th-self.th.value)/2)    #s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
-            self.location = [self.x.value, self.y.value, self.th.value]
-            self.cell = helpers.map.pos2array(self.map_size, self.location)  # updates the cell!     
             with open(self.odometry_file, 'a', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])

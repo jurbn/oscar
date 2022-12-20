@@ -26,23 +26,27 @@ def spin(robot, th, w = 0.8):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.1, detect_obstacles = False):
+def run(robot, objctv, v = 0.1, detect_obstacles = False, relative = False):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     th = robot.th.value
+    #if relative:
+    #    th = helpers.location.get_robot_quadrant(robot)
+    #    objctv = 
     while (not helpers.location.is_near(robot, objctv, threshold=0.02)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > 0.02): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega
         if detect_obstacles:
             near = robot.getFrontsonic() < 20
         else:
             near = False
         th = robot.th.value
-        if helpers.location.is_near_angle(th, 0, threshold=math.pi/5):
-            ob_th = 0
-        elif helpers.location.is_near_angle(th, math.pi/2, threshold=math.pi/5):
-            ob_th = math.pi/2
-        elif helpers.location.is_near_angle(th, math.pi, threshold=math.pi/5):
-            ob_th = math.pi
-        elif helpers.location.is_near_angle(th, -math.pi/2, threshold=math.pi/5):
-            ob_th = -math.pi/2
+        ob_th = helpers.location.get_robot_quadrant(robot)
+        # if helpers.location.is_near_angle(th, 0, threshold=math.pi/5):
+        #     ob_th = 0
+        # elif helpers.location.is_near_angle(th, math.pi/2, threshold=math.pi/5):
+        #     ob_th = math.pi/2
+        # elif helpers.location.is_near_angle(th, math.pi, threshold=math.pi/5):
+        #     ob_th = math.pi
+        # elif helpers.location.is_near_angle(th, -math.pi/2, threshold=math.pi/5):
+        #     ob_th = -math.pi/2
         w = (ob_th-th)
         if near:
             raise Exception('OH NOOO A WALL <:o')
