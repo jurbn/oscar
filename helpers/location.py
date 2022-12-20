@@ -36,17 +36,17 @@ def get_robot_quadrant(robot, index = False):
     th = robot.th.value
     if is_near_angle(th, 0, threshold=math.pi/5):
         if index:
-            ob_th = 0
+            ob_th = 1
         else:
             ob_th = 0
     elif is_near_angle(th, math.pi/2, threshold=math.pi/5):
         if index:
-            ob_th = 6
+            ob_th = 0
         else:
             ob_th = math.pi/2
     elif is_near_angle(th, math.pi, threshold=math.pi/5):
         if index:
-            ob_th = 4
+            ob_th = 3
         else:
             ob_th = math.pi
     elif is_near_angle(th, -math.pi/2, threshold=math.pi/5):

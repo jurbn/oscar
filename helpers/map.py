@@ -4,7 +4,7 @@ import numpy as np
 import helpers.location
 import math
 
-def draw_map(grid, robot, direction = None, pos = None):
+def draw_map(grid, robot, direction = None, pos = None, tile_map = False):
     """
     Prints the grid and, if given, the direction of the robot
     """
@@ -14,6 +14,8 @@ def draw_map(grid, robot, direction = None, pos = None):
     #sustituimos las paredes por 'bloques' (ASCII 219) 
     for j in range (len(grid[0, :])):
         for i in range (len(grid[:, 0])):
+            if tile_map and ((j%2 == 0) or (i%2 == 0)):
+                ascii_grid[i][j] = '\0'
             if (grid[i,j] == -1):
                 ascii_grid[i][j] = '█'
     if (direction is not None) and (pos is not None):
@@ -32,15 +34,20 @@ def read_map(file):
 def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMALLEST VALUE CUANDO TIENES QUE REMAKEAR EL MAPA???
     smallest_value = 100
     max_move = len(moves)-1
+    print(moves)
 
     for i in range(0, max_move+1):    # i is the relative move
         real_index = offset_angle + i   # real_index is used to get the nearest cells
         while real_index > max_move:    # if we're out of bounds, return to the boundaries
             real_index -= (max_move + 1)    # if its 9, 9-8 = 1 :)
+        
         possible_cell = arr_pos + moves[real_index]
         grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
-        if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell
-            
+        if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell   
+            print('I AND RINDEX')
+            print(i, real_index)
+            print(possible_cell)
+         
             right_index_1 = norm_index(real_index - 1, max_move)
             right_index_2 = norm_index(real_index - 2, max_move)
             left_index_1 = norm_index(real_index + 1, max_move)
@@ -72,18 +79,32 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
 
             else:   # if its a corner 
                 #can make a clockwise turn:
-                if are_cells_connected([arr_pos, arr_pos+moves[right_index_1], possible_cell], grid):
-                    clockwise = 1   
-                    relative_move = i
-                    abs_destination = [possible_cell]
-                    smallest_value = grid_value
-                #can make a anti-clockwise turn:
-                elif are_cells_connected([arr_pos, arr_pos+moves[right_index_1], possible_cell], grid):
-                    clockwise = 0   
-                    relative_move = i
-                    abs_destination = [possible_cell]
-                    smallest_value = grid_value
-
+                if i == 1:
+                    if are_cells_connected([arr_pos, arr_pos+moves[right_index_1], possible_cell], grid):
+                        clockwise = 1   
+                        relative_move = i
+                        abs_destination = [possible_cell]
+                        smallest_value = grid_value
+                    #can make a anti-clockwise turn:
+                    elif are_cells_connected([arr_pos, arr_pos+moves[left_index_1], possible_cell], grid):
+                        clockwise = 0   
+                        relative_move = i
+                        abs_destination = [possible_cell]
+                        smallest_value = grid_value
+                else:
+                    if are_cells_connected([arr_pos, arr_pos+moves[left_index_1], possible_cell], grid):
+                        clockwise = 0
+                        relative_move = i
+                        abs_destination = [possible_cell]
+                        smallest_value = grid_value
+                    #can make a anti-clockwise turn:
+                    elif are_cells_connected([arr_pos, arr_pos+moves[right_index_1], possible_cell], grid):
+                        clockwise = 1   
+                        relative_move = i
+                        abs_destination = [possible_cell]
+                        smallest_value = grid_value
+    print('RELATIVE MOVEEEEEE')
+    print(relative_move)
     return relative_move, abs_destination, clockwise
 
 def norm_index(i, max_i):

@@ -21,7 +21,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
     goal = helpers.map.tile2array(size, goal)
     grid = helpers.map.generate_grid(map, goal)
     finished = False
-    moves = [[2, 0], [2, -2], [0, -2], [-2, -2], [-2, 0], [-2, 2], [0, 2], [2, 2]]  # 0,1,2,3,4,5,6,7 en tiles (2arr=1tile)
+    moves = [[-2, 0], [-2, +2], [0, 2], [2, 2], [2, 0], [2, -2], [0, -2], [-2, -2]]  # 0,1,2,3,4,5,6,7 en tiles (2arr=1tile)
     #offset_angle = 0   # vamo a no declararlo no vaya a ser que se este saltando los ifs...
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
@@ -35,7 +35,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
             print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
             offset_angle = helpers.location.get_robot_quadrant(robot, index=True) * 2
-            helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos)
+            helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos, True)
             [relative_move, abs_destinations, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             for abs_destination in abs_destinations:
                 arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)
@@ -61,7 +61,7 @@ def remakeMap(robot, size, map, goal, offset_angle = 0):
     logging.debug('NEW GRID HAS BEEN GENERATED :D')
     return grid
 
-def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
+def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el error tiene que estar aqui next_cell funciona
     """actions.moves the robot given the goal array position being:\n
         actions.moves:          relative goals:\n
         7   0   1       [-1,-1]  [-1,0]  [-1,1]\n
@@ -75,10 +75,10 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
         if move == 0: 
             logging.debug('voy recto')
             actions.moves.run(robot, goal, detect_obstacles=True)
-        elif move == 1 and (clockwise or clockwise == 2):
+        elif move == 1 and (clockwise in (1, 2)):
             logging.debug('arco a la derecha')
             actions.moves.arc(robot, goal, clockwise = True, detect_obstacles=True)
-        elif move == 1 and not clockwise:
+        elif move == 1 and (clockwise is 0):
             logging.debug('giro derecha y arco a la izquierda')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.arc(robot, goal, clockwise = False, detect_obstacles=True)
@@ -86,11 +86,11 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
             logging.debug('giro derecha y voy recto')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.run(robot, goal, detect_obstacles=True)
-        elif move == 3 and (clockwise or clockwise == 2):
+        elif move == 3 and (clockwise in (1, 2)):
             logging.debug('giro derecha y arco a la derecha')
             actions.moves.spin(robot, -math.pi/2)
             actions.moves.arc(robot, goal, clockwise = True, detect_obstacles=True)
-        elif move == 3 and not clockwise:
+        elif move == 3 and (clockwise is 0):
             logging.debug('giro 180 y arco a la izquierda')
             actions.moves.spin(robot, math.pi)
             actions.moves.arc(robot, goal, clockwise = False, detect_obstacles=True)
@@ -98,11 +98,11 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
             logging.debug('giro 180 y voy recto')
             actions.moves.spin(robot, math.pi)
             actions.moves.run(robot, goal, detect_obstacles=True)
-        elif move == 5 and (not clockwise or clockwise == 2):
+        elif move == 5 and (clockwise in (0, 2)):
             logging.debug('giro izquierda y arco a la izquierda')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.arc(robot, goal, clockwise = False, detect_obstacles=True)
-        elif move == 5 and clockwise:
+        elif move == 5 and (clockwise is 1):
             logging.debug('giro 180 y giro derecha')
             actions.moves.spin(robot, math.pi)
             actions.moves.arc(robot, goal, clockwise = True, detect_obstacles=True)
@@ -110,10 +110,10 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
             logging.debug('giro izquierda y voy recto')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.run(robot, goal, detect_obstacles=True)
-        elif move == 7 and (not clockwise or clockwise == 2):
+        elif move == 7 and (clockwise in (0, 2)):
             logging.debug('arco a la izquierda')
             actions.moves.arc(robot, goal, clockwise = False, detect_obstacles=True)
-        elif move == 7 and clockwise:
+        elif move == 7 and (clockwise is 1):
             logging.debug('giro izquierda y arco a la derecha')
             actions.moves.spin(robot, math.pi/2)
             actions.moves.arc(robot, goal, clockwise = True, detect_obstacles=True)

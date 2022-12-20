@@ -116,6 +116,7 @@ class Robot:
             value = self.BP.get_sensor(self.frontasonic)
         except Exception:
             logging.info('One of the frontsonic values was invalid.')
+            value = 255
         else:
         #        value_arr = np.append(value_arr, value)
         #        print(value_arr)
