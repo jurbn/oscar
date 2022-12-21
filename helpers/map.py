@@ -34,7 +34,6 @@ def read_map(file):
 def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMALLEST VALUE CUANDO TIENES QUE REMAKEAR EL MAPA???
     smallest_value = 100
     max_move = len(moves)-1
-    print(moves)
 
     for i in range(0, max_move+1):    # i is the relative move
         real_index = offset_angle + i   # real_index is used to get the nearest cells
@@ -44,10 +43,6 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
         possible_cell = arr_pos + moves[real_index]
         grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
         if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell   
-            print('I AND RINDEX')
-            print(i, real_index)
-            print(possible_cell)
-         
             right_index_1 = norm_index(real_index - 1, max_move)
             right_index_2 = norm_index(real_index - 2, max_move)
             left_index_1 = norm_index(real_index + 1, max_move)
@@ -103,11 +98,10 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
                         relative_move = i
                         abs_destination = [possible_cell]
                         smallest_value = grid_value
-    print('RELATIVE MOVEEEEEE')
-    print(relative_move)
     return relative_move, abs_destination, clockwise
 
 def norm_index(i, max_i):
+    """Normalizes an index so it doesn't go out of bounds"""
     while i < 0:  
         i += (max_i + 1)
     while i > max_i:
@@ -115,6 +109,7 @@ def norm_index(i, max_i):
     return i
 
 def get_rel_index (robot, arr_cell):
+    """Gets the relative index of a cell around the robot"""
     robot_cell = helpers.map.pos2array(robot.map_size, [robot.x.value, robot.y.value])
     rel_cell = [arr_cell[0] - robot_cell[0], arr_cell[1] - robot_cell[1]]
     rel_cells = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
@@ -125,9 +120,9 @@ def get_rel_index (robot, arr_cell):
             break
         else:
             i += 1
-    print(index)
     offset = helpers.location.get_robot_quadrant(robot, index=True) * 2
-    return norm_index(index + offset, 7)
+    print('WHATS MY INDEX {}'.format(index))
+    return norm_index(index - offset, 7)
 
 def are_cells_connected(cells, grid):
     connected = True
@@ -212,6 +207,9 @@ def tile2array(size, their_coord):
     y = (2 * their_coord[0]) + 1
     x = 2 * size[1] - 1 - 2 * their_coord[1]
     return np.array([round(x, 0), round(y, 0)])
+
+def pos2tile(size, their_coord):
+    pass
 
 def distance_front_wall(robot, map, map_size, cells = 3):
     rob_cell = pos2array(map_size, [robot.x.value, robot.y.value])

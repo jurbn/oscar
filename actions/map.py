@@ -33,7 +33,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             finished = True
         else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
             smallest_value = grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
-            print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
+            #print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
             offset_angle = helpers.location.get_robot_quadrant(robot, index=True) * 2
             helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos, True)
             [relative_move, abs_destinations, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
@@ -68,6 +68,7 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el erro
         6   x   2       [0,-1]      x    [0,1]\n
         5   4   3       [1,-1]    [1,0]  [1,1]\n
     with x facing up(0) and y facing left(6)"""
+    print('MY GOAL IS: {}'.format(arr_goal))
     move = helpers.map.get_rel_index(robot, arr_goal)
     goal = helpers.map.array2pos(map_size, map, arr_goal)
     logging.debug('RELATIVE CELL: {}, IM GOING TO DO:'.format(move))
