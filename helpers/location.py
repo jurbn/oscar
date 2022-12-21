@@ -34,22 +34,22 @@ def absolute_offset(robot, distance=0):
 def get_robot_quadrant(robot, index = False):
     """Returns the nearest n*pi/2"""
     th = robot.th.value
-    if is_near_angle(th, 0, threshold=math.pi/5):
+    if is_near_angle(th, 0, threshold=math.pi/4):
         if index:
             ob_th = 1
         else:
             ob_th = 0
-    elif is_near_angle(th, math.pi/2, threshold=math.pi/5):
+    elif is_near_angle(th, math.pi/2, threshold=math.pi/4):
         if index:
             ob_th = 0
         else:
             ob_th = math.pi/2
-    elif is_near_angle(th, math.pi, threshold=math.pi/5):
+    elif is_near_angle(th, math.pi, threshold=math.pi/4):
         if index:
             ob_th = 3
         else:
             ob_th = math.pi
-    elif is_near_angle(th, -math.pi/2, threshold=math.pi/5):
+    elif is_near_angle(th, -math.pi/2, threshold=math.pi/4):
         if index:
             ob_th = 2
         else:

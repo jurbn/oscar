@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2+0.1]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[2.2, 1.4, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -36,9 +36,7 @@ def main(args):
         elif args.fcn == 'spin':
             mv.spin(oscar, math.pi, 0.8)
         elif args.fcn == 'run':
-            mv.run(oscar, [1,1.8])
-        elif args.fcn == 'relrun':
-            mv.run(oscar, 0.2, relative=True)
+            mv.run(oscar, [1, 0])
         elif args.fcn == 'stop':
             oscar.setSpeed(0, 0)
         elif args.fcn == 'ball':
@@ -48,7 +46,7 @@ def main(args):
         elif args.fcn == 'pictures':
             helpers.vision.show_cam_blobs(oscar) 
         elif args.fcn == 'square':
-            mv.square(oscar, l = 0.4)
+            mv.square(oscar, l = 0.8)
         elif args.fcn == 'ballCheck':
             oscar.ballCaught()
         elif args.fcn == 'reset':
@@ -56,9 +54,9 @@ def main(args):
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
-            actions.map.navigateMap(oscar, [0, 4], [4, 1])
-        elif args.fcn == 'cell':
-            actions.map.go_to_cell(oscar, oscar.map, 1, [2,2], False, oscar.map_size)
+            actions.map.navigateMap(oscar, [0, 4], [2, 0])
+        elif args.fcn == 'plot':
+            helpers.plot.plot_file('logs/odometry/22-12-21--17:51:57.csv', oscar.map_file)
         
         #########################
         #       the thing       #

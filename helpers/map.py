@@ -111,17 +111,20 @@ def norm_index(i, max_i):
 def get_rel_index (robot, arr_cell):
     """Gets the relative index of a cell around the robot"""
     robot_cell = helpers.map.pos2array(robot.map_size, [robot.x.value, robot.y.value])
+    print('IM IN {}|||{}'.format(robot_cell, robot.x.value, robot.y.value))
     rel_cell = [arr_cell[0] - robot_cell[0], arr_cell[1] - robot_cell[1]]
+    rel_cell[0] = helpers.maths.get_sign(rel_cell[0])
+    rel_cell[1] = helpers.maths.get_sign(rel_cell[1])
+    print('DIFFERENCE IS {}'.format(rel_cell))
     rel_cells = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     i = 0
     while i < len(rel_cells):
-        if (rel_cell == rel_cells[i]) or (rel_cell == [cell * 2 for cell in rel_cells[i]]):
+        if (rel_cell == rel_cells[i]):  # or (rel_cell == [cell * 2 for cell in rel_cells[i]]):
             index = i
             break
         else:
             i += 1
     offset = helpers.location.get_robot_quadrant(robot, index=True) * 2
-    print('WHATS MY INDEX {}'.format(index))
     return norm_index(index - offset, 7)
 
 def are_cells_connected(cells, grid):
@@ -186,7 +189,7 @@ def array2pos(map_size, map, cell):
     pos[1] = (map_size[1]*2-cell[0]) * (map_size[2]/2)
     return pos
 
-def pos2array(map_size, pos): 
+def pos2array_prev(map_size, pos): 
     """Turns real-world coordinates into their equivalent map positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the tiles border position on the map only if it matches exactly that position, otherwise it will return the tile position"""
@@ -197,6 +200,13 @@ def pos2array(map_size, pos):
     cell[1] = (pos[1]*2)/map_size[2]
     cell = base_map2array(map_size, cell)
     return cell  # we could also return a modified map maybe with the -3 value in the given position? or the value of a map in that position
+
+def pos2array(map_size, pos):
+    """Turns real-world coordinates into their equivalent map positions considering the walls have a width of 0.10m"""
+    cell = np.array([0, 0], dtype=int)
+    cell[1] = (2 * (pos[0]//map_size[2]) + (abs(0.2 - pos[0] % map_size[2]) > 0.15)) +1
+    cell[0] = map_size[1] * 2 - (2 * (pos[1]//map_size[2]) + (abs(0.2 - pos[1] % map_size[2]) > 0.15)) -1
+    return cell
 
 def base_map2array(map_size, tile):
     x = 2 * map_size[1] - tile[1]

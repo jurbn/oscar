@@ -42,7 +42,6 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
                 if not arrived: # no ha llegao
                     grid = remakeMap(robot, size, map, goal, offset_angle=offset_angle)
                     break
-            print('ARRIVED???? {}'.format(relative_move))  
     robot.setSpeed(0, 0)
     return True
 

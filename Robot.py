@@ -69,6 +69,8 @@ class Robot:
         self.BP.set_sensor_type(self.light, self.BP.SENSOR_TYPE.NXT_LIGHT_ON)
 
         self.BP.offset_motor_encoder(self.claw_motor, self.BP.get_motor_encoder(self.claw_motor))
+        self.BP.offset_motor_encoder(self.left_motor, self.BP.get_motor_encoder(self.left_motor))
+        self.BP.offset_motor_encoder(self.right_motor, self.BP.get_motor_encoder(self.right_motor))  
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
         self.lock_odometry = Lock()
@@ -108,21 +110,17 @@ class Robot:
             
 
     def getFrontsonic(self):
-        #i = 0
-        #value_arr = np.array([], dtype='float')
-        #while i < 5:
-        time.sleep(0.05)
-        try:
-            value = self.BP.get_sensor(self.frontasonic)
-        except Exception:
-            logging.info('One of the frontsonic values was invalid.')
-            value = 255
-        else:
-        #        value_arr = np.append(value_arr, value)
-        #        print(value_arr)
-        #        i += 1
-        #value = np.median(value_arr)
-            return value
+        """Returns the value of the frontsonic"""
+        error = True
+        while error:
+            time.sleep(0.03)
+            try:
+                value = self.BP.get_sensor(self.frontasonic)
+            except Exception:
+                logging.info('Frontasonic took an invalid value, repeating...')
+            else:
+                error = False
+        return value
 
     def startTeabag(self):
         self.finish_tb.value = False
@@ -141,7 +139,6 @@ class Robot:
                 pass
             tEnd = time.clock()
             time.sleep(self.odometry_period - tEnd + tIni)
-
 
     def setSpeed(self, v, w):
         """Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
@@ -195,7 +192,7 @@ class Robot:
         with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y', 'th'])
-        [enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]        
+        #[enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]      TODO: hemo comentado  
         [enc_l_1, enc_r_1] = [0, 0]
         time.sleep(self.odometry_period)
         while not self.finished.value:
@@ -212,18 +209,20 @@ class Robot:
             #if (self.w.value == 0) and (w != 0):
             #    self.changed = True
             #    self.setSpeed(self.v.value, w)
-            try:
-                r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
-                v = r * w
-            except Exception:
-                v = v_l
-            if self.v.value == 0:
-                v = 0
+            # try:
+            #     r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
+            #     v = r * w
+            # except Exception:
+            #     v = v_r
+            v = (v_l + v_r)/2
+            #if self.v.value == 0:  TODO: comentao
+            #    v = 0
             s = v*self.odometry_period
 
             self.lock_odometry.acquire()
-            self.x.value += s * math.cos(self.th.value+(th-self.th.value)/2)    #s * math.cos(th)*2
-            self.y.value += s * math.sin(self.th.value+(th-self.th.value)/2)    #s * math.sin(th)*2
+            th_calc = helpers.maths.norm_pi(self.th.value+(th-self.th.value)/2)
+            self.x.value += s * math.cos(th_calc)    #s * math.cos(th)*2
+            self.y.value += s * math.sin(th_calc)    #s * math.sin(th)*2
             self.th.value = th
             self.lock_odometry.release()
             with open(self.odometry_file, 'a', newline='') as csvfile:

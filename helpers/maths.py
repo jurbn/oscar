@@ -30,3 +30,11 @@ def norm_pi(th):
     while th < -np.pi:
         th += 2 * np.pi
     return th
+
+def get_sign(number):
+    if number > 0:
+        return 1
+    elif number < 0:
+        return -1
+    else:
+        return 0
