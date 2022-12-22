@@ -44,7 +44,7 @@ class Robot:
         [self.map_size, self.map] = helpers.map.read_map(self.map_file)
 
         self.radius = 0.028
-        self.length = 0.15
+        self.length = 0.134
         self.op_cl = 275
         self.cl_cl = 0
 

@@ -19,7 +19,7 @@ def main(args):
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('Program started')
-        oscar = Robot(init_position=[2.2, 1.4, 0]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+        oscar = Robot(init_position=[0.2, 1.8, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
         logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
         
         #########################
@@ -54,7 +54,7 @@ def main(args):
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
-            actions.map.navigateMap(oscar, [0, 4], [2, 0])
+            actions.map.navigateMap(oscar, [0, 4], [4, 1])
         elif args.fcn == 'plot':
             helpers.plot.plot_file('logs/odometry/22-12-21--17:51:57.csv', oscar.map_file)
         

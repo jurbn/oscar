@@ -111,11 +111,9 @@ def norm_index(i, max_i):
 def get_rel_index (robot, arr_cell):
     """Gets the relative index of a cell around the robot"""
     robot_cell = helpers.map.pos2array(robot.map_size, [robot.x.value, robot.y.value])
-    print('IM IN {}|||{}'.format(robot_cell, robot.x.value, robot.y.value))
     rel_cell = [arr_cell[0] - robot_cell[0], arr_cell[1] - robot_cell[1]]
     rel_cell[0] = helpers.maths.get_sign(rel_cell[0])
     rel_cell[1] = helpers.maths.get_sign(rel_cell[1])
-    print('DIFFERENCE IS {}'.format(rel_cell))
     rel_cells = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     i = 0
     while i < len(rel_cells):
@@ -204,8 +202,17 @@ def pos2array_prev(map_size, pos):
 def pos2array(map_size, pos):
     """Turns real-world coordinates into their equivalent map positions considering the walls have a width of 0.10m"""
     cell = np.array([0, 0], dtype=int)
-    cell[1] = (2 * (pos[0]//map_size[2]) + (abs(0.2 - pos[0] % map_size[2]) > 0.15)) +1
-    cell[0] = map_size[1] * 2 - (2 * (pos[1]//map_size[2]) + (abs(0.2 - pos[1] % map_size[2]) > 0.15)) -1
+    
+    if (abs(0.2 - (pos[0] % map_size[2])) < 0.15):  # no toca pared en X (mapa)
+        cell[1] = (2 * (pos[0]//map_size[2]) +1)
+    else:   # SI toca pared en Y
+        cell[1] = (2 * ((pos[0] + map_size[2]/2)//map_size[2]))
+    
+    if (abs(0.2 - (pos[1] % map_size[2])) < 0.15):  # no toca pared en Y (mapa)
+        cell[0] = map_size[1] * 2 - (2 * (pos[1]//map_size[2]) + 1)
+    else:   # SI toca pared en Y
+        cell[0] = map_size[1] * 2 - (2 * ((pos[1] + map_size[2]/2)//map_size[2]))
+
     return cell
 
 def base_map2array(map_size, tile):

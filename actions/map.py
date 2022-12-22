@@ -38,6 +38,7 @@ def navigateMap(robot, origin, goal):    # TODO: cambiar en odometry que actuali
             helpers.map.draw_map(grid, robot, offset_angle/2, arr_pos, True)
             [relative_move, abs_destinations, clockwise] = helpers.map.next_cell(grid, moves, offset_angle, arr_pos, smallest_value)  # sacamos la siguiente celda a la que tenemos que ir!
             for abs_destination in abs_destinations:
+                print('-'*20)
                 arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)
                 if not arrived: # no ha llegao
                     grid = remakeMap(robot, size, map, goal, offset_angle=offset_angle)
@@ -67,10 +68,10 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el erro
         6   x   2       [0,-1]      x    [0,1]\n
         5   4   3       [1,-1]    [1,0]  [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    print('MY GOAL IS: {}'.format(arr_goal))
+    print('GO_TO_CELL: my goal is: {}'.format(arr_goal))
     move = helpers.map.get_rel_index(robot, arr_goal)
     goal = helpers.map.array2pos(map_size, map, arr_goal)
-    logging.debug('RELATIVE CELL: {}, IM GOING TO DO:'.format(move))
+    logging.debug('GO_TO_CELL: relative move: {}'.format(move))
     try:
         if move == 0: 
             logging.debug('voy recto')
