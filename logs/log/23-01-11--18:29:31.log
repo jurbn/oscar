@@ -1,0 +1,30 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 21974:
+INFO:root:Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:Tile color is white, setting map A
+INFO:root:Updating position to [0.6, 3]
+INFO:root:Updating position to [1.4, 1.4]
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 30.141876220703125
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 81.6026382446289
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.15 meters
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 78, in main
+    actions.map.exit_map(oscar, black)
+  File "/home/pi/oscar/actions/map.py", line 21, in exit_map
+    go_to_watchpoint(robot, watchpoint)
+  File "/home/pi/oscar/actions/map.py", line 39, in go_to_watchpoint
+    rel_th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], objective)
+  File "/home/pi/oscar/helpers/location.py", line 9, in get_angle_between_points
+    angle = math.norm_pi(angle)
+AttributeError: module 'math' has no attribute 'norm_pi'
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos

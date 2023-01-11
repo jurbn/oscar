@@ -1,0 +1,21 @@
+INFO:root:Program started
+INFO:root:Robot set up!
+INFO:root:Odometry was started, PID: 22606:
+INFO:root:Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:Tile color is white, setting map A
+INFO:root:Updating position to [0.6, 3]
+INFO:root:Updating position to [1.4, 1.4]
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 31.630237579345703
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 81.89161682128906
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.14 meters
+WARNING:root:KeyboardInterrupt raised
+WARNING:root:Abruptly stopped the robot!
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
