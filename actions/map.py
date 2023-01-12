@@ -40,8 +40,7 @@ def exit_map(robot, black = True):
     actions.moves.run(robot, [robot.x.value, robot.y.value + robot.map_size[2]])
 
 def go_to_watchpoint (robot, objective):
-    """The robot faces the objective tile, goes to it and then faces the picture\n
-    (this function's name is inspired by the one and only doja cat <3)""" #TODO: hola jorge teq perdon x poner siempre paridas
+    """The robot faces the objective tile, goes to it and then faces the picture"""
     watchpoint_coord = helpers.map.array2pos(robot.map_size, 0, helpers.map.tile2array(robot.map_size, objective))
     print(watchpoint_coord)
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
@@ -67,7 +66,7 @@ def navigateMap(robot, origin, goal, eight_neigh = True):    # TODO: cambiar en 
     #offset_angle = 0   # vamo a no declararlo no vaya a ser que se este saltando los ifs...
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
         #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
-        #    robot.remakeMap(size, map, goal, origin)
+        #    robot.remake_map(size, map, goal, origin)
         arr_pos = helpers.map.pos2array(size, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
         #logging.debug('im in {}, {}'.format(arr_pos, robot.th.value))
         #logging.debug('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
@@ -88,15 +87,16 @@ def navigateMap(robot, origin, goal, eight_neigh = True):    # TODO: cambiar en 
                 print('-'*20)
                 arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)
                 if not arrived: # no ha llegao
-                    grid = remakeMap(robot, size, map, goal, offset_angle=offset_angle)
+                    logging.debug('GO_TO_CELL: An exception was raised, calling remake_map function (offset angle: {})...'.format(offset_angle))
+                    grid = remake_map(robot, size, map, goal, offset_angle = offset_angle) 
                     break
     robot.setSpeed(0, 0)
     return True
 
-def remakeMap(robot, size, map, goal, offset_angle = 0):
+def remake_map(robot, size, map, goal, offset_angle = 0):
     """Updates the map when the robot encounters an obstacle"""
     pos = helpers.map.pos2array(size, [robot.x.value, robot.y.value])
-    print('mi offset angle is {}'.format(offset_angle))
+    logging.debug('REMAKE_MAP: mi cell is {} and my offset angle is {}'.format(pos, offset_angle))
     if offset_angle == 0: # mirando hacia arriba
         map[int(pos[0]), int(pos[1])-1] = 0
     elif offset_angle == 6: # mirando izda
@@ -106,6 +106,7 @@ def remakeMap(robot, size, map, goal, offset_angle = 0):
     elif offset_angle == 2: # mirando dcha
         map[int(pos[0]), int(pos[1])+1] = 0
     grid = helpers.map.generate_grid(map, goal)
+    robot.grid = grid
     logging.debug('NEW GRID HAS BEEN GENERATED :D')
     return grid
 
