@@ -49,6 +49,7 @@ class Robot:
 
         self.cell = [0, 0] #TODO: esto lo usamos en algun lado?
         [self.map_size, self.map] = helpers.map.read_map(self.map_file)
+        self.grid = helpers.map.generate_grid(self.map, self.objective)
         self.black = True
 
         self.radius = 0.028
@@ -89,7 +90,7 @@ class Robot:
 
         self.odometry_file = 'logs/odometry/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.csv'
         
-        logging.info('Robot set up!')
+        logging.info('ROBOT: Robot set up!')
         error = True
         while error:
             time.sleep(0.1)
@@ -102,7 +103,7 @@ class Robot:
         self.startOdometry()
 
     def forceNewPosition(self, new_pos):
-        logging.info('Updating position to {}'.format(new_pos))
+        logging.info('ROBOT forceNewPosition: Updating position to {}'.format(new_pos))
         self.lock_odometry.acquire()
         self.x.value = new_pos[0]
         self.y.value = new_pos[1]
@@ -121,12 +122,12 @@ class Robot:
 
     def setMapByColor(self, black = False):
         if black:
-            logging.info('Tile color is black, setting map B')
+            logging.info('ROBOT setMapByColor: Tile color is black, setting map B')
             self.forceNewPosition([2.2, 3])
             self.last_seen_left = True
             self.updateWithMapFile('res/maps/mapaB_CARRERA2020.txt')
         else:
-            logging.info('Tile color is white, setting map A')
+            logging.info('ROBOT setMapByColor:Tile color is white, setting map A')
             self.forceNewPosition([0.6, 3])
             self.last_seen_left = False
             self.updateWithMapFile('res/maps/mapaA_CARRERA2020.txt')
@@ -224,7 +225,7 @@ class Robot:
         self.finished.value = False
         self.process = Process(target=self.updateOdometry, args=())
         self.process.start()
-        logging.info("Odometry was started, PID: {}:".format(self.process.pid))
+        logging.info("ROBOT: Odometry was started, PID: {}:".format(self.process.pid))
    
     def updateOdometry(self):
         """Updates the location values of the robot using the gyroscope"""
@@ -238,13 +239,20 @@ class Robot:
             tIni = time.clock()
             #if self.changed:
             #    self.setSpeed(self.v.value, 0)
-            th = helpers.maths.norm_pi(self.offset[2] - math.radians(self.BP.get_sensor(self.gyro)[0])) # se le mete el offset al giroscopio pq el cabron lo reinicia
+            try:
+                gyro_values = self.BP.get_sensor(self.gyro)
+            except Exception:
+                gyro_values = [self.th.value, self.w.value]
+            th = helpers.maths.norm_pi(self.offset[2] - math.radians(gyro_values[0])) # se le mete el offset al giroscopio pq el cabron lo reinicia
             [enc_l_2, enc_r_2] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
             
-            w = -math.radians(self.BP.get_sensor(self.gyro)[1])
+            try:
+                w = -math.radians(gyro_values[1])
+            except Exception:
+                self.w.value
             #if (self.w.value == 0) and (w != 0):
             #    self.changed = True
             #    self.setSpeed(self.v.value, w)

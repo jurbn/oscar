@@ -58,7 +58,7 @@ def approach_ball(robot, last_pos = None):
                 robot.last_seen_left = False
             elif blob.pt[0] < (640/2)*robot.reduction:   #izquierda
                 robot.last_seen_left = True
-            if blob.size >= 30:
+            if blob.size >= 27:
                 ready = True
                 logging.info('Close enough to the ball, size is: {}'.format(blob.size))
             else:
@@ -83,10 +83,10 @@ def center_ball(robot):
         blob = helpers.vision.get_blob_new(frame = frame)
         if blob:
             logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
-            if blob.pt[0] > (640/2)*robot.reduction + 10: #un poco mas de la mitad
+            if blob.pt[0] > (640/2)*robot.reduction + 5: #un poco mas de la mitad
                 robot.setSpeed(0, -0.4)
                 robot.last_seen_left = False
-            elif blob.pt[0] < (640/2)*robot.reduction - 10:   # un poco menos de la mitad
+            elif blob.pt[0] < (640/2)*robot.reduction - 5:   # un poco menos de la mitad
                 robot.setSpeed(0, 0.4)
                 robot.last_seen_left = True
             else:
@@ -164,7 +164,7 @@ def go_for_ball(robot):
             if success:
                 state = 4
             else:
-                state = 2
+                state = 0
 
 def ball_caught(robot):
     """Checks wether or not oscar got the ball"""

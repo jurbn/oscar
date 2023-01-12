@@ -1,0 +1,95 @@
+INFO:root:MAIN: Program started
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 29371:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+
+
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.322856903076172
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 80.14977264404297
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 30.521459579467773
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 61.873634338378906
+INFO:root:The ball's x position is: 55.46162414550781
+INFO:root:The ball's x position is: 50.509918212890625
+WARNING:root:Lost the ball! Searching agan...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+WARNING:root:Lost the ball! Searching again...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.905807495117188
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 144.8997802734375
+INFO:root:The ball's x position is: 144.25674438476562
+INFO:root:The ball's x position is: 143.34962463378906
+INFO:root:The ball's x position is: 142.31442260742188
+INFO:root:The ball's x position is: 142.18722534179688
+INFO:root:The ball's x position is: 144.35154724121094
+INFO:root:The ball's x position is: 145.22616577148438
+INFO:root:The ball's x position is: 144.92904663085938
+INFO:root:The ball's x position is: 145.604248046875
+INFO:root:The ball's x position is: 145.27581787109375
+INFO:root:The ball's x position is: 145.43714904785156
+INFO:root:The ball's x position is: 145.46949768066406
+INFO:root:The ball's x position is: 144.79428100585938
+INFO:root:The ball's x position is: 144.57455444335938
+INFO:root:The ball's x position is: 144.7694091796875
+INFO:root:The ball's x position is: 145.10159301757812
+INFO:root:The ball's x position is: 145.11636352539062
+INFO:root:The ball's x position is: 145.19171142578125
+INFO:root:The ball's x position is: 144.64175415039062
+INFO:root:The ball's x position is: 144.24256896972656
+INFO:root:The ball's x position is: 143.26681518554688
+INFO:root:The ball's x position is: 142.04959106445312
+INFO:root:The ball's x position is: 140.82485961914062
+INFO:root:The ball's x position is: 139.42971801757812
+INFO:root:The ball's x position is: 138.1475067138672
+INFO:root:The ball's x position is: 136.56764221191406
+INFO:root:The ball's x position is: 132.52426147460938
+INFO:root:The ball's x position is: 130.36117553710938
+INFO:root:The ball's x position is: 128.43353271484375
+INFO:root:The ball's x position is: 126.49061584472656
+INFO:root:The ball's x position is: 122.64334106445312
+INFO:root:The ball's x position is: 118.86032104492188
+INFO:root:The ball's x position is: 116.51072692871094
+INFO:root:The ball's x position is: 114.25093841552734
+INFO:root:The ball's x position is: 111.96411895751953
+INFO:root:The ball's x position is: 107.59569549560547
+INFO:root:The ball's x position is: 105.86842346191406
+INFO:root:The ball's x position is: 104.9048843383789
+INFO:root:The ball's x position is: 103.32450866699219
+INFO:root:The ball's x position is: 102.6063232421875
+INFO:root:The ball's x position is: 102.04375457763672
+INFO:root:The ball's x position is: 101.07915496826172
+INFO:root:The ball's x position is: 100.21345520019531
+INFO:root:The ball's x position is: 98.95282745361328
+INFO:root:The ball's x position is: 98.03937530517578
+INFO:root:The ball's x position is: 97.1930923461914
+INFO:root:The ball's x position is: 96.41757202148438
+INFO:root:The ball's x position is: 95.73855590820312
+INFO:root:The ball's x position is: 94.1043930053711
+INFO:root:The ball's x position is: 93.18238067626953
+INFO:root:The ball's x position is: 92.37584686279297
+INFO:root:The ball's x position is: 91.7778091430664
+INFO:root:The ball's x position is: 90.56558990478516
+INFO:root:The ball's x position is: 90.07966613769531
+INFO:root:The ball's x position is: 89.46564483642578
+INFO:root:The ball's x position is: 88.87431335449219
+INFO:root:The ball's x position is: 87.4128189086914
+INFO:root:The ball's x position is: 86.85344696044922
+INFO:root:The ball's x position is: 85.90992736816406
+INFO:root:The ball's x position is: 85.06189727783203
+INFO:root:The ball's x position is: 84.0836181640625
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.28 meters
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos

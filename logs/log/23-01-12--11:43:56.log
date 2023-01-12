@@ -1,0 +1,51 @@
+INFO:root:MAIN: Program started
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 28383:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+
+
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 28.55327796936035
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 82.9345474243164
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 84.78108978271484
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 88.65442657470703
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 97.71846771240234
+INFO:root:The ball's x position is: 98.14387512207031
+INFO:root:The ball's x position is: 100.68232727050781
+WARNING:root:Lost the ball! Searching agan...
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.26548194885254
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 62.71956253051758
+INFO:root:The ball's x position is: 63.002174377441406
+INFO:root:The ball's x position is: 63.327823638916016
+INFO:root:The ball's x position is: 62.997798919677734
+INFO:root:The ball's x position is: 62.62079620361328
+INFO:root:The ball's x position is: 62.51258087158203
+INFO:root:The ball's x position is: 62.80109786987305
+INFO:root:The ball's x position is: 62.16653060913086
+INFO:root:The ball's x position is: 60.149742126464844
+INFO:root:The ball's x position is: 59.664127349853516
+INFO:root:The ball's x position is: 59.12916564941406
+INFO:root:The ball's x position is: 60.82206726074219
+INFO:root:The ball's x position is: 61.66226577758789
+INFO:root:The ball's x position is: 62.317874908447266
+INFO:root:The ball's x position is: 64.31369018554688
+INFO:root:The ball's x position is: 65.82025909423828
+INFO:root:The ball's x position is: 67.43086242675781
+INFO:root:The ball's x position is: 68.7200927734375
+INFO:root:The ball's x position is: 70.02340698242188
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.18000000000000002 meters
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos

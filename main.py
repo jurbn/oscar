@@ -21,9 +21,9 @@ def main(args):
     try:
         logging.basicConfig(filename='logs/log/' + time.strftime('%y-%m-%d--%H:%M:%S') + '.log', level=logging.DEBUG)
         logging.getLogger().addHandler(logging.StreamHandler())
-        logging.info('Program started')
+        logging.info('MAIN: Program started')
         oscar = Robot(init_position=[0.6, 2.6, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
-        logging.info('Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
+        logging.info('MAIN: Initial location: {}, {}, {}\n\n'.format(oscar.x.value, oscar.y.value, oscar.th.value))
 
         #########################
         #   various functions   #
@@ -65,7 +65,7 @@ def main(args):
             actions.dynamic_ball.go_for_ball(oscar)
         elif args.fcn == 'plot':
             helpers.plot.plot_file('logs/odometry/22-12-21--17:51:57.csv', 'res/maps/mapaA_CARRERA2020.txt')
-        elif args.fcn == 'exit':
+        elif args.fcn == 'r2d2':
             while True:
                 print(helpers.vision.find_my_template(oscar))
                 time.sleep(0.5)
@@ -87,12 +87,12 @@ def main(args):
 
         else:
             black = oscar.isFloorBlack()
-            logging.info('The floor is {}'.format(black*'BLACK' or 'WHITE'))
+            logging.info('MAIN: The floor is {}'.format(black*'BLACK' or 'WHITE'))
             oscar.setMapByColor(black = black)
             actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.15])
             actions.moves.half_eight_short(oscar, black)
             oscar.objective = [4, 4]
-            actions.map.navigateMap(oscar, [], oscar.objective, eight_neigh = False)
+            actions.map.navigate_map(oscar, [], oscar.objective, eight_neigh = False)
             #TODO: que avance hasta el centro si no la ve 
             actions.ball.go_for_ball(oscar)
             # TODO: AQUI COMPROBAR SI ESTOY EN PARED, SI LO ESTOY MIRO AL PROXIMO TILE Y AVANZO 20 CM !!!! (o solo ando 20 pa lante)
@@ -106,20 +106,20 @@ def main(args):
 
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file, oscar.objective)
+        helpers.plot.plot_file(oscar)
 
     except KeyboardInterrupt:
         logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file, oscar.objective)
+        helpers.plot.plot_file(oscar)
     except Exception as error:
         logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
-        helpers.plot.plot_file(oscar.odometry_file, oscar.map_file, oscar.objective)
+        helpers.plot.plot_file(oscar)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

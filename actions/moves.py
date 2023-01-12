@@ -18,7 +18,8 @@ import helpers.simulation
 ###################
 # BASIC MOVEMENTS #
 ###################
-def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+
+def spin(robot, th, w = 1.5, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
@@ -28,7 +29,7 @@ def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda p
         th = helpers.maths.norm_pi(th)
         spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
     w = (2*(spin_dir>=0)-1)*w
-    while not helpers.location.is_near_angle(robot, th, threshold=0.02):
+    while not helpers.location.is_near_angle(robot, th, threshold=0.06):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
@@ -40,6 +41,16 @@ def run(robot, objctv, v = 0.15, correct_trajectory = True, detect_obstacles = F
     if detect_obstacles:
             near = robot.getFrontsonic() < 30
             if near:
+                robot.setSpeed(0, 0)
+                front_value = robot.getFrontsonic()
+                while not (18 < front_value < 22):
+                    front_sign = 2 * ((20 - front_value) < 0) - 1
+                    robot.setSpeed(0.03*front_sign, 0)
+                    new_front_value = robot.getFrontsonic()
+                    if new_front_value > 50:
+                        front_value = front_value
+                    else:
+                        front_value = new_front_value
                 robot.setSpeed(0, 0)
                 raise Exception('OH NOOO A WALL <:o')
     while (not helpers.location.is_near(robot, objctv, threshold=threshold)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > threshold): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega+-
@@ -176,19 +187,19 @@ def half_eight(robot, black, v = 0.2):
     th = robot.th.value
     side = black * 2 - 1
     w = v / r
-    logging.info('PRIMER VALOR: {}pi'.format(robot.th.value/math.pi))
+    #logging.info('PRIMER VALOR: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th + side * math.pi/2):
         robot.setSpeed(0, side * w * 2)
-    logging.info('spin: {}pi'.format(robot.th.value/math.pi))
+    #logging.info('spin: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th - side * math.pi/2):
         robot.setSpeed(v, -w * side)
-    logging.info('primer cacho: {}pi'.format(robot.th.value/math.pi))
+    #logging.info('primer cacho: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th + side * math.pi/2):
         robot.setSpeed(v, w * side)
-    logging.info('segundo cacho: {}pi'.format(robot.th.value/math.pi))
+    #logging.info('segundo cacho: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th):
         robot.setSpeed(0, -w * side * 2)
-    logging.info('done!: {}pi'.format(robot.th.value/math.pi))
+    logging.info('HALF_EIGHT: done!')
 
 def half_eight_short(robot, black, v = 0.2):
     """
@@ -198,16 +209,13 @@ def half_eight_short(robot, black, v = 0.2):
     th = robot.th.value
     side = black * 2 - 1
     w = v / r
-    logging.info('PRIMER VALOR: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th + side * math.pi/2):
         robot.setSpeed(0, side * w * 2)
-    logging.info('spin: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th - side * math.pi/2):
         robot.setSpeed(v, -w * side)
-    logging.info('primer cacho: {}pi'.format(robot.th.value/math.pi))
-    while not helpers.location.is_near_angle(robot.th.value, th):
-        robot.setSpeed(v+0.03, w * side)
-    logging.info('done!: {}pi'.format(robot.th.value/math.pi))
+    while (not helpers.location.is_near_angle(robot.th.value, th)) and (robot.y.value > 1.4):
+        robot.setSpeed(v, w * side)
+    logging.info('HALF_EIGHT_SHORT: done!')
 
 
 def slalom(robot, black = False, map_size = 0.4, v = 0.5): 

@@ -1,0 +1,3 @@
+INFO:root:MAIN: Program started
+INFO:root:ROBOT: Robot set up!
+WARNING:root:KeyboardInterrupt raised

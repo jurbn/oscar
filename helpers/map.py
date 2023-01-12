@@ -39,7 +39,10 @@ def next_cell_4(grid, moves, offset_angle, arr_pos, smallest_value):
         real_index = offset_angle + i
         real_index = norm_index(real_index, max_move)
         possible_cell = arr_pos + moves[real_index]
-        grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+        try:
+            grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+        except Exception:   # if the cell is out of bounds
+            grid_value = -1
         if -1 < grid_value < smallest_value:
             possible_wall = arr_pos + [moves[real_index][0]/2, moves[real_index][1]/2]
             grid_wall = grid[int(possible_wall[0]), int(possible_wall[1])]
@@ -62,7 +65,10 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
             real_index -= (max_move + 1)    # if its 9, 9-8 = 1 :)
         
         possible_cell = arr_pos + moves[real_index]
-        grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+        try:
+            grid_value = grid[int(possible_cell[0]), int(possible_cell[1])]
+        except Exception:   # if the cell is out of bounds
+            grid_value = -1
         if -1 < grid_value < smallest_value:  # smallest value starts as the grid value of the cell   
             right_index_1 = norm_index(real_index - 1, max_move)
             right_index_2 = norm_index(real_index - 2, max_move)

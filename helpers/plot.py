@@ -6,14 +6,15 @@ import pandas as pd
 import numpy as np
 import helpers.map
 
-def plot_file(file_name, map_name, objective):
-    size = helpers.map.read_map(map_name)[0]
-    map = helpers.map.read_map(map_name)[1]
+def plot_file(robot): 
+    map_file = robot.map_file[:26] + '_plot' + robot.map_file[26:]
+    size = helpers.map.read_map(map_file)[0]
+    map = helpers.map.read_map(map_file)[1]
     size[2] *= 1000
     size = [int(param) for param in size]
     fig = plt.figure()
     mapLine = 'p-'
-    df = pd.read_csv(file_name)
+    df = pd.read_csv(robot.odometry_file, skiprows = [1])
     ax = fig.add_subplot(111)   
 
     # Creamos una figura grid, que represente las paredes del mapa:
@@ -35,12 +36,15 @@ def plot_file(file_name, map_name, objective):
     ax.plot(X, Y, mapLine)
 
     #goal(s):
-    grid = helpers.map.generate_grid(map, objective)
+    grid = robot.grid
     for i in range(1, 2*size[0], 2):
         for j in range(1, 2*size[0], 2):
-            if not grid[i,j]:
+            if not robot.grid[i, j]:
                 [X, Y] = np.array(helpers.map.array2pos(size, map, [i, j]))/1000
                 ax.plot(X, Y, marker = "x")
+            if robot.grid[i,j] == -1:
+                [X, Y] = np.array(helpers.map.array2pos(size, map, [i, j]))/1000
+                ax.plot(X, Y, marker = "o", markersize = 15)
 
     #vertical walls:
     for i in range(2, 2 * size[1], 2):
