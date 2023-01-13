@@ -10,6 +10,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
 import helpers.vision
+import actions.moves
 
 def calibrate_claw(robot): 
     """Calibrates the claw and sets its offset"""
@@ -32,16 +33,15 @@ def search_ball(robot):
     else: w = -1
     robot.reduction = 0.25
     while not found:
-        #tIni = time.clock()
         frame = robot.takePic()
         blob = helpers.vision.get_blob_new(frame = frame)
         if blob:
             found = True
             logging.info('Found the ball! Approaching...')
+        elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black):
+            return False
         else:
-            robot.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!)
-        #tEnd = time.clock()
-        #time.sleep(robot.blob_period-tEnd+tIni)
+            robot.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!) 
     return True
 
 def approach_ball(robot, last_pos = None):
@@ -147,6 +147,8 @@ def go_for_ball(robot):
             success = search_ball(robot)
             if success:
                 state = 1
+            else:
+                actions.map.go_to_center(robot) #TODO: HACER EL METODO
         elif state == 1:    # acercandose al peloto 
             success = approach_ball(robot)
             if success:
@@ -167,12 +169,37 @@ def go_for_ball(robot):
                 state = 0
     robot.ball_caught_in = [robot.x.value, robot.y.value]
 
-def ball_caught(robot):
+def check_caught(robot, black):
     """Checks wether or not oscar got the ball"""
-    frame = robot.takePic()[219:239, 139:179]
-    rows, cols, _ = frame.shape
-    rowsA, colsA = 0,0
+    found = False
+    actions.moves.spin(robot, math.pi*(not black), relative = False)
+    front_value = robot.getFrontsonic()
+    initial_value = front_value
+    while not (22 < front_value < 28):  # acercarnos para chequiar
+        v = 0.015 * (front_value - 25)
+        if v > 0.15: v = 0.15
+        elif v < -0.15: v = -0.15
+        new_front_value = robot.getFrontsonic()
+        robot.setSpeed(v, 0)
+        if new_front_value > 60:
+            front_value = front_value
+        else:
+            front_value = new_front_value
+    frame = robot.takePic()
+    blob = helpers.vision.get_blob_new(frame = frame)
+    if blob: found = True
+    front_value = robot.getFrontsonic()
+    while not (initial_value-2 < front_value < initial_value+2):  # acercarnos para chequiar
+        v = 0.015 * (front_value - 20)
+        if v > 0.15: v = 0.15
+        elif v < -0.15: v = -0.15
+        new_front_value = robot.getFrontsonic()
+        robot.setSpeed(v, 0)
+        if new_front_value > 60:
+            front_value = front_value
+        else:
+            front_value = new_front_value
+    return found
 
-    print ('tamaño imagen: {}x{} pixels comprobados: {}x{} (origen en centro inferior: ({}, 0))'.format(rows,cols,rowsA,colsA,cols/2))
 
-    return 'holi soy ballCaught y estoy incompleta'
+    

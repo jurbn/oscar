@@ -16,12 +16,20 @@ sys.path.append(parentdir)
 import helpers.location
 import helpers.map
 
+def go_to_center(robot):
+    if robot.black:
+        center = [2*robot.map_size[2], 5*robot.map_size[2]]
+    else: center = [5, 5]*robot.map_size[2]
+    th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], center)
+    logging.debug('     GO_TO_CENTER: spinning to ABSOLUTE TH {}'.format(th))
+    actions.moves.spin(robot, th, relative = False, w = 1)
+    logging.debug('     GO_TO_CENTER: running to center: {}'.format(center))
+    while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.07):  
+        robot.setSpeed(0.2, 0)
+
 def exit_map(robot, black = True):
     logging.debug('EXIT_MAP: beggining exiting sequence...')
-    if black: watchpoint = [3, 6] # se va a la izda a mirar
-    else: watchpoint = [5, 6]
     logging.debug('EXIT_MAP: watchpoint is {}'.format(watchpoint))
-    go_to_watchpoint(robot, watchpoint)
     logging.debug('EXIT_MAP: beggining image scan...'.format(watchpoint))
     found = helpers.vision.find_my_template(robot)  # si ha visto a r2d2
     if found:
@@ -52,27 +60,31 @@ def exit_map(robot, black = True):
     actions.moves.spin(robot, math.pi/2, relative=False)
     actions.moves.run(robot, [robot.x.value, robot.y.value + robot.map_size[2]])
 
-def go_to_watchpoint (robot, objective):
-    """The robot faces the objective tile, goes to it and then faces the picture"""
-    watchpoint_coord = helpers.map.array2pos(robot.map_size, 0, helpers.map.tile2array(robot.map_size, objective))
-    watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - objective[0])
+def go_to_watchpoint (robot, black):
+    """The robot faces the watchpoint tile, goes to it and then faces the picture"""
+    if black: watchpoint = [3, 6] # se va a la izda a mirar
+    else: watchpoint = [5, 6]
+    watchpoint_coord = helpers.map.array2pos(robot.map_size, 0, helpers.map.tile2array(robot.map_size, watchpoint))
+    watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - watchpoint[0])
     logging.debug('Watchpoint coordinates: {}'.format(watchpoint_coord))
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
     logging.debug('     GO_TO_WATCHPOINT: spinning to ABSOLUTE TH {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
-    logging.debug('     GO_TO_WATCHPOINT: running to watchpoint: {}'.format(objective))
+    logging.debug('     GO_TO_WATCHPOINT: running to watchpoint: {}'.format(watchpoint))
     while not helpers.location.is_near([robot.x.value, robot.y.value], watchpoint_coord, threshold=0.1):
     #while (abs(robot.x.value - watchpoint_coord[0]) > 0.04) or (robot.y.value < 2.2) or (robot.y.value > 2.6):  
         robot.setSpeed(0.2, 0)
-    #actions.moves.run(robot, objective, correct_trajectory= False, threshold=0.1)
+    #actions.moves.run(robot, watchpoint, correct_trajectory= False, threshold=0.1)
     logging.debug('     GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
-    actions.moves.spin(robot, math.pi/2, relative = False)
 
 def navigate_map(robot, origin, goal, eight_neigh = True):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
     """The robot navigates the map to reach a given goal"""
     [size, map] = helpers.map.read_map(robot.map_file)
     #origin = sage.them_to_us(size, origin)
-    goal = helpers.map.tile2array(size, goal)
+    try:
+        goal = [helpers.map.tile2array(size, goal[0]), helpers.map.tile2array(size, goal[1])]
+    except Exception:
+        goal = helpers.map.tile2array(size, goal)
     robot.grid = helpers.map.generate_grid(map, goal)
     logging.debug('\n###################### NAVIGATE_MAP ######################\n my turbogoal is: {}(array)'.format(goal))
     finished = False

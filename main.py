@@ -92,11 +92,17 @@ def main(args):
             oscar.setMapByColor(black = black)
             actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.10])
             actions.moves.half_eight_short(oscar, black)
-            oscar.objective = [4, 4]
+            if black:
+                oscar.objective = np.array([[1, 4], [4, 4]])
+            else: oscar.objective = np.array([[4, 4], [7, 4]])
             actions.map.navigate_map(oscar, [], oscar.objective, eight_neigh = False)
-            #TODO: que avance hasta el centro si no la ve 
+            #TODO: que avance hasta el centro si no la ve
+            #has_ball = False
+            #while not has_ball:
             actions.ball.go_for_ball(oscar)
-            # TODO: AQUI COMPROBAR SI ESTOY EN PARED, SI LO ESTOY MIRO AL PROXIMO TILE Y AVANZO 20 CM !!!! (o solo ando 20 pa lante)
+            actions.map.go_to_watchpoint(oscar, black)
+            #has_ball = actions.ball.check_caught(oscar, black)
+            actions.moves.spin(oscar, math.pi/2, relative = False)
             actions.map.exit_map(oscar, black)
 
 # :) <3

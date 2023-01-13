@@ -177,6 +177,7 @@ def generate_grid(map, goals):
     try:
         for goal_k in goals:
             #goal_k = goal[k-1]
+            logging.debug('GENERATE_GRID: goal_k is: {}'.format(goal_k))
             grids = np.append(grids, generate_single_grid(map, goal_k))
             grid = mix_grids(map, grids)
     except Exception:
