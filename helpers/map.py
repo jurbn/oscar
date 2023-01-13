@@ -174,12 +174,18 @@ def get_wall(tile1, tile2):
 
 def generate_grid(map, goals):
     grids = None
+    #grids = np.array([[]])
     try:
         for goal_k in goals:
             #goal_k = goal[k-1]
-            logging.debug('GENERATE_GRID: goal_k is: {}'.format(goal_k))
-            grids = np.append(grids, generate_single_grid(map, goal_k))
-            grid = mix_grids(map, grids)
+            logging.debug('GENERATE_GRID: goal_k is: {}\n goals: {}'.format(goal_k, goals))
+            grid = generate_single_grid(map, goal_k)
+            logging.debug('GENERATE_GRID: grid (Type {}) is:\n{}'.format(type(grid), grid))
+            if grids is None:
+                grids = np.array([grid])
+            else: grids = np.append(grids, [generate_single_grid(map, goal_k)], axis = 0)
+        logging.debug('GENERATE_GRID: GRIDS:\n {}'.format(grids))
+        grid = mix_grids(map, grids)
     except Exception:
             grid = generate_single_grid(map, goals)
     #logging.debug('GENERATE_GRID: grids value:\n {},\n grid value:\n {}'.format(grids,grid))
@@ -187,7 +193,8 @@ def generate_grid(map, goals):
 
 def mix_grids(map, grids):
     mixed_grid = grids[0]
-    for grid in grids:
+    for k in range (1, len(grids)-1):
+        grid = grids[k]
         for i in range(map.shape[0]):
             for j in range(map.shape[1]):
                 if (grid[i, j] < mixed_grid[i, j]):
@@ -264,6 +271,12 @@ def pos2array(map_size, pos):
 
     return cell
 
+def tile2pos(map_size, tile):
+    try:
+        pos = [(tile[0]-0.5)*map_size[2], (tile[1]-0.5)*map_size[2]]
+    except Exception:
+        pos = [(tile[0]-0.5)*map_size, (tile[1]-0.5)*map_size]
+    return pos
 def base_map2array(map_size, tile):
     x = 2 * map_size[1] - tile[1]
     y = tile[0]

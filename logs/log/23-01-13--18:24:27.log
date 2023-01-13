@@ -1,0 +1,10 @@
+INFO:root:MAIN: Program started
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 25, in main
+    oscar = Robot(init_position=[0.6, 2.6, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
+  File "/home/pi/oscar/Robot.py", line 54, in __init__
+    self.grid = helpers.map.generate_grid(self.map, self.objective)
+  File "/home/pi/oscar/helpers/map.py", line 176, in generate_grid
+    grids = np.array()
+TypeError: Required argument 'object' (pos 1) not found
+

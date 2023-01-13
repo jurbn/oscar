@@ -5,12 +5,13 @@ import matplotlib.animation as FuncAnimation
 import pandas as pd
 import numpy as np
 import helpers.map
+import logging
 
 def plot_file(robot):  #TODO: distintos formatos del csv para las distintas etapas
-    size = helpers.map.read_map(robot.map_file)[0]
-    map = helpers.map.read_map(robot.map_file)[1]
-    size[2] *= 1000
-    size = [int(param) for param in size]
+    size = helpers.map.read_map(robot.map_file)[0] #TODO: cambiar al size de robot
+    size_0 = int(size[0])
+    size_1 = int(size[1])
+    tile_size = size[2]
     fig = plt.figure()
     df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])
     ax = fig.add_subplot(111)   
@@ -19,56 +20,61 @@ def plot_file(robot):  #TODO: distintos formatos del csv para las distintas etap
     plt.rc('grid', linestyle ="--", color='gray')
     plt.grid(True)
     plt.tight_layout()
-    x_t = range(0, (size[0] + 1)* size[2], size[2]) 
-    y_t = range(0, (size[1] + 1) * size[2], size[2])
+    x_t = np.arange(0, (size_0 + 1)* tile_size, tile_size) 
+    y_t = np.arange(0, (size_1 + 1) * tile_size, tile_size)
 
     #the main frame of the map:
-    X = np.array([0, size[0], size[0], 0, 0]) * size[2] / 1000 
-    Y = np.array([0, 0, size[1], size[1], 0]) * size[2] / 1000
+    X = np.array([0, size_0, size_0, 0, 0]) * tile_size  
+    Y = np.array([0, 0, size_1, size_1, 0]) * tile_size 
     base = plt.gca().transData
     rot = trans.Affine2D().rotate_deg(270)
     ax.plot(X, Y)
 
     #figuras extra:
-    grid = robot.grid
-    for i in range(1, 2*size[0], 2):
-        for j in range(1, 2*size[0], 2):
-            if not robot.grid[i, j]: #Goal position, marked with an x
-                [X, Y] = np.array(helpers.map.array2pos(size, map, [i, j]))/1000
-                ax.plot(X, Y, marker = "x")
-            if robot.grid[i,j] == -1: #Slalom obstacles, marked with octagons
-                robot.grid[i+1,j] = 1
-                robot.grid[i-1,j] = 1
-                robot.grid[i,j-1] = 1
-                robot.grid[i,j+1] = 1
-                [X, Y] = np.array(helpers.map.array2pos(size, map, [i, j]))/1000
+    for i in range(1, 2*(size_0), 2):
+        for j in range(1, 2*size_0, 2):
+            if not robot.map[i,j]: #Slalom obstacles, marked with octagons
+                robot.map[i+1,j] = 1
+                robot.map[i-1,j] = 1
+                robot.map[i,j-1] = 1
+                robot.map[i,j+1] = 1
+                [X, Y] = np.array(helpers.map.array2pos(size, robot.map, [i, j]))
                 ax.plot(X, Y, marker = "8", markersize = 15)
+    if robot.objective:
+        try:
+            for obj in robot.objective:
+                X = helpers.map.tile2pos(robot.map_size, obj)[0]
+                Y = helpers.map.tile2pos(robot.map_size, obj)[1]    
+                ax.plot(X, Y, marker = "x")
+        except Exception:
+            [X, Y] = helpers.map.tile2pos(robot.map_size, robot.objective)
+            ax.plot(X, Y, marker = "x")
     if robot.ball_caught_in:
         [X, Y] = robot.ball_caught_in
         ax.plot(X, Y, 'r', marker = "o", markersize = 15)
 
     #vertical walls:
-    for i in range(2, 2 * size[1], 2):
-        for j in range(1, 2 * size[0], 2):
-            if (grid[i,j] == -1):
-                cx = np.floor((i-1)/2) - size[1]
+    for i in np.arange(2, 2 * size_1, 2):
+        for j in np.arange(1, 2 * size_0, 2):
+            if not robot.map[i,j]:
+                cx = np.floor((i-1)/2) - size_1
                 cy = np.floor((j-1)/2)
-                X = np.array([cx + 1, cx + 1]) * size[2] / 1000
-                Y = np.array([cy, cy + 1]) * size[2] / 1000
+                X = np.array([cx + 1, cx + 1]) * tile_size
+                Y = np.array([cy, cy + 1]) * tile_size
                 ax.plot(X, Y, transform = rot + base) 
     
     #horizontal walls:
-    for j in range(2, 2 * size[0], 2):
-        for i in range(1, 2 * size[1], 2):
-            if (grid[i,j] == -1):
-                cx = np.floor((i-1)/2) - size[1]
+    for j in np.arange(2, 2 * size_0, 2):
+        for i in np.arange(1, 2 * size_1, 2):
+            if not robot.map[i,j]:
+                cx = np.floor((i-1)/2) - size_1
                 cy = np.floor((j-1)/2)
-                X = np.array([cx, cx + 1]) * size[2] / 1000
-                Y = np.array([cy + 1, cy + 1]) * size[2] / 1000
+                X = np.array([cx, cx + 1]) * tile_size
+                Y = np.array([cy + 1, cy + 1]) * tile_size
                 ax.plot(X, Y, transform = rot + base) 
     ax.plot(df['x'], df['y']) 
-    plt.xticks(np.arange(0, (size[0]+1)*0.4, 0.4))
-    plt.yticks(np.arange(0, (size[1]+1)*0.4, 0.4))
+    plt.xticks(np.arange(0, (size_0+1)*0.4, 0.4))
+    plt.yticks(np.arange(0, (size_1+1)*0.4, 0.4))
     plt.gca().set_aspect("equal")
     plt.show()    
 

@@ -77,7 +77,7 @@ def go_to_watchpoint (robot, black):
     #actions.moves.run(robot, watchpoint, correct_trajectory= False, threshold=0.1)
     logging.debug('     GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
 
-def navigate_map(robot, origin, goal, eight_neigh = True):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
+def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
     """The robot navigates the map to reach a given goal"""
     [size, map] = helpers.map.read_map(robot.map_file)
     #origin = sage.them_to_us(size, origin)

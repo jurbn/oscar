@@ -58,9 +58,10 @@ def main(args):
         elif args.fcn == 'arc':
             mv.go_to(oscar, [0.4, 0])
         elif args.fcn == 'nav':
-            oscar.updateWithMapFile('res/maps/mapa3.txt')
-            oscar.forceNewPosition([0.4, 1.8, -math.pi/2])
-            actions.map.navigateMap(oscar, [0, 4], [4, 1])
+            oscar.updateWithMapFile('res/maps/mapaB_CARRERA2020.txt')
+            oscar.forceNewPosition([1.8, 1.4, -math.pi/2])
+            oscar.objective = [[1, 4], [4, 4]]
+            actions.map.navigate_map(oscar,oscar.objective)
         elif args.fcn == 'dinamo':
             actions.dynamic_ball.go_for_ball(oscar)
         elif args.fcn == 'plot':
@@ -95,7 +96,7 @@ def main(args):
             if black:
                 oscar.objective = np.array([[1, 4], [4, 4]])
             else: oscar.objective = np.array([[4, 4], [7, 4]])
-            actions.map.navigate_map(oscar, [], oscar.objective, eight_neigh = False)
+            actions.map.navigate_map(oscar, oscar.objective, eight_neigh = False)
             #TODO: que avance hasta el centro si no la ve
             #has_ball = False
             #while not has_ball:
