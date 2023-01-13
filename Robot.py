@@ -16,6 +16,8 @@ import csv
 import cv2 as cv
 import numpy as np
 import logging
+import picamera
+from picamera.array import PiRGBArray
 from multiprocessing import Process, Value, Lock
 
 class Robot:
@@ -85,6 +87,8 @@ class Robot:
         self.lock_odometry = Lock()
         self.odometry_period = 0.05
         self.blob_period = 0.5 
+
+        self.ball_caught_in = None
         self.last_seen_left = False
         self.changed = False
 
@@ -146,7 +150,7 @@ class Robot:
                 value_arr = np.append(value_arr, value)
                 i += 1
         value = np.median(value_arr)
-        self.black = value > 2700
+        self.black = value > 2600
         return self.black # if true, black; if false, white
             
     def getFrontsonic(self):
@@ -206,13 +210,28 @@ class Robot:
             logging.debug("There was an error while reading the speed of the motors")
         return v, w_rad
     
-    def takePic(self, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
+    def takePic(self, PI = False, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
         """Takes a nice picture and stores it as the save parameter"""
-        ret = False
-        while not ret:
-            ret, frame = self.cam.read()
+        if not PI:
+            if type(self.cam) is picamera.camera.PiCamera:
+                self.cam.close()
+                self.cam = cv.VideoCapture(0)
+            ret = False
+            while not ret:
+                ret, frame = self.cam.read()
+        else:
+            if type(self.cam) is cv.VideoCapture:
+                self.cam.release()
+                self.cam = picamera.PiCamera()
+            self.cam.resolution = (640, 480)
+            self.cam.framerate = 10
+            rawCapture = PiRGBArray(self.cam)
+            self.cam.capture(rawCapture, format="bgr")
+            frame = rawCapture.array
+            rawCapture.truncate(0)
         frame  = cv.rotate(frame, cv.ROTATE_180)
         frame = cv.resize(frame, None, fx = self.reduction, fy = self.reduction, interpolation = cv.INTER_LANCZOS4)
+        logging.info('A PICTURE WAS MADE')
         return frame
 
 

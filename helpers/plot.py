@@ -14,7 +14,7 @@ def plot_file(robot):
     size = [int(param) for param in size]
     fig = plt.figure()
     mapLine = 'p-'
-    df = pd.read_csv(robot.odometry_file, skiprows = [1])
+    df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])
     ax = fig.add_subplot(111)   
 
     # Creamos una figura grid, que represente las paredes del mapa:

@@ -19,17 +19,16 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 1.5, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 1.25, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
-        spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
     else:
         #th = helpers.maths.norm_pi(th + robot.th.value)
         th = helpers.maths.norm_pi(th)
-        spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
-    w = (2*(spin_dir>=0)-1)*w
-    while not helpers.location.is_near_angle(robot, th, threshold=0.06):
+    spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
+    w = helpers.maths.get_sign(spin_dir)*w
+    while not helpers.location.is_near_angle(robot, th, threshold=0.04):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
@@ -39,20 +38,23 @@ def run(robot, objctv, v = 0.15, correct_trajectory = True, detect_obstacles = F
     #can_fix = helpers.map.
     near = False
     if detect_obstacles:
-            near = robot.getFrontsonic() < 30
+            near = robot.getFrontsonic() < 45
             if near:
+                logging.warning('OH NOOO A WALL <:o')
                 robot.setSpeed(0, 0)
                 front_value = robot.getFrontsonic()
                 while not (18 < front_value < 22):
-                    front_sign = 2 * ((20 - front_value) < 0) - 1
-                    robot.setSpeed(0.03*front_sign, 0)
+                    v = 0.015 * (front_value - 20)
+                    if v > 0.15: v = 0.15
+                    elif v < -0.15: v = -0.15
                     new_front_value = robot.getFrontsonic()
-                    if new_front_value > 50:
+                    robot.setSpeed(v, 0)
+                    if new_front_value > 60:
                         front_value = front_value
                     else:
                         front_value = new_front_value
                 robot.setSpeed(0, 0)
-                raise Exception('OH NOOO A WALL <:o')
+                raise Exception('Seen a wall')
     while (not helpers.location.is_near(robot, objctv, threshold=threshold)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > threshold): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega+-
         if correct_trajectory:
             th = robot.th.value
@@ -68,7 +70,7 @@ def run(robot, objctv, v = 0.15, correct_trajectory = True, detect_obstacles = F
         #     robot.setSpeed(0, 0)
         #     raise Exception('OH NOOO A WALL <:o')
 
-def arc(robot, objctv, v = 0.15, clockwise = True, detect_obstacles = False):
+def arc(robot, objctv, v = 0.5, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
     mvmnt = objctv - [robot.x.value, robot.y.value]

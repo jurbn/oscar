@@ -7,6 +7,7 @@ import traceback
 
 import actions.moves
 import helpers.vision
+import helpers.maths
 
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
@@ -17,7 +18,7 @@ import helpers.map
 
 def exit_map(robot, black = True):
     logging.debug('EXIT_MAP: beggining exiting sequence...')
-    if black: watchpoint = [2, 6] # se va a la izda a mirar
+    if black: watchpoint = [3, 6] # se va a la izda a mirar
     else: watchpoint = [5, 6]
     logging.debug('EXIT_MAP: watchpoint is {}'.format(watchpoint))
     go_to_watchpoint(robot, watchpoint)
@@ -27,27 +28,40 @@ def exit_map(robot, black = True):
         logging.info('Ive seen R2D2')
     else:
         logging.info('Ive seen BB8')
-    if found and black: # si r2d2 y yo negro, la dcha
-        exit = [4, 7]
+    if found and black: # si r2d2 y yo negro, la izda
+        exit = [1, 7]
     elif found and not black:   # si r2d2 y yo blanco, izda
         exit = [4, 7]
-    elif not found and black:   # si bb8 y yo negro, la izda
-        exit = [1, 7]
+    elif not found and black:   # si bb8 y yo negro, la dcha
+        exit = [4, 7]
     elif not found and not black:   # si bb8 y yo blanco, la dcha
         exit =  [7, 7]
     navigate_map(robot, [], exit, eight_neigh=False)
+    front_value = robot.getFrontsonic()
+    while not (18 < front_value < 22):
+        v = 0.015 * (front_value - 20)
+        if v > 0.15: v = 0.15
+        elif v < -0.15: v = -0.15
+        new_front_value = robot.getFrontsonic()
+        robot.setSpeed(v, 0)
+        if new_front_value > 60:
+            front_value = front_value
+        else:
+            front_value = new_front_value
+    robot.setSpeed(0, 0)
     actions.moves.spin(robot, math.pi/2, relative=False)
     actions.moves.run(robot, [robot.x.value, robot.y.value + robot.map_size[2]])
 
 def go_to_watchpoint (robot, objective):
     """The robot faces the objective tile, goes to it and then faces the picture"""
     watchpoint_coord = helpers.map.array2pos(robot.map_size, 0, helpers.map.tile2array(robot.map_size, objective))
-    print(watchpoint_coord)
+    watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - objective[0])
+    logging.debug('Watchpoint coordinates: {}'.format(watchpoint_coord))
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
     logging.debug('     GO_TO_WATCHPOINT: spinning to ABSOLUTE TH {}'.format(th))
-    actions.moves.spin(robot, th, relative = False, w = 0.5)
+    actions.moves.spin(robot, th, relative = False, w = 1)
     logging.debug('     GO_TO_WATCHPOINT: running to watchpoint: {}'.format(objective))
-    while not helpers.location.is_near([robot.x.value, robot.y.value], [1.8, 2.2], threshold=0.1):
+    while not helpers.location.is_near([robot.x.value, robot.y.value], watchpoint_coord, threshold=0.1):
     #while (abs(robot.x.value - watchpoint_coord[0]) > 0.04) or (robot.y.value < 2.2) or (robot.y.value > 2.6):  
         robot.setSpeed(0.2, 0)
     #actions.moves.run(robot, objective, correct_trajectory= False, threshold=0.1)

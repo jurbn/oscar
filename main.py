@@ -67,7 +67,8 @@ def main(args):
             helpers.plot.plot_file('logs/odometry/22-12-21--17:51:57.csv', 'res/maps/mapaA_CARRERA2020.txt')
         elif args.fcn == 'r2d2':
             while True:
-                print(helpers.vision.find_my_template(oscar))
+                found = helpers.vision.find_my_template(oscar)
+                print('I\'ve seen {}'.format('R2D2'*found or 'NOTHING'))
                 time.sleep(0.5)
         elif args.fcn == 'whitest':
             black = False
@@ -89,7 +90,7 @@ def main(args):
             black = oscar.isFloorBlack()
             logging.info('MAIN: The floor is {}'.format(black*'BLACK' or 'WHITE'))
             oscar.setMapByColor(black = black)
-            actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.15])
+            actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.10])
             actions.moves.half_eight_short(oscar, black)
             oscar.objective = [4, 4]
             actions.map.navigate_map(oscar, [], oscar.objective, eight_neigh = False)

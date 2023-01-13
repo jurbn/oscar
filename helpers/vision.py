@@ -99,11 +99,9 @@ def show_cam_blobs(robot):
 def find_my_template(robot, refFilename = "res/img/R2-D2_s.png"):
     robot.reduction = 1
     imReference = cv.imread(refFilename, cv.IMREAD_COLOR)
-    frame = robot.takePic()
-    frame = robot.takePic()
-    print(frame)
+    frame = robot.takePic(PI=True)
     #imReference = cv.resize(imReference, None, fx = reduct, fy = reduct, interpolation = cv.INTER_LANCZOS4)
-    cv.imshow('res/img/last_r2d2.png', frame)
+    cv.imwrite('res/img/last_r2d2.png', frame)
     if cv.waitKey(1) & 0xFF == ord('q'):
         pass
     try:

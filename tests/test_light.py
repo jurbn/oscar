@@ -31,7 +31,7 @@ BP.reset_all()
 # BP.set_sensor_type configures the BrickPi3 for a specific sensor.
 # BP.PORT_1 specifies that the sensor will be on sensor port 1.
 # BP.SENSOR_TYPE.NXT_ULTRASONIC specifies that the sensor will be an NXT ultrasonic sensor.
-li_sen = BP.PORT_3
+li_sen = BP.PORT_1
 BP.set_sensor_type(li_sen, BP.SENSOR_TYPE.NXT_LIGHT_ON)     #EV3_ULTRASONIC_CM)
 
 try:

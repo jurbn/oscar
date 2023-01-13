@@ -1,0 +1,19 @@
+INFO:root:MAIN: Program started
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 14090:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+
+
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 70, in main
+    found = helpers.vision.find_my_template(oscar)
+  File "/home/pi/oscar/helpers/vision.py", line 102, in find_my_template
+    frame = robot.takePic(PI=True)
+  File "/home/pi/oscar/Robot.py", line 218, in takePic
+    cam = picamera.PiCamera()
+NameError: name 'picamera' is not defined
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

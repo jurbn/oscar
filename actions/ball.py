@@ -165,6 +165,7 @@ def go_for_ball(robot):
                 state = 4
             else:
                 state = 0
+    robot.ball_caught_in = [robot.x.value, robot.y.value]
 
 def ball_caught(robot):
     """Checks wether or not oscar got the ball"""
