@@ -216,6 +216,7 @@ def half_eight_short(robot, black, v = 0.2):
     while not helpers.location.is_near_angle(robot.th.value, th - side * math.pi/2):
         robot.setSpeed(v, -w * side)
     while (not helpers.location.is_near_angle(robot.th.value, th)) and (robot.y.value > 1.4):
+        logging.debug(robot.th.value)
         robot.setSpeed(v, w * side)
     logging.info('HALF_EIGHT_SHORT: done!')
 

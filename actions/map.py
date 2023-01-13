@@ -29,8 +29,6 @@ def go_to_center(robot):
 
 def exit_map(robot, black = True):
     logging.debug('EXIT_MAP: beggining exiting sequence...')
-    logging.debug('EXIT_MAP: watchpoint is {}'.format(watchpoint))
-    logging.debug('EXIT_MAP: beggining image scan...'.format(watchpoint))
     found = helpers.vision.find_my_template(robot)  # si ha visto a r2d2
     if found:
         logging.info('Ive seen R2D2')
@@ -44,7 +42,7 @@ def exit_map(robot, black = True):
         exit = [4, 7]
     elif not found and not black:   # si bb8 y yo blanco, la dcha
         exit =  [7, 7]
-    navigate_map(robot, [], exit, eight_neigh=False)
+    navigate_map(robot, exit, eight_neigh=False)
     front_value = robot.getFrontsonic()
     while not (18 < front_value < 22):
         v = 0.015 * (front_value - 20)

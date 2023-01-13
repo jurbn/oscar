@@ -94,8 +94,8 @@ def main(args):
             actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.10])
             actions.moves.half_eight_short(oscar, black)
             if black:
-                oscar.objective = np.array([[1, 4], [4, 4]])
-            else: oscar.objective = np.array([[4, 4], [7, 4]])
+                oscar.objective = [[1, 4], [4, 4]]
+            else: oscar.objective = [[4, 4], [7, 4]]
             actions.map.navigate_map(oscar, oscar.objective, eight_neigh = False)
             #TODO: que avance hasta el centro si no la ve
             #has_ball = False

@@ -233,7 +233,6 @@ class Robot:
             rawCapture.truncate(0)
         frame  = cv.rotate(frame, cv.ROTATE_180)
         frame = cv.resize(frame, None, fx = self.reduction, fy = self.reduction, interpolation = cv.INTER_LANCZOS4)
-        logging.info('A PICTURE WAS MADE')
         return frame
 
 

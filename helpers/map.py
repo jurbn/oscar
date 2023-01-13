@@ -180,25 +180,28 @@ def generate_grid(map, goals):
             #goal_k = goal[k-1]
             logging.debug('GENERATE_GRID: goal_k is: {}\n goals: {}'.format(goal_k, goals))
             grid = generate_single_grid(map, goal_k)
-            logging.debug('GENERATE_GRID: grid (Type {}) is:\n{}'.format(type(grid), grid))
+            logging.debug('GENERATE_GRID: grid is:\n{}'.format(grid))
             if grids is None:
                 grids = np.array([grid])
             else: grids = np.append(grids, [generate_single_grid(map, goal_k)], axis = 0)
-        logging.debug('GENERATE_GRID: GRIDS:\n {}'.format(grids))
+        logging.debug('GENERATE_GRID: voy a mezclar {} grids'.format(len(grids)))
         grid = mix_grids(map, grids)
     except Exception:
-            grid = generate_single_grid(map, goals)
-    #logging.debug('GENERATE_GRID: grids value:\n {},\n grid value:\n {}'.format(grids,grid))
+        logging.debug('GENERATE_GRID: no hay que mezclar')
+        grid = generate_single_grid(map, goals)
+    logging.debug('GENERATE_GRID: final grid value:\n {}'.format(grid))
     return grid
 
 def mix_grids(map, grids):
+    logging.debug('MIX_GRIDS: im in')
     mixed_grid = grids[0]
-    for k in range (1, len(grids)-1):
+    for k in range(1, len(grids)):
         grid = grids[k]
+        logging.debug('MIX_GRIDS: comprobando grid {}'.format(k+1))
         for i in range(map.shape[0]):
             for j in range(map.shape[1]):
-                if (grid[i, j] < mixed_grid[i, j]):
-                    mixed_grid[i, j] = grid[i, j]    
+                if (grid[i, j] < mixed_grid[i, j]): #TODO: que no lo recorra la primera vez
+                    mixed_grid[i, j] = grid[i, j] 
     return mixed_grid
 
 def generate_single_grid(map, goal):
