@@ -24,11 +24,11 @@ def plot_file(robot):  #TODO: distintos formatos del csv para las distintas etap
     y_t = np.arange(0, (size_1 + 1) * tile_size, tile_size)
 
     #the main frame of the map:
-    X = np.array([0, size_0, size_0, 0, 0]) * tile_size  
-    Y = np.array([0, 0, size_1, size_1, 0]) * tile_size 
+    #X = np.array([0, size_0, size_0, 0, 0]) * tile_size  
+    #Y = np.array([0, 0, size_1, size_1, 0]) * tile_size 
     base = plt.gca().transData
     rot = trans.Affine2D().rotate_deg(270)
-    ax.plot(X, Y)
+    #ax.plot(X, Y)
 
     #figuras extra:
     for i in range(1, 2*(size_0), 2):
@@ -54,8 +54,8 @@ def plot_file(robot):  #TODO: distintos formatos del csv para las distintas etap
         ax.plot(X, Y, 'r', marker = "o", markersize = 15)
 
     #vertical walls:
-    for i in np.arange(2, 2 * size_1, 2):
-        for j in np.arange(1, 2 * size_0, 2):
+    for i in np.arange(0, 2 * size_1, 2):
+        for j in np.arange(1, 2 * size_0 + 1, 2):
             if not robot.map[i,j]:
                 cx = np.floor((i-1)/2) - size_1
                 cy = np.floor((j-1)/2)
@@ -64,8 +64,8 @@ def plot_file(robot):  #TODO: distintos formatos del csv para las distintas etap
                 ax.plot(X, Y, transform = rot + base) 
     
     #horizontal walls:
-    for j in np.arange(2, 2 * size_0, 2):
-        for i in np.arange(1, 2 * size_1, 2):
+    for j in np.arange(0, 2 * size_0, 2):
+        for i in np.arange(1, 2 * size_1 + 1, 2):
             if not robot.map[i,j]:
                 cx = np.floor((i-1)/2) - size_1
                 cy = np.floor((j-1)/2)
