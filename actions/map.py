@@ -109,9 +109,9 @@ def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometr
             else:
                 [relative_move, abs_destinations, clockwise] = helpers.map.next_cell_4(robot.grid, moves, offset_angle, arr_pos, smallest_value)
             for abs_destination in abs_destinations:
-                print('-'*20) #TODO: jorge q es esto auxilio
+                print('-'*20)   # we print a line :)
                 arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)
-                if not arrived: # no ha llegao
+                if not arrived:
                     logging.debug('GO_TO_CELL: An exception was raised, calling remake_map function (offset angle: {})...\n'.format(offset_angle))
                     offset_angle = helpers.location.get_robot_quadrant(robot, index=True) * 2
                     robot.grid = remake_map(robot, size, map, goal, offset_angle = offset_angle) 

@@ -1,0 +1,17 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 11155:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 50, in main
+    helpers.vision.show_cam_blobs(oscar)
+  File "/home/pi/oscar/helpers/vision.py", line 93, in show_cam_blobs
+    cv.imshow('img', im_with_keypoints)
+cv2.error: OpenCV(3.4.13) /home/pi/sources_opencv/opencv-3.4.13/modules/highgui/src/window_gtk.cpp:624: error: (-2:Unspecified error) Can't initialize GTK backend in function 'cvInitSystem'
+
+
+WARNING:root:Abruptly stopped the robot!
+INFO:root:Odometry was stopped

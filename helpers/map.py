@@ -178,7 +178,6 @@ def generate_grid(map, goals):
     try:
         for goal_k in goals:
             #goal_k = goal[k-1]
-            logging.debug('GENERATE_GRID: goal_k is: {}\n goals: {}'.format(goal_k, goals))
             grid = generate_single_grid(map, goal_k)
             logging.debug('GENERATE_GRID: grid is:\n{}'.format(grid))
             if grids is None:
@@ -189,7 +188,6 @@ def generate_grid(map, goals):
     except Exception:
         logging.debug('GENERATE_GRID: no hay que mezclar')
         grid = generate_single_grid(map, goals)
-    logging.debug('GENERATE_GRID: final grid value:\n {}'.format(grid))
     return grid
 
 def mix_grids(map, grids):
@@ -197,7 +195,6 @@ def mix_grids(map, grids):
     mixed_grid = grids[0]
     for k in range(1, len(grids)):
         grid = grids[k]
-        logging.debug('MIX_GRIDS: comprobando grid {}'.format(k+1))
         for i in range(map.shape[0]):
             for j in range(map.shape[1]):
                 if (grid[i, j] < mixed_grid[i, j]): #TODO: que no lo recorra la primera vez

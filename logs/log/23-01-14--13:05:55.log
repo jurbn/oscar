@@ -1,0 +1,49 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 8555:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.980112075805664
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 67.28378295898438
+INFO:root:The ball's x position is: 68.76058959960938
+INFO:root:The ball's x position is: 65.41023254394531
+INFO:root:The ball's x position is: 62.67007064819336
+INFO:root:The ball's x position is: 61.17127990722656
+INFO:root:The ball's x position is: 61.141845703125
+INFO:root:The ball's x position is: 59.51926803588867
+INFO:root:The ball's x position is: 60.82175064086914
+INFO:root:The ball's x position is: 60.668216705322266
+INFO:root:The ball's x position is: 61.00493621826172
+INFO:root:The ball's x position is: 61.26322937011719
+INFO:root:The ball's x position is: 62.01324462890625
+INFO:root:The ball's x position is: 63.28794860839844
+INFO:root:The ball's x position is: 64.57006072998047
+INFO:root:The ball's x position is: 68.09465789794922
+INFO:root:The ball's x position is: 69.47110748291016
+INFO:root:The ball's x position is: 71.38748168945312
+INFO:root:The ball's x position is: 73.57080078125
+INFO:root:The ball's x position is: 74.30683135986328
+INFO:root:The ball's x position is: 76.32073211669922
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.017765045166016
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 77.46807861328125
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.18999999999999997 meters
+DEBUG:root:ENCODER VALUES: 0 -- 3
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:KeyboardInterrupt raised
+WARNING:root:Abruptly stopped the robot!
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.axes._base:update_title_pos

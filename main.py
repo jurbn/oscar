@@ -23,7 +23,8 @@ def main(args):
         logging.getLogger().addHandler(logging.StreamHandler())
         logging.info('MAIN: Program started')
         oscar = Robot(init_position=[0.6, 2.6, -math.pi/2]) # init_position=[0.1, 0.9, math.pi] #[0.6, 1.8, -math.pi/2]  [0.2, 1.8, 0]
-        logging.info('MAIN: Initial location: {}, {}, {}\n\n'.format(oscar.x.value, oscar.y.value, oscar.th.value))
+        logging.info('MAIN: Initial location: {}, {}, {}'.format(oscar.x.value, oscar.y.value, oscar.th.value))
+        logging.info('*' + '-'*75 + '*')
 
         #########################
         #   various functions   #
@@ -42,7 +43,7 @@ def main(args):
         elif args.fcn == 'stop':
             oscar.setSpeed(0, 0)
         elif args.fcn == 'ball':
-            actions.ball.go_for_ball(oscar)
+            actions.ball.go_for_ball(oscar, center=False)
         elif args.fcn == 'enc_test':
             mv.enc_test()
         elif args.fcn == 'pictures':
@@ -97,7 +98,6 @@ def main(args):
                 oscar.objective = [[1, 4], [4, 4]]
             else: oscar.objective = [[4, 4], [7, 4]]
             actions.map.navigate_map(oscar, oscar.objective, eight_neigh = False)
-            #TODO: que avance hasta el centro si no la ve
             #has_ball = False
             #while not has_ball:
             actions.ball.go_for_ball(oscar)
@@ -117,12 +117,14 @@ def main(args):
         helpers.plot.plot_file(oscar)
 
     except KeyboardInterrupt:
+        logging.info('*' + '-'*75 + '*')
         logging.warning('KeyboardInterrupt raised')
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()
         oscar.BP.reset_all()
         helpers.plot.plot_file(oscar)
     except Exception as error:
+        logging.info('*' + '-'*75 + '*')
         logging.warning(traceback.format_exc())
         mv.abrupt_stop(oscar)
         oscar.stopOdometry()

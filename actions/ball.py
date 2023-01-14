@@ -25,8 +25,9 @@ def calibrate_claw(robot):
         time.sleep(robot.blob_period-tEnd+tIni)
     robot.BP.reset_motor_encoder(robot.claw_motor)
 
-def search_ball(robot):
+def search_ball(robot, center = True):
     """Uses the camera to locate the ball"""
+    logging.info('Searching the ball...')
     found = False
     if  robot.last_seen_left:
         w = 1
@@ -38,7 +39,7 @@ def search_ball(robot):
         if blob:
             found = True
             logging.info('Found the ball! Approaching...')
-        elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black):
+        elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black) and center:
             return False
         else:
             robot.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!) 
@@ -47,6 +48,7 @@ def search_ball(robot):
 def approach_ball(robot, last_pos = None):
     """The robot will try to get close enough to get the ball, trying to get it centered if possible (not necessary as 
     it's goint to spin on the grabBall function)"""
+    logging.info('Approaching the ball...')
     ready = False
     robot.reduction = 0.25
     while not ready:
@@ -58,12 +60,12 @@ def approach_ball(robot, last_pos = None):
                 robot.last_seen_left = False
             elif blob.pt[0] < (640/2)*robot.reduction:   #izquierda
                 robot.last_seen_left = True
-            if blob.size >= 27:
+            if blob.size >= 30:
                 ready = True
                 logging.info('Close enough to the ball, size is: {}'.format(blob.size))
             else:
-                v = ((40 - blob.size) / 40) * 0.25
-                w = ((640/2)*robot.reduction - blob.pt[0]) / ((640/2)*robot.reduction) * (math.pi/3)
+                v = ((30 - blob.size) / 20) * 0.25
+                w = ((640/2)*robot.reduction - blob.pt[0]) / ((640/2)*robot.reduction) * (math.pi/2)
                 robot.setSpeed(v, w)
         else:
             logging.warning('Lost the ball! Searching again...')
@@ -83,11 +85,11 @@ def center_ball(robot):
         blob = helpers.vision.get_blob_new(frame = frame)
         if blob:
             logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
-            if blob.pt[0] > (640/2)*robot.reduction + 5: #un poco mas de la mitad
-                robot.setSpeed(0, -0.4)
+            if blob.pt[0] > (640/2)*robot.reduction + 2: #un poco mas de la mitad
+                robot.setSpeed(0, -0.5)
                 robot.last_seen_left = False
-            elif blob.pt[0] < (640/2)*robot.reduction - 5:   # un poco menos de la mitad
-                robot.setSpeed(0, 0.4)
+            elif blob.pt[0] < (640/2)*robot.reduction - 2:   # un poco menos de la mitad
+                robot.setSpeed(0, 0.5)
                 robot.last_seen_left = True
             else:
                 robot.setSpeed(0, 0)
@@ -106,6 +108,8 @@ def center_ball(robot):
 
 def grab_ball(robot):
     """Once the robot is near the ball, it reorients itrobot and tries to grab it."""
+    logging.info('Grabbing the ball...')
+    enc_beg = robot.BP.get_motor_encoder(robot.claw_motor)
     distance_array = []
     for i in range(5):
         tIni = time.clock()
@@ -134,20 +138,26 @@ def grab_ball(robot):
     time.sleep(distance/0.1 + 0.12)
     robot.setSpeed(0, 0)
     robot.BP.set_motor_position(robot.claw_motor, robot.cl_cl)
-    time.sleep(0.6)
-    ####### CHECK IF BALL IN CLAW AND IF NOT RETURN FALSE
-    return True
+    time.sleep(1.5)
+    enc_dif = robot.BP.get_motor_encoder(robot.claw_motor) - enc_beg
+    logging.debug('BALL grab_ball: encoder value is {}'.format(enc_dif))
+    if enc_dif > 1:
+        logging.info('Got the ball!')
+        return True
+    else:
+        logging.warning('Didn\'t get the ball :(')
+        return False
 
-def go_for_ball(robot):
+def go_for_ball(robot, center = True):
     """Searches, and goes for the ball"""
     state = 0
     while state < 4:
         robot.setSpeed(0, 0)
         if state == 0:      # buscando el peloto
-            success = search_ball(robot)
+            success = search_ball(robot, center)
             if success:
                 state = 1
-            else:
+            elif not success and center == True:
                 actions.map.go_to_center(robot) #TODO: HACER EL METODO
         elif state == 1:    # acercandose al peloto 
             success = approach_ball(robot)

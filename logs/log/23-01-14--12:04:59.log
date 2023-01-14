@@ -1,0 +1,18 @@
+[main()] MAIN: Program started
+[generate_grid()] GENERATE_GRID: goal_k is: 0
+ goals: [0, 0, 0]
+[generate_grid()] GENERATE_GRID: no hay que mezclar
+[__init__()] ROBOT: Robot set up!
+[startOdometry()] ROBOT: Odometry was started, PID: 5616:
+[main()] MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+
+
+[main()] MAIN: The floor is WHITE
+[setMapByColor()] ROBOT setMapByColor:Tile color is white, setting map A
+[forceNewPosition()] ROBOT forceNewPosition: Updating position to [0.6, 3]
+[main()] KeyboardInterrupt raised
+[abrupt_stop()] Abruptly stopped the robot!
+[_findfont_cached()] findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+[_update_title_position()] update_title_pos
+[_update_title_position()] update_title_pos
+[_update_title_position()] update_title_pos

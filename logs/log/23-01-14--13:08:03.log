@@ -1,0 +1,34 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 9216:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:Found the ball! Approaching...
+INFO:root:Close enough to the ball, size is: 27.6712703704834
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 88.57352447509766
+INFO:root:The ball's x position is: 88.53856658935547
+INFO:root:The ball's x position is: 88.63824462890625
+INFO:root:The ball's x position is: 88.90077209472656
+INFO:root:The ball's x position is: 89.4173355102539
+INFO:root:The ball's x position is: 89.82439422607422
+INFO:root:The ball's x position is: 89.71952056884766
+INFO:root:The ball's x position is: 90.20294952392578
+INFO:root:The ball's x position is: 91.3399887084961
+INFO:root:The ball's x position is: 91.0709228515625
+INFO:root:The ball's x position is: 91.35201263427734
+INFO:root:The ball's x position is: 90.00706481933594
+INFO:root:The ball's x position is: 88.84796905517578
+INFO:root:The ball's x position is: 87.97765350341797
+INFO:root:The ball's x position is: 87.15801239013672
+INFO:root:The ball's x position is: 86.70068359375
+INFO:root:The ball's x position is: 85.44247436523438
+INFO:root:The ball's x position is: 82.91461944580078
+INFO:root:Ball centered and ready to be catched!
+INFO:root:The distance to be covered is: 0.18000000000000002 meters
+DEBUG:root:ENCODER VALUES: 0 -- 0
+INFO:root:Odometry was stopped
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:KeyboardInterrupt raised
+WARNING:root:Abruptly stopped the robot!
