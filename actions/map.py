@@ -19,7 +19,7 @@ import helpers.map
 def go_to_center(robot):
     if robot.black:
         center = [2*robot.map_size[2], 5*robot.map_size[2]]
-    else: center = [5, 5]*robot.map_size[2]
+    else: center = [5*robot.map_size[2], 5*robot.map_size[2]]
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], center)
     logging.debug('     GO_TO_CENTER: spinning to ABSOLUTE TH {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
@@ -62,7 +62,7 @@ def go_to_watchpoint (robot, black):
     """The robot faces the watchpoint tile, goes to it and then faces the picture"""
     if black: watchpoint = [3, 6] # se va a la izda a mirar
     else: watchpoint = [5, 6]
-    watchpoint_coord = helpers.map.array2pos(robot.map_size, 0, helpers.map.tile2array(robot.map_size, watchpoint))
+    watchpoint_coord = helpers.map.array2pos(robot.map_size, helpers.map.tile2array(robot.map_size, watchpoint))
     watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - watchpoint[0])
     logging.debug('Watchpoint coordinates: {}'.format(watchpoint_coord))
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
@@ -149,7 +149,7 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el erro
     with x facing up(0) and y facing left(6)"""
     #logging.DEBUG('GO_TO_CELL: my goal is: {}'.format(arr_goal))
     move = helpers.map.get_rel_index(robot, arr_goal)
-    goal = helpers.map.array2pos(map_size, map, arr_goal)
+    goal = helpers.map.array2pos(map_size, arr_goal)
     logging.debug('GO_TO_CELL: relative move: {}'.format(move))
     try:
         if move == 0: 

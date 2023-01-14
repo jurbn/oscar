@@ -234,7 +234,7 @@ def generate_single_grid(map, goal):
             finished = True
     return grid
 
-def array2pos(map_size, map, cell): #TODO: quitar map, no se usa
+def array2pos(map_size, cell): #TODO: quitar map, no se usa
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""

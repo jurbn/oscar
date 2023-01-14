@@ -1,0 +1,11 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 11570:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:Searching the ball...
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:KeyboardInterrupt raised
+WARNING:root:Abruptly stopped the robot!
+DEBUG:root:pared horizontal en: [0, 3]
