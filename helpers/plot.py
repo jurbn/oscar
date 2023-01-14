@@ -53,8 +53,8 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
         [X, Y] = robot.ball_caught_in
         ax.plot(X, Y, 'r', marker = "o", markersize = 15)
 
-    #vertical walls:
-    for i in np.arange(0, 2 * size_1, 2):
+    #vertical walls: EDIT theyre horizontal ITHINK
+    for i in np.arange(0, 2 * size_1 + 1, 2):
         for j in np.arange(1, 2 * size_0 + 1, 2):
             if not robot.map[i,j]:
                 cx = np.floor((i-1)/2) - size_1
@@ -64,7 +64,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
                 ax.plot(X, Y, transform = rot + base) 
     
     #horizontal walls:
-    for j in np.arange(0, 2 * size_0, 2):
+    for j in np.arange(0, 2 * size_0 + 1, 2):
         for i in np.arange(1, 2 * size_1 + 1, 2):
             if not robot.map[i,j]:
                 cx = np.floor((i-1)/2) - size_1

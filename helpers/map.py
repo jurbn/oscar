@@ -4,7 +4,7 @@ import numpy as np
 import helpers.location
 import math
 
-def draw_map(grid, robot, direction = None, pos = None, tile_map = False):
+def draw_map(grid, robot, direction = None, pos = None, tile_map = False): #TODO: cambiar nombre a draw_grid
     """
     Prints the grid and, if given, the direction of the robot
     """
@@ -234,7 +234,7 @@ def generate_single_grid(map, goal):
             finished = True
     return grid
 
-def array2pos(map_size, map, cell):
+def array2pos(map_size, map, cell): #TODO: quitar map, no se usa
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""

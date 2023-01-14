@@ -1,32 +1,66 @@
-import argparse
-import time
-import logging
-import math
 import numpy as np
-from Robot import Robot
-import actions.moves as mv
-import actions.map
-import helpers.plot
-import traceback
-from tabulate import tabulate
+import matplotlib.pyplot as plt
+import matplotlib.lines as lines
+import matplotlib.transforms as trans
+import matplotlib.animation as FuncAnimation
 
-goal = [4, 1]
-direction = 2
-pos = [1, 4]
-[size, map] = helpers.map.read_map('maps/mapa3.txt')
-goal = helpers.map.tile2array(size, goal)
-grid = helpers.map.generate_grid(map, goal)  
 
-####################################draw_map(grid, direction = None, pos = None):
-print('Y \n↑ \no → X')
-lim_str = '+---' * len(grid[0, :]) + '+'
-arrow_list = ['↑', '→', '↓', '←']
-#sustituimos las paredes por 'bloques' (ASCII 219) 
-ascii_grid = grid.astype(int).tolist()
-for j in range (len(grid[0, :])):
-    for i in range (len(grid[:, 0])):
-        if (grid[i,j] == -1):
-            ascii_grid[i][j] = '█'
-if (direction is not None) and (pos is not None):
-    ascii_grid[int(pos[0])][int(pos[1])] = arrow_list[int(direction)]
-print(tabulate(ascii_grid, tablefmt='grid'))
+######################################ploteo weno
+def plot():
+    map = np.array([[0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+    size_0 = 7
+    size_1 = 7
+    tile_size = 0.4
+    map_size = [size_0, size_1, tile_size]
+
+    fig = plt.figure()
+    #df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])   # the dataframe where the odometry values are stored
+    plot = fig.add_subplot(111)   # subplot where we will draw
+
+    # obstacles:
+    for i in range (size_1 * 2):
+        for j in range(size_0 *2):
+            if not map[i,j]: #if the map cell is zero, it means there's a wall:
+                if (i%2==0) and (j%2==1): #horizontal wall
+                    print('pared horizontal en: [{}, {}]'.format(i,j)) 
+                    [posx, posy] = array2pos(map_size, [i,j])
+                    X = np.array([posx - tile_size/2, posx + tile_size/2])
+                    Y = np.array([posy, posy])
+                    plot.plot(X, Y) 
+                elif (i%2==1) and (j%2==0): #vertical wall
+                    print('pared vertical en: [{}, {}]'.format(i,j)) #AQUIvvvvvv
+                    [posx, posy] = array2pos(map_size, [i,j])
+                    X = np.array([posx, posx])
+                    Y = np.array([posy - tile_size/2, posy + tile_size/2])
+                    plot.plot(X, Y) 
+                elif (i%2==1) and (j%2==1): #obstá([culo])
+                    print('columna en: [{}, {}]'.format(i,j)) 
+                    [X, Y] = array2pos(map_size, [i,j])
+                    plot.plot(X, Y) 
+    
+    #plot.plot(df['x'], df['y']) 
+    plt.xticks(np.arange(0, (size_0+1)*tile_size, tile_size))
+    plt.yticks(np.arange(0, (size_1+1)*tile_size, tile_size))
+    #plt.gca().set_aspect("equal")
+    plt.show()    
+
+
+def array2pos(map_size, cell): 
+    pos = np.array([0, 0], dtype=float)
+    pos[0] = cell[1] * (map_size[2]/2)
+    pos[1] = (map_size[1]*2-cell[0]) * (map_size[2]/2)
+    return pos
