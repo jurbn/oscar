@@ -8,76 +8,82 @@ import helpers.map
 import logging
 
 def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en diferentes colores
-    size = helpers.map.read_map(robot.map_file)[0] #TODO: cambiar al size de robot
-    size_0 = int(size[0])
-    size_1 = int(size[1])   # sizes of the map
-    tile_size = size[2]
-    fig = plt.figure()
-    df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])   # the dataframe where the odometry values are stored
-    ax = fig.add_subplot(111)   # subplot where we will draw
+    size_0 = int(robot.map_size[0])
+    size_1 = int(robot.map_size[1])   # sizes of the map
+    tile_size = robot.map_size[2]
+    map = get_map(robot, 2)
 
-    # We create a grid figure that matches the floor tiles:
-    plt.rc('grid', linestyle ="--", color='gray')
+    f = plt.figure()
+    fig = f.add_subplot(111)   # subplot where we will draw
+    
+    # plot config:
     plt.grid(True)
-    plt.tight_layout()
-    x_t = np.arange(0, (size_0 + 1)* tile_size, tile_size) 
-    y_t = np.arange(0, (size_1 + 1) * tile_size, tile_size)
-
-    # the main frame of the map:
-    # X = np.array([0, size_0, size_0, 0, 0]) * tile_size  
-    # Y = np.array([0, 0, size_1, size_1, 0]) * tile_size 
-    base = plt.gca().transData
-    rot = trans.Affine2D().rotate_deg(270)
-    #ax.plot(X, Y)
-
-    # extra figures:
-    for i in range(1, 2*(size_0), 2):
-        for j in range(1, 2*size_0, 2):
-            if not robot.map[i,j]: #Slalom obstacles, marked with octagons
-                robot.map[i+1,j] = 1
-                robot.map[i-1,j] = 1
-                robot.map[i,j-1] = 1
-                robot.map[i,j+1] = 1
-                [X, Y] = np.array(helpers.map.array2pos(size, robot.map, [i, j]))
-                ax.plot(X, Y, marker = "8", markersize = 15)
-    if robot.objective: # if the robot has a declared objective, mark it with an X
+    plt.xticks(np.arange(0, (size_0 + 1)* tile_size, tile_size)) #we set the axis ticks to match the tiles
+    plt.yticks(np.arange(0, (size_1 + 1) * tile_size, tile_size))
+    plt.gca().set_aspect("equal")
+    colors = ['tomato', 'orange', 'gold', 'yellow','greenyellow', 'aquamarine', 'cornflowerblue', 'mediumorchid']
+    # obstacles:
+    for i in range (size_1 * 2 + 1):
+        for j in range(size_0 * 2 + 1):
+            if not map[i,j]: #if the map cell is zero, it means there's an obstacle:
+                if (i%2==0) and (j%2==1): #horizontal wall
+                    logging.debug('pared horizontal en: [{}, {}]'.format(i,j)) 
+                    [posx, posy] = helpers.map.array2pos(robot.map_size, [i,j])
+                    X = np.array([posx - tile_size/2, posx + tile_size/2])
+                    Y = np.array([posy, posy])
+                    fig.plot(X, Y, linewidth = '2', color = colors[i//2]) 
+                elif (i%2==1) and (j%2==0): #vertical wall
+                    logging.debug('pared vertical en: [{}, {}]'.format(i,j)) 
+                    [posx, posy] = helpers.map.array2pos(robot.map_size, [i,j])
+                    X = np.array([posx, posx])
+                    Y = np.array([posy - tile_size/2, posy + tile_size/2])
+                    fig.plot(X, Y, linewidth = '2' color = colors[i//2]) 
+                elif (i%2==1) and (j%2==1): #obstá([culo]) (.)(.)
+                    logging.debug('columna en: [{}, {}]'.format(i,j)) 
+                    [X, Y] = helpers.map.array2pos(robot.map_size, [i,j])
+                    fig.plot(X, Y, marker='8', markersize = 15, color = 'pink') 
+    
+    # objective(s):
+    if robot.objective:
         try:
             for obj in robot.objective:
                 X = helpers.map.tile2pos(robot.map_size, obj)[0]
                 Y = helpers.map.tile2pos(robot.map_size, obj)[1]    
-                ax.plot(X, Y, marker = "x")
+                fig.plot(X, Y, marker = "x")
         except Exception:
             [X, Y] = helpers.map.tile2pos(robot.map_size, robot.objective)
-            ax.plot(X, Y, marker = "x")
+            fig.plot(X, Y, marker = "x") #TODO: poner colores decentes para los objetivos
+    
+    # ball:
     if robot.ball_caught_in:    # if the robot has caught the ball, mark it with a red circle
         [X, Y] = robot.ball_caught_in
-        ax.plot(X, Y, 'r', marker = "o", markersize = 15)
+        fig.plot(X, Y, 'r', marker = "o", markersize = 15)
 
-    #vertical walls: EDIT theyre horizontal ITHINK
-    for i in np.arange(0, 2 * size_1 + 1, 2):
-        for j in np.arange(1, 2 * size_0 + 1, 2):
-            if not robot.map[i,j]:
-                cx = np.floor((i-1)/2) - size_1
-                cy = np.floor((j-1)/2)
-                X = np.array([cx + 1, cx + 1]) * tile_size
-                Y = np.array([cy, cy + 1]) * tile_size
-                ax.plot(X, Y, transform = rot + base) 
-    
-    #horizontal walls:
-    for j in np.arange(0, 2 * size_0 + 1, 2):
-        for i in np.arange(1, 2 * size_1 + 1, 2):
-            if not robot.map[i,j]:
-                cx = np.floor((i-1)/2) - size_1
-                cy = np.floor((j-1)/2)
-                X = np.array([cx, cx + 1]) * tile_size
-                Y = np.array([cy + 1, cy + 1]) * tile_size
-                ax.plot(X, Y, transform = rot + base) 
-    ax.plot(df['x'], df['y']) 
-    plt.xticks(np.arange(0, (size_0+1)*0.4, 0.4))
-    plt.yticks(np.arange(0, (size_1+1)*0.4, 0.4))
-    plt.gca().set_aspect("equal")
+    # odometry: TODO: coloresss
+    df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])   # the dataframe where the odometry values are stored
+    fig.plot(df['x'], df['y'], color = 'baby blue') # este color probablemente de error ya buscare como ponerlo bien
+
     plt.show()    
 
+def get_map(robot, columns):
+    i = 1
+    j = 1
+    n = 0
+    map = robot.map
+    finished = False
+    while (i < (robot.map_size[1] * 2 + 1)) and not finished:
+        while (j < (robot.map_size[0] * 2 + 1)) and not finished:
+            if not robot.map[i, j]:
+                n += 1
+                map[i + 1, j] = 1
+                map[i, j + 1] = 1
+                map[i - 1, j] = 1
+                map[i, j - 1] = 1
+                if n == columns: finished = True
+            j += 2
+        j = 1
+        i += 2
+    return map
 
 def plot_animation(robot):  #FIXME: unused, right?
     fig = plt.figure(figsize=(6, 3))
