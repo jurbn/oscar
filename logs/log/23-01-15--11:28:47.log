@@ -1,0 +1,87 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 18734:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:Searching the ball...
+INFO:root:Found the ball! Approaching...
+INFO:root:Approaching the ball...
+INFO:root:Close enough to the ball, size is: 32.214561462402344
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 143.87161254882812
+INFO:root:The ball's x position is: 150.499755859375
+INFO:root:The ball's x position is: 149.52334594726562
+INFO:root:The ball's x position is: 143.2240753173828
+INFO:root:The ball's x position is: 147.95819091796875
+INFO:root:The ball's x position is: 139.48487854003906
+INFO:root:The ball's x position is: 137.83592224121094
+INFO:root:The ball's x position is: 137.54786682128906
+INFO:root:The ball's x position is: 140.2100067138672
+INFO:root:The ball's x position is: 146.98777770996094
+INFO:root:The ball's x position is: 150.95208740234375
+INFO:root:The ball's x position is: 155.5588836669922
+INFO:root:The ball's x position is: 153.41807556152344
+INFO:root:The ball's x position is: 152.3730926513672
+INFO:root:The ball's x position is: 151.97750854492188
+INFO:root:The ball's x position is: 148.7039337158203
+INFO:root:The ball's x position is: 146.09730529785156
+INFO:root:The ball's x position is: 144.05958557128906
+INFO:root:The ball's x position is: 138.5230712890625
+INFO:root:The ball's x position is: 135.51287841796875
+INFO:root:The ball's x position is: 133.1656951904297
+INFO:root:The ball's x position is: 136.24485778808594
+INFO:root:The ball's x position is: 137.4960174560547
+INFO:root:The ball's x position is: 138.06625366210938
+WARNING:root:Lost the ball! Searching agan...
+INFO:root:Searching the ball...
+INFO:root:Found the ball! Approaching...
+INFO:root:Approaching the ball...
+INFO:root:Close enough to the ball, size is: 30.493751525878906
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 74.15000915527344
+INFO:root:The ball's x position is: 73.51189422607422
+INFO:root:The ball's x position is: 72.81925964355469
+INFO:root:The ball's x position is: 72.11773681640625
+INFO:root:The ball's x position is: 71.66309356689453
+INFO:root:The ball's x position is: 70.9920425415039
+INFO:root:The ball's x position is: 70.7083511352539
+INFO:root:The ball's x position is: 70.22750854492188
+INFO:root:The ball's x position is: 70.56135559082031
+INFO:root:The ball's x position is: 70.87568664550781
+INFO:root:The ball's x position is: 72.00749969482422
+INFO:root:The ball's x position is: 72.97998046875
+INFO:root:The ball's x position is: 74.71133422851562
+INFO:root:The ball's x position is: 76.91300964355469
+INFO:root:The ball's x position is: 81.59109497070312
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Grabbing the ball...
+INFO:root:The distance to be covered is: 0.21 meters
+DEBUG:root:BALL grab_ball: encoder value is 0
+WARNING:root:Didn't get the ball :(
+INFO:root:Searching the ball...
+INFO:root:Found the ball! Approaching...
+INFO:root:Approaching the ball...
+INFO:root:Close enough to the ball, size is: 30.53287124633789
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 88.23503112792969
+INFO:root:The ball's x position is: 90.89195251464844
+INFO:root:The ball's x position is: 93.64691162109375
+WARNING:root:Lost the ball! Searching agan...
+INFO:root:Searching the ball...
+INFO:root:Found the ball! Approaching...
+INFO:root:Approaching the ball...
+INFO:root:Close enough to the ball, size is: 30.29414939880371
+INFO:root:Centering the ball...
+INFO:root:The ball's x position is: 82.65816497802734
+INFO:root:The ball's x position is: 82.50802612304688
+INFO:root:The ball's x position is: 81.93409729003906
+INFO:root:Ball centered and ready to be catched!
+INFO:root:Grabbing the ball...
+INFO:root:The distance to be covered is: 0.22 meters
+DEBUG:root:BALL grab_ball: encoder value is 3
+INFO:root:Got the ball!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

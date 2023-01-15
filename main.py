@@ -75,9 +75,11 @@ def main(args):
         elif args.fcn == 'whitest':
             black = False
             oscar.setMapByColor(black = black)
-            oscar.forceNewPosition([1.4, 1.4])
+            oscar.forceNewPosition([1.4, 1.4, math.pi/2])
             actions.ball.go_for_ball(oscar)
-            # TODO: AQUI COMPROBAR SI ESTOY EN PARED, SI LO ESTOY MIRO AL PROXIMO TILE Y AVANZO 20 CM !!!! (o solo ando 20 pa lante)
+            actions.map.go_to_watchpoint(oscar, black)
+            #has_ball = actions.ball.check_caught(oscar, black)
+            actions.moves.spin(oscar, math.pi/2, relative = False)
             actions.map.exit_map(oscar, black)
 
         #########################

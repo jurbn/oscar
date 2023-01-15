@@ -24,7 +24,7 @@ def go_to_center(robot):
     logging.debug('     GO_TO_CENTER: spinning to ABSOLUTE TH {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
     logging.debug('     GO_TO_CENTER: running to center: {}'.format(center))
-    while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.07):  
+    while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.1):  
         robot.setSpeed(0.2, 0)
 
 def exit_map(robot, black = True):

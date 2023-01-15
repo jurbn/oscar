@@ -112,7 +112,7 @@ class Robot:
         self.x.value = new_pos[0]
         self.y.value = new_pos[1]
         try:
-            self.offset_angle = new_pos[2]
+            self.offset_angle = new_pos[2] - (self.th.value - self.offset_angle)
         except Exception:
             pass
         self.lock_odometry.release()

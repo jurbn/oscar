@@ -61,7 +61,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
 
     # odometry: TODO: coloresss
     df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])   # the dataframe where the odometry values are stored
-    fig.plot(df['x'], df['y'], color = 'blue') #  BABY BLUE este color probablemente de error ya buscare como ponerlo bien
+    fig.plot(df['x'], df['y'], color = 'cornflowerblue') #  BABY BLUE este color probablemente de error ya buscare como ponerlo bien
 
     plt.show()    
 

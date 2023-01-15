@@ -31,16 +31,9 @@ r22 = np.array([180, 255, 255])
 MIN_MATCH_COUNT=20          # initially
 MIN_MATCH_OBJECTFOUND=15    # after robust check, to consider object-found
 
-def get_blob(frame):
+def get_blob_old(frame):
     """ Searches for a blob and returns the center """
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
-    #logging.debug('brightness: {}'.format(avg_brightness))
-    # if avg_brightness > 140:
-    #    diff = avg_brightness - 140
-    #    for pixel in hsv:
-    #        pixel[2] = pixel[2] - diff
-    #avg_brightness = np.average(np.linalg.norm(hsv, axis=2))
     mask1 = cv.inRange(hsv, r11, r12)
     mask2 = cv.inRange(hsv, r21, r22)
     mask = mask1 | mask2    # we need two masks because hsv values start and end on red :/
@@ -56,7 +49,8 @@ def get_blob(frame):
                 biggest_kp = point
     return biggest_kp   # return the chonky one
 
-def get_blob_new(frame):
+def get_blob(frame):
+    """Returns the keypoint that's most likely to be the ball"""
     blurred = cv.GaussianBlur(frame, (11, 11), 0)
     hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
     mask1 = cv.inRange(hsv, r11, r12)
@@ -82,7 +76,7 @@ def show_cam_blobs(robot):
         tIni = time.clock()
         robot.reduction = 0.25 #0.25
         frame = robot.takePic()     # [139:179, 219:239]
-        blob = get_blob_new(frame=frame)
+        blob = get_blob(frame=frame)
         if blob:
             print('size: {}'.format(blob.size))
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array(
@@ -97,9 +91,10 @@ def show_cam_blobs(robot):
     cv.destroyAllWindows()
 
 def find_my_template(robot, refFilename = "res/img/R2-D2_s.png"):
+    """Takes a picture and returns True if the template has been found"""
     robot.reduction = 1
     imReference = cv.imread(refFilename, cv.IMREAD_COLOR)
-    frame = robot.takePic(PI=True)
+    frame = robot.takePic(PI=True)  # PI==True because its better for the template recognition
     #imReference = cv.resize(imReference, None, fx = reduct, fy = reduct, interpolation = cv.INTER_LANCZOS4)
     cv.imwrite('res/img/last_r2d2.png', frame)
     if cv.waitKey(1) & 0xFF == ord('q'):
@@ -126,21 +121,15 @@ def match_img(img1_bgr, img2_bgr):
     kp2, des2 = detector.detectAndCompute(img2,None)
 
     if des1 is None or des2 is None:
-        print("WARNING: empty detection?")
         return False
     if len(des1) < MIN_MATCH_COUNT or len(des2) < MIN_MATCH_COUNT:
-        print("WARNING: not enough FEATURES (im1: %d, im2: %d)" %(len(des1), len(des2)) )
         return False
-    print(" FEATURES extracted (im1: %d, im2: %d)" %(len(des1), len(des2)) )
         
-
     if binary_features:
         bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
         matches = bf.match(des1,des2)
         matches = sorted(matches, key = lambda x:x.distance)
         good = matches
-
-    print(" Initial matches found: %d" %(len(good)))
 
     if len(good)>MIN_MATCH_COUNT:
         src_pts = np.float32([ kp1[m.queryIdx].pt for m in good ]).reshape(-1,1,2)
@@ -150,18 +139,13 @@ def match_img(img1_bgr, img2_bgr):
         num_robust_matches = np.sum(matchesMask)
         if num_robust_matches < MIN_MATCH_OBJECTFOUND:
             found = False
-            print("NOT enough ROBUST matches found - %d (required %d)" % 
-                (num_robust_matches, MIN_MATCH_OBJECTFOUND))
             return found
         h,w = img1.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
         dst = cv.perspectiveTransform(pts,H_21)
-        img2_res = cv.polylines(img2_bgr, [np.int32(dst)], True, 
-                                 color=(255,255,255), thickness=3)
+        img2_res = cv.polylines(img2_bgr, [np.int32(dst)], True, color=(255,255,255), thickness=3)
         found = True
-        print("ROBUST matches found - %d (out of %d) --> OBJECT FOUND" % (np.sum(matchesMask), len(good)))
     else:
-        print("Not enough initial matches are found - %d (required %d)" % (len(good), MIN_MATCH_COUNT))
         matchesMask = None
         found = False
     return found

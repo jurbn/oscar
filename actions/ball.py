@@ -18,7 +18,7 @@ def calibrate_claw(robot):
     while not located:
         tIni = time.clock()
         frame = robot.takePic()[0:640, 240:480]
-        blob = helpers.vision.get_blob_new(frame=frame, color='yellow')
+        blob = helpers.vision.get_blob(frame=frame, color='yellow')
         if blob:
             located = True
         tEnd = time.clock()
@@ -35,7 +35,7 @@ def search_ball(robot, center = True):
     robot.reduction = 0.25
     while not found:
         frame = robot.takePic()
-        blob = helpers.vision.get_blob_new(frame = frame)
+        blob = helpers.vision.get_blob(frame = frame)
         if blob:
             found = True
             logging.info('Found the ball! Approaching...')
@@ -54,7 +54,7 @@ def approach_ball(robot, last_pos = None):
     while not ready:
         #tIni = time.clock()
         frame = robot.takePic()
-        blob = helpers.vision.get_blob_new(frame = frame)
+        blob = helpers.vision.get_blob(frame = frame)
         if blob:
             if blob.pt[0] > (640/2)*robot.reduction: #derecha
                 robot.last_seen_left = False
@@ -65,7 +65,7 @@ def approach_ball(robot, last_pos = None):
                 logging.info('Close enough to the ball, size is: {}'.format(blob.size))
             else:
                 v = ((30 - blob.size) / 20) * 0.25
-                w = ((640/2)*robot.reduction - blob.pt[0]) / ((640/2)*robot.reduction) * (math.pi/2)
+                w = ((640/2)*robot.reduction - blob.pt[0]) / ((640/2)*robot.reduction) * (math.pi/2.5)
                 robot.setSpeed(v, w)
         else:
             logging.warning('Lost the ball! Searching again...')
@@ -75,34 +75,42 @@ def approach_ball(robot, last_pos = None):
     return True
 
 def center_ball(robot):
-    # robot.pauseProximity()
+    """Spins until the ball is on the center of the screen for at least two frames"""
     logging.info('Centering the ball...')
+    first = False
+    second = False
     centered = False
     robot.reduction = 0.25
     while not centered:
         #tIni = time.clock()
         frame = robot.takePic()
-        blob = helpers.vision.get_blob_new(frame = frame)
+        blob = helpers.vision.get_blob(frame = frame)
         if blob:
             logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
             if blob.pt[0] > (640/2)*robot.reduction + 2: #un poco mas de la mitad
-                robot.setSpeed(0, -0.5)
+                robot.setSpeed(0, -0.35)
+                first = False
+                second = False
                 robot.last_seen_left = False
             elif blob.pt[0] < (640/2)*robot.reduction - 2:   # un poco menos de la mitad
-                robot.setSpeed(0, 0.5)
+                robot.setSpeed(0, 0.35)
+                first = False
+                second = False
                 robot.last_seen_left = True
             else:
                 robot.setSpeed(0, 0)
-                centered = True
-                logging.info('Ball centered and ready to be catched!')
+                second = first # centered True if previous was centered too
+                centered = second
+                first = True
         else:   # si no ve el blob, hace otra foto
             frame = robot.takePic()
-            blob = helpers.vision.get_blob_new(frame = frame)
+            blob = helpers.vision.get_blob(frame = frame)
             if not blob:
                 logging.warning('Lost the ball! Searching agan...')
                 return False
         #tEnd = time.clock()
         #time.sleep(robot.blob_period-tEnd+tIni)
+    logging.info('Ball centered and ready to be catched!')
     return True
 
 
@@ -158,7 +166,7 @@ def go_for_ball(robot, center = True):
             if success:
                 state = 1
             elif not success and center == True:
-                actions.map.go_to_center(robot) #TODO: HACER EL METODO
+                actions.map.go_to_center(robot)
         elif state == 1:    # acercandose al peloto 
             success = approach_ball(robot)
             if success:
@@ -196,7 +204,7 @@ def check_caught(robot, black):
         else:
             front_value = new_front_value
     frame = robot.takePic()
-    blob = helpers.vision.get_blob_new(frame = frame)
+    blob = helpers.vision.get_blob(frame = frame)
     if blob: found = True
     front_value = robot.getFrontsonic()
     while not (initial_value-2 < front_value < initial_value+2):  # acercarnos para chequiar
