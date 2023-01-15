@@ -15,3 +15,12 @@ Incluye las funciones referentes al posicionamiento y localización del robot co
 ### [map.py](map.py)
 Se declaran todas las funciones que hagan referencia al mapa y su recorrido, desde funciones que realizan el cambio de base entre referencias hasta funciones que calculan el grid y las mejores "siguientes celdas" hacia las que avanzar.
 ### [maths.py](maths.py)
+Incluye las funciones que sean meras operaciones matemáticas, esto incluye normalizaciones, obtención de signos, geometría, etc,
+### [plot.py](plot.py)
+Aquí se encuentran todas las funciones que tienen como objetivo generar el plot del recorrido realizado por el robot.
+### [vision.py](vision.py)
+Este archivo incluye las funciones dirigidas al reconocimiento de objetos mediante visión por computador.
+## [Robot.py](Robot.py)
+Este archivo alberga la clase Robot y todos sus atributos y funciones. Desde ella se gestionan todas las funciones directamente relacionadas con el robot, ya sea la lectura de sensores, posicionamiento de actuadores, modificación de los valores de odometría...
+## [main.py](main.py)
+Este es el archivo que el usuario ejecuta directamente, incluye una serie de funciones que se darán dependiendo del input que se escriba en los argumentos.
