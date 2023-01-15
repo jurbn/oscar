@@ -99,8 +99,8 @@ def center_ball(robot):
                 robot.last_seen_left = True
             else:
                 robot.setSpeed(0, 0)
-                second = first # centered True if previous was centered too
-                centered = second
+                centered = second   # centered True if previous two waere centered too
+                second = first
                 first = True
         else:   # si no ve el blob, hace otra foto
             frame = robot.takePic()
@@ -166,6 +166,7 @@ def go_for_ball(robot, center = True):
             if success:
                 state = 1
             elif not success and center == True:
+                center = False  # para que no se repita!
                 actions.map.go_to_center(robot)
         elif state == 1:    # acercandose al peloto 
             success = approach_ball(robot)

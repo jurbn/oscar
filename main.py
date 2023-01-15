@@ -95,7 +95,7 @@ def main(args):
             logging.info('MAIN: The floor is {}'.format(black*'BLACK' or 'WHITE'))
             oscar.setMapByColor(black = black)
             actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.10])
-            actions.moves.half_eight_short(oscar, black)
+            actions.moves.half_eight(oscar, black)
             if black:
                 oscar.objective = [[1, 4], [4, 4]]
             else: oscar.objective = [[4, 4], [7, 4]]
