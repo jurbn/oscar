@@ -19,7 +19,7 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 1, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 0.75, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
