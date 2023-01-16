@@ -36,7 +36,7 @@ def go_to_center(robot):
     logging.debug('GO_TO_CENTER: spinning to (absolute) th {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
     logging.debug('GO_TO_CENTER: running to center: {}'.format(center))
-    while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.1):  
+    while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.2):  
         robot.setSpeed(0.2, 0)
 
 def exit_map(robot, black = True):
@@ -68,8 +68,8 @@ def exit_map(robot, black = True):
         else:
             front_value = new_front_value
     robot.setSpeed(0, 0)
-    actions.moves.spin(robot, math.pi/2, relative=False)
-    actions.moves.run(robot, [robot.x.value, robot.y.value + robot.map_size[2]])
+    actions.moves.spin(robot, math.pi/2, relative=False, threshold = 0.35)
+    actions.moves.run(robot, [robot.x.value, robot.y.value + 1.5*robot.map_size[2]], v = 0.25)
 
 def go_to_watchpoint (robot, black):
     """The robot faces the watchpoint tile, goes to it and then faces the picture"""

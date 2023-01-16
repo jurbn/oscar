@@ -19,7 +19,7 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 1, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
@@ -28,11 +28,11 @@ def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda p
         th = helpers.maths.norm_pi(th)
     spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
     w = helpers.maths.get_sign(spin_dir)*w
-    while not helpers.location.is_near_angle(robot, th, threshold=0.02):
+    while not helpers.location.is_near_angle(robot, th, threshold = threshold):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.25, correct_trajectory = True, detect_obstacles = False, threshold = 0.025):
+def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = False, threshold = 0.025):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     th = robot.th.value
     #can_fix = helpers.map.
@@ -181,11 +181,11 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def half_eight(robot, black, v = 0.35):
+def half_eight(robot, black, v = 0.27):
     """
     Does an odometry-based eight circuit with the given r and v.
     """
-    r = 0.35
+    r = 0.325
     th = robot.th.value
     side = black * 2 - 1
     w = v / r

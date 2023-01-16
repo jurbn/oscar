@@ -30,8 +30,8 @@ def search_ball(robot, center = True):
     logging.info('SEARCH_BALL: Searching for the ball...')
     found = False
     if  robot.last_seen_left:
-        w = 1
-    else: w = -1
+        w = 1.5
+    else: w = -1.5
     robot.reduction = 0.25
     while not found:
         frame = robot.takePic()
@@ -64,7 +64,7 @@ def approach_ball(robot, last_pos = None):
                 ready = True
                 logging.info('Close enough to the ball, size is: {}'.format(blob.size))
             else:
-                v = ((30 - blob.size) / 20) * 0.25
+                v = ((30 - blob.size) / 20) * 0.35
                 w = ((640/2)*robot.reduction - blob.pt[0]) / ((640/2)*robot.reduction) * (math.pi/2.5)
                 robot.setSpeed(v, w)
         else:
