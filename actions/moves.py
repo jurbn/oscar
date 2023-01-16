@@ -32,7 +32,7 @@ def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda p
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
-def run(robot, objctv, v = 0.15, correct_trajectory = True, detect_obstacles = False, threshold = 0.015):
+def run(robot, objctv, v = 0.25, correct_trajectory = True, detect_obstacles = False, threshold = 0.025):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     th = robot.th.value
     #can_fix = helpers.map.
@@ -181,7 +181,7 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def half_eight(robot, black, v = 0.2):
+def half_eight(robot, black, v = 0.35):
     """
     Does an odometry-based eight circuit with the given r and v.
     """

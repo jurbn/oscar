@@ -21,11 +21,11 @@ def center_in_cell(robot):
     array_location = helpers.map.tile2array(robot.map_size, destination)
     desired_location = helpers.map.array2pos(robot.map_size, array_location)
     while not ((desired_location[0] - 0.01) < robot.x.value < (desired_location[0] + 0.01)):
-        v = helpers.maths.get_sign(desired_location[0] - robot.x.value) * 0.08 * (2*robot.black-1)
+        v = helpers.maths.get_sign(desired_location[0] - robot.x.value) * 0.15 * (2*robot.black-1)
         robot.setSpeed(v, 0)
     actions.moves.spin(robot, -math.pi/2, w = 1, relative = False)
     while not ((desired_location[1] - 0.01) < robot.y.value < (desired_location[1] + 0.01)):
-        v = helpers.maths.get_sign(desired_location[1] - robot.y.value) * -0.08
+        v = helpers.maths.get_sign(desired_location[1] - robot.y.value) * -0.15
         robot.setSpeed(v, 0)
 
 def go_to_center(robot):

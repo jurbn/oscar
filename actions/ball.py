@@ -114,7 +114,7 @@ def center_ball(robot):
     return True
 
 
-def grab_ball(robot):
+def grab_ball(robot, check_caught = False):
     """Once the robot is near the ball, it reorients itrobot and tries to grab it."""
     logging.info('Grabbing the ball...')
     enc_beg = robot.BP.get_motor_encoder(robot.claw_motor)
@@ -147,14 +147,17 @@ def grab_ball(robot):
     robot.setSpeed(0, 0)
     robot.BP.set_motor_position(robot.claw_motor, robot.cl_cl)
     time.sleep(1.5)
-    enc_dif = robot.BP.get_motor_encoder(robot.claw_motor) - enc_beg
-    logging.debug('BALL grab_ball: encoder value is {}'.format(enc_dif))
-    if enc_dif >= 1:
-        logging.info('Got the ball!')
-        return True
+    if check_caught:
+        enc_dif = robot.BP.get_motor_encoder(robot.claw_motor) - enc_beg
+        logging.debug('BALL grab_ball: encoder value is {}'.format(enc_dif))
+        if enc_dif > 1:
+            logging.info('Got the ball!')
+            return True
+        else:
+            logging.warning('Didn\'t get the ball :(')
+            return False
     else:
-        logging.warning('Didn\'t get the ball :(')
-        return False
+        return True
 
 def go_for_ball(robot, center = True):
     """Searches, and goes for the ball"""
@@ -188,7 +191,7 @@ def go_for_ball(robot, center = True):
                 state = 0
     robot.ball_caught_in = [robot.x.value, robot.y.value]
 
-def check_caught(robot, black):
+def check_caught(robot, black): #TODO: esto es lo del espejo que al final no lo hemos hecho
     """Checks wether or not oscar got the ball"""
     found = False
     actions.moves.spin(robot, math.pi*(not black), relative = False)
