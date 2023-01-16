@@ -16,14 +16,26 @@ sys.path.append(parentdir)
 import helpers.location
 import helpers.map
 
+def center_in_cell(robot):
+    destination = robot.objective
+    array_location = helpers.map.tile2array(robot.map_size, destination)
+    desired_location = helpers.map.array2pos(robot.map_size, array_location)
+    while not ((desired_location[0] - 0.01) < robot.x.value < (desired_location[0] + 0.01)):
+        v = helpers.maths.get_sign(desired_location[0] - robot.x.value) * 0.08 * (2*robot.black-1)
+        robot.setSpeed(v, 0)
+    actions.moves.spin(robot, -math.pi/2, w = 1, relative = False)
+    while not ((desired_location[1] - 0.01) < robot.y.value < (desired_location[1] + 0.01)):
+        v = helpers.maths.get_sign(desired_location[1] - robot.y.value) * -0.08
+        robot.setSpeed(v, 0)
+
 def go_to_center(robot):
     if robot.black:
         center = [2*robot.map_size[2], 5*robot.map_size[2]]
     else: center = [5*robot.map_size[2], 5*robot.map_size[2]]
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], center)
-    logging.debug('     GO_TO_CENTER: spinning to ABSOLUTE TH {}'.format(th))
+    logging.debug('GO_TO_CENTER: spinning to (absolute) th {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
-    logging.debug('     GO_TO_CENTER: running to center: {}'.format(center))
+    logging.debug('GO_TO_CENTER: running to center: {}'.format(center))
     while not helpers.location.is_near([robot.x.value, robot.y.value], center, threshold=0.1):  
         robot.setSpeed(0.2, 0)
 
@@ -31,17 +43,18 @@ def exit_map(robot, black = True):
     logging.debug('EXIT_MAP: beggining exiting sequence...')
     found = helpers.vision.find_my_template(robot)  # si ha visto a r2d2
     if found:
-        logging.info('Ive seen R2D2')
+        logging.info('EXIT_MAP: Ive seen R2D2')
     else:
-        logging.info('Ive seen BB8')
+        logging.info('EXIT_MAP: Ive seen BB8')
     if found and black: # si r2d2 y yo negro, la izda
-        exit = [1, 7]
+        robot.objective = [1, 7]
     elif found and not black:   # si r2d2 y yo blanco, izda
-        exit = [4, 7]
+        robot.objective = [4, 7]
     elif not found and black:   # si bb8 y yo negro, la dcha
-        exit = [4, 7]
+        robot.objective = [4, 7]
     elif not found and not black:   # si bb8 y yo blanco, la dcha
-        exit =  [7, 7]
+        robot.objective =  [7, 7]
+    exit = robot.objective
     navigate_map(robot, exit, eight_neigh=False)
     front_value = robot.getFrontsonic()
     while not (18 < front_value < 22):
@@ -62,18 +75,18 @@ def go_to_watchpoint (robot, black):
     """The robot faces the watchpoint tile, goes to it and then faces the picture"""
     if black: watchpoint = [3, 6] # se va a la izda a mirar
     else: watchpoint = [5, 6]
+    robot.objective = watchpoint
     watchpoint_coord = helpers.map.array2pos(robot.map_size, helpers.map.tile2array(robot.map_size, watchpoint))
     watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - watchpoint[0])
-    logging.debug('Watchpoint coordinates: {}'.format(watchpoint_coord))
+    logging.debug('GO_TO_WATCHPOINT: watchpoint coordinates: {}'.format(watchpoint_coord))
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
-    logging.debug('     GO_TO_WATCHPOINT: spinning to ABSOLUTE TH {}'.format(th))
     actions.moves.spin(robot, th, relative = False, w = 1)
-    logging.debug('     GO_TO_WATCHPOINT: running to watchpoint: {}'.format(watchpoint))
+    logging.debug('GO_TO_WATCHPOINT: running to watchpoint ({})...'.format(watchpoint))
     while not helpers.location.is_near([robot.x.value, robot.y.value], watchpoint_coord, threshold=0.1):
     #while (abs(robot.x.value - watchpoint_coord[0]) > 0.04) or (robot.y.value < 2.2) or (robot.y.value > 2.6):  
         robot.setSpeed(0.2, 0)
     #actions.moves.run(robot, watchpoint, correct_trajectory= False, threshold=0.1)
-    logging.debug('     GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
+    logging.debug('GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
 
 def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
     """The robot navigates the map to reach a given goal"""
@@ -138,7 +151,7 @@ def remake_map(robot, size, map, goal, offset_angle = 0):
         logging.debug('REMAKE_MAP: fourth case (2)\n')
     robot.grid = helpers.map.generate_grid(map, goal)
     logging.debug('REMAKE MAP: NEW GRID HAS BEEN GENERATED :D\n')
-    return robot.grid
+    return robot.grid #TODO: arrasar con el reeturn
 
 def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el error tiene que estar aqui next_cell funciona
     """actions.moves the robot given the goal array position being:\n

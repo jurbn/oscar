@@ -1,0 +1,24 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 21622:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:MAIN: The floor is WHITE
+INFO:root:ROBOT setMapByColor:Tile color is white, setting map A
+INFO:root:ROBOT forceNewPosition: Updating position to [0.6, 3]
+INFO:root:HALF_EIGHT: done!
+DEBUG:root:estoy mal en x, corrigiendo
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 99, in main
+    actions.map.center_in_cell(oscar)
+  File "/home/pi/oscar/actions/map.py", line 25, in center_in_cell
+    v = helpers.maths.get_sign(desired_location[x] - robot.x.value) * 0.08 * (2*robot.black-1)
+NameError: name 'x' is not defined
+
+WARNING:root:ABRUPT_STOP: abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos

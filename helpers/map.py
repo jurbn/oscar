@@ -179,7 +179,6 @@ def generate_grid(map, goals):
         for goal_k in goals:
             #goal_k = goal[k-1]
             grid = generate_single_grid(map, goal_k)
-            logging.debug('GENERATE_GRID: grid is:\n{}'.format(grid))
             if grids is None:
                 grids = np.array([grid])
             else: grids = np.append(grids, [generate_single_grid(map, goal_k)], axis = 0)
@@ -191,7 +190,6 @@ def generate_grid(map, goals):
     return grid
 
 def mix_grids(map, grids):
-    logging.debug('MIX_GRIDS: im in')
     mixed_grid = grids[0]
     for k in range(1, len(grids)):
         grid = grids[k]

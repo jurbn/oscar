@@ -27,7 +27,7 @@ def calibrate_claw(robot):
 
 def search_ball(robot, center = True):
     """Uses the camera to locate the ball"""
-    logging.info('Searching the ball...')
+    logging.info('SEARCH_BALL: Searching for the ball...')
     found = False
     if  robot.last_seen_left:
         w = 1
@@ -38,7 +38,7 @@ def search_ball(robot, center = True):
         blob = helpers.vision.get_blob(frame = frame)
         if blob:
             found = True
-            logging.info('Found the ball! Approaching...')
+            logging.info('SEARCH_BALL: Found the ball! Approaching...')
         elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black) and center:
             return False
         else:
@@ -48,7 +48,7 @@ def search_ball(robot, center = True):
 def approach_ball(robot, last_pos = None):
     """The robot will try to get close enough to get the ball, trying to get it centered if possible (not necessary as 
     it's goint to spin on the grabBall function)"""
-    logging.info('Approaching the ball...')
+    logging.info('APPROACH_BALL: Approaching the ball...')
     ready = False
     robot.reduction = 0.25
     while not ready:
@@ -86,7 +86,7 @@ def center_ball(robot):
         frame = robot.takePic()
         blob = helpers.vision.get_blob(frame = frame)
         if blob:
-            logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
+            #logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
             if blob.pt[0] > (640/2)*robot.reduction + 2: #un poco mas de la mitad
                 robot.setSpeed(0, -0.35)
                 first = False
@@ -149,7 +149,7 @@ def grab_ball(robot):
     time.sleep(1.5)
     enc_dif = robot.BP.get_motor_encoder(robot.claw_motor) - enc_beg
     logging.debug('BALL grab_ball: encoder value is {}'.format(enc_dif))
-    if enc_dif > 1:
+    if enc_dif >= 1:
         logging.info('Got the ball!')
         return True
     else:

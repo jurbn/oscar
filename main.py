@@ -96,12 +96,19 @@ def main(args):
             oscar.setMapByColor(black = black)
             actions.moves.run(oscar, [oscar.x.value, oscar.y.value - oscar.map_size[2]-0.10])
             actions.moves.half_eight(oscar, black)
+            actions.map.center_in_cell(oscar)
+            if black:
+                oscar.objective = [6, 3]
+            else:
+                oscar.objective = [2, 3]
+            actions.map.navigate_map(oscar, oscar.objective, eight_neigh = False)
             if black:
                 oscar.objective = [[1, 4], [4, 4]]
             else: oscar.objective = [[4, 4], [7, 4]]
             actions.map.navigate_map(oscar, oscar.objective, eight_neigh = False)
             #has_ball = False
             #while not has_ball:
+            oscar.grid_plot = oscar.grid
             actions.ball.go_for_ball(oscar)
             actions.map.go_to_watchpoint(oscar, black)
             #has_ball = actions.ball.check_caught(oscar, black)

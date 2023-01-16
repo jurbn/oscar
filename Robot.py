@@ -52,6 +52,7 @@ class Robot:
         self.cell = [0, 0] #TODO: esto lo usamos en algun lado?
         [self.map_size, self.map] = helpers.map.read_map(self.map_file)
         self.grid = helpers.map.generate_grid(self.map, self.objective)
+        self.grid_plot = self.grid
         self.black = True
 
         self.radius = 0.028
@@ -130,13 +131,13 @@ class Robot:
             self.forceNewPosition([2.2, 3])
             self.last_seen_left = True
             self.updateWithMapFile('res/maps/mapaB_CARRERA2020.txt')
-            self.objective = [5, 4] #TODO: lo pongo asi para que no se nos olvide cambiarlo si al finbal tenemos que hacer el slalom completo
+            self.objective = [6, 3] 
         else:
             logging.info('ROBOT setMapByColor:Tile color is white, setting map A')
             self.forceNewPosition([0.6, 3])
             self.last_seen_left = False
             self.updateWithMapFile('res/maps/mapaA_CARRERA2020.txt')
-            self.objective = [3, 4]
+            self.objective = [2, 3]
 
     def isFloorBlack(self):
         """Returns True if black, False if white"""

@@ -19,7 +19,7 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 1.5, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 1, relative = True): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
@@ -28,7 +28,7 @@ def spin(robot, th, w = 1.5, relative = True): #TODO: cambiar para que se ppueda
         th = helpers.maths.norm_pi(th)
     spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
     w = helpers.maths.get_sign(spin_dir)*w
-    while not helpers.location.is_near_angle(robot, th, threshold=0.08):
+    while not helpers.location.is_near_angle(robot, th, threshold=0.02):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
 
@@ -48,7 +48,10 @@ def run(robot, objctv, v = 0.15, correct_trajectory = True, detect_obstacles = F
                     if v > 0.15: v = 0.15
                     elif v < -0.15: v = -0.15
                     new_front_value = robot.getFrontsonic()
-                    robot.setSpeed(v, 0)
+                    th = robot.th.value
+                    ob_th = helpers.location.get_robot_quadrant(robot)
+                    w = helpers.maths.norm_pi(ob_th-th)
+                    robot.setSpeed(v, w)
                     if new_front_value > 60:
                         front_value = front_value
                     else:
@@ -86,22 +89,20 @@ def arc(robot, objctv, v = 0.5, clockwise = True, detect_obstacles = False):
         if near:
             robot.setSpeed(0,0)
             raise Exception('OH NOOO A WALL >:o')
-        #logging.debug('')
         robot.setSpeed(v, w)
-#TODO: def arc(robot, goal) funcion que calcule arcos en funcion del destino O del radio especificado
 
 def abrupt_stop(robot):
     """
     Quickly stops the robot (please, use this for emergencies only!)
     """
     robot.setSpeed(0, 0)
-    logging.warning('Abruptly stopped the robot!')
+    logging.warning('ABRUPT_STOP: abruptly stopped the robot!')
 
 def soft_stop(robot, t = 0.5):
     """
     Steadily stops the robot in the given time
     """
-    logging.info('Stopping the robot...')
+    logging.info('SOFT_STOP: stopping the robot...')
     v, w = robot.readSpeed()
     delay = t / 10
     for i in range(9, 0):
@@ -117,37 +118,37 @@ def square (robot, l=0.4):
     v = 0.1
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
-    logging.info('primer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: first spin done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.y.value < l/2):
         robot.setSpeed(v, 0)
-    logging.info('primera recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: first side done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(0, -w)
-    logging.info('segundo giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: second spin done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.x.value < l):
         robot.setSpeed(v, 0)
-    logging.info('segunda recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: second side done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(0, -w)
-    logging.info('tercer giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: third spin done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.y.value > -l/2):
         robot.setSpeed(v, 0)
-    logging.info('tercera recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: third side done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value < 0):
         robot.setSpeed(0, -w)
-    logging.info('cuarto giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: fourth spin done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.x.value > 0):
         robot.setSpeed(v, 0)
-    logging.info('cuarta recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: fourth side done. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value > math.pi/2):
         robot.setSpeed(0, -w)
-    logging.info('ultimo giro. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: last spin. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.y.value < 0):
         robot.setSpeed(v, 0)
-    logging.info('ultima recta. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: finished the first side. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(0, -w)
-    logging.info('y ya estaría. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
+    logging.info('SQUARE: done!. Pos: ({}m, {}m, {}pi rad)'.format(robot.x.value, robot.y.value, robot.th.value/math.pi))
 
 
 def eight(robot, r = 0.2, v = 0.1):
@@ -155,28 +156,27 @@ def eight(robot, r = 0.2, v = 0.1):
     Does an odometry-based eight circuit with the given r and v.
     """
     w = v / r
-    logging.info('PRIMER VALOR: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(0, w)
-    logging.info('spin: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: spin: {}'.format(robot.th.value))
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('primer cacho: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: first circle: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < math.pi/2):
         robot.setSpeed(v, w)
-    logging.info('empieza media vuelta: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: empieza media vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(v, w)
-    logging.info('tres cuartos vuelta: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: tres cuartos vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < -math.pi/2):
         robot.setSpeed(v,w)
-    logging.info('final vuelta: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: final vuelta: {}'.format(robot.th.value/math.pi))
     while(robot.th.value < 0):
         robot.setSpeed(v, -w)
-    logging.info('casi acaba el ocho: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: casi acaba el ocho: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > math.pi/2):
         robot.setSpeed(v, -w)
-    logging.info('yyy acabamos: {}'.format(robot.th.value/math.pi))
+    logging.info('EIGHT: yyy acabamos: {}'.format(robot.th.value/math.pi))
     while(robot.th.value > 0):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
@@ -189,18 +189,14 @@ def half_eight(robot, black, v = 0.2):
     th = robot.th.value
     side = black * 2 - 1
     w = v / r
-    #logging.info('PRIMER VALOR: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th + side * math.pi/2):
         robot.setSpeed(0, side * w * 2)
-    #logging.info('spin: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th - side * math.pi/2):
         robot.setSpeed(v, -w * side)
-    #logging.info('primer cacho: {}pi'.format(robot.th.value/math.pi))
     while not helpers.location.is_near_angle(robot.th.value, th + side * math.pi/2):
         robot.setSpeed(v, w * side)
-    #logging.info('segundo cacho: {}pi'.format(robot.th.value/math.pi))
-    while not helpers.location.is_near_angle(robot.th.value, th):
-        robot.setSpeed(0, -w * side * 2)
+    #while not helpers.location.is_near_angle(robot.th.value, th):
+    #    robot.setSpeed(0, -w * side * 2)
     logging.info('HALF_EIGHT: done!')
 
 def half_eight_short(robot, black, v = 0.2):

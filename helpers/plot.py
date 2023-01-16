@@ -11,7 +11,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
     size_0 = int(robot.map_size[0])
     size_1 = int(robot.map_size[1])   # sizes of the map
     tile_size = robot.map_size[2]
-    map = get_map(robot, 2)
+    grid = get_grid(robot, 2)
 
     f = plt.figure()
     fig = f.add_subplot(111)   # subplot where we will draw
@@ -25,7 +25,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
     # obstacles:
     for i in range (size_1 * 2 + 1):
         for j in range(size_0 * 2 + 1):
-            if not map[i,j]: #if the map cell is zero, it means there's an obstacle:
+            if (grid[i,j] == -1): #if the map cell is zero, it means there's an obstacle:
                 if (i%2==0) and (j%2==1): #horizontal wall
                     #logging.debug('pared horizontal en: [{}, {}]'.format(i,j)) 
                     [posx, posy] = helpers.map.array2pos(robot.map_size, [i,j])
@@ -49,41 +49,41 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
             for obj in robot.objective:
                 X = helpers.map.tile2pos(robot.map_size, obj)[0]
                 Y = helpers.map.tile2pos(robot.map_size, obj)[1]    
-                fig.plot(X, Y, marker = "x")
+                fig.plot(X, Y, marker = "x", color = 'greenyellow')
         except Exception:
             [X, Y] = helpers.map.tile2pos(robot.map_size, robot.objective)
-            fig.plot(X, Y, marker = "x") #TODO: poner colores decentes para los objetivos
+            fig.plot(X, Y, marker = "x", color = 'greenyellow') #TODO: poner colores decentes para los objetivos
     
     # ball:
     if robot.ball_caught_in:    # if the robot has caught the ball, mark it with a red circle
         [X, Y] = robot.ball_caught_in
         fig.plot(X, Y, 'r', marker = "o", markersize = 15)
 
-    # odometry: TODO: coloresss
+    # odometry: 
     df = pd.read_csv(robot.odometry_file, skiprows = [1,2,3])   # the dataframe where the odometry values are stored
-    fig.plot(df['x'], df['y'], color = 'cornflowerblue') #  BABY BLUE este color probablemente de error ya buscare como ponerlo bien
+    fig.plot(df['x'], df['y'], color = 'cornflowerblue') 
 
     plt.show()    
 
-def get_map(robot, columns):
+def get_grid(robot, columns):
     i = 1
     j = 1
     n = 0
-    map = robot.map
+    grid = robot.grid_plot
     finished = False
     while (i < (robot.map_size[1] * 2 + 1)) and not finished:
         while (j < (robot.map_size[0] * 2 + 1)) and not finished:
-            if not robot.map[i, j]:
+            if (robot.grid[i, j] == -1):
                 n += 1
-                map[i + 1, j] = 1
-                map[i, j + 1] = 1
-                map[i - 1, j] = 1
-                map[i, j - 1] = 1
+                grid[i + 1, j] = 1
+                grid[i, j + 1] = 1
+                grid[i - 1, j] = 1
+                grid[i, j - 1] = 1
                 if n == columns: finished = True
             j += 2
         j = 1
         i += 2
-    return map
+    return grid
 
 def plot_animation(robot):  #FIXME: unused, right?
     fig = plt.figure(figsize=(6, 3))
