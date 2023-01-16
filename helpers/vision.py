@@ -58,8 +58,8 @@ def get_blob(frame):
     mask = mask1 | mask2    # we need two masks because hsv values start and end on red :/
     mask = cv.erode(mask, None, iterations=2)
     mask = cv.dilate(mask, None, iterations=2)
-    res = cv.bitwise_and(frame, frame, mask=mask)
-    keypoints = detector.detect(res)
+    #res = cv.bitwise_and(frame, frame, mask=mask)
+    keypoints = detector.detect(mask)
     if not keypoints:
         biggest_kp = None
     else:   # we only keep the biggest blob!
