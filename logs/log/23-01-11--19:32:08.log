@@ -1,7 +1,0 @@
-INFO:root:Program started
-INFO:root:Robot set up!
-INFO:root:Odometry was started, PID: 4207:
-INFO:root:Initial location: 2.2, 2.6, -1.5707963267948966
-INFO:root:Odometry was stopped
-WARNING:root:KeyboardInterrupt raised
-WARNING:root:Abruptly stopped the robot!

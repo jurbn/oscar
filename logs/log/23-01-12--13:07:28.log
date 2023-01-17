@@ -1,8 +1,0 @@
-INFO:root:MAIN: Program started
-INFO:root:ROBOT: Robot set up!
-INFO:root:ROBOT: Odometry was started, PID: 14896:
-INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
-
-
-WARNING:root:KeyboardInterrupt raised
-WARNING:root:Abruptly stopped the robot!

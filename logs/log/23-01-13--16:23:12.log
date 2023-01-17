@@ -1,4 +1,0 @@
-INFO:root:MAIN: Program started
-DEBUG:root:GENERATE_GRID: goal_k is: 0
-INFO:root:ROBOT: Robot set up!
-WARNING:root:KeyboardInterrupt raised

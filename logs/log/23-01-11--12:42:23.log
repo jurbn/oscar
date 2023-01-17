@@ -1,9 +1,0 @@
-INFO:root:Program started
-INFO:root:Robot set up!
-INFO:root:Odometry was started, PID: 22303:
-INFO:root:Initial location: 2.2, 2.6, -1.5707963267948966
-INFO:root:The floor is WHITE
-INFO:root:Tile color is white, setting map A
-INFO:root:PRIMER VALOR: -0.33333333333333337pi
-WARNING:root:KeyboardInterrupt raised
-WARNING:root:Abruptly stopped the robot!
