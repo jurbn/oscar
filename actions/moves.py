@@ -19,7 +19,7 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 0.75, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 1, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
     """Makes Oscar turn a specified angle (in radians)"""
     if relative:
         th = helpers.maths.norm_pi(robot.th.value + th)
@@ -73,7 +73,7 @@ def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = Fa
         #     robot.setSpeed(0, 0)
         #     raise Exception('OH NOOO A WALL <:o')
 
-def arc(robot, objctv, v = 0.5, clockwise = True, detect_obstacles = False):
+def arc(robot, objctv, v = 0.15, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
     objctv = np.array(objctv)
     mvmnt = objctv - [robot.x.value, robot.y.value]

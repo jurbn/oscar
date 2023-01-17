@@ -122,6 +122,8 @@ class Robot:
         try:
             self.map_file = file
             [self.map_size, self.map] = helpers.map.read_map(self.map_file)
+            self.grid = helpers.map.generate_grid(self.map, self.objective)
+            self.grid_plot = self.grid
         except Exception:
             logging.error('An error occurred while updating the map!')
 

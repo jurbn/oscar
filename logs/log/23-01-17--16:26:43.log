@@ -1,0 +1,17 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 11881:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:Traceback (most recent call last):
+  File "/home/pi/oscar/main.py", line 91, in main
+    oscar.BP.set_motor_position(robot.claw_motor, robot.op_cl)
+NameError: name 'robot' is not defined
+
+WARNING:root:ABRUPT_STOP: abruptly stopped the robot!
+INFO:root:Odometry was stopped
+DEBUG:matplotlib.axes._base:update_title_pos
+DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/pi/.local/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:matplotlib.axes._base:update_title_pos
