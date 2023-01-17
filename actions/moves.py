@@ -44,7 +44,7 @@ def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = Fa
                 robot.setSpeed(0, 0)
                 front_value = robot.getFrontsonic()
                 while not (18 < front_value < 22):
-                    v = 0.015 * (front_value - 20)
+                    v = 0.025 * (front_value - 20)
                     if v > 0.15: v = 0.15
                     elif v < -0.15: v = -0.15
                     new_front_value = robot.getFrontsonic()
@@ -181,7 +181,7 @@ def eight(robot, r = 0.2, v = 0.1):
         robot.setSpeed(0, -w)
     robot.setSpeed(0, 0)
 
-def half_eight(robot, black, v = 0.27):
+def half_eight(robot, black, v = 0.25):
     """
     Does an odometry-based eight circuit with the given r and v.
     """
@@ -197,6 +197,7 @@ def half_eight(robot, black, v = 0.27):
         robot.setSpeed(v, w * side)
     #while not helpers.location.is_near_angle(robot.th.value, th):
     #    robot.setSpeed(0, -w * side * 2)
+    robot.setSpeed(0, 0)
     logging.info('HALF_EIGHT: done!')
 
 def half_eight_short(robot, black, v = 0.2):

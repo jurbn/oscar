@@ -58,7 +58,7 @@ def exit_map(robot, black = True):
     navigate_map(robot, exit, eight_neigh=False)
     front_value = robot.getFrontsonic()
     while not (18 < front_value < 22):
-        v = 0.015 * (front_value - 20)
+        v = 0.025 * (front_value - 20)
         if v > 0.15: v = 0.15
         elif v < -0.15: v = -0.15
         new_front_value = robot.getFrontsonic()
@@ -68,7 +68,7 @@ def exit_map(robot, black = True):
         else:
             front_value = new_front_value
     robot.setSpeed(0, 0)
-    actions.moves.spin(robot, math.pi/2, relative=False, threshold = 0.35)
+    actions.moves.spin(robot, math.pi/2, relative=False, threshold=0.35, w=1.2)
     actions.moves.run(robot, [robot.x.value, robot.y.value + 1.5*robot.map_size[2]], v = 0.25)
 
 def go_to_watchpoint (robot, black):
@@ -78,13 +78,15 @@ def go_to_watchpoint (robot, black):
     robot.objective = watchpoint
     watchpoint_coord = helpers.map.array2pos(robot.map_size, helpers.map.tile2array(robot.map_size, watchpoint))
     watchpoint_coord[0] += 0.1 * helpers.maths.get_sign(4 - watchpoint[0])
+    watchpoint_coord[1] += 0.15 
     logging.debug('GO_TO_WATCHPOINT: watchpoint coordinates: {}'.format(watchpoint_coord))
     th = helpers.location.get_angle_between_points([robot.x.value, robot.y.value], watchpoint_coord)
     actions.moves.spin(robot, th, relative = False, w = 1)
     logging.debug('GO_TO_WATCHPOINT: running to watchpoint ({})...'.format(watchpoint))
-    while not helpers.location.is_near([robot.x.value, robot.y.value], watchpoint_coord, threshold=0.1):
+    while not helpers.location.is_near([robot.x.value, robot.y.value], watchpoint_coord, threshold=0.085):
     #while (abs(robot.x.value - watchpoint_coord[0]) > 0.04) or (robot.y.value < 2.2) or (robot.y.value > 2.6):  
         robot.setSpeed(0.2, 0)
+    robot.setSpeed(0, 0)
     #actions.moves.run(robot, watchpoint, correct_trajectory= False, threshold=0.1)
     logging.debug('GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
 

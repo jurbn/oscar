@@ -112,7 +112,7 @@ def main(args):
             actions.ball.go_for_ball(oscar)
             actions.map.go_to_watchpoint(oscar, black)
             #has_ball = actions.ball.check_caught(oscar, black)
-            actions.moves.spin(oscar, math.pi/2, relative = False)
+            actions.moves.spin(oscar, math.pi/2, w=0.5, relative = False)
             actions.map.exit_map(oscar, black)
 
 # :) <3

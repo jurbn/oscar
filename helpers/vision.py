@@ -28,8 +28,8 @@ r22 = np.array([180, 255, 255])
 
 
 # REQUIRED number of correspondences (matches) found:
-MIN_MATCH_COUNT=15          # initially
-MIN_MATCH_OBJECTFOUND=10   # after robust check, to consider object-found
+MIN_MATCH_COUNT=20          # initially
+MIN_MATCH_OBJECTFOUND=15   # after robust check, to consider object-found
 
 def get_blob_old(frame):
     """ Searches for a blob and returns the center """
@@ -58,8 +58,8 @@ def get_blob(frame):
     mask = mask1 | mask2    # we need two masks because hsv values start and end on red :/
     mask = cv.erode(mask, None, iterations=2)
     mask = cv.dilate(mask, None, iterations=2)
-    res = cv.bitwise_and(frame, frame, mask=mask)
-    keypoints = detector.detect(res)
+    #res = cv.bitwise_and(frame, frame, mask=mask)
+    keypoints = detector.detect(mask)
     if not keypoints:
         biggest_kp = None
     else:   # we only keep the biggest blob!
@@ -92,14 +92,11 @@ def show_cam_blobs(robot):
 
 def find_my_template(robot, refFilename = "res/img/R2-D2_s.png"):
     """Takes a picture and returns True if the template has been found"""
-    robot.reduction = 0.25
+    robot.reduction = 1
     imReference = cv.imread(refFilename, cv.IMREAD_COLOR)
-    imReference =  cv.resize(imReference, None, fx = robot.reduction, fy = robot.reduction, interpolation = cv.INTER_LANCZOS4)
     frame = robot.takePic(PI=True)  # PI==True because its better for the template recognition
     #imReference = cv.resize(imReference, None, fx = reduct, fy = reduct, interpolation = cv.INTER_LANCZOS4)
     cv.imwrite('res/img/last_r2d2.png', frame)
-    if cv.waitKey(1) & 0xFF == ord('q'):
-        pass
     try:
         found = match_img(imReference, frame)
     except Exception:
