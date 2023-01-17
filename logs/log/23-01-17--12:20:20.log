@@ -1,0 +1,12 @@
+INFO:root:MAIN: Program started
+DEBUG:root:GENERATE_GRID: no hay que mezclar
+INFO:root:ROBOT: Robot set up!
+INFO:root:ROBOT: Odometry was started, PID: 16859:
+INFO:root:MAIN: Initial location: 2.2, 2.6, -1.5707963267948966
+INFO:root:*---------------------------------------------------------------------------*
+INFO:root:MAIN: The floor is WHITE
+INFO:root:ROBOT setMapByColor:Tile color is white, setting map A
+INFO:root:ROBOT forceNewPosition: Updating position to [0.6, 3]
+INFO:root:*---------------------------------------------------------------------------*
+WARNING:root:KeyboardInterrupt raised
+WARNING:root:ABRUPT_STOP: abruptly stopped the robot!

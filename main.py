@@ -67,6 +67,10 @@ def main(args):
             actions.dynamic_ball.go_for_ball(oscar)
         elif args.fcn == 'plot':
             helpers.plot.plot_file('logs/odometry/22-12-21--17:51:57.csv', 'res/maps/mapaA_CARRERA2020.txt')
+        elif args.fcn == 'correct_angle':
+            actions.moves.spin(oscar, math.pi/4)
+            time.sleep(1)
+            actions.moves.run(oscar, [5, 0])
         elif args.fcn == 'r2d2':
             while True:
                 found = helpers.vision.find_my_template(oscar)
