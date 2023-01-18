@@ -4,7 +4,7 @@ import numpy as np
 import helpers.location
 import math
 
-def draw_map(grid, robot, direction = None, pos = None, tile_map = False): #TODO: cambiar nombre a draw_grid
+def draw_map(grid, robot, direction = None, pos = None, tile_map = False):
     """
     Prints the grid and, if given, the direction of the robot
     """
@@ -46,8 +46,8 @@ def next_cell_4(grid, moves, offset_angle, arr_pos, smallest_value):
         if -1 < grid_value < smallest_value:
             possible_wall = arr_pos + [moves[real_index][0]/2, moves[real_index][1]/2]
             grid_wall = grid[int(possible_wall[0]), int(possible_wall[1])]
-            print(possible_wall)
-            print(grid_wall)
+            logging.debug(possible_wall)
+            logging.debug(grid_wall)
             if int(grid_wall) != -1:
                 relative_move = i * 2
                 clockwise = 2
@@ -55,8 +55,8 @@ def next_cell_4(grid, moves, offset_angle, arr_pos, smallest_value):
                 smallest_value = grid_value
     return relative_move, abs_destination, clockwise
 
-def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMALLEST VALUE CUANDO TIENES QUE REMAKEAR EL MAPA???
-    smallest_value = 1000
+def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):
+    smallest_value = 1000   # we set a really big value (ik its inefficient, but didnt have time to change it)
     max_move = len(moves)-1
 
     for i in range(0, max_move+1):    # i is the relative move
@@ -75,7 +75,6 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
             left_index_1 = norm_index(real_index + 1, max_move)
             left_index_2 = norm_index(real_index + 2, max_move)
 
-            #TODO: que priorice clockwise o no en pl<n eficiencia o algo
             if i % 2 == 0:    # if its a lateral
                 #can go straight to the tile:
                 if are_cells_connected([arr_pos, possible_cell], grid): 
@@ -84,7 +83,6 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
                     abs_destination = [possible_cell]
                     smallest_value = grid_value
                 #can make a big clockwise turn:
-                #TODO: llamar a go_to_cell varias veces en estos casos de arco grande!!!! RUN ARCO ARCO RUN
                 elif are_cells_connected([arr_pos, arr_pos+moves[right_index_2], arr_pos+moves[right_index_1], possible_cell], grid): 
                     clockwise = 1   
                     relative_move = i
@@ -98,7 +96,6 @@ def next_cell(grid, moves, offset_angle, arr_pos, smallest_value):  #FIXME: SMAL
                     abs_destination = [get_wall(arr_pos, arr_pos+moves[left_index_2]), get_wall(arr_pos+moves[left_index_2], arr_pos+moves[left_index_1]),
                                         get_wall(arr_pos+moves[left_index_1], possible_cell), possible_cell]
                     smallest_value = grid_value
-
             else:   # if its a corner 
                 #can make a clockwise turn:
                 if i == 1:
@@ -144,7 +141,7 @@ def get_rel_index (robot, arr_cell):
     rel_cells = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
     i = 0
     while i < len(rel_cells):
-        if (rel_cell == rel_cells[i]):  # or (rel_cell == [cell * 2 for cell in rel_cells[i]]):
+        if (rel_cell == rel_cells[i]):
             index = i
             break
         else:
@@ -153,6 +150,7 @@ def get_rel_index (robot, arr_cell):
     return norm_index(index - offset, 7)
 
 def are_cells_connected(cells, grid):
+    """Returns True if two cells are connected in some way"""
     connected = True
     i = 0
     while (i < len(cells) - 1) and connected:
@@ -166,6 +164,7 @@ def are_cells_connected(cells, grid):
     return connected
 
 def get_wall(tile1, tile2):
+    """Returns the position of a wall between two tiles"""
     if(tile1[0] == tile2[0]): #coinciden en X
         wall_pos = [int(tile1[0]), int((tile1[1]+tile2[1])/2)]
     else: #coinciden en Y
@@ -173,11 +172,10 @@ def get_wall(tile1, tile2):
     return wall_pos
 
 def generate_grid(map, goals):
+    """Generates a grid with the given map and goals"""
     grids = None
-    #grids = np.array([[]])
     try:
         for goal_k in goals:
-            #goal_k = goal[k-1]
             grid = generate_single_grid(map, goal_k)
             if grids is None:
                 grids = np.array([grid])
@@ -190,12 +188,13 @@ def generate_grid(map, goals):
     return grid
 
 def mix_grids(map, grids):
+    """Mixes two or more grids"""
     mixed_grid = grids[0]
     for k in range(1, len(grids)):
         grid = grids[k]
         for i in range(map.shape[0]):
             for j in range(map.shape[1]):
-                if (grid[i, j] < mixed_grid[i, j]): #TODO: que no lo recorra la primera vez
+                if (grid[i, j] < mixed_grid[i, j]):
                     mixed_grid[i, j] = grid[i, j] 
     return mixed_grid
 
@@ -213,7 +212,6 @@ def generate_single_grid(map, goal):
     moves = np.array([[+1, 0], [-1, 0], [0, +1], [0, -1]])  # 4 direction neighbours
     finished = False
     while not finished:
-        # for n in range(current_cells.size):     # for every cell on the wavefront
         if current_cells.size > 0:
             cell = current_cells[0]     # check if there are any
             for move in moves:  # we create a cell for each move
@@ -232,7 +230,7 @@ def generate_single_grid(map, goal):
             finished = True
     return grid
 
-def array2pos(map_size, cell): #TODO: quitar map, no se usa
+def array2pos(map_size, cell):
     """Turns the map's coordinates into their real-world  positions in the array using said map's size.\n
     You can use the map's size vector or the tile size directly.\n
     The value will go to the middle of every tile or tile border"""
@@ -270,22 +268,26 @@ def pos2array(map_size, pos):
     return cell
 
 def tile2pos(map_size, tile):
+    """Returns the xy position of the given cell"""
     try:
         pos = [(tile[0]-0.5)*map_size[2], (tile[1]-0.5)*map_size[2]]
     except Exception:
         pos = [(tile[0]-0.5)*map_size, (tile[1]-0.5)*map_size]
     return pos
+    
 def base_map2array(map_size, tile):
     x = 2 * map_size[1] - tile[1]
     y = tile[0]
     return np.array([round(x, 0), round(y, 0)])
 
 def tile2array(size, their_coord):
+    """Returns the array position of a given tile"""
     y = (2 * their_coord[0]) - 1
-    x = (2 * size[1] + 1) - (2 * their_coord[1])    # CREO QUE ES 2*size[1] - (2*size[1] - 1) wait its the same ;(
+    x = (2 * size[1] + 1) - (2 * their_coord[1])
     return np.array([round(x, 0), round(y, 0)])
 
 def distance_front_wall(robot, map, map_size, cells = 3):
+    """Returns the distance to the next wall in front of the robot"""
     rob_cell = pos2array(map_size, [robot.x.value, robot.y.value])
     rob_cell = [int(cell) for cell in rob_cell]
     if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # mira hacia arriba
@@ -307,6 +309,7 @@ def distance_front_wall(robot, map, map_size, cells = 3):
     return None
 
 def distance_left_wall(robot, map, map_size, cells = 3):
+    """Returns the distance to the next wall left to the robot"""
     rob_cell = pos2array(map_size, [robot.x.value, robot.y.value])
     rob_cell = [int(cell) for cell in rob_cell]
     if helpers.location.is_near_angle(robot.th.value, math.pi/2, threshold=math.pi/5):  # mira hacia arriba

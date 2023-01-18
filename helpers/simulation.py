@@ -1,6 +1,8 @@
 import numpy as np
 import helpers.maths
 
+# ONLY USED FOR SOME CLASS EXERCISES
+
 def pos_bot(vw, x_w_r, t):
     """
     Returns the position of the robot with vc=[v, w] during t seconds and starting on x_w_r.

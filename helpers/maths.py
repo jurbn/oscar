@@ -32,6 +32,7 @@ def norm_pi(th):
     return th
 
 def get_sign(number):
+    """Returns -1, 0 or +1"""
     if number > 0:
         return 1
     elif number < 0:

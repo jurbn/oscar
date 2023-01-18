@@ -1,6 +1,6 @@
 from asyncio import wait_for
 import math
-import time     # import the time library for the sleep function
+import time
 import numpy as np
 import math
 import logging
@@ -19,15 +19,14 @@ import helpers.simulation
 # BASIC MOVEMENTS #
 ###################
 
-def spin(robot, th, w = 1, relative = True, threshold = 0.03): #TODO: cambiar para que se ppueda poner por absolutas  ni que sea por coherencia ((y que me da toc))
+def spin(robot, th, w = 1, relative = True, threshold = 0.03):
     """Makes Oscar turn a specified angle (in radians)"""
-    if relative:
+    if relative:    # if relative flag is setted, we will spin relatively to the robot's position
         th = helpers.maths.norm_pi(robot.th.value + th)
     else:
-        #th = helpers.maths.norm_pi(th + robot.th.value)
         th = helpers.maths.norm_pi(th)
     spin_dir = -helpers.maths.norm_pi(robot.th.value - th)
-    w = helpers.maths.get_sign(spin_dir)*w
+    w = helpers.maths.get_sign(spin_dir)*w  # specify speed and direction
     while not helpers.location.is_near_angle(robot, th, threshold = threshold):
         robot.setSpeed(0, w)
     robot.setSpeed(0, 0)
@@ -35,11 +34,10 @@ def spin(robot, th, w = 1, relative = True, threshold = 0.03): #TODO: cambiar pa
 def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = False, threshold = 0.025):
     """Makes Oscar go straight forward to the specified position (in meters)"""
     th = robot.th.value
-    #can_fix = helpers.map.
     near = False
     if detect_obstacles:
             near = robot.getFrontsonic() < 45
-            if near:
+            if near:    # if an obstacle was detected, stop and correct position
                 logging.warning('OH NOOO A WALL <:o')
                 robot.setSpeed(0, 0)
                 front_value = robot.getFrontsonic()
@@ -58,7 +56,7 @@ def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = Fa
                         front_value = new_front_value
                 robot.setSpeed(0, 0)
                 raise Exception('Seen a wall')
-    while (not helpers.location.is_near(robot, objctv, threshold=threshold)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > threshold): #molaría añadir si eso una condicion por tiempo o delta de pos para asegurar que llega+-
+    while (not helpers.location.is_near(robot, objctv, threshold=threshold)) and (abs(math.sqrt(pow(robot.x.value * math.cos(th), 2) + pow(robot.y.value*math.sin(th), 2)) - math.sqrt(pow(objctv[0]*math.cos(th), 2) + pow(objctv[1]*math.sin(th), 2))) > threshold):
         if correct_trajectory:
             th = robot.th.value
             ob_th = helpers.location.get_robot_quadrant(robot)
@@ -66,12 +64,6 @@ def run(robot, objctv, v = 0.2, correct_trajectory = True, detect_obstacles = Fa
         else:
             w = 0
         robot.setSpeed(v, w)
-        #print('está: {} quiere llegar a: {}, is_near: {}'.format([robot.x.value, robot.y.value], objctv, helpers.location.is_near(robot, objctv, threshold=0.02)))
-        # if detect_obstacles:
-        #     near = robot.getFrontsonic() < 30
-        # if near:
-        #     robot.setSpeed(0, 0)
-        #     raise Exception('OH NOOO A WALL <:o')
 
 def arc(robot, objctv, v = 0.15, clockwise = True, detect_obstacles = False):
     """Makes Oscar advance in a circular motion to the specified location (in meters)"""
@@ -114,6 +106,7 @@ def soft_stop(robot, t = 0.5):
 # COMPLEX MOVEMENTS #
 #####################
 def square (robot, l=0.4):
+    """A simple square used for odometry calibration"""
     w = 1
     v = 0.1
     while(robot.th.value < math.pi/2):
@@ -183,7 +176,7 @@ def eight(robot, r = 0.2, v = 0.1):
 
 def half_eight(robot, black, v = 0.25):
     """
-    Does an odometry-based eight circuit with the given r and v.
+    Does an odometry-based half-eight circuit with the given r and v.
     """
     r = 0.325
     th = robot.th.value
@@ -202,7 +195,7 @@ def half_eight(robot, black, v = 0.25):
 
 def half_eight_short(robot, black, v = 0.2):
     """
-    Does an odometry-based eight circuit with the given r and v.
+    Does a short odometry-based half-eight circuit with the given r and v. [ No utilizado pq rosario no nos deja :( ]
     """
     r = 0.35
     th = robot.th.value
@@ -261,7 +254,6 @@ def tronchopocho(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     """
     Does a odometry-based slalom with the given r1, r2, diameter and linear speed.\n r1 must be greater than r2.
     """
-    #robot.logger.info('Starting an odometry-based slalom.\n Initial position: ({}, {}, {})'.format(robot.x.value, robot.y.value, robot.th.value))
     logging.info('Starting the slalom...')
     w1 = v / r1
     w2 = v / r2
@@ -275,7 +267,6 @@ def tronchopocho(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
     t12 = np.array([tx1, -ty2])
     t21 = np.array([tx2, ty2])
     t22 = np.array([tx2, -ty2])
-
     logging.info('Spinning at: {}, {}, {}'.format(robot.x.value, robot.y.value, robot.th.value))
     while(robot.th.value > -math.pi/2):
         robot.setSpeed(0, -w2)
@@ -305,15 +296,14 @@ def tronchopocho(robot, r1=0.1, r2=0.2, d=0.5, v=0.1):
         robot.setSpeed(0, w2)
     robot.setSpeed(0,0)    
 
-################
-# MESSY THINGS #
-################
+#############################
+# MESSY (and unused) THINGS #
+#############################
 
 def enc_test (robot):
     logging.debug('encoder 3 = {}'.format(robot.BP.fet_motot_encoder(robot.claw_motor))) 
 
 def moveC(robot, pos, R, th, t=0):
-    # voy a hacer el control con la funcion del cálculo de la posición tras el movimiento y los datos de odometría.
     if t == 0:
         w = robot.w_max*0.75
         v = w*R

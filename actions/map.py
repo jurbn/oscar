@@ -17,6 +17,7 @@ import helpers.location
 import helpers.map
 
 def center_in_cell(robot):
+    """Proportional close loop control used to center the robot on the correct tile at the end of the slalom"""
     destination = robot.objective
     array_location = helpers.map.tile2array(robot.map_size, destination)
     desired_location = helpers.map.array2pos(robot.map_size, array_location)
@@ -29,6 +30,7 @@ def center_in_cell(robot):
         robot.setSpeed(v, 0)
 
 def go_to_center(robot):
+    """Used to go to the center of the call-catching field if the ball hasn't been seen"""
     if robot.black:
         center = [2*robot.map_size[2], 5*robot.map_size[2]]
     else: center = [5*robot.map_size[2], 5*robot.map_size[2]]
@@ -40,6 +42,7 @@ def go_to_center(robot):
         robot.setSpeed(0.2, 0)
 
 def exit_map(robot, black = True):
+    """Used to find the template and decide wether to go left or right to exit the map"""
     logging.debug('EXIT_MAP: beggining exiting sequence...')
     found = helpers.vision.find_my_template(robot)  # si ha visto a r2d2
     if found:
@@ -90,7 +93,7 @@ def go_to_watchpoint (robot, black):
     #actions.moves.run(robot, watchpoint, correct_trajectory= False, threshold=0.1)
     logging.debug('GO_TO_WATCHPOINT: facing image (pi/2 (im in {}pi))...'.format(robot.th.value/math.pi))
 
-def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometry que actualice robot.cell y go_to que tenga como parámetro el array del move y no el int
+def navigate_map(robot, goal, eight_neigh = True):
     """The robot navigates the map to reach a given goal"""
     [size, map] = helpers.map.read_map(robot.map_file)
     #origin = sage.them_to_us(size, origin)
@@ -102,19 +105,13 @@ def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometr
     logging.debug('\n###################### NAVIGATE_MAP ######################\n my turbogoal is: {}(array)'.format(goal))
     finished = False
     moves = [[-2, 0], [-2, +2], [0, 2], [2, 2], [2, 0], [2, -2], [0, -2], [-2, -2]]  # 0,1,2,3,4,5,6,7 en tiles (2arr=1tile)
-    #offset_angle = 0   # vamo a no declararlo no vaya a ser que se este saltando los ifs...
     while not finished: # cuando no haya acabado, sigue recorriendo el mapa
-        #if robot.BP.get_sensor(robot.ultrasonic) < 20:    # si encuentra un obstaculo, remakea el mapa
-        #    robot.remake_map(size, map, goal, origin)
         arr_pos = helpers.map.pos2array(size, [robot.x.value, robot.y.value]) # calcula la pos que tiene en el mapa
-        #logging.debug('im in {}, {}'.format(arr_pos, robot.th.value))
-        #logging.debug('MY GRID VALUE IS {}'.format(grid[int(arr_pos[0]), int(arr_pos[1])]))
         if robot.grid[int(arr_pos[0]), int(arr_pos[1])] == 0:  # si el valor del grid de mi pos es 0, he acabado!!!  
             logging.info('NAVIGATE_MAP: I\'ve reached my goal')
             finished = True
         else:   # si no he acabado, valoro que movimiento es el mejor (el que sea un número más bajo al que tengo ahora)
             smallest_value = robot.grid[int(arr_pos[0]), int(arr_pos[1])]     # el valor más pequeño empieza siendo el MIO
-            #print('Distancia a la pared del frente: {}\n Distancia a la pared de la izq: {}'.format(helpers.map.distance_front_wall(robot, map, size), helpers.map.distance_left_wall(robot, map, size)))
             offset_angle = helpers.location.get_robot_quadrant(robot, index=True) * 2
             helpers.map.draw_map(robot.grid, robot, offset_angle/2, arr_pos, True)
             if (arr_pos[0] % 2 == 0) or (arr_pos[1] % 2 == 0):
@@ -124,7 +121,7 @@ def navigate_map(robot, goal, eight_neigh = True):    # TODO: cambiar en odometr
             else:
                 [relative_move, abs_destinations, clockwise] = helpers.map.next_cell_4(robot.grid, moves, offset_angle, arr_pos, smallest_value)
             for abs_destination in abs_destinations:
-                print('-'*20)   # we print a line :)
+                logging.debug('-'*20)   # we print a line :)
                 arrived = go_to_cell(robot, map, relative_move, abs_destination, clockwise, size)
                 if not arrived:
                     logging.debug('GO_TO_CELL: An exception was raised, calling remake_map function (offset angle: {})...\n'.format(offset_angle))
@@ -153,16 +150,15 @@ def remake_map(robot, size, map, goal, offset_angle = 0):
         logging.debug('REMAKE_MAP: fourth case (2)\n')
     robot.grid = helpers.map.generate_grid(map, goal)
     logging.debug('REMAKE MAP: NEW GRID HAS BEEN GENERATED :D\n')
-    return robot.grid #TODO: arrasar con el reeturn
+    return robot.grid
 
-def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el error tiene que estar aqui next_cell funciona
+def go_to_cell(robot, map, move, arr_goal, clockwise, map_size):
     """actions.moves the robot given the goal array position being:\n
         actions.moves:          relative goals:\n
         7   0   1       [-1,-1]  [-1,0]  [-1,1]\n
         6   x   2       [0,-1]      x    [0,1]\n
         5   4   3       [1,-1]    [1,0]  [1,1]\n
     with x facing up(0) and y facing left(6)"""
-    #logging.DEBUG('GO_TO_CELL: my goal is: {}'.format(arr_goal))
     move = helpers.map.get_rel_index(robot, arr_goal)
     goal = helpers.map.array2pos(map_size, arr_goal)
     logging.debug('GO_TO_CELL: relative move: {}'.format(move))
@@ -214,5 +210,5 @@ def go_to_cell(robot, map, move, arr_goal, clockwise, map_size): #FIXME: el erro
             actions.moves.arc(robot, goal, clockwise = True, detect_obstacles=True)
         return True
     except Exception:
-        print(traceback.format_exc())
+        logging.warning(traceback.format_exc())
         return False

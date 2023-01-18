@@ -65,7 +65,7 @@ def get_color():
     return random.choice(colors)
 
 
-def rmv_col_walls(map, map_size, columns):# removing the walls around the columns: TODO: puedo hacer un metodo de esto con el número de columnas that'd be hot
+def rmv_col_walls(map, map_size, columns):# removing the walls around the columns:
     i = 1
     j = 1
     n = 0

@@ -10,7 +10,7 @@ import libs.brickpi3 as brickpi3 # import the BrickPi3 drivers
 import helpers.map
 import helpers.maths
 
-import time     # import the time library for the sleep function
+import time
 import math
 import csv
 import cv2 as cv
@@ -24,7 +24,6 @@ class Robot:
     def __init__(self, init_position=[0.0, 0.0, 0.0], side = None):
         """
         Initialize basic robot params. \
-
         Initialize Motors and Sensors according to the set up in your robot
         """
         init_pos_A = np.array([0.6, 2.6, -math.pi/2])
@@ -49,17 +48,18 @@ class Robot:
         self.w_max = 100
         self.v_max = 0.5
 
-        self.cell = [0, 0] #TODO: esto lo usamos en algun lado?
         [self.map_size, self.map] = helpers.map.read_map(self.map_file)
         self.grid = helpers.map.generate_grid(self.map, self.objective)
-        self.grid_plot = self.grid
-        self.black = True
+        self.grid_plot = self.grid  # plottable grid (auxiliar)
+        self.black = True           # True if our map is BLACK
 
+        # Construction params #
         self.radius = 0.028
         self.length = 0.134
         self.op_cl = 275
         self.cl_cl = 0
 
+        # Actuators and sensors #
         self.BP = brickpi3.BrickPi3()
 
         self.left_motor = self.BP.PORT_C
@@ -85,6 +85,7 @@ class Robot:
         self.BP.offset_motor_encoder(self.right_motor, self.BP.get_motor_encoder(self.right_motor))  
         self.BP.set_motor_limits(self.claw_motor, 100, 400)
 
+        # other internal params #
         self.lock_odometry = Lock()
         self.odometry_period = 0.05
         self.blob_period = 0.5 
@@ -97,7 +98,7 @@ class Robot:
         
         logging.info('ROBOT: Robot set up!')
         error = True
-        while error:
+        while error:    # we loop until we can use the gyro sensor
             time.sleep(0.1)
             try:
                 self.BP.get_sensor(self.gyro)
@@ -108,6 +109,9 @@ class Robot:
         self.startOdometry()
 
     def forceNewPosition(self, new_pos):
+        """
+        Forces a new xy position for the Robot (teleport)
+        """
         logging.info('ROBOT forceNewPosition: Updating position to {}'.format(new_pos))
         self.lock_odometry.acquire()
         self.x.value = new_pos[0]
@@ -119,6 +123,9 @@ class Robot:
         self.lock_odometry.release()
     
     def updateWithMapFile(self, file):
+        """
+        Updates the map and grid params given a map file
+        """
         try:
             self.map_file = file
             [self.map_size, self.map] = helpers.map.read_map(self.map_file)
@@ -128,6 +135,9 @@ class Robot:
             logging.error('An error occurred while updating the map!')
 
     def setMapByColor(self, black = False):
+        """
+        Sets a map file (and therefore its params and grid) given the color of the first tile
+        """
         if black:
             logging.info('ROBOT setMapByColor: Tile color is black, setting map B')
             self.forceNewPosition([2.2, 3])
@@ -159,7 +169,7 @@ class Robot:
         return self.black # if true, black; if false, white
             
     def getFrontsonic(self):
-        """Returns the value of the frontsonic"""
+        """Returns the value of the front ultrasonic sensor"""
         error = True
         while error:
             time.sleep(0.03)
@@ -171,24 +181,6 @@ class Robot:
                 error = False
         return value
 
-    def startTeabag(self):
-        self.finish_tb.value = False
-        self.teabag = Process(target=self.updateTeabag, args=())
-        self.teabag.start()
-        logging.info('Teabag started, PID: {}'.format(self.teabag.pid))
-
-    def updateTeabag(self):
-        while not self.finish_tb.value:
-            tIni = time.clock()
-            try:
-                distance = self.getFrontsonic()
-                if distance < 15:
-                    pass
-            except Exception:
-                pass
-            tEnd = time.clock()
-            time.sleep(self.odometry_period - tEnd + tIni)
-
     def setSpeed(self, v, w):
         """Sets the speed of both motors to achieve the given speed parameters (angular speed must be in rad/s)
         (Positive w values turn left, negative ones turn right)"""
@@ -196,7 +188,6 @@ class Robot:
         self.w.value = w
         rps_left = (v - (w * self.length) / 2) / self.radius 
         rps_right = (v + (w * self.length) / 2) / self.radius
-
         self.BP.set_motor_dps(self.left_motor, math.degrees(rps_left))  # BP works on degrees, so we have to transform it :/
         self.BP.set_motor_dps(self.right_motor, math.degrees(rps_right))
 
@@ -215,8 +206,9 @@ class Robot:
             logging.debug("There was an error while reading the speed of the motors")
         return v, w_rad
     
-    def takePic(self, PI = False, save: str = None):    # seteamos que ser un string con default value None (Null o whatever en java)
-        """Takes a nice picture and stores it as the save parameter"""
+    def takePic(self, PI = False, save: str = None):
+        """Takes a nice picture and saves it on the save parameter's path.
+        PI parameter specifies wether picam or opencv libraries will be used."""
         if not PI:
             if type(self.cam) is picamera.camera.PiCamera:
                 self.cam.close()
@@ -255,13 +247,10 @@ class Robot:
         with open(self.odometry_file, 'a', newline='') as csvfile:  # first, we write the headers of the csv
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['x', 'y', 'th'])
-        #[enc_l_1, enc_r_1] = [self.BP.get_motor_encoder(self.left_motor), self.BP.get_motor_encoder(self.right_motor)]      TODO: hemo comentado  
         [enc_l_1, enc_r_1] = [0, 0]
         time.sleep(self.odometry_period)
         while not self.finished.value:
             tIni = time.clock()
-            #if self.changed:
-            #    self.setSpeed(self.v.value, 0)
             try:
                 gyro_values = self.BP.get_sensor(self.gyro)
             except Exception:
@@ -271,35 +260,19 @@ class Robot:
             v_l = math.radians((enc_l_2 - enc_l_1) / self.odometry_period) * self.radius
             v_r = math.radians((enc_r_2 - enc_r_1) / self.odometry_period) * self.radius
             [enc_l_1, enc_r_1] = [enc_l_2, enc_r_2]
-            
-            try:
-                w = -math.radians(gyro_values[1])
-            except Exception:
-                self.w.value
-            #if (self.w.value == 0) and (w != 0):
-            #    self.changed = True
-            #    self.setSpeed(self.v.value, w)
-            # try:
-            #     r = (self.length / 2) * (v_l + v_r) / (v_r - v_l)
-            #     v = r * w
-            # except Exception:
-            #     v = v_r
             v = (v_l + v_r)/2
-            #if self.v.value == 0:  TODO: comentao
-            #    v = 0
             s = v*self.odometry_period
-
-            self.lock_odometry.acquire()
+            self.lock_odometry.acquire()    # we lock the odometry values
             th_calc = helpers.maths.norm_pi(self.th.value+(th-self.th.value)/2)
-            self.x.value += s * math.cos(th_calc)    #s * math.cos(th)*2
-            self.y.value += s * math.sin(th_calc)    #s * math.sin(th)*2
+            self.x.value += s * math.cos(th_calc)
+            self.y.value += s * math.sin(th_calc)
             self.th.value = th
-            self.lock_odometry.release()
-            with open(self.odometry_file, 'a', newline='') as csvfile:
+            self.lock_odometry.release()    # we release those values
+            with open(self.odometry_file, 'a', newline='') as csvfile:  # write odometry values on the .csv file
                 writer = csv.writer(csvfile, delimiter=',')
                 writer.writerow([self.x.value, self.y.value, self.th.value])
             tEnd = time.clock()
-            time.sleep(self.odometry_period - tEnd + tIni)
+            time.sleep(self.odometry_period - tEnd + tIni)  # wait until the period is completed
         logging.info('Odometry was stopped')
 
         

@@ -7,7 +7,8 @@ import numpy as np
 import helpers.map
 import logging
 
-def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en diferentes colores
+def plot_file(robot):
+    """Plots the tajectory of the robot and the map walls"""
     size_0 = int(robot.map_size[0])
     size_1 = int(robot.map_size[1])   # sizes of the map
     tile_size = robot.map_size[2]
@@ -39,8 +40,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
                         X = np.array([posx, posx])
                         Y = np.array([posy - tile_size/2, posy + tile_size/2])
                         fig.plot(X, Y, linewidth = '2', color = colors[i//2]) 
-                    elif (i%2==1) and (j%2==1): #obstá([culo]) (.)(.)
-                        #logging.debug('columna en: [{}, {}]'.format(i,j)) 
+                    elif (i%2==1) and (j%2==1):
                         [X, Y] = helpers.map.array2pos(robot.map_size, [i,j])
                         fig.plot(X, Y, marker='8', markersize = 15, color = 'pink')
             except Exception:
@@ -55,7 +55,7 @@ def plot_file(robot):  #TODO: guardar dónde acaba cada etapa para plotearlo en 
                 fig.plot(X, Y, marker = "x", color = 'greenyellow')
         except Exception:
             [X, Y] = helpers.map.tile2pos(robot.map_size, robot.objective)
-            fig.plot(X, Y, marker = "x", color = 'greenyellow') #TODO: poner colores decentes para los objetivos
+            fig.plot(X, Y, marker = "x", color = 'greenyellow')
     
     # ball:
     if robot.ball_caught_in:    # if the robot has caught the ball, mark it with a red circle
@@ -88,17 +88,3 @@ def get_grid(robot, columns):
         i += 2
     return grid
 
-def plot_animation(robot):  #FIXME: unused, right?
-    fig = plt.figure(figsize=(6, 3))
-    x = [0]
-    y = [0]
-    ln, = plt.plot(x, y, '-')
-    def update_plot(frame):
-        x.append(robot.x.value)
-        y.append(robot.y.value)
-        ln.set_data(x, y)
-        fig.gca().relim()
-        fig.gca().autoscale_view()
-        return ln,
-    animation = FuncAnimation(fig, update_plot, interval=50)
-    plt.show()

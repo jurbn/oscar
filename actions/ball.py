@@ -12,37 +12,24 @@ sys.path.append(parentdir)
 import helpers.vision
 import actions.moves
 
-def calibrate_claw(robot): 
-    """Calibrates the claw and sets its offset"""
-    located = False
-    while not located:
-        tIni = time.clock()
-        frame = robot.takePic()[0:640, 240:480]
-        blob = helpers.vision.get_blob(frame=frame, color='yellow')
-        if blob:
-            located = True
-        tEnd = time.clock()
-        time.sleep(robot.blob_period-tEnd+tIni)
-    robot.BP.reset_motor_encoder(robot.claw_motor)
-
 def search_ball(robot, center = True):
     """Uses the camera to locate the ball"""
     logging.info('SEARCH_BALL: Searching for the ball...')
     found = False
-    if  robot.last_seen_left:
+    if robot.last_seen_left:    # if we've seen the ball before, spin on that direction
         w = 1.5
     else: w = -1.5
-    robot.reduction = 0.25
-    while not found:
+    robot.reduction = 0.25  # camera resolution reduction
+    while not found:        # search until found
         frame = robot.takePic()
         blob = helpers.vision.get_blob(frame = frame)
         if blob:
             found = True
             logging.info('SEARCH_BALL: Found the ball! Approaching...')
-        elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black) and center:
+        elif helpers.location.is_near_angle(robot.th.value, math.pi * robot.black) and center:  # if center flag is on and we haven't found it in a while, we go to the CENTER
             return False
         else:
-            robot.setSpeed(0, w)   # gira relativamente rápido para simplemente localizarla (SI TENEMOS LAST_POS, GIRAR HACIA AHI!!!!!!!) 
+            robot.setSpeed(0, w)
     return True
 
 def approach_ball(robot, last_pos = None):
@@ -52,13 +39,12 @@ def approach_ball(robot, last_pos = None):
     ready = False
     robot.reduction = 0.25
     while not ready:
-        #tIni = time.clock()
         frame = robot.takePic()
         blob = helpers.vision.get_blob(frame = frame)
         if blob:
-            if blob.pt[0] > (640/2)*robot.reduction: #derecha
+            if blob.pt[0] > (640/2)*robot.reduction:    # right
                 robot.last_seen_left = False
-            elif blob.pt[0] < (640/2)*robot.reduction:   #izquierda
+            elif blob.pt[0] < (640/2)*robot.reduction:  # left
                 robot.last_seen_left = True
             if blob.size >= 30:
                 ready = True
@@ -70,23 +56,19 @@ def approach_ball(robot, last_pos = None):
         else:
             logging.warning('Lost the ball! Searching again...')
             return False
-        #tEnd = time.clock()
-        #time.sleep(robot.blob_period-tEnd+tIni)
     return True
 
 def center_ball(robot):
-    """Spins until the ball is on the center of the screen for at least two frames"""
+    """Spins until the ball is on the center of the screen for at least three frames"""
     logging.info('Centering the ball...')
     first = False
     second = False
     centered = False
     robot.reduction = 0.25
     while not centered:
-        #tIni = time.clock()
         frame = robot.takePic()
         blob = helpers.vision.get_blob(frame = frame)
         if blob:
-            #logging.info('The ball\'s x position is: {}'.format(blob.pt[0]))
             if blob.pt[0] > (640/2)*robot.reduction + 2: #un poco mas de la mitad
                 robot.setSpeed(0, -0.35)
                 first = False
@@ -102,14 +84,12 @@ def center_ball(robot):
                 centered = second   # centered True if previous two waere centered too
                 second = first
                 first = True
-        else:   # si no ve el blob, hace otra foto
+        else:
             frame = robot.takePic()
             blob = helpers.vision.get_blob(frame = frame)
             if not blob:
                 logging.warning('Lost the ball! Searching agan...')
                 return False
-        #tEnd = time.clock()
-        #time.sleep(robot.blob_period-tEnd+tIni)
     logging.info('Ball centered and ready to be catched!')
     return True
 
@@ -128,20 +108,18 @@ def grab_ball(robot, check_caught = False):
             except Exception as error:
                 logging.error(error)
             else:
-                print(data)
+                logging.debug(data)
                 valid = True
             time.sleep(robot.odometry_period-time.clock()+tIni)
         distance_array.append(data)
         tEnd = time.clock()
         time.sleep(robot.odometry_period-tEnd+tIni)
-    distance = np.median(distance_array) / 100 - 0.1# lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
+    distance = np.median(distance_array) / 100 - 0.1    # lo dividimos para 100 pq las unidades del sensor son cm Y LE METEMOS OFFSET DE 5CM
     if distance > 0.30:
         return False
     logging.info('The distance to be covered is: {} meters'.format(distance))
     robot.BP.set_motor_position(robot.claw_motor, robot.op_cl)
     time.sleep(0.5)
-    #point = sage.absolute_offset(robot, distance)
-    #while not sage.is_near(robot, point, 0.01):
     robot.setSpeed(0.1, 0)
     time.sleep(distance/0.1 + 0.12)
     robot.setSpeed(0, 0)
@@ -191,7 +169,7 @@ def go_for_ball(robot, center = True):
                 state = 0
     robot.ball_caught_in = [robot.x.value, robot.y.value]
 
-def check_caught(robot, black): #TODO: esto es lo del espejo que al final no lo hemos hecho
+def check_caught(robot, black): # esto es lo de que el robot se mire en un espejo que al final no lo hemos hecho
     """Checks wether or not oscar got the ball"""
     found = False
     actions.moves.spin(robot, math.pi*(not black), relative = False)

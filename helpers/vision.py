@@ -73,21 +73,18 @@ def get_blob(frame):
 def show_cam_blobs(robot):
     """Shows a video and marks the biggest blob if any are found"""
     while (True):
-        tIni = time.clock()
-        robot.reduction = 0.25 #0.25
-        frame = robot.takePic()     # [139:179, 219:239]
+        robot.reduction = 0.25
+        frame = robot.takePic()
         blob = get_blob(frame=frame)
         if blob:
-            print('size: {}'.format(blob.size))
+            logging.info('size: {}'.format(blob.size))
             im_with_keypoints = cv.drawKeypoints(frame, [blob], np.array(
                 []), (255, 255, 255), cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         else:
             im_with_keypoints = frame
-        
         cv.imshow('img', im_with_keypoints)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
-        tEnd = time.clock()
     cv.destroyAllWindows()
 
 def find_my_template(robot, refFilename = "res/img/R2-D2_s.png"):
@@ -95,12 +92,11 @@ def find_my_template(robot, refFilename = "res/img/R2-D2_s.png"):
     robot.reduction = 1
     imReference = cv.imread(refFilename, cv.IMREAD_COLOR)
     frame = robot.takePic(PI=True)  # PI==True because its better for the template recognition
-    #imReference = cv.resize(imReference, None, fx = reduct, fy = reduct, interpolation = cv.INTER_LANCZOS4)
     cv.imwrite('res/img/last_r2d2.png', frame)
     try:
         found = match_img(imReference, frame)
     except Exception:
-        print(traceback.format_exc())
+        logging.warning(traceback.format_exc())
         found = False
     return found
 
