@@ -30,6 +30,23 @@ Todas las funciones de ayuda las encontraremos aquí. Viene a ser una carpeta do
   Aquí se encuentran todas las funciones que tienen como objetivo generar el plot del recorrido realizado por el robot.
 - vision.py
   Este archivo incluye las funciones dirigidas al reconocimiento de objetos mediante visión por computador.
+########
+# libs #
+########
+Aquí se guardan las librerias externas necesarias para le ejecución de los programas. Únicamente encontramos [brickpi.py](libs/brickpi.py) puesto que el resto de ellas se instalaron con `pip`.
+########
+# logs #
+########
+En esta carpeta encontramos dos subcarpetas diferentes: [log](logs/log) y [odometry](logs/odometry), ambos con el nombre correspondiente a la fecha y hora de la ejecución del robot que representan.
+La carpeta [log](logs/log) incluye los registros de ejecución del programa (mostrados por pantalla durante la misma), mientras que la carpeta [odometry](logs/odometry) incluye archivos `.csv` con la posición del robot en cada momento (cada actualización de odometría) que se pueden emplear para realizar un plot con el recorrido realizado.
+#######
+# res #
+#######
+Esta carpeta incluye los recursos necesarios para el robot, ya sean imágenes o mapas.
+#########
+# tests #
+#########
+Aquí es donde se guardan los archivos empleados como prueba para la calibraci
 ############
 # Robot.py #
 ############
